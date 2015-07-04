@@ -1,3 +1,47 @@
 <resources>
     <string name="app_name">Cycling Map</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="title_activity_login">Login</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="plus_sign_out">Switch Google+ account</string>
+    <string name="plus_disconnect">Disconnect from Google+</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="title_activity_gps">GPSActivity</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_log">LogActivity</string>
+
+    <!-- Login and Register labels  -->
+
+    <string name="user_label">Nombre de Usuario</string>
+    <string name="pass_label">Contrasena</string>
+    <string name="confirm_pass">Confirmar contrasena</string>
+    <string name="email_label">Email</string>
+    <string name="create_user_label">Crear Usuario</string>
+    <string name="login_label">Ingresar</string>
+    <string name="register_label">Registrar</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <!-- End -->
+
+    <!-- Drawer -->
+    <string name="title_activity_principal">PrincipalActivity</string>
+    <string name="title_principal">Profile</string>
+    <string name="title_routes">Routes</string>
+    <string name="title_friends">Amigos</string>
+    <string name="title_groups">Grupos</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_main">MainActivity</string>
+
+
 </resources>
