@@ -12,6 +12,7 @@ import android.view.Window;
 import com.cyclingmap.orion.cyclingmap.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,6 +21,8 @@ import java.util.TimerTask;
 public class SplashScreenActivity extends Activity implements  GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     private static final long SPLASH_SCREEN_DELAY = 3500;
+    private GoogleApiClient mGoogleApiClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +30,21 @@ public class SplashScreenActivity extends Activity implements  GoogleApiClient.C
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash_screen);
+        mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build()).addScope(Plus.SCOPE_PLUS_LOGIN).build();
+        mGoogleApiClient.connect();
+
 
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-
-                Intent mainIntent = new Intent().setClass(
+                Intent mainIntent=null ;
+                if(mGoogleApiClient.isConnected()){
+                    mainIntent= new Intent().setClass(
+                            SplashScreenActivity.this, PrincipalActivity.class);
+                }else
+                mainIntent= new Intent().setClass(
                         SplashScreenActivity.this, LogActivity.class);
+
                 startActivity(mainIntent);
                 finish();
             }
