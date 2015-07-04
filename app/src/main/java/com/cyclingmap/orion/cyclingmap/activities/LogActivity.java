@@ -242,5 +242,15 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
             }
             return resul;
         }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            if(integer!=0){
+                Intent intent=new Intent(LogActivity.this, PrincipalActivity.class);
+                startActivity(intent);
+            }
+
+        }
     }
 }

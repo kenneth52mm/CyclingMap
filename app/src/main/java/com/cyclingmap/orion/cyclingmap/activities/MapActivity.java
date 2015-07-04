@@ -16,7 +16,9 @@ import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.RouteWsHelper;
+import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
+import com.cyclingmap.orion.cyclingmap.model.Route;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -42,6 +44,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
     private TextView txtDistance;
     private Chronometer chronometer;
     private long speed;
+    private DBHelper dbHelper;
 
     /**
      * @param savedInstanceState
@@ -59,6 +62,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
         map.setMyLocationEnabled(true);
         polylineOptions = new PolylineOptions();
         lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        dbHelper = new DBHelper(getApplicationContext());
         getCurrentLocation();
     }
 
@@ -115,7 +119,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
 
     private double getTotalDistance() {
         double totalDistance = 0.0;
-        for (int i = 0; i < route.size()-1; i++) {
+        for (int i = 0; i < route.size() - 1; i++) {
             LatLng start = route.get(i);
             LatLng end = route.get(i + 1);
             Location locationA = new Location("");
@@ -192,5 +196,13 @@ public class MapActivity extends FragmentActivity implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    public void coordsToLocalData(ArrayList<Coordinate> coords) {
+        dbHelper.addCoords(coords);
+    }
+
+    public void routeToLocalData(Route route){
+        dbHelper.addRoute(route);
     }
 }

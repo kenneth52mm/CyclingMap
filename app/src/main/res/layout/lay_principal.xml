@@ -114,7 +114,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="New route" />
+            android:text="New route"
+            android:onClick="newRoute"/>
 
         <Button
             android:layout_width="wrap_content"
