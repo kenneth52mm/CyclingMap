@@ -58,11 +58,16 @@
     <string name="max_speed">Velocidad max</string>
     <string name="experience_level">Nivel</string>
     <string name="last_route">Ultima ruta</string>
-    
+
     <string name="add_route">Agregar ruta</string>
     <string name="search_route">Buscar</string>
-
-
+    <string name="title_activity_profile_user">ProfileUserActivity</string>
     <!-- end lay -->
 
+    <!-- Profile -->
+    <string name="name_user">Usuario</string>
+    <string name="pass_user">Clave</string>
+    <string name="friend_list">Cantidad de amigos</string>
+    <string name="configuration">Configuracion</string>
+    <!-- End -->
 </resources>

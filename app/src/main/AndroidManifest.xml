@@ -64,6 +64,10 @@
             android:name=".activities.EndTraceActivity"
             android:label="@string/title_activity_end_trace" >
         </activity>
+        <activity
+            android:name=".activities.ProfileUserActivity"
+            android:label="@string/title_activity_profile_user" >
+        </activity>
     </application>
 
 </manifest>
