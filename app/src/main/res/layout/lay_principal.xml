@@ -2,155 +2,189 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#009688"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="#FFFFFF"
+
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Distancia total:"
-        android:id="@+id/dist"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="63dp"
-        android:layout_marginStart="63dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#fff9ffef"
-        android:shadowColor="#983e3c40" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/l1"
+        android:gravity="left"
+        android:layout_marginTop="20dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Velocidad Máx:"
-        android:id="@+id/speed"
-        android:layout_marginTop="53dp"
-        android:layout_below="@+id/dist"
-        android:layout_alignLeft="@+id/dist"
-        android:layout_alignStart="@+id/dist"
-        android:textColor="#fff9ffef" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nivel:"
-        android:id="@+id/textView"
-        android:textColor="#fff9ffef"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/speed"
-        android:layout_alignStart="@+id/speed" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Ultima ruta:"
-        android:id="@+id/textView2"
-        android:textColor="#fff9ffef"
-        android:layout_marginTop="48dp"
-        android:layout_below="@+id/TxtLevel"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/TxtTotalDist"
-        android:layout_below="@+id/dist"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/TxtMaxSpeed"
-        android:layout_below="@+id/speed"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/TxtLevel"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/TxtLastRoute"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_below="@+id/TxtLastRoute"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="38dp"
-        android:layout_alignParentBottom="true">
-
-
-        <Button
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button2"
-            android:layout_marginLeft="40dp"
-            android:layout_marginStart="40dp"
+            android:src="@mipmap/ic_km_trace"
+            android:id="@+id/imageView"
+            android:layout_marginLeft="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/distance_user_total"
+            android:id="@+id/dist"
+            android:textColor="#000000"
+            android:shadowColor="#983e3c40"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/l2"
+        android:layout_below="@+id/l1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="3dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_max_sp"
+            android:id="@+id/imageView2"
+            android:layout_marginLeft="15dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/max_speed"
+            android:id="@+id/speed"
+            android:layout_below="@+id/dist"
+            android:layout_alignLeft="@+id/dist"
+            android:layout_alignStart="@+id/dist"
+            android:textColor="#000000"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/l3"
+        android:layout_below="@+id/l2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="3dp"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_level_exp"
+            android:id="@+id/imageView3"
+            android:layout_marginLeft="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/experience_level"
+            android:id="@+id/textView"
+            android:textColor="#000000"
+            android:layout_below="@+id/speed"
+            android:layout_alignLeft="@+id/speed"
+            android:layout_alignStart="@+id/speed"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/l4"
+        android:layout_below="@+id/l3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="3dp"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_last_route"
+            android:id="@+id/imageView4"
+            android:layout_marginLeft="15dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/last_route"
+            android:id="@+id/textView2"
+            android:textColor="#000000"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="New route"
-            android:onClick="newRoute"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
 
-        <Button
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/l_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/relativeLayout">
+
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button4"
-            android:layout_marginRight="38dp"
-            android:layout_marginEnd="38dp"
-            android:layout_alignTop="@+id/button2"
+            android:id="@+id/ImageV1"
+            android:layout_marginLeft="39dp"
+            android:layout_marginStart="39dp"
+            android:src="@mipmap/ic_add"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ImageV2"
+            android:layout_marginRight="44dp"
+            android:layout_marginEnd="44dp"
+            android:text="Search"
+            android:src="@mipmap/ic_search_route"
+            android:layout_alignBottom="@+id/ImageV1"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:text="Search" />
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Add new route"
-            android:id="@+id/textView3"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/button2"
-            android:layout_alignStart="@+id/button2" />
+            android:text="@string/add_route"
+            android:id="@+id/textView5"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/ImageV1"
+            android:layout_alignLeft="@+id/ImageV1"
+            android:layout_alignStart="@+id/ImageV1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Search route"
-            android:id="@+id/textView4"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/button4"
-            android:layout_alignStart="@+id/button4"
-            android:layout_alignTop="@+id/textView3"
-            android:layout_alignRight="@+id/button4"
-            android:layout_alignEnd="@+id/button4" />
+            android:text="@string/search_route"
+            android:id="@+id/textView6"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/ImageV2"
+            android:layout_alignRight="@+id/ImageV2"
+            android:layout_alignEnd="@+id/ImageV2" />
     </RelativeLayout>
-
 
 </RelativeLayout>

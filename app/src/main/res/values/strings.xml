@@ -52,4 +52,17 @@
     <string name="speed_avg">Velocidad promedio</string>
     <!-- End -->
 
+    <!-- lay_Principal -->
+
+    <string name="distance_user_total">Kms recorridos</string>
+    <string name="max_speed">Velocidad max</string>
+    <string name="experience_level">Nivel</string>
+    <string name="last_route">Ultima ruta</string>
+    
+    <string name="add_route">Agregar ruta</string>
+    <string name="search_route">Buscar</string>
+
+
+    <!-- end lay -->
+
 </resources>
