@@ -42,6 +42,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_main">MainActivity</string>
-
+    <string name="title_activity_user_routes">UserRoutes</string>
+    <string name="empty_list">No hay rutas</string>
 
 </resources>

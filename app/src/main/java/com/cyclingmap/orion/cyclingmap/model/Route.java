@@ -31,6 +31,12 @@ public class Route {
         this.townList = townList;
         this.coordinateList = coordinateList;
     }
+
+    public Route(double i, double s) {
+        this.distance=i;
+        this.avgSpeed=s;
+    }
+
     /**
      * @return the idRoute
      */

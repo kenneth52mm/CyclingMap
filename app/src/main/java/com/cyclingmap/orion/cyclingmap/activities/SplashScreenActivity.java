@@ -41,10 +41,10 @@ public class SplashScreenActivity extends Activity implements  GoogleApiClient.C
                 if(mGoogleApiClient.isConnected()){
                     mainIntent= new Intent().setClass(
                             SplashScreenActivity.this, PrincipalActivity.class);
-                }else
-                mainIntent= new Intent().setClass(
-                        SplashScreenActivity.this, LogActivity.class);
-
+                }else {
+                    mainIntent = new Intent().setClass(
+                            SplashScreenActivity.this, LogActivity.class);
+                }
                 startActivity(mainIntent);
                 finish();
             }
@@ -52,6 +52,11 @@ public class SplashScreenActivity extends Activity implements  GoogleApiClient.C
 
         Timer timer = new Timer();
         timer.schedule(task, SPLASH_SCREEN_DELAY);
+
+    }
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
 
     }
 

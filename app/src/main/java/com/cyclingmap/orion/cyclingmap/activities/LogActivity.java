@@ -57,6 +57,7 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         txtPassword = (EditText) findViewById(R.id.TxtPassword);
         signinButton = (SignInButton) findViewById(R.id.btnGP);
         mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build()).addScope(Plus.SCOPE_PLUS_LOGIN).build();
+        signinButton.setOnClickListener(this);
         signinButton.setSize(SignInButton.SIZE_ICON_ONLY);
 
         //btnRegister = (Button)findViewById(R.id.BtnRegister);
@@ -139,12 +140,12 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
         switch (requestCode) {
             case RC_SIGN_IN:
-                intent.setClass(this, MainActivity.class);
+//                intent.setClass(this, MainActivity.class);
                 if (responseCode == RESULT_OK) {
                     signedInUser = false;
-                    intent.setClass(this, MainActivity.class);
-//                    Bundle bundle=new Bundle();
-//                    bundle.putString("user",userName);
+                    intent.setClass(this, PrincipalActivity.class);
+////                    Bundle bundle=new Bundle();
+////                    bundle.putString("user",userName);
                     startActivity(intent);
                 }
                 mIntentInProgress = false;
@@ -158,9 +159,18 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
 
     @Override
     public void onClick(View v) {
+        Intent intent=null;
         switch (v.getId()) {
             case R.id.btnGP:
                 googlePlusLogin();
+                if(!signedInUser)
+                {
+                    intent.setClass(this, PrincipalActivity.class);
+////                    Bundle bundle=new Bundle();
+////                    bundle.putString("user",userName);
+                    startActivity(intent);
+
+                }
                 break;
         }
     }
@@ -180,10 +190,10 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     public void onConnected(Bundle arg0) {
         signedInUser = false;
         Toast.makeText(this, "Connected", Toast.LENGTH_LONG).show();
-        if (!signedInUser) {
-            Intent intent = new Intent(this, PrincipalActivity.class);
-            startActivity(intent);
-        }
+//        if (!signedInUser) {
+//            Intent intent = new Intent(this, PrincipalActivity.class);
+//            startActivity(intent);
+//        }
         getProfileInformation();
     }
 
@@ -246,8 +256,8 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            if(integer!=0){
-                Intent intent=new Intent(LogActivity.this, PrincipalActivity.class);
+            if (integer != 0) {
+                Intent intent = new Intent(LogActivity.this, PrincipalActivity.class);
                 startActivity(intent);
             }
 
