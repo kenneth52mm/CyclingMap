@@ -6,11 +6,15 @@ import android.os.AsyncTask;
 /**
  * Created by kenneth on 07/07/2015.
  */
-public class UserWSHelper extends AsyncTask<String, Integer, Integer> {
-
+public class UserWSHelper extends AsyncTask<Integer, Integer, Integer> {
 
     @Override
-    protected Integer doInBackground(String... params) {
+    protected Integer doInBackground(Integer... params) {
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(Integer integer) {
+        super.onPostExecute(integer);
     }
 }
