@@ -60,6 +60,10 @@
             android:name=".activities.UserRoutes"
             android:label="@string/title_activity_user_routes" >
         </activity>
+        <activity
+            android:name=".activities.EndTraceActivity"
+            android:label="@string/title_activity_end_trace" >
+        </activity>
     </application>
 
 </manifest>

@@ -44,5 +44,12 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_user_routes">UserRoutes</string>
     <string name="empty_list">No hay rutas</string>
+    <string name="title_activity_end_trace">EndTraceActivity</string>
+
+    <!-- Final trace -->
+    <string name="distance_Total">Distancia</string>
+    <string name="time_Total">Duracion</string>
+    <string name="speed_avg">Velocidad promedio</string>
+    <!-- End -->
 
 </resources>
