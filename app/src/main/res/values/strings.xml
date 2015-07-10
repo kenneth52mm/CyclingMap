@@ -70,4 +70,15 @@
     <string name="friend_list">Cantidad de amigos</string>
     <string name="configuration">Configuracion</string>
     <!-- End -->
+
+    <string name="rutas_activity_lbltiempo">TIEMPO (s)</string>
+    <string name="ruta_activity_lbldistancia">DISTANCIA</string>
+    <string name="ruta_activity_lbldistanprome">VELOCIDAD MEDIA</string>
+    <string name="title_activity_rutas">Crear Ruta</string>
+    <string name="title_activity_buscar_rutas">Buscar Rutas</string>
+    <string name="btnRutas_lista_buscar">Aceptar</string>
+    <string name="btn_rutas_buscar_lblboton">Buscar</string>
+    <string name="title_activity_detalles_ruta">Detalles de Ruta</string>
+    <string name="detalle_ruta_Encabezado">Detalles de la Ruta</string>
+
 </resources>
