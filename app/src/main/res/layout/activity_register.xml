@@ -68,7 +68,7 @@
         android:layout_width="fill_parent"
         android:layout_height="60dp"
         android:text="@string/create_user_label"
-        android:id="@+id/BtnLogin"
+        android:id="@+id/BtnRegister"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
