@@ -136,7 +136,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
 
     public void sendData(View v) {
         //ArrayList<Coordinate> coordinates= (ArrayList<Coordinate>) dbHelper.retrieveAll();
-        ArrayList<Coordinate> coordinates=new ArrayList<>();
+        ArrayList<Coordinate> coordinates=new ArrayList<Coordinate>();
         coordinates.add(new Coordinate(20.0,30.1));
         routeWsHelper.execute(coordinates);
     }
