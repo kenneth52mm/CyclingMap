@@ -16,13 +16,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     String sqlCreateCoords = "CREATE TABLE coords (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-            " lat REAL,lng REAL,id_route INTEGER,FOREING KEY(id_route) REFERENCES route(id_route))";
+            " lat REAL,lng REAL,id_route INTEGER,FOREIGN KEY(id_route) REFERENCES route(id_route))";
     String sqlCreateRoute = "CREATE TABLE route (id_route INTEGER PRIMARY KEY AUTOINCREMENT" +
             " NOT NULL, distance REAL, time_to_finish NUMERIC, avg_speed REAL,difficulty_level INTEGER);";
     String sqlCreateUser = "CREATE TABLE user (id_user INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
             "name TEXT, email TEXT, pass TEXT);";
     String sqlCreateUserRoute = "CREATE TABLE user_route (id_route INTEGER, id_user INTEGER," +
-            " FOREING KEY(id_route) REFERENCES route(id_route),FOREING KEY(id_user) REFERENCES " +
+            " FOREIGN KEY(id_route) REFERENCES route(id_route),FOREIGN KEY(id_user) REFERENCES " +
             "user(id_user),PRIMARY KEY (id_route,id_user))";
     SQLiteDatabase helper;
     int id;
@@ -38,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCreateCoords);
         db.execSQL(sqlCreateUser);
         db.execSQL(sqlCreateUserRoute);
-        id = getIdRoute();
+        //id = getIdRoute();
     }
 
     @Override
@@ -61,7 +61,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public List<Coordinate> retrieveAll() {
         List<Coordinate> coordinates = new ArrayList<>();
-        Cursor c = helper.rawQuery("Select lat,lng From coords Where id_route='" + id + "';", null);
+       // Cursor c = helper.rawQuery("Select lat,lng From coords Where id_route='" + id + "';", null);
+        Cursor c = helper.rawQuery("Select lat,lng From coords;", null);
         if (c.moveToFirst()) {
             do {
                 double lat = c.getDouble(0);

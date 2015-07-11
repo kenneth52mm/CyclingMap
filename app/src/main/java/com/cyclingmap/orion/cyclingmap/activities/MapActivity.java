@@ -104,6 +104,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
         float[] distance2 = new float[1];
         Location.distanceBetween(start.latitude, start.longitude, end.latitude, end.longitude, distance2);
         txtDistance.setText("Distancia: " + distance / 1000 + " otra:" + getTotalDistance());
+        dbHelper.addCoords(coords);
     }
 
     public double getDistance(double startOne, double endOne, double startTwo, double endTwo) {
@@ -134,7 +135,10 @@ public class MapActivity extends FragmentActivity implements LocationListener {
     }
 
     public void sendData(View v) {
-        routeWsHelper.execute(coords);
+        //ArrayList<Coordinate> coordinates= (ArrayList<Coordinate>) dbHelper.retrieveAll();
+        ArrayList<Coordinate> coordinates=new ArrayList<>();
+        coordinates.add(new Coordinate(20.0,30.1));
+        routeWsHelper.execute(coordinates);
     }
 
     public void startTrace(View v) {

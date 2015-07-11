@@ -77,9 +77,7 @@ public class RoutesSection extends Fragment {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 
-
                 }
-
             } catch (Exception ex) {
 
             } finally {

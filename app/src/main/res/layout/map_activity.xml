@@ -48,7 +48,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:text="Guardar" />
+        android:text="Guardar"
+        android:onClick="sendData"/>
 
     <TextView
         android:id="@+id/txtDistance"

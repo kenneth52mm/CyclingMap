@@ -31,7 +31,7 @@ public class RouteWsHelper extends AsyncTask<ArrayList<Coordinate>, String, Stri
         HttpPost post = new HttpPost("http://orion-group.azurewebsites.net/Api/route/save/");
         post.setHeader("content-type", "application/json");
         try {
-            JSONArray jsonArray = new JSONArray(params[0]);
+            JSONArray jsonArray = new JSONArray();
 
             for (Coordinate coordinate : params[0]) {
                 JSONObject object = new JSONObject();
@@ -43,9 +43,15 @@ public class RouteWsHelper extends AsyncTask<ArrayList<Coordinate>, String, Stri
             post.setEntity(entity);
             HttpResponse response = client.execute(post);
             resp = EntityUtils.toString(response.getEntity());
+            Log.i("respuesta ",resp);
         } catch (Exception ex) {
             Log.e("route ex", ex.getMessage());
         }
         return resp;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
     }
 }
