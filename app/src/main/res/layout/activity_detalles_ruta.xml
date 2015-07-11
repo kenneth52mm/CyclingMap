@@ -28,93 +28,158 @@
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:focusableInTouchMode="false"
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:id="@+id/ivRuta_Detalle"
-                android:src="@drawable/ejrutadetalle1" />
+                android:src="@drawable/ejrutadetalle1"
+                android:layout_gravity="left"
+                android:layout_column="0"
+                android:layout_span="3"
+                android:layout_marginBottom="5dp" />
         </TableRow>
 
         <TableRow
-            android:layout_width="fill_parent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView4"
+                    android:src="@mipmap/ic_speed"
+                    android:layout_gravity="left"
+                    android:layout_column="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre: Tres Rios Volcan Irazu"
+                    android:id="@+id/txtRuta_Det_Nombre"
+                    android:textSize="18dp"
+                    android:layout_gravity="left" />
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nombre: Tres Rios Volcan Irazu"
-                android:id="@+id/txtRuta_Det_Nombre"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textSize="18dp"
-                android:layout_marginLeft="10dp" />
-        </TableRow>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView5"
+                    android:src="@mipmap/ic_distanc"
+                    android:layout_gravity="left" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Distancia : 30 km"
-                android:id="@+id/txtRuta_Det_Distancia"
-                android:layout_marginBottom="10dp"
-                android:textSize="18dp"
-                android:layout_marginLeft="10dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Velocidad Media : 20 km/h"
-                android:id="@+id/txtRutas_Det_Vel_Media"
-                android:layout_marginBottom="10dp"
-                android:textSize="18dp"
-                android:layout_marginLeft="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Distancia : 30 km"
+                    android:id="@+id/txtRuta_Det_Distancia"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
         </TableRow>
 
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nivel: Medio"
-                android:id="@+id/txtRuta_Det_Nivel"
-                android:layout_marginBottom="10dp"
-                android:textSize="18dp"
-                android:layout_marginLeft="10dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView6"
+                    android:src="@mipmap/ic_speedavg"
+                    android:layout_gravity="left" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Velocidad Media : 20 km/h"
+                    android:id="@+id/txtRutas_Det_Vel_Media"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+
         </TableRow>
 
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tipo de Calle: Combinado"
-                android:id="@+id/txtRuta_Det_TipCalle"
-                android:layout_marginLeft="10dp"
-                android:textSize="18dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView7"
+                    android:src="@mipmap/ic_level_exp"
+                    android:layout_gravity="left" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nivel: Medio"
+                    android:id="@+id/txtRuta_Det_Nivel"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView8"
+                    android:src="@mipmap/ic_distanc"
+                    android:layout_gravity="left" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo de Calle: Combinado"
+                    android:id="@+id/txtRuta_Det_TipCalle"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18dp" />
+            </LinearLayout>
         </TableRow>
 
     </TableLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-    </LinearLayout>
 
     <Button
         android:layout_width="fill_parent"

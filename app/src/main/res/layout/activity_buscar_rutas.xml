@@ -24,7 +24,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Opciones de busqueda"
                 android:id="@+id/txtRut_Buscar_Enca"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:height="40dp" />
         </TableRow>
 
@@ -38,19 +38,27 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView3"
+                    android:src="@mipmap/ic_last_route"
+                    android:layout_marginLeft="10dp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Popularidad "
-                    android:id="@+id/textView5"
-                    android:layout_marginLeft="10dp" />
+                    android:text="Popularidad"
+                    android:id="@+id/textView6"
+                    android:layout_marginTop="10dp" />
 
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/spinnerPopu"
                     android:spinnerMode="dropdown"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp" />
             </LinearLayout>
 
         </TableRow>
@@ -65,19 +73,27 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView"
+                    android:src="@mipmap/ic_speed"
+                    android:layout_marginLeft="10dp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tipo de Calle"
-                    android:id="@+id/textView6"
-                    android:layout_marginLeft="10dp" />
+                    android:text="Tipo de calle"
+                    android:id="@+id/textView5"
+                    android:layout_marginTop="10dp" />
 
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/spinnerTipCalle"
                     android:spinnerMode="dropdown"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp" />
 
             </LinearLayout>
 
@@ -93,19 +109,27 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView2"
+                    android:src="@mipmap/ic_level_exp"
+                    android:layout_marginLeft="10dp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nivel              "
                     android:id="@+id/textView7"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginTop="10dp" />
 
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/spinnerNivel"
                     android:spinnerMode="dropdown"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp" />
             </LinearLayout>
         </TableRow>
     </TableLayout>
@@ -124,7 +148,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/lvRutasEncontradas"
             android:visibility="invisible"
-            android:background="#ff5b41ff" />
+            android:background="#ff5b41ff"
+            android:layout_marginBottom="5dp" />
 
     </LinearLayout>
 
