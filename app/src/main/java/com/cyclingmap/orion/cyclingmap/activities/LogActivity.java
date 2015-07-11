@@ -18,6 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
@@ -48,9 +54,16 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
 
     private Button btnRegister;
 
+    //That's for Facebook Login
+    private CallbackManager callbackManager;
+    private LoginButton loginButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
+
         setContentView(R.layout.activity_log);
         //txtMessage = (TextView) findViewById(R.id.TxtMessage);
         txtUsername = (EditText) findViewById(R.id.TxtUsername);
@@ -59,6 +72,32 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build()).addScope(Plus.SCOPE_PLUS_LOGIN).build();
         signinButton.setOnClickListener(this);
         signinButton.setSize(SignInButton.SIZE_ICON_ONLY);
+
+
+
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // Intent i = new Intent(LogActivity.this,PrincipalActivity.class);
+                // startActivity(i);
+                Log.d("Success", "Login");
+            }
+            @Override
+            public void onCancel() {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Attempt cancelled", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            @Override
+            public void onError(FacebookException e) {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Failed attempt", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+        });
+
 
         //btnRegister = (Button)findViewById(R.id.BtnRegister);
 
