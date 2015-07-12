@@ -2,6 +2,7 @@ package com.cyclingmap.orion.cyclingmap.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
@@ -27,6 +28,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
 
@@ -105,6 +107,19 @@ public class MapActivity extends FragmentActivity implements LocationListener {
         Location.distanceBetween(start.latitude, start.longitude, end.latitude, end.longitude, distance2);
         txtDistance.setText("Distancia: " + distance / 1000 + " otra:" + getTotalDistance());
         dbHelper.addCoords(coords);
+
+        //Code to go to EndTraceActivity with the extras
+        String td= getTotalDistance() + "";
+        String ch = chronometer.getBase() + "";
+        String sp = speed + "";
+        Intent i = new Intent(getApplicationContext(), EndTraceActivity.class);
+
+        i.putExtra("route", (Serializable) route);
+        i.putExtra("Distance",td);
+        i.putExtra("Duration", ch);
+        i.putExtra("Speed", sp );
+
+        startActivity(i);
     }
 
     public double getDistance(double startOne, double endOne, double startTwo, double endTwo) {
