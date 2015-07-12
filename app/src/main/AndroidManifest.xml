@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cyclingmap.orion.cyclingmap" >
+    package="com.cyclingmap.orion.cyclingmap">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -17,21 +17,21 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activities.SplashScreenActivity"
-            android:label="@string/title_activity_splash_screen" >
-
-        </activity>
-        <activity
-            android:name=".activities.MapActivity"
-            android:label="Map"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_splash_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.MapActivity"
+            android:label="Map"
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".activities.MainActivity"
@@ -63,22 +63,19 @@
             android:label="@string/title_activity_principal" />
         <activity
             android:name=".activities.UserRoutes"
-            android:label="@string/title_activity_user_routes" >
-        </activity>
+            android:label="@string/title_activity_user_routes"></activity>
         <activity
             android:name=".activities.EndTraceActivity"
-            android:label="@string/title_activity_end_trace" >
-        </activity>
+            android:label="@string/title_activity_end_trace"></activity>
         <activity
             android:name=".activities.ProfileUserActivity"
-            android:label="@string/title_activity_profile_user" >
-        </activity>
+            android:label="@string/title_activity_profile_user"></activity>
 
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-       </application>
+    </application>
 
 </manifest>

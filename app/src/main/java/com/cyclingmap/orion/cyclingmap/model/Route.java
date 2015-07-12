@@ -20,7 +20,10 @@ public class Route {
     private ArrayList<Town> townList;
     private ArrayList<Coordinate> coordinateList;
 
-    public Route(int idRoute, double distance, Time timeToFinish, double avgSpeed, 
+    public Route() {
+    }
+
+    public Route(int idRoute, double distance, Time timeToFinish, double avgSpeed,
             String dLevel, ArrayList<Town> townList, ArrayList<Coordinate> coordinateList)
     {
         this.idRoute = idRoute;

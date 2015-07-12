@@ -28,7 +28,7 @@ public class UserRoutesAdapter extends ArrayAdapter<Route> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        Route route=routesList.get(0);
+        Route route=routesList.get(position);
         LayoutInflater inflater = LayoutInflater.from(context);
         View item = inflater.inflate(R.layout.list_user_routes, null);
         TextView txt1 = (TextView) item.findViewById(R.id.route_name);
