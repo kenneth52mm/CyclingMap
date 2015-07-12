@@ -41,6 +41,13 @@
             android:layout_marginLeft="30dp"
             android:layout_marginStart="42dp"
             android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/TxtDistTotal"
+            android:layout_marginLeft="10dp"
+            android:layout_margin="15dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,7 +79,15 @@
             android:layout_marginLeft="30dp"
             android:layout_marginStart="44dp"
             android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/TxtDuration"
+            android:layout_marginLeft="10dp"
+            android:layout_margin="15dp" />
     </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -82,7 +97,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="0dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -103,7 +118,38 @@
             android:layout_marginLeft="30dp"
             android:layout_marginStart="44dp"
             android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/TxtSpeedAvg"
+            android:layout_marginLeft="10dp"
+            android:layout_margin="15dp" />
     </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/lL4"
+        android:layout_below="@+id/lL3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="15dp">
+
+
+        <RadioButton
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/share_public"
+            android:textSize="20sp"
+            android:id="@+id/radioButton"
+            android:checked="false"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
