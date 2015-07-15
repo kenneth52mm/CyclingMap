@@ -11,9 +11,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.business.RouteWsHelper;
+import com.cyclingmap.orion.cyclingmap.model.Coordinate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -32,6 +35,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     private Location lc;
     private LocationManager locationManager;
     private PolylineOptions polylineOptions;
+    private RouteWsHelper routeWsHelper = new RouteWsHelper();
 
 
     @Override
@@ -74,6 +78,12 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         polylineOptions.color(Color.RED);
         map.addPolyline(polylineOptions);
 
+    }
+
+    public void sendData(View v){
+        ArrayList<Coordinate> coordinates=new ArrayList<Coordinate>();
+        coordinates.add(new Coordinate(20.0,30.1));
+        routeWsHelper.execute(coordinates);
     }
 
     @Override
