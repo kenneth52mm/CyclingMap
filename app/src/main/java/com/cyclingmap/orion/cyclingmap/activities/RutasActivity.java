@@ -26,7 +26,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
 
-
+import android.content.Intent;
 import com.cyclingmap.orion.cyclingmap.business.RouteWsHelper;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
@@ -38,9 +38,13 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.Serializable;
+import java.sql.Time;
+import java.util.ArrayList;
+
 import com.cyclingmap.orion.cyclingmap.R;
 
-import java.util.ArrayList;
+
 
 public class RutasActivity extends FragmentActivity implements LocationListener{
 
@@ -59,7 +63,7 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
 
     private TextView tvTiempo, tvDistan, tvVeloProm, tvKm, tvKmH;
     private Chronometer chrono;
-    private Button btnRutaStar, btnRutasStop, btnMapShow;
+    private Button btnRutaStar, btnRutasStop, btnMapShow, btnEndTrace;
     private LinearLayout layoutMap;
 
 
@@ -77,6 +81,7 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         btnRutaStar = (Button) findViewById(R.id.btnStarRutas);
         btnRutasStop = (Button) findViewById(R.id.btnRutasStop);
         btnMapShow = (Button) findViewById(R.id.btnShowMap);
+        btnEndTrace = (Button) findViewById(R.id.btnEndTraceActivity);
         layoutMap = (LinearLayout) findViewById(R.id.linearLayMapRoad);
 
         //Area de mapa
@@ -116,7 +121,21 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
             @Override
             public void onClick(View v) {
                 btnRutasStop.setVisibility(View.INVISIBLE);
+                btnRutaStar.setVisibility(View.INVISIBLE);
+                btnEndTrace.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //Go to entrace activity
+        btnEndTrace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnRutasStop.setVisibility(View.INVISIBLE);
                 btnRutaStar.setVisibility(View.VISIBLE);
+                btnEndTrace.setVisibility(View.INVISIBLE);
+
+                Intent i = new Intent( getApplicationContext(), EndTraceActivity.class);
+                startActivity(i);
             }
         });
 
@@ -158,17 +177,42 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     }
 
     public void verRuta(View v) {
-        polylineOptions.addAll(route);
-        polylineOptions.width(12);
-        polylineOptions.color(Color.RED);
-        map.addPolyline(polylineOptions);
+        //  polylineOptions.addAll(route);
+        //  polylineOptions.width(12);
+        //  polylineOptions.color(Color.RED);
+        //  map.addPolyline(polylineOptions)
+
+        String td= getTotalDistance() + "";
+        String ch = chrono.getBase() + "";
+        String sp = speed + "";
+        double dist = getTotalDistance();
+
         LatLng start = route.get(0);
         LatLng end = route.get(route.size() - 1);
+
         distance = getDistance(start.latitude, end.latitude, start.longitude, end.longitude);
+
         float[] distance2 = new float[1];
+
         Location.distanceBetween(start.latitude, start.longitude, end.latitude, end.longitude, distance2);
+
         tvDistan.setText("Distancia: " + distance / 1000 + " otra:" + getTotalDistance());
+
         dbHelper.addCoords(coords);
+
+        //Code to go to EndTraceActivity with the extras
+
+        double speedAvg = ((double) dist / chrono.getBase());
+        speed = ((long) speedAvg / chrono.getBase());
+
+        Intent i = new Intent(getApplicationContext(), EndTraceActivity.class);
+
+        i.putExtra("route", (Serializable) route);
+        i.putExtra("Distance",td);
+        i.putExtra("Duration", ch);
+        i.putExtra("Speed", sp );
+
+        startActivity(i);
     }
 
     public double getDistance(double startOne, double endOne, double startTwo, double endTwo) {
@@ -274,4 +318,3 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         dbHelper.addRoute(route);
     }
 }
-
