@@ -1,9 +1,11 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,7 +14,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -23,26 +28,47 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     private TextView txtdistancefinal;
     private TextView txtDuration;
     private TextView txtSpeedAvg;
-    private PolylineOptions polylineOptions;
     private GoogleMap map;
+    private Location lc;
+    private LocationManager locationManager;
+    private PolylineOptions polylineOptions;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_trace);
+
         txtdistancefinal = (TextView)findViewById(R.id.TxtDistTotal);
         txtDuration = (TextView)findViewById(R.id.TxtDuration);
         txtSpeedAvg = (TextView)findViewById(R.id.TxtSpeedAvg);
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0, 0, this);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+
+        map = mapFragment.getMap();
+        map.setMyLocationEnabled(true);
+        polylineOptions = new PolylineOptions();
+        lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
 
 
         Bundle bundle = getIntent().getExtras();
+        ArrayList route= (ArrayList) bundle.get("route");
         txtdistancefinal.setText(bundle.getString("Distance"));
         txtDuration.setText(bundle.getString("Duration"));
         txtSpeedAvg.setText(bundle.getString("Speed"));
-        ArrayList route= (ArrayList) bundle.get("route");
 
+
+        // Show the current position on Fragment map
+        LatLng current = (LatLng) route.get(0);
+        CameraPosition myPosition = new CameraPosition.Builder()
+                .target(current).zoom(17).bearing(90).tilt(30).build();
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
+
+        //Draw the route on fragmentmap
         polylineOptions.addAll(route);
         polylineOptions.width(12);
         polylineOptions.color(Color.RED);

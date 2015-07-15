@@ -66,6 +66,7 @@
             android:label="@string/title_activity_user_routes"></activity>
         <activity
             android:name=".activities.EndTraceActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_end_trace"></activity>
         <activity
             android:name=".activities.ProfileUserActivity"
