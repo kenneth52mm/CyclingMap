@@ -237,7 +237,8 @@
             android:text="Ver Ruta"
             android:id="@+id/btnEndTraceActivity"
             android:background="@drawable/btnstar_circle"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:onClick="verRuta" />
     </LinearLayout>
 
 </RelativeLayout>
