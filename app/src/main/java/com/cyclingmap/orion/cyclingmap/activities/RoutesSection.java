@@ -1,6 +1,7 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
-import android.content.Intent;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,6 @@ import com.cyclingmap.orion.cyclingmap.business.UserRoutesAdapter;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
 import com.cyclingmap.orion.cyclingmap.model.Route;
 
-import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -25,10 +25,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -46,16 +44,23 @@ public class RoutesSection extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.lay_route_section, container, false);
-        lwRoutes = (ListView) rootView.findViewById(R.id.list);
+//        lwRoutes = (ListView) rootView.findViewById(R.id.list);
+//        routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), rootView.getContext());
+//        lwRoutes.setAdapter(routesAdapter);
         helper = new UserWSHelper();
         helper.execute(13);
-        lwRoutes.setAdapter(routesAdapter);
         return rootView;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
     }
 
     private void onRouteClick() {
@@ -74,19 +79,30 @@ public class RoutesSection extends Fragment {
     class UserWSHelper extends AsyncTask<Integer, ArrayList, ArrayList> {
 
         ArrayList<Route> respRoutes;
+        private final ProgressDialog dialog = new ProgressDialog(getActivity());
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.setMessage("Cargando...");
+            dialog.show();
+        }
 
         @Override
         protected ArrayList doInBackground(Integer... params) {
+           // android.os.Debug.waitForDebugger();
             HttpClient client = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet("http://orion-group.azurewbsites.net/Api/user/routes/" + params[0]);
+            HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/routes/" + params[0]);
             httpGet.setHeader("content-type", "application/json");
+            Log.i("entro", "entro");
             try {
                 HttpResponse response = client.execute(httpGet);
                 JSONArray jsonArray = new JSONArray(EntityUtils.toString(response.getEntity()));
                 for (int i = 0; i < jsonArray.length(); i++) {
                     Route route = new Route();
                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                    Log.i("entro", "" + i);
+                    Log.i("ENTRO", "" + i);
                     route.setIdRoute(jsonObject.getInt("IdRoute"));
                     route.setDistance(jsonObject.getDouble("Distance"));
                     route.setAvgSpeed(jsonObject.getDouble("AvgSpeed"));
@@ -99,22 +115,24 @@ public class RoutesSection extends Fragment {
                         coordinates.add(new Coordinate(x, y));
                     }
                     route.setCoordinateList(coordinates);
-                    route.setTimeToFin((Time) jsonObject.get("TimeToFin"));
-                    respRoutes.add(route);
+                   // route.setTimeToFin((Time) jsonObject.get("TimeToFin"));
+                    routes.add(route);
                 }
             } catch (Exception ex) {
-
-            } finally {
-                routes = respRoutes;
+                Log.i("Error", "" + ex);
             }
-            return respRoutes;
+            return routes;
         }
 
         @Override
         protected void onPostExecute(ArrayList array) {
-            super.onPostExecute(array);
-            routesAdapter = new UserRoutesAdapter(array, getActivity().getApplicationContext());
+            //super.onPostExecute(array);
+            lwRoutes = (ListView) getActivity().findViewById(R.id.list);
+            routesAdapter = new UserRoutesAdapter(routes, getActivity());
             lwRoutes.setAdapter(routesAdapter);
+            dialog.dismiss();
+           // routesAdapter.setRoutesList(routes);
+            routesAdapter.notifyDataSetChanged();
         }
     }
 }

@@ -28,7 +28,7 @@ public class UserRoutesAdapter extends ArrayAdapter<Route> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        Route route=routesList.get(position);
+        Route route=getRoutesList().get(position);
         LayoutInflater inflater = LayoutInflater.from(context);
         View item = inflater.inflate(R.layout.list_user_routes, null);
         TextView txt1 = (TextView) item.findViewById(R.id.route_name);
@@ -36,5 +36,13 @@ public class UserRoutesAdapter extends ArrayAdapter<Route> {
         TextView txt2 = (TextView) item.findViewById(R.id.text2);
         txt2 .setText(""+route.getAvgSpeed());
         return item;
+    }
+
+    public List<Route> getRoutesList() {
+        return routesList;
+    }
+
+    public void setRoutesList(List<Route> routesList) {
+        this.routesList = routesList;
     }
 }
