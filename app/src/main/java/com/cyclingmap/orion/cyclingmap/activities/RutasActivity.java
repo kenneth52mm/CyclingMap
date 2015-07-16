@@ -61,11 +61,10 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     private long speed;
     private DBHelper dbHelper;
 
-    private TextView tvTiempo, tvDistan, tvVeloProm, tvKm, tvKmH;
+    private TextView tvTiempo, tvDistan, tvVeloProm, tvKm, txtDistance,txtAvegSpeed, tvKmH;
     private Chronometer chrono;
     private Button btnRutaStar, btnRutasStop, btnMapShow, btnEndTrace;
     private LinearLayout layoutMap;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +76,8 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         tvVeloProm = (TextView) findViewById(R.id.lblRutasVelProm);
         tvKm =  (TextView) findViewById(R.id.lblRtuasKm);
         tvKmH =  (TextView) findViewById(R.id.lblRutasKmH);
+        txtDistance =  (TextView) findViewById(R.id.txtRutaskm);
+        txtAvegSpeed =  (TextView) findViewById(R.id.txtRutaskmh);
         chrono = (Chronometer) findViewById(R.id.chrono);
         btnRutaStar = (Button) findViewById(R.id.btnStarRutas);
         btnRutasStop = (Button) findViewById(R.id.btnRutasStop);
@@ -110,9 +111,9 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         btnRutaStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 btnRutaStar.setVisibility(View.INVISIBLE);
                 btnRutasStop.setVisibility(View.VISIBLE);
+                startTrace(v);
             }
         });
 
@@ -123,19 +124,7 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
                 btnRutasStop.setVisibility(View.INVISIBLE);
                 btnRutaStar.setVisibility(View.INVISIBLE);
                 btnEndTrace.setVisibility(View.VISIBLE);
-            }
-        });
-
-        //Go to entrace activity
-        btnEndTrace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnRutasStop.setVisibility(View.INVISIBLE);
-                btnRutaStar.setVisibility(View.VISIBLE);
-                btnEndTrace.setVisibility(View.INVISIBLE);
-
-                Intent i = new Intent( getApplicationContext(), EndTraceActivity.class);
-                startActivity(i);
+                stopTrace(v);
             }
         });
 
@@ -143,7 +132,16 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         btnMapShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layoutMap.setVisibility(View.VISIBLE);
+                if(layoutMap.getVisibility()== View.INVISIBLE ) {
+                    layoutMap.setVisibility(View.VISIBLE);
+                    btnRutasStop.setVisibility(View.INVISIBLE);
+                    btnRutaStar.setVisibility(View.INVISIBLE);
+                    btnEndTrace.setVisibility(View.INVISIBLE);
+                }else
+                {
+                    layoutMap.setVisibility(View.INVISIBLE);
+                    btnEndTrace.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -253,7 +251,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         RUNNING = true;
         chrono.setBase(SystemClock.elapsedRealtime());
         chrono.start();
-
     }
 
     public void stopTrace(View v) {
@@ -262,6 +259,26 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         Log.i("Tiempo ", "" + chrono.getBase());
         speed = ((long) distance / chrono.getBase()) / 1000;
         Log.i("Velocidad ", "" + speed);
+
+        txtDistance.setText( (int)( this.getTotalDistance()/1000 ) + "");
+
+        txtAvegSpeed.setText((int) (speed * 0.000277777777) + "");
+
+        loadMap(v);
+    }
+
+    public void loadMap(View v) {
+        polylineOptions.addAll(route);
+        polylineOptions.width(10);
+        polylineOptions.color(Color.RED);
+        map.addPolyline(polylineOptions);
+        LatLng start = route.get(0);
+        LatLng end = route.get(route.size() - 1);
+
+        float[] distance2 = new float[1];
+        Location.distanceBetween(start.latitude, start.longitude, end.latitude, end.longitude, distance2);
+
+        dbHelper.addCoords(coords);
     }
 
     @Override

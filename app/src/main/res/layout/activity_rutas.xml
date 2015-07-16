@@ -175,8 +175,7 @@
             android:layout_toEndOf="@+id/lblRutasDistancia"
             android:width="20dp"
             android:text="INICIAR"
-            android:enabled="true"
-            android:onClick="startTrace" />
+            android:enabled="true" />
 
     </LinearLayout>
 
@@ -200,8 +199,7 @@
             android:layout_alignBottom="@+id/btnStarRutas"
             android:layout_alignLeft="@+id/btnStarRutas"
             android:layout_alignStart="@+id/btnStarRutas"
-            android:text="PARAR"
-            android:onClick="stopTrace" />
+            android:text="PARAR" />
 
     </LinearLayout>
 
