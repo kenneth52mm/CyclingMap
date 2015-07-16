@@ -24,7 +24,7 @@
     <!-- Login and Register labels  -->
 
     <string name="user_label">Nombre de Usuario</string>
-    <string name="pass_label">Contrasena</string>
+    <string name="pass_label">Clave</string>
     <string name="confirm_pass">Confirmar contrasena</string>
     <string name="email_label">Email</string>
     <string name="create_user_label">Crear Usuario</string>
