@@ -66,6 +66,7 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     private Button btnRutaStar, btnRutasStop, btnMapShow, btnEndTrace;
     private LinearLayout layoutMap;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,6 +148,8 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
 
     }//END ON Create
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -175,20 +178,53 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     }
 
     public void verRuta(View v) {
+        //  polylineOptions.addAll(route);
+        //  polylineOptions.width(12);
+        //  polylineOptions.color(Color.RED);
+        //  map.addPolyline(polylineOptions)
 
         String td= getTotalDistance() + "";
         String ch = chrono.getBase() + "";
+        String sp = speed + "";
         double dist = getTotalDistance();
-        tvDistan.setText("Distancia: "+ getTotalDistance());
+
+        LatLng start = route.get(0);
+        LatLng end = route.get(route.size() - 1);
+
+        distance = getDistance(start.latitude, end.latitude, start.longitude, end.longitude);
+
+        float[] distance2 = new float[1];
+
+        Location.distanceBetween(start.latitude, start.longitude, end.latitude, end.longitude, distance2);
+
+        tvDistan.setText("Distancia: " + distance / 1000 + " otra:" + getTotalDistance());
+
         dbHelper.addCoords(coords);
+
+        //Code to go to EndTraceActivity with the extras
+
         double speedAvg = ((double) dist / chrono.getBase());
+        speed = ((long) speedAvg / chrono.getBase());
+
         Intent i = new Intent(getApplicationContext(), EndTraceActivity.class);
+
         i.putExtra("route", (Serializable) route);
         i.putExtra("Distance",td);
         i.putExtra("Duration", ch);
-        i.putExtra("Speed", speedAvg );
+        i.putExtra("Speed", sp );
 
         startActivity(i);
+    }
+
+    public double getDistance(double startOne, double endOne, double startTwo, double endTwo) {
+        Location locationA = new Location("");
+        locationA.setLatitude(startOne);
+        locationA.setLongitude(startTwo);
+        Location locationB = new Location("");
+        locationB.setLatitude(endOne);
+        locationB.setLongitude(endTwo);
+        double distance = locationA.distanceTo(locationB);
+        return distance;
     }
 
     private double getTotalDistance() {
@@ -207,6 +243,12 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         return totalDistance;
     }
 
+    public void sendData(View v) {
+        //ArrayList<Coordinate> coordinates= (ArrayList<Coordinate>) dbHelper.retrieveAll();
+        ArrayList<Coordinate> coordinates=new ArrayList<Coordinate>();
+        coordinates.add(new Coordinate(20.0,30.1));
+        routeWsHelper.execute(coordinates);
+    }
 
     public void startTrace(View v) {
         RUNNING = true;
@@ -223,7 +265,7 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
 
         txtDistance.setText( (int)( this.getTotalDistance()/1000 ) + "");
 
-        txtAvegSpeed.setText((int) (speed * 0.000277777777) + "");
+        txtAvegSpeed.setText(  (int)( speed * 0.000277777777 )+ "");
 
         loadMap(v);
     }
@@ -238,8 +280,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
 
         float[] distance2 = new float[1];
         Location.distanceBetween(start.latitude, start.longitude, end.latitude, end.longitude, distance2);
-
-        dbHelper.addCoords(coords);
     }
 
     @Override
@@ -253,7 +293,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         if (RUNNING) {
             route.add(new LatLng(location.getLatitude(), location.getLongitude()));
             coords.add(new Coordinate(location.getLatitude(), location.getLongitude()));
-            centerMapOnMyLocation();
         }
         if (route.size() == 1) {
             centerMapOnMyLocation();
@@ -265,13 +304,13 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        chrono.setBase(-chronSystemClock.elapsedRealtime()-chrono.getBase());
+        chrono.setBase(SystemClock.elapsedRealtime());
     }
 
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
-       chrono.setBase(chronSystemClock.elapsedRealtime()-chronoo.getBase());
+        chrono.setBase(SystemClock.elapsedRealtime());
     }
 
     @Override
