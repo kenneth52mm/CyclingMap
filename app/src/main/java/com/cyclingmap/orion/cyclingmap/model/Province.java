@@ -16,7 +16,15 @@ public class Province {
     private int idProvince;
     private String nameProvince;
     private ArrayList<Town> townList;
-    
+
+    public Province() {
+    }
+
+    public Province(String nameProvince, ArrayList<Town> townList) {
+        this.nameProvince = nameProvince;
+        this.townList = townList;
+    }
+
     public Province(int idProvince, String nameProvince, ArrayList<Town> townList)
     { 
         this.idProvince = idProvince;

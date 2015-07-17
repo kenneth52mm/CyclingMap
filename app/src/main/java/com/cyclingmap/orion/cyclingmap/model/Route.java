@@ -8,7 +8,6 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 /**
- *
  * @author Daniel
  */
 public class Route {
@@ -17,27 +16,26 @@ public class Route {
     private Time timeToFin; //Tiempo de duracion
     private double avgSpeed;
     private String difficultyLevel;
-    private ArrayList<Town> townList;
+    private ArrayList<Province> provinces;
     private ArrayList<Coordinate> coordinateList;
 
     public Route() {
     }
 
     public Route(int idRoute, double distance, Time timeToFinish, double avgSpeed,
-            String dLevel, ArrayList<Town> townList, ArrayList<Coordinate> coordinateList)
-    {
+                 String dLevel, ArrayList<Province> provinceArrayList, ArrayList<Coordinate> coordinateList) {
         this.idRoute = idRoute;
         this.distance = distance;
         this.timeToFin = timeToFinish;
         this.avgSpeed = avgSpeed;
         this.difficultyLevel = dLevel;
-        this.townList = townList;
+        this.provinces = provinceArrayList;
         this.coordinateList = coordinateList;
     }
 
     public Route(double i, double s) {
-        this.distance=i;
-        this.avgSpeed=s;
+        this.distance = i;
+        this.avgSpeed = s;
     }
 
     /**
@@ -71,7 +69,7 @@ public class Route {
     /**
      * @return the runTime
      */
- 
+
 
     /**
      * @return the avgSpeed
@@ -104,15 +102,15 @@ public class Route {
     /**
      * @return the townList
      */
-    public ArrayList<Town> getTownList() {
-        return townList;
+    public ArrayList<Province> getProvinces() {
+        return provinces;
     }
 
     /**
-     * @param townList the townList to set
+     * @param provinceArrayList the townList to set
      */
-    public void setTownList(ArrayList<Town> townList) {
-        this.townList = townList;
+    public void setProvinces(ArrayList<Province> provinceArrayList) {
+        this.provinces = provinceArrayList;
     }
 
     /**
@@ -142,5 +140,5 @@ public class Route {
     public void setTimeToFin(Time timeToFin) {
         this.timeToFin = timeToFin;
     }
-    
+
 }

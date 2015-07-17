@@ -8,6 +8,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -18,7 +20,9 @@ import android.widget.TextView;
 import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.RouteWsHelper;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
+import com.cyclingmap.orion.cyclingmap.data.LocationAddress;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
+import com.cyclingmap.orion.cyclingmap.model.Province;
 import com.cyclingmap.orion.cyclingmap.model.Route;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -96,12 +100,12 @@ public class MapActivity extends FragmentActivity implements LocationListener {
     }
 
     public void verRuta(View v) {
-      //  polylineOptions.addAll(route);
-      //  polylineOptions.width(12);
-      //  polylineOptions.color(Color.RED);
-      //  map.addPolyline(polylineOptions);
+        //  polylineOptions.addAll(route);
+        //  polylineOptions.width(12);
+        //  polylineOptions.color(Color.RED);
+        //  map.addPolyline(polylineOptions);
 
-        String td= getTotalDistance() + "";
+        String td = getTotalDistance() + "";
         String ch = chronometer.getBase() + "";
         String sp = speed + "";
         double dist = getTotalDistance();
@@ -117,7 +121,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
 
         txtDistance.setText("Distancia: " + distance / 1000 + " otra:" + getTotalDistance());
 
-        dbHelper.addCoords(coords);
+        // dbHelper.addCoords(coords);
 
         //Code to go to EndTraceActivity with the extras
 
@@ -127,9 +131,9 @@ public class MapActivity extends FragmentActivity implements LocationListener {
         Intent i = new Intent(getApplicationContext(), EndTraceActivity.class);
 
         i.putExtra("route", (Serializable) route);
-        i.putExtra("Distance",td);
+        i.putExtra("Distance", td);
         i.putExtra("Duration", ch);
-        i.putExtra("Speed", sp );
+        i.putExtra("Speed", sp);
 
         startActivity(i);
     }
@@ -163,8 +167,8 @@ public class MapActivity extends FragmentActivity implements LocationListener {
 
     public void sendData(View v) {
         //ArrayList<Coordinate> coordinates= (ArrayList<Coordinate>) dbHelper.retrieveAll();
-        ArrayList<Coordinate> coordinates=new ArrayList<Coordinate>();
-        coordinates.add(new Coordinate(20.0,30.1));
+        ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+        coordinates.add(new Coordinate(20.0, 30.1));
         routeWsHelper.execute(coordinates);
     }
 
@@ -181,6 +185,10 @@ public class MapActivity extends FragmentActivity implements LocationListener {
         Log.i("Tiempo ", "" + chronometer.getBase());
         speed = ((long) distance / chronometer.getBase()) / 1000;
         Log.i("Velocidad ", "" + speed);
+        LatLng[] coords = new LatLng[1];
+        coords[0] = new LatLng(9.799982, -84.033366);
+        LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
+
     }
 
     @Override
@@ -230,10 +238,29 @@ public class MapActivity extends FragmentActivity implements LocationListener {
     }
 
     public void coordsToLocalData(ArrayList<Coordinate> coords) {
-        dbHelper.addCoords(coords);
+        //dbHelper.addCoords(coords);
     }
 
-    public void routeToLocalData(Route route){
+    private class GeocoderHandler extends Handler {
+        @Override
+        public void handleMessage(Message message) {
+            ArrayList<Province> locationAddress;
+            switch (message.what) {
+                case 1:
+                    Bundle bundle = message.getData();
+                    locationAddress = (ArrayList<Province>) bundle.getSerializable("direccion");
+                    break;
+                default:
+                    locationAddress = null;
+            }
+            if (locationAddress != null) {
+                Province p = locationAddress.get(0);
+                txtDistance.setText(p.getNameProvince());
+            }
+        }
+    }
+
+    public void routeToLocalData(Route route) {
         dbHelper.addRoute(route);
     }
 }
