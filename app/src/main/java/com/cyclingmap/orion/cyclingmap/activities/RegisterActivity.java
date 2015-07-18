@@ -13,7 +13,7 @@ import com.cyclingmap.orion.cyclingmap.R;
 public class RegisterActivity extends ActionBarActivity {
 
     Button btnReg;
-    EditText txtName, txtEmail, txtPass, txtConfirnPass;
+    EditText txtName, txtEmail, txtPass;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

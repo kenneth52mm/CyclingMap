@@ -14,16 +14,20 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
@@ -57,6 +61,11 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     //That's for Facebook Login
     private CallbackManager callbackManager;
     private LoginButton loginButton;
+    private ImageView buttonLogin;
+
+    private TextView register;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,29 +83,21 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         signinButton.setSize(SignInButton.SIZE_ICON_ONLY);
 
 
+        buttonLogin = (ImageView) findViewById(R.id.login);
 
-        loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
-                // Intent i = new Intent(LogActivity.this,PrincipalActivity.class);
-                // startActivity(i);
-                Log.d("Success", "Login");
-            }
-            @Override
-            public void onCancel() {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Attempt cancelled", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            @Override
-            public void onError(FacebookException e) {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Failed attempt", Toast.LENGTH_SHORT);
-                toast.show();
-            }
+            public void onClick(View v) {
+                com.facebook.login.widget.LoginButton btn = new LoginButton(LogActivity.this);
+                btn.performClick();
+                btn.registerCallback(callbackManager, mCallBack);
 
+
+                //   btn.registerCallback(mCallbackManager, mCallBack);
+            }
         });
+
+
 
 
         //btnRegister = (Button)findViewById(R.id.BtnRegister);
@@ -108,7 +109,39 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
 //                startActivity(intent);
 //            }
 //        });
+        register = (TextView)findViewById(R.id.register);
     }
+
+    public void registerNew(View v){
+        Intent intent = new Intent(LogActivity.this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    private FacebookCallback<LoginResult> mCallBack = new FacebookCallback<LoginResult>() {
+        @Override
+        public void onSuccess(LoginResult loginResult) {
+            AccessToken accessToken = loginResult.getAccessToken();
+            Profile profile = Profile.getCurrentProfile();
+            profile.getId();
+            profile.getName();
+            Intent i = new Intent(getApplicationContext(), PrincipalActivity.class);
+            startActivity(i);
+        }
+
+        @Override
+        public void onCancel() {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Attempt cancelled", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        @Override
+        public void onError(FacebookException e) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Login attempt failed", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    };
 
     protected void onStart() {
         super.onStart();
@@ -193,6 +226,12 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
                     startActivity(intent);
                 }
                 break;
+        }
+
+        callbackManager.onActivityResult(requestCode, responseCode, intent);
+        if(responseCode == RESULT_OK){
+            Intent i = new Intent(this,PrincipalActivity.class);
+            startActivity(i);
         }
     }
 

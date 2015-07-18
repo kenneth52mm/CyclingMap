@@ -141,7 +141,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout8">
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -185,7 +186,8 @@
         android:layout_below="@+id/linearLayout6"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-45dp"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:id="@+id/linearLayout9">
 
         <Button
             android:layout_width="wrap_content"
@@ -198,21 +200,43 @@
             android:layout_alignLeft="@+id/btnStarRutas"
             android:layout_alignStart="@+id/btnStarRutas"
             android:text="PARAR" />
+
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout8"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        android:id="@+id/linearLayMapRoad">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:id="@+id/imgMap"
-            android:src="@drawable/map1"
-            android:layout_below="@+id/btnStarRutas"
-            android:layout_centerHorizontal="true"
-            android:visibility="invisible" />
+        <fragment
+            android:id="@+id/mapRutas"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="350dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout9"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-45dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ver Ruta"
+            android:id="@+id/btnEndTraceActivity"
+            android:background="@drawable/btnstar_circle"
+            android:visibility="invisible"
+            android:onClick="verRuta" />
     </LinearLayout>
 
 </RelativeLayout>

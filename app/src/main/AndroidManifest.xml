@@ -61,16 +61,25 @@
         <activity
             android:name=".activities.PrincipalActivity"
             android:label="@string/title_activity_principal" />
-        <activity
+        <activit
             android:name=".activities.UserRoutes"
-            android:label="@string/title_activity_user_routes"></activity>
+            android:label="@string/title_activity_user_routes"/>
         <activity
             android:name=".activities.EndTraceActivity"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_end_trace"></activity>
+            android:label="@string/title_activity_end_trace"/>
         <activity
             android:name=".activities.ProfileUserActivity"
-            android:label="@string/title_activity_profile_user"></activity>
+            android:label="@string/title_activity_profile_user"/>
+
+        <activity
+            android:name=".activities.BuscarRutas"
+            android:label="busca"/>
+
+
+        <activity
+            android:name=".activities.RutasActivity"
+            android:label="rutas"/>
 
         <activity
             android:name="com.facebook.FacebookActivity"

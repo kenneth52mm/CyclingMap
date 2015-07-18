@@ -7,12 +7,21 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.business.UserRoutesAdapter;
+import com.cyclingmap.orion.cyclingmap.model.Route;
+
+import java.util.ArrayList;
 
 
 public class DetallesRuta extends ActionBarActivity {
 
     TextView lblEncabez, lblNombre,lblDistancia, lblVelMedia, lblNivel, lblTipCalle;
     Button btnPlay;
+
+    UserRoutesAdapter routesAdapter;
+    ArrayList<Route> routes = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +44,32 @@ public class DetallesRuta extends ActionBarActivity {
         lblNivel.setTypeface(tf);
         lblTipCalle.setTypeface(tf);
         btnPlay.setTypeface(tf);
-    }
 
+        //Mostrar los datos
+        Bundle b = getIntent().getExtras();
+
+        //controla que haya datos si no se muestra nada
+        if(b != null) {
+            String distance = b.getString("Distance");
+            String velMedia = b.getString("AvgSpeed");
+            String nivel = b.getString("Medio");
+
+            lblDistancia.setText(lblDistancia.getText().toString() + distance + "");
+            lblVelMedia.setText(lblVelMedia.getText().toString() + velMedia + "");
+            lblNivel.setText(lblNivel.getText() + nivel + "");
+            lblNombre.setText(lblNombre.getText() + "Ruta 1");
+            lblTipCalle.setText(lblTipCalle.getText() + "Combinado");
+        }
+        else
+        {
+            lblDistancia.setText(lblDistancia.getText().toString() + " 0 Km");
+            lblVelMedia.setText(lblVelMedia.getText().toString()+ " 0 km/h");
+            lblNivel.setText(lblNivel.getText() +" 0");
+            lblNombre.setText(lblNombre.getText() + " 0");
+            lblTipCalle.setText(lblTipCalle.getText() + " Calle");
+
+        }
+
+    }
 
 }
