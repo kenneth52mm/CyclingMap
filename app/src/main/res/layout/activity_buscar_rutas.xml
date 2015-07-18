@@ -39,11 +39,11 @@
                 android:layout_marginBottom="10dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:id="@+id/imageView3"
-                    android:src="@mipmap/ic_last_route"
-                    android:layout_marginLeft="10dp" />
+                    android:src="@drawable/popularidad"
+                    android:layout_marginLeft="8dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -74,10 +74,10 @@
                 android:layout_marginBottom="10dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:id="@+id/imageView"
-                    android:src="@mipmap/ic_speed"
+                    android:src="@drawable/tipocalle"
                     android:layout_marginLeft="10dp" />
 
                 <TextView
@@ -165,9 +165,9 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:text="@string/btn_rutas_buscar_lblboton"
-            android:background="@drawable/btnrutas_buscar_boton"
+            android:background="@color/colorPrimary"
             android:id="@+id/btnRutas_Buscar"
-             />
+            />
 
     </LinearLayout>
 

@@ -1,21 +1,10 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
-import android.app.Activity;
-import android.graphics.Typeface;
-import android.location.LocationListener;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -24,9 +13,12 @@ import android.os.SystemClock;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import android.content.Intent;
+import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.RouteWsHelper;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
@@ -39,11 +31,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.Serializable;
-import java.sql.Time;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.ArrayList;
-
-import com.cyclingmap.orion.cyclingmap.R;
-
 
 
 public class RutasActivity extends FragmentActivity implements LocationListener{
@@ -178,41 +168,31 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     }
 
     public void verRuta(View v) {
-        //  polylineOptions.addAll(route);
-        //  polylineOptions.width(12);
-        //  polylineOptions.color(Color.RED);
-        //  map.addPolyline(polylineOptions)
+//        polylineOptions.addAll(route);
+//        polylineOptions.width(12);
+//        polylineOptions.color(Color.RED);
+//        map.addPolyline(polylineOptions);
 
-        String td= getTotalDistance() + "";
-        String ch = chrono.getBase() + "";
-        String sp = speed + "";
-        double dist = getTotalDistance();
+        double dist = getTotalDistance() / 1000; // km
 
-        LatLng start = route.get(0);
-        LatLng end = route.get(route.size() - 1);
+        long timeElapsed = SystemClock.elapsedRealtime() - chrono.getBase();
+        long hours = (timeElapsed / 3600000); //H
+        long minutes = ((timeElapsed - hours * 3600000) /60000);
+        long seconds = ((timeElapsed - hours * 3600000 - minutes * 60000) / 1000);
 
-        distance = getDistance(start.latitude, end.latitude, start.longitude, end.longitude);
+        double j = (double) hours;
+        double speedavg = dist/j;
 
-        float[] distance2 = new float[1];
 
-        Location.distanceBetween(start.latitude, start.longitude, end.latitude, end.longitude, distance2);
-
-        tvDistan.setText("Distancia: " + distance / 1000 + " otra:" + getTotalDistance());
-
-       // dbHelper.addCoords(coords);
-
-        //Code to go to EndTraceActivity with the extras
-
-        double speedAvg = ((double) dist / chrono.getBase());
-        speed = ((long) speedAvg / chrono.getBase());
+        String rt= dist + " Km" + "";
+        String dt = hours + " Hrs"+ "";
+        String tm =  speedavg + " Km/h"+ "";
 
         Intent i = new Intent(getApplicationContext(), EndTraceActivity.class);
-
         i.putExtra("route", (Serializable) route);
-        i.putExtra("Distance",td);
-        i.putExtra("Duration", ch);
-        i.putExtra("Speed", sp );
-
+        i.putExtra("Distance",rt);
+        i.putExtra("Duration", dt);
+        i.putExtra("Speed", tm );
         startActivity(i);
     }
 
@@ -263,9 +243,13 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         speed = ((long) distance / chrono.getBase()) / 1000;
         Log.i("Velocidad ", "" + speed);
 
-        txtDistance.setText( (int)( this.getTotalDistance()/1000 ) + "");
 
-        txtAvegSpeed.setText(  (int)( speed * 0.000277777777 )+ "");
+        //Muestro distancia y velocidad
+        NumberFormat numFormat = NumberFormat.getInstance();
+        numFormat.setMaximumFractionDigits(2);
+        numFormat.setRoundingMode(RoundingMode.DOWN);
+        txtDistance.setText( numFormat.format( this.getTotalDistance()/1000 ) + "");
+        txtAvegSpeed.setText(  numFormat.format( this.getTotalDistance()/ (chrono.getBase()/3600000) )+ "");
 
         loadMap(v);
     }
@@ -328,8 +312,8 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
 
     }
 
-    public void coordsToLocalData(ArrayList<Coordinate> coords) {
-       // dbHelper.addCoords(coords);
+    public void coordsToLocalData(ArrayList<Coordinate> coords, int id_route) {
+        dbHelper.addCoords(coords, id_route);
     }
 
     public void routeToLocalData(Route route){
