@@ -27,7 +27,7 @@ public class BuscarRutas extends ActionBarActivity {
     LinearLayout contedorListaBus;
     TableLayout tablaBusca;
 
-    String[] arrayPopu = {"Mucha", "Poca", "Muy poco"};
+    String[] arrayPopu = {"Alta", "Medio", "Baja"};
     String[] arraTipoCalle = {"Lastre", "Asfalto", "Combinado"};
     String[] arraNivel = {"Principiante", "Intermedio", "Avanzado"};
     ArrayList arraRutasBusc = new ArrayList();

@@ -43,7 +43,11 @@ public class SplashScreenActivity extends Activity implements  GoogleApiClient.C
                             SplashScreenActivity.this, PrincipalActivity.class);
                 }else {
                     mainIntent = new Intent().setClass(
+<<<<<<< HEAD
                             SplashScreenActivity.this, LogActivity.class);
+=======
+                            SplashScreenActivity.this, MapActivity.class);
+>>>>>>> origin/master
                 }
                 startActivity(mainIntent);
                 finish();

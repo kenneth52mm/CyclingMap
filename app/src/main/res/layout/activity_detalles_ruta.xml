@@ -43,8 +43,8 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="left">
 
             <LinearLayout
@@ -56,17 +56,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imageView4"
-                    android:src="@mipmap/ic_speed"
+                    android:src="@mipmap/ic_speedavg"
                     android:layout_gravity="left"
                     android:layout_column="0" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre: Tres Rios Volcan Irazu"
                     android:id="@+id/txtRuta_Det_Nombre"
                     android:textSize="18dp"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:text="Nombre: "
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtNameRoad" />
             </LinearLayout>
 
         </TableRow>
@@ -90,11 +96,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Distancia : 30 km"
                     android:id="@+id/txtRuta_Det_Distancia"
                     android:layout_marginBottom="10dp"
                     android:textSize="18dp"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:text="Distancia: " />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtDistance" />
             </LinearLayout>
         </TableRow>
 
@@ -117,11 +128,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Velocidad Media : 20 km/h"
+                    android:text="Velocidad Media : "
                     android:id="@+id/txtRutas_Det_Vel_Media"
                     android:layout_marginBottom="10dp"
                     android:textSize="18dp"
                     android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtSpeedAveg" />
             </LinearLayout>
 
         </TableRow>
@@ -145,11 +161,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nivel: Medio"
+                    android:text="Nivel: "
                     android:id="@+id/txtRuta_Det_Nivel"
                     android:layout_marginBottom="10dp"
                     android:textSize="18dp"
                     android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtNivelRoad" />
             </LinearLayout>
         </TableRow>
 
@@ -172,10 +193,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tipo de Calle: Combinado"
+                    android:text="Tipo de Calle: "
                     android:id="@+id/txtRuta_Det_TipCalle"
                     android:layout_marginLeft="10dp"
                     android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtRoadType" />
             </LinearLayout>
         </TableRow>
 
@@ -184,7 +210,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btnrutas_buscar_boton"
+        android:background="@color/colorPrimary"
         android:text="Play"
         android:id="@+id/btnRuta_Det_Play"
         android:layout_alignParentBottom="true"

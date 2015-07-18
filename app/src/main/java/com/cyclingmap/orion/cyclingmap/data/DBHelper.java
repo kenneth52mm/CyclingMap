@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
 import com.cyclingmap.orion.cyclingmap.model.Route;
+import com.cyclingmap.orion.cyclingmap.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,13 +48,22 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCreateRoute);
     }
 
-    public boolean addCoords(List<Coordinate> coordinates) {
+    public void addUser(User user) {
+        ContentValues values = new ContentValues();
+        values.put("name", user.getName());
+        values.put("email", user.getEmail());
+        values.put("pass", user.getPassword());
+        helper.insert("user", null, values);
+    }
+
+    public boolean addCoords(List<Coordinate> coordinates, int id_route) {
         boolean resp = true;
         for (int i = 0; i < coordinates.size(); i++) {
             Coordinate coord = coordinates.get(i);
             ContentValues values = new ContentValues();
             values.put("lat", coord.getX());
             values.put("lng", coord.getY());
+            values.put("id_route", id_route);
             helper.insert("coords", null, values);
         }
         return resp;
@@ -61,7 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public List<Coordinate> retrieveAll() {
         List<Coordinate> coordinates = new ArrayList<>();
-       // Cursor c = helper.rawQuery("Select lat,lng From coords Where id_route='" + id + "';", null);
+        // Cursor c = helper.rawQuery("Select lat,lng From coords Where id_route='" + id + "';", null);
         Cursor c = helper.rawQuery("Select lat,lng From coords;", null);
         if (c.moveToFirst()) {
             do {
@@ -81,6 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("avg_speed", route.getAvgSpeed());
         values.put("difficulty_level", route.getDifficultyLevel());
         helper.insert("route", null, values);
+        addCoords(route.getCoordinateList(), getIdRoute());
     }
 
     public int getIdRoute() {
