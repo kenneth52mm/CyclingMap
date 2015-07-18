@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -16,7 +18,9 @@ import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.RouteWsHelper;
+import com.cyclingmap.orion.cyclingmap.data.LocationAddress;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
+import com.cyclingmap.orion.cyclingmap.model.Province;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -36,6 +40,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     private LocationManager locationManager;
     private PolylineOptions polylineOptions;
     private RouteWsHelper routeWsHelper = new RouteWsHelper();
+    ArrayList<Province> routeProvinces;
 
 
     @Override
@@ -43,12 +48,12 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_trace);
 
-        txtdistancefinal = (TextView)findViewById(R.id.TxtDistTotal);
-        txtDuration = (TextView)findViewById(R.id.TxtDuration);
-        txtSpeedAvg = (TextView)findViewById(R.id.TxtSpeedAvg);
+        txtdistancefinal = (TextView) findViewById(R.id.TxtDistTotal);
+        txtDuration = (TextView) findViewById(R.id.TxtDuration);
+        txtSpeedAvg = (TextView) findViewById(R.id.TxtSpeedAvg);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0, 0, this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
@@ -58,31 +63,32 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
 
-
         Bundle bundle = getIntent().getExtras();
-        ArrayList route= (ArrayList) bundle.get("route");
+        ArrayList routeCoords = (ArrayList) bundle.get("route");
         txtdistancefinal.setText(bundle.getString("Distance"));
         txtDuration.setText(bundle.getString("Duration"));
         txtSpeedAvg.setText(bundle.getString("Speed"));
 
 
         // Show the current position on Fragment map
-        LatLng current = (LatLng) route.get(0);
+        LatLng current = (LatLng) routeCoords.get(0);
         CameraPosition myPosition = new CameraPosition.Builder()
                 .target(current).zoom(17).bearing(90).tilt(30).build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
 
         //Draw the route on fragmentmap
-        polylineOptions.addAll(route);
+        polylineOptions.addAll(routeCoords);
         polylineOptions.width(12);
         polylineOptions.color(Color.RED);
         map.addPolyline(polylineOptions);
-
+        LatLng[] coords = new LatLng[3];
+        coords[0] = (LatLng) routeCoords.get(0);
+        LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
     }
 
-    public void sendData(View v){
-        ArrayList<Coordinate> coordinates=new ArrayList<Coordinate>();
-        coordinates.add(new Coordinate(20.0,30.1));
+    public void sendData(View v) {
+        ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+        coordinates.add(new Coordinate(20.0, 30.1));
         routeWsHelper.execute(coordinates);
     }
 
@@ -126,5 +132,19 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    private class GeocoderHandler extends Handler {
+        @Override
+        public void handleMessage(Message message) {
+            switch (message.what) {
+                case 1:
+                    Bundle bundle = message.getData();
+                    routeProvinces = (ArrayList<Province>) bundle.getSerializable("direccion");
+                    break;
+                default:
+                    routeProvinces = null;
+            }
+        }
     }
 }
