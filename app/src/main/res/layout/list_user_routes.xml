@@ -29,7 +29,8 @@
             android:ellipsize="end"
             style="?android:textAppearanceMedium"
             tools:text="Ruta"
-            android:transitionName="image" />
+            android:transitionName="image"
+            android:textColor="#ff484848" />
 
         <TextView
             android:id="@+id/text2"

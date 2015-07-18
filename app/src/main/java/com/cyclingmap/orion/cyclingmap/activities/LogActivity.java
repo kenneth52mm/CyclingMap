@@ -27,6 +27,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
@@ -61,6 +62,8 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     private CallbackManager callbackManager;
     private LoginButton loginButton;
     private ImageView buttonLogin;
+
+    private TextView register;
 
 
 
@@ -106,6 +109,12 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
 //                startActivity(intent);
 //            }
 //        });
+        register = (TextView)findViewById(R.id.register);
+    }
+
+    public void registerNew(View v){
+        Intent intent = new Intent(LogActivity.this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     private FacebookCallback<LoginResult> mCallBack = new FacebookCallback<LoginResult>() {
@@ -220,8 +229,10 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         }
 
         callbackManager.onActivityResult(requestCode, responseCode, intent);
-        Intent i = new Intent(this,PrincipalActivity.class);
-        startActivity(i);
+        if(responseCode == RESULT_OK){
+            Intent i = new Intent(this,PrincipalActivity.class);
+            startActivity(i);
+        }
     }
 
     @Override

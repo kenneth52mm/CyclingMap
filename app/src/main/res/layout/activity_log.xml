@@ -24,7 +24,7 @@
             android:layout_column="0"
             android:layout_columnSpan="4"
             android:layout_gravity="fill_horizontal"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="80dp"
             android:layout_row="0"
             android:padding="10dp"
             android:singleLine="true"
@@ -32,7 +32,8 @@
             android:hint="@string/user_label"
             android:textColor="#757575"
             android:textColorHint="#757575"
-            android:background="#ffffffff" />
+            android:background="#ffffffff"
+            android:layout_marginBottom="10dp" />
 
         <EditText
             android:id="@+id/TxtPassword"
@@ -41,7 +42,7 @@
             android:layout_column="0"
             android:layout_columnSpan="4"
             android:layout_gravity="fill_horizontal"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:layout_row="1"
             android:padding="10dp"
             android:singleLine="true"
@@ -90,6 +91,18 @@
             android:layout_marginTop="20dp"
             android:layout_row="2"
             android:background="@drawable/fb_login" />
+
+        <TextView
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_message"
+            android:onClick="registerNew"
+            android:clickable="true"
+            android:textSize="20dp"
+            android:layout_column="0"
+            android:layout_row="7"
+            android:layout_marginTop="25dp" />
 
         <!--   <Button
                android:layout_width="wrap_content"

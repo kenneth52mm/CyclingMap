@@ -31,14 +31,15 @@
     <string name="login_label">Ingresar</string>
     <string name="register_label">Registrar</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="register_message">Registrate</string>
     <!-- End -->
 
     <!-- Drawer -->
     <string name="title_activity_principal">PrincipalActivity</string>
-    <string name="title_principal">Profile</string>
-    <string name="title_routes">Routes</string>
+    <string name="title_principal">Principal</string>
+    <string name="title_routes">Rutas</string>
     <string name="title_friends">Amigos</string>
-    <string name="title_groups">Grupos</string>
+    <string name="title_groups">Perfil</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
