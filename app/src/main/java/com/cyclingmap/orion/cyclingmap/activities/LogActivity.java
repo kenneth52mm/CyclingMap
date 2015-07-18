@@ -131,14 +131,14 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         @Override
         public void onCancel() {
             Toast toast = Toast.makeText(getApplicationContext(),
-                    "Attempt cancelled", Toast.LENGTH_SHORT);
+                    "Intento cancelado", Toast.LENGTH_SHORT);
             toast.show();
         }
 
         @Override
         public void onError(FacebookException e) {
             Toast toast = Toast.makeText(getApplicationContext(),
-                    "Login attempt failed", Toast.LENGTH_SHORT);
+                    "Intento fallido", Toast.LENGTH_SHORT);
             toast.show();
         }
     };
