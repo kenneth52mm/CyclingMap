@@ -23,21 +23,17 @@ import java.util.Locale;
  */
 public class LocationAddress {
     private static final String TAG = "LocationAddress";
+    private static ArrayList<Province> provinces = new ArrayList<>();
 
     public static void getRouteInfo(final LatLng[] coords, final Context context, final Handler handler) {
         Thread thread = new Thread() {
             @Override
             public void run() {
                 Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-                ArrayList<Province> provinces = new ArrayList<>();
                 ArrayList<Town> towns = new ArrayList<>();
+                provinces.add(new Province("Cartago"));
                 try {
-                    for (int j = 0; j <coords.length; j++) {
-                        Province province;
-                        if (provinces.isEmpty())
-                            province = new Province();
-                        else
-                            province = provinces.get(j);
+                    for (int j = 0; j < coords.length; j++) {
                         double latitude = coords[j].latitude;
                         double longitude = coords[j].longitude;
                         List<Address> addressList = geocoder.getFromLocation(
@@ -48,15 +44,21 @@ public class LocationAddress {
                             for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
                                 sb.append(address.getAddressLine(i)).append("\n");
                             }
-                            province.setNameProvince(address.getAdminArea());
+                            String provinceName = address.getAdminArea();
                             String townName = address.getLocality();
                             // Log.i("Canton ",townName);
                             // if (!province.getTownList().contains(townName))
-                            towns.add(new Town(townName));
-                            province.setTownList(towns);
-
-                            // if (!provinces.contains(province))
-                            provinces.add(province);
+                            Province p = null;
+                            if (provinces.size() != 0) {
+                                p = getProvinceByName(provinceName);
+                                Log.i("Nombre",p.getNameProvince());
+                                if (!provinceHasTown(townName,p.getNameProvince()))
+                                    p.getTownList().add(new Town(townName));
+                            } else if (p == null) {
+                                p = new Province();
+                                towns.add(new Town(townName));
+                                p.setTownList(towns);
+                            }
                         }
                     }
                 } catch (IOException e) {
@@ -81,6 +83,28 @@ public class LocationAddress {
             }
         };
         thread.start();
+    }
+
+    public static Province getProvinceByName(String name) {
+        Province p = null;
+        for (Province province : provinces) {
+            if (province.getNameProvince().equals(name)) {
+                p = province;
+                Log.i("provincia"," existe");
+                break;
+            }
+        }
+        return p;
+    }
+    public static boolean provinceHasTown(String townName,String provinceName){
+        boolean flag=false;
+        Province province=getProvinceByName(provinceName);
+        ArrayList<Town> towns=province.getTownList();
+        for(Town town:towns){
+            if(town.getNameTown().equals(townName))
+                flag=true;
+        }
+        return  flag;
     }
 
     private static class GeocoderHandler extends Handler {

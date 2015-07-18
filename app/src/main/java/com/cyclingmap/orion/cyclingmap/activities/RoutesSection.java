@@ -38,7 +38,6 @@ public class RoutesSection extends Fragment {
     ListView lwRoutes;
     UserRoutesAdapter routesAdapter;
     ArrayList<Route> routes = new ArrayList<>();
-    UserWSHelper helper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +46,7 @@ public class RoutesSection extends Fragment {
 //        lwRoutes = (ListView) rootView.findViewById(R.id.list);
 //        routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), rootView.getContext());
 //        lwRoutes.setAdapter(routesAdapter);
-        helper = new UserWSHelper();
+        UserWSHelper helper = new UserWSHelper();
         helper.execute(13);
         return rootView;
     }
@@ -91,7 +90,7 @@ public class RoutesSection extends Fragment {
 
         @Override
         protected ArrayList doInBackground(Integer... params) {
-           // android.os.Debug.waitForDebugger();
+            // android.os.Debug.waitForDebugger();
             HttpClient client = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/routes/" + params[0]);
             httpGet.setHeader("content-type", "application/json");
@@ -115,7 +114,7 @@ public class RoutesSection extends Fragment {
                         coordinates.add(new Coordinate(x, y));
                     }
                     route.setCoordinateList(coordinates);
-                   // route.setTimeToFin((Time) jsonObject.get("TimeToFin"));
+                    // route.setTimeToFin((Time) jsonObject.get("TimeToFin"));
                     routes.add(route);
                 }
             } catch (Exception ex) {
@@ -131,7 +130,7 @@ public class RoutesSection extends Fragment {
             routesAdapter = new UserRoutesAdapter(routes, getActivity());
             lwRoutes.setAdapter(routesAdapter);
             dialog.dismiss();
-           // routesAdapter.setRoutesList(routes);
+            // routesAdapter.setRoutesList(routes);
             routesAdapter.notifyDataSetChanged();
         }
     }

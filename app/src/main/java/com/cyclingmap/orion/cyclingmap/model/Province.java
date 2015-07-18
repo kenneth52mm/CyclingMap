@@ -18,6 +18,12 @@ public class Province {
     private ArrayList<Town> townList;
 
     public Province() {
+        townList=new ArrayList<>();
+    }
+
+    public Province(String nameProvince) {
+        this.nameProvince = nameProvince;
+        townList=new ArrayList<>();
     }
 
     public Province(String nameProvince, ArrayList<Town> townList) {
