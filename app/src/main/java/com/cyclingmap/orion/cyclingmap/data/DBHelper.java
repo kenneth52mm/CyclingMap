@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
     String sqlCreateRoute = "CREATE TABLE route (id_route INTEGER PRIMARY KEY AUTOINCREMENT" +
             " NOT NULL, distance REAL, time_to_finish NUMERIC, avg_speed REAL,difficulty_level INTEGER);";
     String sqlCreateUser = "CREATE TABLE user (id_user INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            "name TEXT, email TEXT, pass TEXT);";
+            "name TEXT, email TEXT, pass TEXT,weigth INTEGER,heigth INTEGER, ex_level TEXT);";
     String sqlCreateUserRoute = "CREATE TABLE user_route (id_route INTEGER, id_user INTEGER," +
             " FOREIGN KEY(id_route) REFERENCES route(id_route),FOREIGN KEY(id_user) REFERENCES " +
             "user(id_user),PRIMARY KEY (id_route,id_user))";
@@ -67,6 +67,15 @@ public class DBHelper extends SQLiteOpenHelper {
             helper.insert("coords", null, values);
         }
         return resp;
+    }
+
+    public void addUserFeatures(int user_id, int weigth, int heigth, String ex_level) {
+        String query = "Update user set weigth,heigth,ex_level  where id='" + user_id + "'";
+        ContentValues values = new ContentValues();
+        values.put("weitgh", weigth);
+        values.put("heitgh", heigth);
+        values.put("ex_level", ex_level);
+        helper.update("user", values, query, null);
     }
 
     public List<Coordinate> retrieveAll() {
