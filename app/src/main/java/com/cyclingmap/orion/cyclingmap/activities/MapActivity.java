@@ -100,7 +100,7 @@ public class MapActivity extends FragmentActivity implements LocationListener {
     }
 
     public void verRuta(View v) {
-<<<<<<< HEAD
+
         //  polylineOptions.addAll(route);
         //  polylineOptions.width(12);
         //  polylineOptions.color(Color.RED);
@@ -109,16 +109,9 @@ public class MapActivity extends FragmentActivity implements LocationListener {
         String td = getTotalDistance() + "";
         String ch = chronometer.getBase() + "";
         String sp = speed + "";
-        double dist = getTotalDistance();
-=======
-//        polylineOptions.addAll(route);
-//        polylineOptions.width(12);
-//        polylineOptions.color(Color.RED);
-//        map.addPolyline(polylineOptions);
+
 
         double dist = getTotalDistance() / 1000; // km
->>>>>>> origin/master
-
         long timeElapsed = SystemClock.elapsedRealtime() - chronometer.getBase();
         long hours = (timeElapsed / 3600000); //H
         long minutes = ((timeElapsed - hours * 3600000) /60000);
@@ -126,11 +119,6 @@ public class MapActivity extends FragmentActivity implements LocationListener {
 
         double j = (double) hours;
         double speedavg = dist/j;
-
-
-<<<<<<< HEAD
-        Location.distanceBetween(start.latitude, start.longitude, end.latitude, end.longitude, distance2);
-
         txtDistance.setText("Distancia: " + distance / 1000 + " otra:" + getTotalDistance());
 
         // dbHelper.addCoords(coords);
@@ -139,24 +127,18 @@ public class MapActivity extends FragmentActivity implements LocationListener {
 
         double speedAvg = ((double) dist / chronometer.getBase());
         speed = ((long) speedAvg / chronometer.getBase());
-=======
         String rt= dist + " Km" + "";
         String dt = hours + " Hrs"+ "";
         String tm =  speedavg + " Km/h"+ "";
->>>>>>> origin/master
 
         Intent i = new Intent(getApplicationContext(), EndTraceActivity.class);
         i.putExtra("route", (Serializable) route);
-<<<<<<< HEAD
         i.putExtra("Distance", td);
         i.putExtra("Duration", ch);
         i.putExtra("Speed", sp);
-
-=======
         i.putExtra("Distance",rt);
         i.putExtra("Duration", dt);
         i.putExtra("Speed", tm );
->>>>>>> origin/master
         startActivity(i);
     }
 

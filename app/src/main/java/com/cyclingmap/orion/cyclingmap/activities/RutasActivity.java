@@ -199,7 +199,7 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
 
         tvDistan.setText("Distancia: " + distance / 1000 + " otra:" + getTotalDistance());
 
-        dbHelper.addCoords(coords);
+       // dbHelper.addCoords(coords);
 
         //Code to go to EndTraceActivity with the extras
 
@@ -329,7 +329,7 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     }
 
     public void coordsToLocalData(ArrayList<Coordinate> coords) {
-        dbHelper.addCoords(coords);
+       // dbHelper.addCoords(coords);
     }
 
     public void routeToLocalData(Route route){
