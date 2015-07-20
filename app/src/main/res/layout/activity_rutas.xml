@@ -148,7 +148,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="fill_parent"
             android:layout_height="30dp"
-            android:text="Map"
+            android:text="@string/rutas_btn_showmap"
             android:id="@+id/btnShowMap"
             android:textSize="15sp"
             android:height="8dp"
@@ -174,7 +174,7 @@
             android:layout_toRightOf="@+id/lblRutasDistancia"
             android:layout_toEndOf="@+id/lblRutasDistancia"
             android:width="20dp"
-            android:text="INICIAR"
+            android:text="@string/rutas_btn_iniciar"
             android:enabled="true" />
 
     </LinearLayout>
@@ -199,7 +199,7 @@
             android:layout_alignBottom="@+id/btnStarRutas"
             android:layout_alignLeft="@+id/btnStarRutas"
             android:layout_alignStart="@+id/btnStarRutas"
-            android:text="PARAR" />
+            android:text="@string/rutas_btn_stop" />
 
     </LinearLayout>
 

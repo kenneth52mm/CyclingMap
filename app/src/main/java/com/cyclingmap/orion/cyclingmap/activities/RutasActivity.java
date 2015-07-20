@@ -9,6 +9,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -21,7 +23,9 @@ import android.widget.TextView;
 import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.RouteWsHelper;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
+import com.cyclingmap.orion.cyclingmap.data.LocationAddress;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
+import com.cyclingmap.orion.cyclingmap.model.Province;
 import com.cyclingmap.orion.cyclingmap.model.Route;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -47,15 +51,12 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     private boolean RUNNING = false;
     private RouteWsHelper routeWsHelper = new RouteWsHelper();
     private double distance;
-
     private long speed;
     private DBHelper dbHelper;
-
-    private TextView tvTiempo, tvDistan, tvVeloProm, tvKm, txtDistance,txtAvegSpeed, tvKmH;
+    private TextView tvTiempo, tvDistan, tvVeloProm, tvKm, txtDistan,txtDistance,txtAvegSpeed, tvKmH;
     private Chronometer chrono;
     private Button btnRutaStar, btnRutasStop, btnMapShow, btnEndTrace;
     private LinearLayout layoutMap;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         tvVeloProm = (TextView) findViewById(R.id.lblRutasVelProm);
         tvKm =  (TextView) findViewById(R.id.lblRtuasKm);
         tvKmH =  (TextView) findViewById(R.id.lblRutasKmH);
-        txtDistance =  (TextView) findViewById(R.id.txtRutaskm);
+        txtDistan =  (TextView) findViewById(R.id.txtRutaskm);
         txtAvegSpeed =  (TextView) findViewById(R.id.txtRutaskmh);
         chrono = (Chronometer) findViewById(R.id.chrono);
         btnRutaStar = (Button) findViewById(R.id.btnStarRutas);
@@ -168,13 +169,16 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     }
 
     public void verRuta(View v) {
-//        polylineOptions.addAll(route);
-//        polylineOptions.width(12);
-//        polylineOptions.color(Color.RED);
-//        map.addPolyline(polylineOptions);
+        polylineOptions.addAll(route);
+        polylineOptions.width(12);
+        polylineOptions.color(Color.RED);
+        map.addPolyline(polylineOptions);
+
+        String td = getTotalDistance() + "";
+        String ch = chrono.getBase() + "";
+        String sp = speed + "";
 
         double dist = getTotalDistance() / 1000; // km
-
         long timeElapsed = SystemClock.elapsedRealtime() - chrono.getBase();
         long hours = (timeElapsed / 3600000); //H
         long minutes = ((timeElapsed - hours * 3600000) /60000);
@@ -183,13 +187,20 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         double j = (double) hours;
         double speedavg = dist/j;
 
+        // dbHelper.addCoords(coords);
+        //Code to go to EndTraceActivity with the extras
 
+        double speedAvg = ((double) dist / chrono.getBase());
+        speed = ((long) speedAvg / chrono.getBase());
         String rt= dist + " Km" + "";
         String dt = hours + " Hrs"+ "";
         String tm =  speedavg + " Km/h"+ "";
 
         Intent i = new Intent(getApplicationContext(), EndTraceActivity.class);
         i.putExtra("route", (Serializable) route);
+        i.putExtra("Distance", td);
+        i.putExtra("Duration", ch);
+        i.putExtra("Speed", sp);
         i.putExtra("Distance",rt);
         i.putExtra("Duration", dt);
         i.putExtra("Speed", tm );
@@ -239,16 +250,20 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     public void stopTrace(View v) {
         RUNNING = false;
         chrono.stop();
-        Log.i("Tiempo ", "" + chrono.getBase());
+        //Log.i("Tiempo ", "" + chrono.getBase());
         speed = ((long) distance / chrono.getBase()) / 1000;
-        Log.i("Velocidad ", "" + speed);
+        //Log.i("Velocidad ", "" + speed);
 
+        LatLng[] coords = new LatLng[1];
+        coords[0] = new LatLng(9.799982, -84.033366);
+        LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
 
         //Muestro distancia y velocidad
         NumberFormat numFormat = NumberFormat.getInstance();
         numFormat.setMaximumFractionDigits(2);
         numFormat.setRoundingMode(RoundingMode.DOWN);
-        txtDistance.setText( numFormat.format( this.getTotalDistance()/1000 ) + "");
+        Double distan = this.getTotalDistance()/1000;
+        txtDistan.setText( numFormat.format( distan ) + "");
         txtAvegSpeed.setText(  numFormat.format( this.getTotalDistance()/ (chrono.getBase()/3600000) )+ "");
 
         loadMap(v);
@@ -261,7 +276,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         map.addPolyline(polylineOptions);
         LatLng start = route.get(0);
         LatLng end = route.get(route.size() - 1);
-
         float[] distance2 = new float[1];
         Location.distanceBetween(start.latitude, start.longitude, end.latitude, end.longitude, distance2);
     }
@@ -269,7 +283,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
     }
 
     @Override
@@ -282,7 +295,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
             centerMapOnMyLocation();
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 5, this);
         }
-
     }
 
     @Override
@@ -312,8 +324,27 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
 
     }
 
-    public void coordsToLocalData(ArrayList<Coordinate> coords, int id_route) {
-        dbHelper.addCoords(coords, id_route);
+    public void coordsToLocalData(ArrayList<Coordinate> coords) {
+        //dbHelper.addCoords(coords);
+    }
+
+    private class GeocoderHandler extends Handler {
+        @Override
+        public void handleMessage(Message message) {
+            ArrayList<Province> locationAddress;
+            switch (message.what) {
+                case 1:
+                    Bundle bundle = message.getData();
+                    locationAddress = (ArrayList<Province>) bundle.getSerializable("direccion");
+                    break;
+                default:
+                    locationAddress = null;
+            }
+            if (locationAddress != null) {
+                Province p = locationAddress.get(0);
+                //txtDistance.setText(p.getNameProvince());
+            }
+        }
     }
 
     public void routeToLocalData(Route route){

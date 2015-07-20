@@ -15,12 +15,12 @@ import java.util.ArrayList;
 
 public class DetallesRuta extends ActionBarActivity {
 
-    TextView lblEncabez, lblNombre,lblDistancia, lblVelMedia, lblNivel, lblTipCalle;
+    TextView lblEncabez, lblNombre,lblDistancia, lblVelMedia, lblNivel, lblTipCalle, txtNameRoad, txtDistanceRoad, txtAveSpeed, txtLevel, txtTipCalle;
     Button btnPlay;
 
     UserRoutesAdapter routesAdapter;
     ArrayList<Route> routes = new ArrayList<>();
-
+    Route route;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,11 @@ public class DetallesRuta extends ActionBarActivity {
         lblVelMedia = (TextView) findViewById(R.id.txtRutas_Det_Vel_Media);
         lblNivel = (TextView) findViewById(R.id.txtRuta_Det_Nivel);
         lblTipCalle = (TextView) findViewById(R.id.txtRuta_Det_TipCalle);
+        txtNameRoad = (TextView) findViewById(R.id.txtNameRoad);
+        txtDistanceRoad = (TextView) findViewById(R.id.txtDistance);
+        txtAveSpeed = (TextView) findViewById(R.id.txtSpeedAveg);
+        txtLevel = (TextView) findViewById(R.id.txtNivelRoad);
+        txtTipCalle = (TextView) findViewById(R.id.txtRoadType);
         btnPlay = (Button)findViewById(R.id.btnRuta_Det_Play);
 
         //Se agrega el estilo de la fuente
@@ -44,32 +49,42 @@ public class DetallesRuta extends ActionBarActivity {
         lblNivel.setTypeface(tf);
         lblTipCalle.setTypeface(tf);
         btnPlay.setTypeface(tf);
+        txtNameRoad.setTypeface(tf);
+        txtDistanceRoad.setTypeface(tf);
+        txtAveSpeed.setTypeface(tf);
+        txtLevel.setTypeface(tf);
+        txtTipCalle.setTypeface(tf);
 
         //Mostrar los datos
         Bundle b = getIntent().getExtras();
 
         //controla que haya datos si no se muestra nada
         if(b != null) {
-            String distance = b.getString("Distance");
-            String velMedia = b.getString("AvgSpeed");
-            String nivel = b.getString("Medio");
+            //route =(Route) b.get("Route");
 
-            lblDistancia.setText(lblDistancia.getText().toString() + distance + "");
-            lblVelMedia.setText(lblVelMedia.getText().toString() + velMedia + "");
-            lblNivel.setText(lblNivel.getText() + nivel + "");
-            lblNombre.setText(lblNombre.getText() + "Ruta 1");
-            lblTipCalle.setText(lblTipCalle.getText() + "Combinado");
+            String id = b.getInt("Id_Route")+"";
+            String distance = b.getDouble("Distance")+"";
+            String velMedia = b.getDouble("SpeedAveg")+"";
+            String nivel = b.getString("Level");
+
+            txtDistanceRoad.setText( distance + "");
+            txtAveSpeed.setText( velMedia + "");
+            txtLevel.setText( nivel + "");
+            txtNameRoad.setText( "Ruta " + id);
+            txtTipCalle.setText( "No aplica");
         }
         else
         {
-            lblDistancia.setText(lblDistancia.getText().toString() + " 0 Km");
-            lblVelMedia.setText(lblVelMedia.getText().toString()+ " 0 km/h");
-            lblNivel.setText(lblNivel.getText() +" 0");
-            lblNombre.setText(lblNombre.getText() + " 0");
-            lblTipCalle.setText(lblTipCalle.getText() + " Calle");
+            txtDistanceRoad.setText("0");
+            txtAveSpeed.setText("");
+            txtLevel.setText("");
+            txtNameRoad.setText("");
+            txtTipCalle.setText("");
 
         }
 
     }
+
+
 
 }

@@ -75,7 +75,10 @@
         <activity
             android:name=".activities.BuscarRutas"
             android:label="busca"/>
-
+        <activity
+            android:name=".activities.DetallesRuta"
+            android:label="@string/title_activity_detalles_ruta">
+        </activity>
 
         <activity
             android:name=".activities.RutasActivity"

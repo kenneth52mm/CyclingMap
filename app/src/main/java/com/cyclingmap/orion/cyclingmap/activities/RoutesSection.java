@@ -2,6 +2,7 @@ package com.cyclingmap.orion.cyclingmap.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -43,11 +44,26 @@ public class RoutesSection extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.lay_route_section, container, false);
-//        lwRoutes = (ListView) rootView.findViewById(R.id.list);
-//        routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), rootView.getContext());
-//        lwRoutes.setAdapter(routesAdapter);
+        lwRoutes = (ListView) rootView.findViewById(R.id.list);
+        routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), rootView.getContext());
+        lwRoutes.setAdapter(routesAdapter);
         UserWSHelper helper = new UserWSHelper();
         helper.execute(13);
+
+        lwRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Route route = routes.get(position);
+                Intent intent = new Intent(getActivity().getApplicationContext(), DetallesRuta.class);
+                intent.putExtra("Distance", route.getDistance());
+                intent.putExtra("Id_Route", route.getIdRoute());
+                intent.putExtra("SpeedAveg", route.getAvgSpeed());
+                intent.putExtra("Level", route.getDifficultyLevel());
+                //intent.putExtra("", (Serializable) route);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 

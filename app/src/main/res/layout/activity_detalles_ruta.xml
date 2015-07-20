@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imageView4"
-                    android:src="@mipmap/ic_speedavg"
+                    android:src="@drawable/nombre"
                     android:layout_gravity="left"
                     android:layout_column="0" />
 
@@ -72,7 +72,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtNameRoad" />
+                    android:id="@+id/txtNameRoad"
+                    android:textSize="18dp" />
             </LinearLayout>
 
         </TableRow>
@@ -105,7 +106,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtDistance" />
+                    android:id="@+id/txtDistance"
+                    android:textSize="18dp" />
             </LinearLayout>
         </TableRow>
 
@@ -137,7 +139,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtSpeedAveg" />
+                    android:id="@+id/txtSpeedAveg"
+                    android:textSize="18dp" />
             </LinearLayout>
 
         </TableRow>
@@ -170,7 +173,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtNivelRoad" />
+                    android:id="@+id/txtNivelRoad"
+                    android:textSize="18dp" />
             </LinearLayout>
         </TableRow>
 
@@ -184,10 +188,10 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:id="@+id/imageView8"
-                    android:src="@mipmap/ic_distanc"
+                    android:src="@drawable/tipocalle"
                     android:layout_gravity="left" />
 
                 <TextView
@@ -201,7 +205,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtRoadType" />
+                    android:id="@+id/txtRoadType"
+                    android:textSize="18dp" />
             </LinearLayout>
         </TableRow>
 

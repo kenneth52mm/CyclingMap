@@ -74,14 +74,21 @@
     <string name="configuration">Configuracion</string>
     <!-- End -->
 
-    <string name="rutas_activity_lbltiempo">TIEMPO (s)</string>
-    <string name="ruta_activity_lbldistancia">DISTANCIA</string>
-    <string name="ruta_activity_lbldistanprome">VELOCIDAD MEDIA</string>
-    <string name="title_activity_rutas">Crear Ruta</string>
     <string name="title_activity_buscar_rutas">Buscar Rutas</string>
     <string name="btnRutas_lista_buscar">Aceptar</string>
     <string name="btn_rutas_buscar_lblboton">Buscar</string>
     <string name="title_activity_detalles_ruta">Detalles de Ruta</string>
     <string name="detalle_ruta_Encabezado">Detalles de la Ruta</string>
+
+    <!-- Rutas activity -->
+    <string name="rutas_activity_lbltiempo">TIEMPO (s)</string>
+    <string name="ruta_activity_lbldistancia">DISTANCIA</string>
+    <string name="ruta_activity_lbldistanprome">VELOCIDAD MEDIA</string>
+    <string name="title_activity_rutas">Crear Ruta</string>
+    <string name="rutas_btn_showmap">MAP</string>
+    <string name="rutas_btn_iniciar">INICIAR</string>
+    <string name="rutas_btn_stop">PARAR</string>
+    <string name="rutas_btn_verruta">VER RUTA</string>
+    <!-- End -->
 
 </resources>
