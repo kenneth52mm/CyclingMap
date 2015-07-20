@@ -32,9 +32,9 @@ public class UserRoutesAdapter extends ArrayAdapter<Route> {
         LayoutInflater inflater = LayoutInflater.from(context);
         View item = inflater.inflate(R.layout.list_user_routes, null);
         TextView txt1 = (TextView) item.findViewById(R.id.route_name);
-        txt1.setText(""+route.getDistance());
+        txt1.setText("Distancia: "+route.getDistance());
         TextView txt2 = (TextView) item.findViewById(R.id.text2);
-        txt2 .setText(""+route.getAvgSpeed());
+        txt2 .setText("Duracion: "+route.getAvgSpeed());
         return item;
     }
 

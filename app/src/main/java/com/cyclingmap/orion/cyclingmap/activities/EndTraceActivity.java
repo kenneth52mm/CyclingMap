@@ -83,6 +83,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         map.addPolyline(polylineOptions);
         LatLng[] coords = new LatLng[3];
         coords[0] = (LatLng) routeCoords.get(0);
+        coords[1]= (LatLng) routeCoords.get(routeCoords.size()-1);
         LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
     }
 
