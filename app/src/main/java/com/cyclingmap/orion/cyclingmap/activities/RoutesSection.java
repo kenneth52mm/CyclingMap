@@ -59,7 +59,7 @@ public class RoutesSection extends Fragment {
                 intent.putExtra("Id_Route", route.getIdRoute());
                 intent.putExtra("SpeedAveg", route.getAvgSpeed());
                 intent.putExtra("Level", route.getDifficultyLevel());
-                //intent.putExtra("", (Serializable) route);
+
                 startActivity(intent);
             }
         });

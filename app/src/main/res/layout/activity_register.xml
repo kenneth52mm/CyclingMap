@@ -15,8 +15,7 @@
         android:paddingRight="20dp"
         android:columnCount="1"
         android:orientation="horizontal"
-        android:rowCount="5"
-        >
+        android:rowCount="5">
 
         <EditText
             android:layout_width="fill_parent"

@@ -152,7 +152,8 @@
             android:id="@+id/btnShowMap"
             android:textSize="15sp"
             android:height="8dp"
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorPrimary"
+            android:textColor="#ffffffff" />
     </LinearLayout>
 
     <LinearLayout
@@ -175,7 +176,8 @@
             android:layout_toEndOf="@+id/lblRutasDistancia"
             android:width="20dp"
             android:text="@string/rutas_btn_iniciar"
-            android:enabled="true" />
+            android:enabled="true"
+            android:textColor="#ffffffff" />
 
     </LinearLayout>
 
@@ -199,7 +201,8 @@
             android:layout_alignBottom="@+id/btnStarRutas"
             android:layout_alignLeft="@+id/btnStarRutas"
             android:layout_alignStart="@+id/btnStarRutas"
-            android:text="@string/rutas_btn_stop" />
+            android:text="@string/rutas_btn_stop"
+            android:textColor="#ffffffff" />
 
     </LinearLayout>
 
@@ -236,7 +239,8 @@
             android:background="@drawable/btnstar_circle"
             android:visibility="invisible"
             android:onClick="verRuta"
-            android:text="VER RUTA" />
+            android:text="VER RUTA"
+            android:textColor="#ffffffff" />
     </LinearLayout>
 
 </RelativeLayout>

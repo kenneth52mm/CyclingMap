@@ -29,4 +29,9 @@
     <!-- Backward-compatible version of ?android:attr/buttonBarButtonStyle -->
     <style name="ButtonBarButton" />
 
+
+    <style name="spinnStyle">
+        <item name="android:labelTextSize">18dp</item>
+    </style>
+
 </resources>

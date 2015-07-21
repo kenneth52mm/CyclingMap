@@ -53,8 +53,8 @@ public class RegisterActivity extends ActionBarActivity {
                 {
                     if(isEmailValid(txtEmail.getText().toString()))//email
                     {
-//                        if(txtPass.getText().toString().equals(txtConfirnPass.getText().toString()))//claves
-//                        {
+                        if(txtPass.getText().toString().trim().length() > 0)//claves
+                        {
                             Encript encript =new Encript();
                             registerPerson(txtEmail.getText().toString(), txtName.getText().toString(), encript.encryptAndEncode(txtPass.getText().toString()));
                             //resetear los texts
@@ -62,12 +62,12 @@ public class RegisterActivity extends ActionBarActivity {
                             txtEmail.setText("");
                             txtPass.setText("");
                             txtConfirnPass.setText("");
-//                        }
-//                        else
-//                        {
-//                            Toast.makeText(getApplicationContext(), "Datos de Contrasena incorrectos",
-//                                    Toast.LENGTH_SHORT).show();
-//                        }
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(), "Por favor ingrese contrasena",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                     else
                     {
@@ -77,7 +77,7 @@ public class RegisterActivity extends ActionBarActivity {
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "El nombre esta vacio",
+                    Toast.makeText(getApplicationContext(), "Por favor ingrese nombre",
                             Toast.LENGTH_SHORT).show();
                 }
             }

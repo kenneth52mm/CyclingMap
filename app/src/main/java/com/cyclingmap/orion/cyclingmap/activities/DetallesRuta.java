@@ -55,7 +55,7 @@ public class DetallesRuta extends ActionBarActivity {
         txtLevel.setTypeface(tf);
         txtTipCalle.setTypeface(tf);
 
-        //Mostrar los datos
+        //Obtener los datos
         Bundle b = getIntent().getExtras();
 
         //controla que haya datos si no se muestra nada

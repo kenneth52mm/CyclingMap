@@ -72,6 +72,12 @@
     <string name="pass_user">Clave</string>
     <string name="friend_list">Cantidad de amigos</string>
     <string name="configuration">Configuracion</string>
+
+    <string name="user_features_head">Datos de Usuario</string>
+    <string name="user_features_weight">Peso</string>
+    <string name="user_features_height">Altura</string>
+    <string name="user_features_level">Nivel</string>
+    <string name="user_features_btnsave">GUARDAR</string>
     <!-- End -->
 
     <string name="title_activity_buscar_rutas">Buscar Rutas</string>
@@ -85,10 +91,18 @@
     <string name="ruta_activity_lbldistancia">DISTANCIA</string>
     <string name="ruta_activity_lbldistanprome">VELOCIDAD MEDIA</string>
     <string name="title_activity_rutas">Crear Ruta</string>
-    <string name="rutas_btn_showmap">MAP</string>
+    <string name="rutas_btn_showmap">MAPA</string>
     <string name="rutas_btn_iniciar">INICIAR</string>
     <string name="rutas_btn_stop">PARAR</string>
     <string name="rutas_btn_verruta">VER RUTA</string>
+    <string name="title_activity_user_features">Usuarios</string>
+    <string name="title_activity_rutas_buscar">Rutas</string>
+    <string name="title_activity_finded_routes">Rutas</string>
+    <string name="detalles_tipocalle">Tipo de Ruta:</string>
+    <string name="detalles_popu">Popularidad:</string>
+    <string name="detalles_nivel">Nivel:</string>
+    <string name="busqueda_head">Opciones de busqueda</string>
+    <string name="btn_ruta_detalle">COMENZAR</string>
     <!-- End -->
 
 </resources>
