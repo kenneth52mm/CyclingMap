@@ -51,14 +51,14 @@
 
     <!-- Final trace -->
     <string name="distance_Total">Distancia</string>
-    <string name="time_Total">Duracion</string>
+    <string name="time_Total">Duración</string>
     <string name="speed_avg">Velocidad promedio</string>
-    <string name="share_public">Compartir</string>
+    <string name="share_public">Pública</string>
     <!-- End -->
 
     <!-- lay_Principal -->
 
-    <string name="distance_user_total">Kilometros recorridos</string>
+    <string name="distance_user_total">Kilómetros recorridos</string>
     <string name="max_speed">Velocidad máxima</string>
     <string name="experience_level">Nivel de experiencia</string>
     <string name="last_route">Ultima ruta</string>
@@ -78,7 +78,7 @@
     <string name="user_features_weight">Peso</string>
     <string name="user_features_height">Altura</string>
     <string name="user_features_level">Nivel</string>
-    <string name="user_features_btnsave">GUARDAR</string>
+    <string name="user_features_btnsave">Guardar</string>
     <!-- End -->
 
     <string name="title_activity_buscar_rutas">Buscar Rutas</string>

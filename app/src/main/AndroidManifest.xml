@@ -51,7 +51,7 @@
         <activity android:name=".activities.LogActivity" />
         <activity android:name=".activities.RegisterActivity" />
 
-        <activit
+        <activity
             android:name=".activities.UserRoutes"
             android:label="@string/title_activity_user_routes" />
 

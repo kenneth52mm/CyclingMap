@@ -1,6 +1,7 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.AsyncTask;
@@ -291,6 +292,15 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
             this.valor = valor;
         }
 
+        private final ProgressDialog dialog = new ProgressDialog(getApplicationContext());
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.setMessage("Cargando...");
+            dialog.show();
+        }
+
         @Override
         protected Integer doInBackground(String... params) {
             int resul = 0;
@@ -314,6 +324,7 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
+            dialog.dismiss();
             if (integer != 0) {
                 Intent intent = new Intent(LogActivity.this, HomeActivity.class);
                 startActivity(intent);
