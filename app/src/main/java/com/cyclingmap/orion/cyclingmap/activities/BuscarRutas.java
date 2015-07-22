@@ -46,14 +46,22 @@ public class BuscarRutas extends ActionBarActivity {
         contedorListaBus = (LinearLayout) findViewById(R.id.layoutContListaBus);
         tablaBusca = (TableLayout) findViewById(R.id.tabla1);
 
-        final ArrayAdapter adapterPop = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayPopu );
-        ArrayAdapter adapterTipoC = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraTipoCalle );
-        ArrayAdapter adapterNi = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraNivel );
+        //Spinner custom
+        ArrayAdapter adapterPop = new ArrayAdapter<CharSequence>(this, R.layout.spin_style_item, arrayPopu );
+        adapterPop.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spPopularidad.setAdapter(adapterPop);
+
+        ArrayAdapter adapterTipoC = new ArrayAdapter<String>(this, R.layout.spin_style_item, arraTipoCalle );
+        adapterTipoC.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spTipoCalle.setAdapter(adapterTipoC);
+
+        ArrayAdapter adapterNi = new ArrayAdapter<String>(this, R.layout.spin_style_item, arraNivel );
+        adapterNi.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spNivel.setAdapter(adapterNi);
+
+
         final ArrayAdapter rutasBuscado = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraRutasBusc );
 
-        spPopularidad.setAdapter(adapterPop);
-        spTipoCalle.setAdapter(adapterTipoC);
-        spNivel.setAdapter(adapterNi);
         lvRutasBuscadas.setAdapter(rutasBuscado);
 
         //Agrega la fuente a los controles

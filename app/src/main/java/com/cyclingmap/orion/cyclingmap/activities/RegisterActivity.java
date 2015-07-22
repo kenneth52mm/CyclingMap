@@ -1,6 +1,7 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class RegisterActivity extends ActionBarActivity {
 
     Button btnReg;
     EditText txtName, txtEmail, txtPass, txtConfirnPass;
+    private final ProgressDialog dialog = new ProgressDialog(getApplicationContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class RegisterActivity extends ActionBarActivity {
                         if(txtPass.getText().toString().trim().length() > 0)//claves
                         {
                             Encript encript =new Encript();
-                            registerPerson(txtEmail.getText().toString(), txtName.getText().toString(), encript.encryptAndEncode(txtPass.getText().toString()));
+                            registerPerson(txtEmail.getText().toString(), txtName.getText().toString(), (txtPass.getText().toString()));
                             //resetear los texts
                             txtName.setText("");
                             txtEmail.setText("");
@@ -99,6 +101,9 @@ public class RegisterActivity extends ActionBarActivity {
             PersonWSHelper personWsHelper = new PersonWSHelper();
             personWsHelper.setPerson(person);
             personWsHelper.execute();
+            //Progress bar
+            dialog.setMessage("Registrando...");
+            dialog.show();
         }
         catch (Exception e )
         {

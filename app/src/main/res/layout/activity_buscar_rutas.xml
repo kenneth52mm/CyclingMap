@@ -173,7 +173,7 @@
         android:id="@+id/linearLayout7">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:text="@string/btn_rutas_buscar_lblboton"
             android:background="@color/greenDark"

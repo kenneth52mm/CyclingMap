@@ -152,7 +152,7 @@
             android:id="@+id/btnShowMap"
             android:textSize="15sp"
             android:height="8dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/greenDark"
             android:textColor="#ffffffff" />
     </LinearLayout>
 

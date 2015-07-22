@@ -106,6 +106,8 @@
     <string name="btn_ruta_detalle">COMENZAR</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="ruta_finded_head">Rutas Encontradas</string>
+    <string name="ruta_finded_btnsee">VER RUTA</string>
 
     <!-- End -->
 
