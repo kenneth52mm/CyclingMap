@@ -124,7 +124,7 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
             Profile profile = Profile.getCurrentProfile();
             profile.getId();
             profile.getName();
-            Intent i = new Intent(getApplicationContext(), PrincipalActivity.class);
+            Intent i = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(i);
         }
 
@@ -215,7 +215,7 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
 //                intent.setClass(this, MainActivity.class);
                 if (responseCode == RESULT_OK) {
                     signedInUser = false;
-                    intent.setClass(this, PrincipalActivity.class);
+                    intent.setClass(this, HomeActivity.class);
 ////                    Bundle bundle=new Bundle();
 ////                    bundle.putString("user",userName);
                     startActivity(intent);
@@ -230,7 +230,7 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
 
         callbackManager.onActivityResult(requestCode, responseCode, intent);
         if(responseCode == RESULT_OK){
-            Intent i = new Intent(this,PrincipalActivity.class);
+            Intent i = new Intent(this,HomeActivity.class);
             startActivity(i);
         }
     }

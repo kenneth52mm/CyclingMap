@@ -10,4 +10,18 @@
     <color name="text_background">#90000000</color>
     <color name="greenDark">#006600</color>
     <color name="greenLight">#00994C</color>
+
+    <array name="texts_black">
+        <item>@color/md_text</item>
+        <item>@color/md_secondary_text_icons</item>
+        <item>@color/md_disabled_hint_text</item>
+        <item>@color/md_divider</item>
+    </array>
+
+    <color name="md_text">#df000000</color>
+    <color name="md_secondary_text_icons">#8a000000</color>
+    <color name="md_disabled_hint_text">#4c000000</color>
+    <color name="md_divider">#1f000000</color>
+    <color name="md_white_1000">#ffffff</color>
+    <color name="md_indigo_500_25">#403f51b5</color>
 </resources>

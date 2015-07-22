@@ -104,6 +104,8 @@
     <string name="detalles_nivel">Nivel:</string>
     <string name="busqueda_head">Opciones de busqueda</string>
     <string name="btn_ruta_detalle">COMENZAR</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- End -->
 
