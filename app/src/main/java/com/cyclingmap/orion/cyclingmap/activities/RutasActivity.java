@@ -300,13 +300,13 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        chrono.setBase(SystemClock.elapsedRealtime());
+        chrono.setBase(SystemClock.elapsedRealtime()-chrono.getBase());
     }
 
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
-        chrono.setBase(SystemClock.elapsedRealtime());
+        chrono.setBase(SystemClock.elapsedRealtime()-chrono.getBase());
     }
 
     @Override
