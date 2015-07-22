@@ -8,5 +8,6 @@
     <color name="navigationBarColor">#000000</color>
     <color name="colorAccent">#0277BD</color>
     <color name="text_background">#90000000</color>
-
+    <color name="greenDark">#006600</color>
+    <color name="greenLight">#00994C</color>
 </resources>

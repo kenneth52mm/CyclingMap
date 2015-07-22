@@ -32,6 +32,7 @@
     <string name="register_label">Registrar</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="register_message">Registrate</string>
+    <string name="login_fb_text">Facebook</string>
     <!-- End -->
 
     <!-- Drawer -->
@@ -103,6 +104,7 @@
     <string name="detalles_nivel">Nivel:</string>
     <string name="busqueda_head">Opciones de busqueda</string>
     <string name="btn_ruta_detalle">COMENZAR</string>
+
     <!-- End -->
 
 </resources>
