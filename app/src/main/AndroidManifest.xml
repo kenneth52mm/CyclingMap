@@ -13,18 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
 
-    <activity
-        android:name=".activities.UserFeatures"
-        android:label="@string/title_activity_user_features" >
-    </activity>
-    <activity
-        android:name=".activities.BuscarRutas"
-        android:label="@string/title_activity_buscar_rutas" >
-    </activity>
-    <activity
-        android:name=".activities.FindedRoutes"
-        android:label="@string/title_activity_finded_routes" >
-    </activity>
+
 
     <application
         android:allowBackup="true"
@@ -94,6 +83,19 @@
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".activities.HomeActivity">
+        </activity>
+
+        <activity
+            android:name=".activities.UserFeatures"
+            android:label="@string/title_activity_user_features" >
+        </activity>
+        <activity
+            android:name=".activities.BuscarRutas"
+            android:label="@string/title_activity_buscar_rutas" >
+        </activity>
+        <activity
+            android:name=".activities.FindedRoutes"
+            android:label="@string/title_activity_finded_routes" >
         </activity>
     </application>
 
