@@ -158,7 +158,9 @@
         android:layout_height="wrap_content"
         android:text="Guardar ruta"
         android:id="@+id/button3"
-        android:background="@color/colorPrimary"
+        android:background="@color/greenDark"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
         android:layout_alignParentBottom="true"
         android:onClick="sendData"
         android:layout_centerHorizontal="true" />

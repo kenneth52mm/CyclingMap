@@ -1,90 +1,94 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="false"
+    android:focusable="false"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.cyclingmap.orion.cyclingmap.activities.UserFeatures"
-    android:clickable="false"
-    android:focusable="false">
+    tools:context="com.cyclingmap.orion.cyclingmap.activities.UserFeatures">
 
-    <TextView android:text="@string/user_features_head"
+    <TextView
+        android:id="@+id/tvFeaturesHead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:id="@+id/tvFeaturesHead" />
+        android:text="@string/user_features_head"
+        android:textSize="20dp" />
 
     <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:inputType="number|textPersonName"
-        android:hint="@string/user_features_weight"
         android:id="@+id/txtFeaturesWeight"
-        android:layout_marginTop="20dp"
-        android:textColorHint="#757575"
-        android:textColor="#757575"
-        android:background="#ffffffff"
-        android:layout_below="@+id/tvFeaturesHead"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:paddingLeft="10dp" />
-
-    <EditText
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:inputType="text|number"
-        android:hint="@string/user_features_height"
-        android:id="@+id/txtFeaturesHeight"
-        android:textColorHint="#757575"
-        android:textColor="#757575"
-        android:background="#ffffffff"
-        android:layout_below="@+id/txtFeaturesWeight"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvFeaturesHead"
+        android:layout_marginTop="20dp"
+        android:background="#ffffffff"
+        android:hint="@string/user_features_weight"
+        android:inputType="number|textPersonName"
+        android:paddingLeft="10dp"
+        android:textColor="#757575"
+        android:textColorHint="#757575" />
+
+    <EditText
+        android:id="@+id/txtFeaturesHeight"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txtFeaturesWeight"
         android:layout_marginTop="16dp"
-        android:paddingLeft="10dp" />
+        android:background="#ffffffff"
+        android:hint="@string/user_features_height"
+        android:inputType="text|number"
+        android:paddingLeft="10dp"
+        android:textColor="#757575"
+        android:textColorHint="#757575" />
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/linearLayout10"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtFeaturesHeight"
         android:layout_marginTop="16dp"
         android:background="#ffffffff"
-        android:id="@+id/linearLayout10"
-        android:layout_below="@+id/txtFeaturesHeight"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:orientation="horizontal"
+        android:singleLine="true">
 
         <TextView
+            android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/user_features_level"
-            android:id="@+id/textView8"
-            android:textSize="20dp"
-            android:textColor="#757575"
+            android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:layout_gravity="center" />
+            android:text="@string/user_features_level"
+            android:textColor="#757575"
+            android:textSize="20dp" />
 
         <Spinner
+            android:id="@+id/spinUserFeatures"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:id="@+id/spinUserFeatures"
+            android:layout_marginLeft="30dp"
             android:textAlignment="center"
-            android:touchscreenBlocksFocus="true"
-            android:layout_marginLeft="30dp" />
+            android:touchscreenBlocksFocus="true" />
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnUserFeaturesSave"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/user_features_btnsave"
-        android:id="@+id/btnUserFeaturesSave"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textColor="#ffffffff" />
+        android:layout_alignParentRight="true"
+        android:background="@color/greenDark"
+        android:text="@string/user_features_btnsave"
+        android:textColor="#ffffffff"
+        android:textStyle="bold" />
 
 </RelativeLayout>
