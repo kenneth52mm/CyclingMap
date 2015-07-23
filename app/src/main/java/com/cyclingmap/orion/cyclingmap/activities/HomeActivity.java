@@ -51,13 +51,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -88,7 +81,7 @@ public class HomeActivity extends AppCompatActivity {
                             case R.id.item_navigation_drawer_routes:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent2 = new Intent(HomeActivity.this, RoutesSection.class);
+                                Intent intent2 = new Intent(HomeActivity.this, UserRoutes.class);
                                 startActivity(intent2);
                                 return true;
 

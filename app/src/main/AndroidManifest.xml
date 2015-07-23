@@ -44,11 +44,6 @@
             android:name=".activities.MapActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity
-            android:name=".activities.MainActivity" />
-        <activity
-            android:name=".activities.LoginActivity"
-            android:label="@string/title_activity_login" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -66,9 +61,6 @@
 
         <activity android:name=".activities.LogActivity" />
         <activity android:name=".activities.RegisterActivity" />
-        <activity
-            android:name=".activities.PrincipalActivity"
-            android:label="@string/title_activity_principal" />
 
         <activit
             android:name=".activities.UserRoutes"
