@@ -49,6 +49,7 @@
             android:required="true" />
 
         <activity android:name=".activities.LogActivity" />
+
         <activity android:name=".activities.RegisterActivity" />
 
         <activity
@@ -69,7 +70,7 @@
         </activity>
         <activity
             android:name=".activities.RutasActivity"
-            android:label="Crear Ruta" />
+            />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -91,8 +92,8 @@
         </activity>
         <activity
             android:name=".activities.BuscarRutas"
-            android:label="@string/title_activity_buscar_rutas" >
-        </activity>
+            android:label="@string/title_activity_buscar_rutas" />
+
         <activity
             android:name=".activities.FindedRoutes"
             android:label="@string/title_activity_finded_routes" >

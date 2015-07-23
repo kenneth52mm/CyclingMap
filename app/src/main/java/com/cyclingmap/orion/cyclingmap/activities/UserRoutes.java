@@ -1,5 +1,6 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -27,7 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class UserRoutes extends ActionBarActivity {
+public class UserRoutes extends Activity {
 
     ListView lwRoutes;
     UserRoutesAdapter routesAdapter;
@@ -41,7 +42,7 @@ public class UserRoutes extends ActionBarActivity {
         routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), getApplicationContext());
         lwRoutes.setAdapter(routesAdapter);
         UserWSHelper helper = new UserWSHelper();
-        helper.execute(13);
+        helper.execute(13);   //Error
 
         lwRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -68,7 +69,7 @@ public class UserRoutes extends ActionBarActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             dialog.setMessage("Cargando...");
-            dialog.show();
+            dialog.show();                  // Error
         }
 
         @Override

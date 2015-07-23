@@ -108,6 +108,8 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="ruta_finded_head">Rutas Encontradas</string>
     <string name="ruta_finded_btnsee">VER RUTA</string>
+    <string name="near_of_me">Rutas cercanas</string>
+    <string name="detalles_distancia">Distancia</string>
 
     <!-- End -->
 
