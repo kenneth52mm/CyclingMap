@@ -187,9 +187,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         double j = (double) hours;
         double speedavg = dist/j;
 
-        // dbHelper.addCoords(coords);
-        //Code to go to EndTraceActivity with the extras
-
         double speedAvg = ((double) dist / chrono.getBase());
         speed = ((long) speedAvg / chrono.getBase());
         String rt= dist + " Km" + "";
@@ -205,17 +202,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         i.putExtra("Duration", dt);
         i.putExtra("Speed", tm );
         startActivity(i);
-    }
-
-    public double getDistance(double startOne, double endOne, double startTwo, double endTwo) {
-        Location locationA = new Location("");
-        locationA.setLatitude(startOne);
-        locationA.setLongitude(startTwo);
-        Location locationB = new Location("");
-        locationB.setLatitude(endOne);
-        locationB.setLongitude(endTwo);
-        double distance = locationA.distanceTo(locationB);
-        return distance;
     }
 
     private double getTotalDistance() {
@@ -235,10 +221,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     }
 
     public void sendData(View v) {
-        //ArrayList<Coordinate> coordinates= (ArrayList<Coordinate>) dbHelper.retrieveAll();
-        ArrayList<Coordinate> coordinates=new ArrayList<Coordinate>();
-        coordinates.add(new Coordinate(20.0,30.1));
-        routeWsHelper.execute(coordinates);
     }
 
     public void startTrace(View v) {
@@ -274,10 +256,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         polylineOptions.width(10);
         polylineOptions.color(Color.RED);
         map.addPolyline(polylineOptions);
-        LatLng start = route.get(0);
-        LatLng end = route.get(route.size() - 1);
-        float[] distance2 = new float[1];
-        Location.distanceBetween(start.latitude, start.longitude, end.latitude, end.longitude, distance2);
     }
 
     @Override
