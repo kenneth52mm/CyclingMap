@@ -26,7 +26,7 @@ public class RegisterActivity extends ActionBarActivity {
 
     Button btnReg;
     EditText txtName, txtEmail, txtPass, txtConfirnPass;
-    private final ProgressDialog dialog = new ProgressDialog(getApplicationContext());
+//    private final ProgressDialog dialog = new ProgressDialog(getApplicationContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class RegisterActivity extends ActionBarActivity {
         txtName.setTypeface(tf);
         txtEmail.setTypeface(tf);
         txtPass.setTypeface(tf);
-        txtConfirnPass.setTypeface(tf);
+//        txtConfirnPass.setTypeface(tf);
         btnReg.setTypeface(tf);
 
         btnReg.setOnClickListener(new View.OnClickListener() {
@@ -102,8 +102,8 @@ public class RegisterActivity extends ActionBarActivity {
             personWsHelper.setPerson(person);
             personWsHelper.execute();
             //Progress bar
-            dialog.setMessage("Registrando...");
-            dialog.show();
+        //    dialog.setMessage("Registrando...");
+        //    dialog.show();
         }
         catch (Exception e )
         {

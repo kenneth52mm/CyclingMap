@@ -81,22 +81,25 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         signinButton = (SignInButton) findViewById(R.id.btnGP);
         mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build()).addScope(Plus.SCOPE_PLUS_LOGIN).build();
         signinButton.setOnClickListener(this);
-        signinButton.setSize(SignInButton.SIZE_ICON_ONLY);
+        signinButton.setSize(SignInButton.SIZE_STANDARD);
 
 
         buttonLogin = (ImageView) findViewById(R.id.login);
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                com.facebook.login.widget.LoginButton btn = new LoginButton(LogActivity.this);
-                btn.performClick();
-                btn.registerCallback(callbackManager, mCallBack);
+        loginButton = (LoginButton) findViewById(R.id.login_Button);
 
 
+      //  buttonLogin.setOnClickListener(new View.OnClickListener() {
+      //      @Override
+     //       public void onClick(View v) {
+     //           com.facebook.login.widget.LoginButton btn = new LoginButton(LogActivity.this);
+     //           btn.performClick();
+     //           btn.registerCallback(callbackManager, mCallBack);
+
+//
                 //   btn.registerCallback(mCallbackManager, mCallBack);
-            }
-        });
+       //     }
+      //  });
 
 
 

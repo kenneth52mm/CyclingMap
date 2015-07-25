@@ -151,6 +151,22 @@
             android:checked="false"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/Txtinfo"
+            android:text="@string/difficulty_l"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="8dp"/>
+
+        <Spinner
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerEnd"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <Button

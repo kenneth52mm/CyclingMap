@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
@@ -41,6 +43,9 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     private PolylineOptions polylineOptions;
     private RouteWsHelper routeWsHelper = new RouteWsHelper();
     ArrayList<Province> routeProvinces;
+
+    String[] arrayLevel = {"Principiante", "Intermedio", "Avanzado"};
+    Spinner spinner_level;
 
 
     @Override
@@ -85,8 +90,13 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         coords[0] = (LatLng) routeCoords.get(0);
         coords[1]= (LatLng) routeCoords.get(routeCoords.size()-1);
         LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
+
+        ArrayAdapter a_level = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayLevel );
+        a_level.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_level.setAdapter(a_level);
     }
 
+    //Ver detalle del Radio Button
     public void sendData(View v) {
         ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
         coordinates.add(new Coordinate(20.0, 30.1));

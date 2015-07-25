@@ -31,7 +31,7 @@
     <string name="login_label">Ingresar</string>
     <string name="register_label">Registrar</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="register_message">Registrate</string>
+    <string name="register_message"><u><b><i>Registrate</i></b></u></string>
     <string name="login_fb_text">Facebook</string>
     <!-- End -->
 
@@ -54,6 +54,7 @@
     <string name="time_Total">Duración</string>
     <string name="speed_avg">Velocidad promedio</string>
     <string name="share_public">Pública</string>
+    <string name="difficulty_l">Nivel</string>
     <!-- End -->
 
     <!-- lay_Principal -->

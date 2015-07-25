@@ -10,16 +10,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
-
-        >
+        android:background="@drawable/home_pic">
 
         <LinearLayout
             android:id="@+id/l1"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginTop="80dp"
             android:gravity="left"
+            android:background="@drawable/l_layout"
             android:orientation="horizontal">
 
             <ImageView
@@ -38,17 +37,19 @@
                 android:shadowColor="#983e3c40"
                 android:text="@string/distance_user_total"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000000" />
+                android:textColor="#757575"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/l2"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/l1"
             android:layout_marginTop="20dp"
+            android:background="@drawable/l_layout"
             android:orientation="horizontal">
 
             <ImageView
@@ -56,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_max_sp" />
+                android:src="@mipmap/ic_speed_avg" />
 
 
             <TextView
@@ -70,17 +71,19 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/max_speed"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000000" />
+                android:textColor="#757575"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/l3"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/l2"
             android:layout_marginTop="20dp"
+            android:background="@drawable/l_layout"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -103,16 +106,18 @@
                 android:layout_weight="0"
                 android:text="@string/experience_level"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000000" />
+                android:textColor="#757575"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/l4"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/l3"
+            android:background="@drawable/l_layout"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:weightSum="1">
@@ -136,7 +141,8 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/last_route"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000000" />
+                android:textColor="#757575"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <RelativeLayout
@@ -236,7 +242,18 @@
             android:background="@color/greenLight"
             android:elevation="4dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ToolbarTheme" />
+            app:theme="@style/ToolbarTheme" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/notificationEvent"
+                android:background="@drawable/ic_notification_bell"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:onClick="showNotification"
+                android:clickable="true" />
+        </android.support.v7.widget.Toolbar>
 
     </FrameLayout>
 
@@ -249,7 +266,10 @@
         android:fitsSystemWindows="@bool/fitsSystemWindows"
         app:headerLayout="@layout/navigation_drawer_header"
         app:menu="@menu/navigation_drawer_menu"
-        app:theme="@style/NavigationViewTheme" />
+        app:theme="@style/NavigationViewTheme" >
+
+    </android.support.design.widget.NavigationView>
+
 
 </android.support.v4.widget.DrawerLayout>
 
