@@ -195,12 +195,9 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
 
         Intent i = new Intent(getApplicationContext(), EndTraceActivity.class);
         i.putExtra("route", (Serializable) route);
-        i.putExtra("Distance", td);
-        i.putExtra("Duration", ch);
-        i.putExtra("Speed", sp);
-        i.putExtra("Distance",rt);
+        i.putExtra("Distance", rt);
         i.putExtra("Duration", dt);
-        i.putExtra("Speed", tm );
+        i.putExtra("Speed", tm);
         startActivity(i);
     }
 
