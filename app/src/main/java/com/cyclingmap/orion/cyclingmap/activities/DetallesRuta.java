@@ -71,7 +71,7 @@ public class DetallesRuta extends ActionBarActivity {
             txtAveSpeed.setText( velMedia + "");
             txtLevel.setText( nivel + "");
             txtNameRoad.setText( "Ruta " + id);
-            txtTipCalle.setText( "No aplica");
+
         }
         else
         {
@@ -79,7 +79,7 @@ public class DetallesRuta extends ActionBarActivity {
             txtAveSpeed.setText("");
             txtLevel.setText("");
             txtNameRoad.setText("");
-            txtTipCalle.setText("");
+
 
         }
 

@@ -111,7 +111,16 @@
     <string name="ruta_finded_btnsee">VER RUTA</string>
     <string name="near_of_me">Rutas cercanas</string>
     <string name="detalles_distancia">Distancia</string>
+    <string name="title_activity_retos">RetosActivity</string>
+    <!-- End -->
 
+    <!-- Retos activity -->
+    <string name="head_activity_retos">Lista de Retos</string>
+    <!-- End -->
+
+    <!-- Badge -->
+    <string name="action_badge">Badge</string>
+    <string name="action_badge_label">Notificacion</string>
     <!-- End -->
 
 </resources>

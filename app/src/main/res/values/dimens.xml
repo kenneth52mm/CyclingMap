@@ -8,4 +8,5 @@
     <dimen name="standard_margin">16dp</dimen>
     <dimen name="small_margin">8dp</dimen>
     <dimen name="lbl_text_size">18dp</dimen>
+    <dimen name="badge_text_size">10sp</dimen>
 </resources>

@@ -244,15 +244,6 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ToolbarTheme" >
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/notificationEvent"
-                android:background="@drawable/ic_notification_bell"
-                android:layout_gravity="right"
-                android:layout_marginRight="15dp"
-                android:onClick="showNotification"
-                android:clickable="true" />
         </android.support.v7.widget.Toolbar>
 
     </FrameLayout>
