@@ -39,6 +39,7 @@ public class RouteWsHelper extends AsyncTask<ArrayList<Coordinate>, String, Stri
                 jsonArray.put(object);
             }
             StringEntity entity = new StringEntity(jsonArray.toString());
+
             post.setEntity(entity);
             HttpResponse response = client.execute(post);
             resp = EntityUtils.toString(response.getEntity());
