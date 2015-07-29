@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
     String sqlCreateRoute = "CREATE TABLE route (id_route INTEGER PRIMARY KEY AUTOINCREMENT" +
             " NOT NULL, distance REAL, time_to_finish NUMERIC, avg_speed REAL,difficulty_level INTEGER);";
     String sqlCreateUser = "CREATE TABLE user (id_user INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            "name TEXT, email TEXT, pass TEXT,weigth INTEGER,heigth INTEGER, ex_level TEXT);";
+            "name TEXT, email TEXT, pass TEXT,weigth INTEGER,heigth INTEGER, ex_level TEXT, logged INTEGER);";
     String sqlCreateUserRoute = "CREATE TABLE user_route (id_route INTEGER, id_user INTEGER," +
             " FOREIGN KEY(id_route) REFERENCES route(id_route),FOREIGN KEY(id_user) REFERENCES " +
             "user(id_user),PRIMARY KEY (id_route,id_user))";
@@ -52,7 +52,8 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("name", user.getName());
         values.put("email", user.getEmail());
-        values.put("pass", user.getPassword());
+        if (user.getPassword() != null)
+            values.put("pass", user.getPassword());
         helper.insert("user", null, values);
     }
 

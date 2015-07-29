@@ -39,7 +39,7 @@ public class UserRoutes extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_routes);
         lwRoutes = (ListView) findViewById(R.id.list);
-        routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), getApplicationContext());
+        routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), UserRoutes.this);
         lwRoutes.setAdapter(routesAdapter);
         UserWSHelper helper = new UserWSHelper();
         helper.execute(13);   //Error
@@ -48,12 +48,11 @@ public class UserRoutes extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Route route = routes.get(position);
-                Intent intent = new Intent(getApplicationContext(), DetallesRuta.class);
+                Intent intent = new Intent(UserRoutes.this, DetallesRuta.class);
                 intent.putExtra("Distance", route.getDistance());
                 intent.putExtra("Id_Route", route.getIdRoute());
                 intent.putExtra("SpeedAveg", route.getAvgSpeed());
                 intent.putExtra("Level", route.getDifficultyLevel());
-
                 startActivity(intent);
             }
         });
@@ -62,14 +61,14 @@ public class UserRoutes extends Activity {
     class UserWSHelper extends AsyncTask<Integer, ArrayList, ArrayList> {
 
         ArrayList<Route> respRoutes;
-        private final ProgressDialog dialog = new ProgressDialog(getApplicationContext());
+        private final ProgressDialog dialog = new ProgressDialog(UserRoutes.this);
 
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             dialog.setMessage("Cargando...");
-            dialog.show();                  // Error
+            dialog.show();
         }
 
         @Override

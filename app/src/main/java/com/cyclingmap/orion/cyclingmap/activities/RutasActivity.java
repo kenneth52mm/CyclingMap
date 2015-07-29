@@ -99,7 +99,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         btnRutaStar.setTypeface(tf);
         btnRutasStop.setTypeface(tf);
 
-        //Accion del boton start
         btnRutaStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +108,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
             }
         });
 
-        //Accion del boton stop
         btnRutasStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +118,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
             }
         });
 
-        //Accion del boton mostrar mapa
         btnMapShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,9 +134,7 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
             }
         });
 
-    }//END ON Create
-
-
+    }
 
     @Override
     protected void onResume() {

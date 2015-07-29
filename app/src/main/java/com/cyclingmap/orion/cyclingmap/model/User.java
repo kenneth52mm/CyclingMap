@@ -21,7 +21,11 @@ public class User {
     private double bestTime;
     private double totalDistance;
     private ArrayList<Route> routeList;
-    
+
+
+    public User() {
+    }
+
     public User(int id, String name, String lastName, String email, String password,
                 double bestSpeed,double bestTime, double totalDistance, ArrayList<Route> routeList)
     {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -18,7 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class SplashScreenActivity extends Activity implements  GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+public class SplashScreenActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final long SPLASH_SCREEN_DELAY = 3500;
     private GoogleApiClient mGoogleApiClient;
@@ -37,15 +38,14 @@ public class SplashScreenActivity extends Activity implements  GoogleApiClient.C
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Intent mainIntent=null ;
-                if(mGoogleApiClient.isConnected()){
-                    mainIntent= new Intent().setClass(
-                            SplashScreenActivity.this, HomeActivity.class);
-                }else {
+                Intent mainIntent = null;
+                if (mGoogleApiClient.isConnected()) {
+                    mainIntent = new Intent().setClass(
+                            SplashScreenActivity.this, LogActivity.class);
+                } else {
                     mainIntent = new Intent().setClass(
 
                             SplashScreenActivity.this, LogActivity.class);
-
 
 
                 }
@@ -58,10 +58,10 @@ public class SplashScreenActivity extends Activity implements  GoogleApiClient.C
         timer.schedule(task, SPLASH_SCREEN_DELAY);
 
     }
+
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
-
     }
 
     @Override

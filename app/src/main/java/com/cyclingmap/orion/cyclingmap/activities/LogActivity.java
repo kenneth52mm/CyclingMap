@@ -20,11 +20,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.data.DBHelper;
+import com.cyclingmap.orion.cyclingmap.model.User;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -42,6 +46,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 public class LogActivity extends Activity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -56,10 +61,8 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     private GoogleApiClient mGoogleApiClient;
     private boolean signedInUser;
     private String userName;
-
+    private DBHelper dbHelper;
     private Button btnRegister;
-
-    //That's for Facebook Login
     private CallbackManager callbackManager;
     private LoginButton loginButton;
     private ImageView buttonLogin;
@@ -67,13 +70,12 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     private TextView register;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
-
+        dbHelper = new DBHelper(getApplicationContext());
         setContentView(R.layout.activity_log);
         //txtMessage = (TextView) findViewById(R.id.TxtMessage);
         txtUsername = (EditText) findViewById(R.id.TxtUsername);
@@ -82,41 +84,12 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build()).addScope(Plus.SCOPE_PLUS_LOGIN).build();
         signinButton.setOnClickListener(this);
         signinButton.setSize(SignInButton.SIZE_STANDARD);
-
-
         buttonLogin = (ImageView) findViewById(R.id.login);
-
         loginButton = (LoginButton) findViewById(R.id.login_Button);
-
-
-      //  buttonLogin.setOnClickListener(new View.OnClickListener() {
-      //      @Override
-     //       public void onClick(View v) {
-     //           com.facebook.login.widget.LoginButton btn = new LoginButton(LogActivity.this);
-     //           btn.performClick();
-     //           btn.registerCallback(callbackManager, mCallBack);
-
-//
-                //   btn.registerCallback(mCallbackManager, mCallBack);
-       //     }
-      //  });
-
-
-
-
-        //btnRegister = (Button)findViewById(R.id.BtnRegister);
-
-//        btnRegisr.tesetOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(LogActivity.this, RegisterActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-        register = (TextView)findViewById(R.id.register);
+        register = (TextView) findViewById(R.id.register);
     }
 
-    public void registerNew(View v){
+    public void registerNew(View v) {
         Intent intent = new Intent(LogActivity.this, RegisterActivity.class);
         startActivity(intent);
     }
@@ -126,8 +99,15 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         public void onSuccess(LoginResult loginResult) {
             AccessToken accessToken = loginResult.getAccessToken();
             Profile profile = Profile.getCurrentProfile();
-            profile.getId();
-            profile.getName();
+            User u =new User();
+            u.setName(profile.getName());
+            GraphRequest request=GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                @Override
+                public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                    u.setEmail(jsonObject.optString("email"));
+                }
+            });
+            dbHelper.addUser(u);
             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(i);
         }
@@ -150,7 +130,6 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
-
     }
 
     protected void onStop() {
@@ -166,8 +145,6 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         // int resp=helper.validate(txtUsername.getText().toString(), txtPassword.getText().toString());
 //        txtMessage.setText("Existe: " + LoginWSHelper.valor);
     }
-
-
 
 
     @Override
@@ -199,38 +176,37 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
 //
                 if (responseCode == RESULT_OK) {
                     signedInUser = false;
-                    intent.setClass(this, HomeActivity.class);
+                    //intent.setClass(this, HomeActivity.class);
 ////                    Bundle bundle=new Bundle();
 ////                    bundle.putString("user",userName);
-                    startActivity(intent);
+                    //  startActivity(intent);
                 }
                 mIntentInProgress = false;
                 if (!mGoogleApiClient.isConnecting()) {
                     mGoogleApiClient.connect();
-                    startActivity(intent);
+                    // startActivity(intent);
                 }
                 break;
         }
 
         callbackManager.onActivityResult(requestCode, responseCode, intent);
-        if(responseCode == RESULT_OK){
-            Intent i = new Intent(this,HomeActivity.class);
+        if (responseCode == RESULT_OK) {
+            Intent i = new Intent(this, HomeActivity.class);
             startActivity(i);
         }
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent=null;
+        Intent intent = null;
         switch (v.getId()) {
             case R.id.btnGP:
                 googlePlusLogin();
-                if(!signedInUser)
-                {
-                    intent.setClass(this, HomeActivity.class);
-////                    Bundle bundle=new Bundle();
-////                    bundle.putString("user",userName);
-                    startActivity(intent);
+                if (!signedInUser) {
+//                    intent.setClass(this, HomeActivity.class);
+//////                    Bundle bundle=new Bundle();
+//////                    bundle.putString("user",userName);
+//                    startActivity(intent);
 
                 }
                 break;
@@ -251,12 +227,14 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     @Override
     public void onConnected(Bundle arg0) {
         signedInUser = false;
-        Toast.makeText(this, "Connected", Toast.LENGTH_LONG).show();
-//        if (!signedInUser) {
-//            Intent intent = new Intent(this, PrincipalActivity.class);
-//            startActivity(intent);
-//        }
+        // Toast.makeText(this, "Connected", Toast.LENGTH_LONG).show();
         getProfileInformation();
+        if (!signedInUser) {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     private void resolveSignInError() {
@@ -275,8 +253,12 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         try {
             if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
                 Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
-                userName = currentPerson.getDisplayName();
+
                 String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
+                User u=new User();
+                u.setEmail(email);
+                u.setName(currentPerson.getDisplayName());
+                dbHelper.addUser(u);
             }
         } catch (Exception e) {
             e.printStackTrace();
