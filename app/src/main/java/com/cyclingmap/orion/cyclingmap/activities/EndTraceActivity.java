@@ -177,7 +177,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
                 JSONObject object = new JSONObject();
                 object.put("distance", route.getDistance());
                 object.put("timeToFin", route.getTimeToFin());
-                object.put("ävgSpeed", route.getAvgSpeed());
+                object.put("avgSpeed", route.getAvgSpeed());
                 object.put("difficultyLevel", route.getDifficultyLevel());
 
                 JSONArray provinces = new JSONArray();

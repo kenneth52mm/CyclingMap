@@ -99,7 +99,7 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         public void onSuccess(LoginResult loginResult) {
             AccessToken accessToken = loginResult.getAccessToken();
             Profile profile = Profile.getCurrentProfile();
-            User u =new User();
+            final User u =new User();
             u.setName(profile.getName());
             GraphRequest request=GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                 @Override

@@ -1,7 +1,10 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
+import android.content.Entity;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
@@ -14,20 +17,38 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.view.View;
+import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.util.Iterator;
 
 public class HomeActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBar actionBar;
+    private TextView txtDistance;
+    private TextView txtBestSpeed;
+    private TextView txtTotalRoutes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        txtDistance = (TextView) findViewById(R.id.dist);
+        txtBestSpeed = (TextView) findViewById(R.id.speed);
+        txtTotalRoutes = (TextView) findViewById(R.id.textView2);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -39,13 +60,16 @@ public class HomeActivity extends AppCompatActivity {
             setupNavigationDrawerContent(navigationView);
         }
         setupNavigationDrawerContent(navigationView);
+        LoadUserStats userStats=new LoadUserStats();
+        userStats.execute(13);
     }
 
-    public void newRoute(View v){
+    public void newRoute(View v) {
         Intent i = new Intent(HomeActivity.this, RutasActivity.class);
         startActivity(i);
     }
-    public void searchRoute(View v){
+
+    public void searchRoute(View v) {
         Intent i = new Intent(HomeActivity.this, BuscarRutas.class);
         startActivity(i);
     }
@@ -106,5 +130,41 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+    }
+
+
+    class LoadUserStats extends AsyncTask<Integer, String, String> {
+
+
+        String distance;
+        String speed;
+        String totalRoutes;
+
+        @Override
+        protected String doInBackground(Integer... params) {
+            HttpClient client = new DefaultHttpClient();
+            HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/stats/" + params[0]);
+            httpGet.setHeader("content-type", "application/json");
+
+            try {
+                HttpResponse response = client.execute(httpGet);
+                JSONArray array = new JSONArray(EntityUtils.toString(response.getEntity()));
+                distance = array.getString(0);
+                speed = array.getString(1);
+                totalRoutes = array.getString(2);
+            } catch (Exception ex) {
+                Log.i("Error", "" + ex);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            txtDistance.setText(txtDistance.getText() + " " + distance);
+            txtBestSpeed.setText(txtBestSpeed.getText() + " " + speed);
+            txtTotalRoutes.setText(txtTotalRoutes.getText()+" "+totalRoutes);
+        }
     }
 }
