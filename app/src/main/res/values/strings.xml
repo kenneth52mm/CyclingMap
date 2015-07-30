@@ -116,6 +116,7 @@
 
     <!-- Retos activity -->
     <string name="head_activity_retos">Lista de Retos</string>
+    <string name="retos_tittle_activity">Lista de Retos</string>
     <!-- End -->
 
     <!-- Badge -->

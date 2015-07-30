@@ -1,6 +1,7 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
 import android.content.Entity;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.utils.Dialog_Notification;
+import com.cyclingmap.orion.cyclingmap.utils.addBadge;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -74,6 +77,21 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    //Opciones del toolbar para mostrar el badge
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem item = menu.findItem(R.id.action_badge);
+
+        // Obtener drawable del item
+        LayerDrawable icon = (LayerDrawable) item.getIcon();
+
+        // Agregando el contador de notificaciones
+        //
+        addBadge.setBadgeCount(this, icon, 20);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -81,6 +99,14 @@ public class HomeActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
+
+        //muestra las notificaciones en un dialog
+        Dialog_Notification notification = new Dialog_Notification();
+
+        String[] noti = {"Notificacion 1", "Notificacion 2", "Notificacion 3"};
+
+        notification.setNotification(noti);
+        notification.show(getFragmentManager(), "notification");
         return super.onOptionsItemSelected(item);
     }
 

@@ -51,11 +51,11 @@ public class RegisterActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //validaciones
-                if(txtName.getText().toString().trim().length() > 0)//nombre
+                if(isEmailValid(txtEmail.getText().toString()))//email
                 {
-                    if(isEmailValid(txtEmail.getText().toString()))//email
+                    if(txtName.getText().toString().trim().length() > 0)//nombre
                     {
-                        if(txtPass.getText().toString().trim().length() > 0)//claves
+                        if(txtPass.getText().toString().trim().length() > 0)//clave
                         {
                             Encript encript =new Encript();
                             registerPerson(txtEmail.getText().toString(), txtName.getText().toString(), (txtPass.getText().toString()));
@@ -63,7 +63,6 @@ public class RegisterActivity extends ActionBarActivity {
                             txtName.setText("");
                             txtEmail.setText("");
                             txtPass.setText("");
-                            txtConfirnPass.setText("");
                         }
                         else
                         {
@@ -73,14 +72,14 @@ public class RegisterActivity extends ActionBarActivity {
                     }
                     else
                     {
-                        Toast.makeText(getApplicationContext(), "Correo invalido",
+                        Toast.makeText(getApplicationContext(), "Por favor ingrese nombre",
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "Por favor ingrese nombre",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Correo invalido",
+                        Toast.LENGTH_SHORT).show();
                 }
             }
         });

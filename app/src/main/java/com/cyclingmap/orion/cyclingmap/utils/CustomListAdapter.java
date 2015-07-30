@@ -1,8 +1,5 @@
 package com.cyclingmap.orion.cyclingmap.utils;
 
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -13,18 +10,21 @@ import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
- * Created by peter on 7/29/2015.
+ * Created by peter on 7/30/2015.
  */
-public class ExpandableListAdapter extends BaseExpandableListAdapter {
+public class CustomListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap<String, List<String>> _listDataChild;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader,
-                                 HashMap<String, List<String>> listChildData) {
+    public CustomListAdapter(Context context, List<String> listDataHeader,
+                             HashMap<String, List<String>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -50,11 +50,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.item_retos_lv, null);
+            convertView = infalInflater.inflate(R.layout.retos_subitem_lv, null);
         }
 
         TextView txtListChild = (TextView) convertView
-                .findViewById(R.id.lblListItem);
+                .findViewById(R.id.lbl_retos_subitem);
 
         txtListChild.setText(childText);
         return convertView;
@@ -88,11 +88,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.group_item_retos, null);
+            convertView = infalInflater.inflate(R.layout.retos_group_lv, null);
         }
 
         TextView lblListHeader = (TextView) convertView
-                .findViewById(R.id.lblListHeader);
+                .findViewById(R.id.retos_lbl_group);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 

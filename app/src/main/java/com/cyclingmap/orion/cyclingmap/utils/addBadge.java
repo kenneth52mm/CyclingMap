@@ -16,7 +16,7 @@ public class addBadge {
         BadgeDrawable badge;
 
         // Reusar drawable
-        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_notification);
         if (reuse != null && reuse instanceof BadgeDrawable) {
             badge = (BadgeDrawable) reuse;
         } else {
@@ -25,6 +25,6 @@ public class addBadge {
 
         badge.setCount(count);
         icon.mutate();
-        icon.setDrawableByLayerId(R.id.ic_badge, badge);
+        icon.setDrawableByLayerId(R.id.ic_notification, badge);
     }
 }
