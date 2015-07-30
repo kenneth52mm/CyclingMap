@@ -12,11 +12,11 @@
         android:layout_height="match_parent"
         android:background="@drawable/home_pic">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/l1"
             android:layout_width="fill_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="80dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="90dp"
             android:gravity="left"
             android:background="@drawable/l_layout"
             android:orientation="horizontal">
@@ -26,25 +26,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_km_trace" />
+                android:src="@mipmap/ic_km_trace"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/title_dist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:shadowColor="#983e3c40"
+                android:text="@string/distance_user_total"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#757575"
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/imageView"
+                android:layout_toEndOf="@+id/imageView"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp" />
 
             <TextView
                 android:id="@+id/dist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:shadowColor="#983e3c40"
-                android:text="@string/distance_user_total"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#757575"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:text="Distancia"
+                android:textColor="#ff404040"
+                android:gravity="center_horizontal"
+                android:layout_below="@+id/title_dist"
+                android:layout_toRightOf="@+id/imageView"
+                android:layout_toEndOf="@+id/imageView"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp" />
 
-        <LinearLayout
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/l2"
             android:layout_width="fill_parent"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/l1"
@@ -57,93 +77,87 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_speed_avg" />
+                android:src="@mipmap/ic_speed_avg"
+                android:layout_marginTop="10dp" />
 
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/max_speed"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#757575"
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/imageView2"
+                android:layout_toEndOf="@+id/imageView2"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/textView" />
 
             <TextView
                 android:id="@+id/speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/dist"
-                android:layout_alignStart="@+id/dist"
-                android:layout_below="@+id/dist"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/max_speed"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#757575"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:text="Velo"
+                android:textColor="#FF404040"
+                android:layout_below="@+id/textView"
+                android:layout_toRightOf="@+id/imageView2"
+                android:layout_toEndOf="@+id/imageView2"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp" />
 
-        <LinearLayout
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/l3"
             android:layout_width="fill_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_height="70dp"
             android:layout_below="@+id/l2"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/l_layout"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_level_exp" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/speed"
-                android:layout_alignStart="@+id/speed"
-                android:layout_below="@+id/speed"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="0"
-                android:text="@string/experience_level"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#757575"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/l4"
-            android:layout_width="fill_parent"
-            android:layout_height="60dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/l3"
             android:background="@drawable/l_layout"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:layout_gravity="right|center_vertical">
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_last_route" />
+                android:src="@mipmap/ic_total_routes" />
 
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/last_route"
+                android:text="@string/total_routes"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#757575"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/imageView4"
+                android:layout_toEndOf="@+id/imageView4"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/textView11" />
+
+            <TextView
+                android:id="@+id/totalRoute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total de rutas"
+                android:textColor="#FF404040"
+                android:layout_below="@+id/textView11"
+                android:layout_toRightOf="@+id/imageView4"
+                android:layout_toEndOf="@+id/imageView4"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp" />
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
@@ -210,7 +224,6 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

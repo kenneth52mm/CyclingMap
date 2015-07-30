@@ -3,7 +3,7 @@
     <string name="app_name">Cycling Map</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="title_activity_splash_screen">Cycling Map</string>
     <string name="title_activity_login">Login</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -20,108 +20,116 @@
     <string name="title_activity_gps">GPSActivity</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_log">LogActivity</string>
+    <string name="time_trace">time</string>
 
     <!-- Login and Register labels  -->
 
-    <string name="user_label">Nombre de Usuario</string>
-    <string name="pass_label">Clave</string>
-    <string name="confirm_pass">Confirmar contrasena</string>
+    <string name="user_label">Username</string>
+    <string name="pass_label">Password</string>
+    <string name="confirm_pass">Confirm password</string>
     <string name="email_label">Email</string>
-    <string name="create_user_label">Crear Usuario</string>
-    <string name="login_label">Ingresar</string>
-    <string name="register_label">Registrar</string>
+    <string name="create_user_label">Create Account</string>
+    <string name="login_label">Sign In</string>
+    <string name="register_label">Sign Up</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="register_message"><u><b><i>Registrate</i></b></u></string>
+    <string name="register_message"><u><b><i>Sign Up</i></b></u></string>
     <string name="login_fb_text">Facebook</string>
     <!-- End -->
 
     <!-- Drawer -->
     <string name="title_activity_principal">PrincipalActivity</string>
-    <string name="title_principal">Principal</string>
-    <string name="title_routes">Rutas</string>
-    <string name="title_friends">Amigos</string>
-    <string name="title_groups">Perfil</string>
+    <string name="title_principal">Main</string>
+    <string name="title_routes">Route</string>
+    <string name="title_friends">Friends</string>
+    <string name="title_groups">Profile</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_user_routes">UserRoutes</string>
-    <string name="empty_list">No hay rutas</string>
+    <string name="empty_list">No routes</string>
     <string name="title_activity_end_trace">EndTraceActivity</string>
 
     <!-- Final trace -->
-    <string name="distance_Total">Distancia</string>
-    <string name="time_Total">Duración</string>
-    <string name="speed_avg">Velocidad promedio</string>
-    <string name="share_public">Pública</string>
-    <string name="difficulty_l">Nivel</string>
+    <string name="distance_Total">Distance</string>
+    <string name="time_Total">Duration</string>
+    <string name="speed_avg">Speed average</string>
+    <string name="share_public">Public</string>
+    <string name="difficulty_l">Level</string>
     <!-- End -->
 
     <!-- lay_Principal -->
+    <string name="distance_user_total">Traveled Kilometers</string>
+    <string name="max_speed">Best speed</string>
+    <string name="experience_level">Experience level</string>
+    <string name="total_routes">Total traveled routes</string>
 
-    <string name="distance_user_total">Kilómetros recorridos</string>
-    <string name="max_speed">Velocidad máxima</string>
-    <string name="experience_level">Nivel de experiencia</string>
-    <string name="last_route">Ultima ruta</string>
-
-    <string name="add_route">Agregar ruta</string>
-    <string name="search_route">Buscar rutas</string>
+    <string name="add_route">Add route</string>
+    <string name="search_route">Search route</string>
     <string name="title_activity_profile_user">ProfileUserActivity</string>
     <!-- end lay -->
 
     <!-- Profile -->
-    <string name="name_user">Usuario</string>
-    <string name="pass_user">Clave</string>
-    <string name="friend_list">Cantidad de amigos</string>
-    <string name="configuration">Configuracion</string>
+    <string name="name_user">Username</string>
+    <string name="pass_user">Password</string>
+    <string name="configuration">Configuration</string>
 
-    <string name="user_features_head">Datos de Usuario</string>
-    <string name="user_features_weight">Peso</string>
-    <string name="user_features_height">Altura</string>
-    <string name="user_features_level">Nivel</string>
-    <string name="user_features_btnsave">Guardar</string>
+    <string name="user_features_head">User information</string>
+    <string name="user_features_weight">Weight</string>
+    <string name="user_features_height">Height</string>
+    <string name="user_features_level">Level</string>
+    <string name="user_features_btnsave">Save</string>
     <!-- End -->
 
-    <string name="title_activity_buscar_rutas">Buscar Rutas</string>
-    <string name="btnRutas_lista_buscar">Aceptar</string>
-    <string name="btn_rutas_buscar_lblboton">Buscar</string>
-    <string name="title_activity_detalles_ruta">Detalles de Ruta</string>
-    <string name="detalle_ruta_Encabezado">Detalles de la Ruta</string>
+    <string name="title_activity_buscar_rutas">Search route</string>
+    <string name="btnRutas_lista_buscar">Accept</string>
+    <string name="btn_rutas_buscar_lblboton">Search</string>
+    <string name="title_activity_detalles_ruta">Route details</string>
+    <string name="detalle_ruta_Encabezado">Route details</string>
 
     <!-- Rutas activity -->
-    <string name="rutas_activity_lbltiempo">TIEMPO (s)</string>
-    <string name="ruta_activity_lbldistancia">DISTANCIA</string>
-    <string name="ruta_activity_lbldistanprome">VELOCIDAD MEDIA</string>
-    <string name="title_activity_rutas">Crear Ruta</string>
-    <string name="rutas_btn_showmap">MAPA</string>
-    <string name="rutas_btn_iniciar">INICIAR</string>
-    <string name="rutas_btn_stop">PARAR</string>
-    <string name="rutas_btn_verruta">VER RUTA</string>
+    <string name="rutas_activity_lbltiempo">TIME (s)</string>
+    <string name="ruta_activity_lbldistancia">DISTANCE</string>
+    <string name="ruta_activity_lbldistanprome">SPEED AVERAGE</string>
+    <string name="title_activity_rutas">Add route</string>
+    <string name="rutas_btn_showmap">MAP</string>
+    <string name="rutas_btn_iniciar">START</string>
+    <string name="rutas_btn_stop">STOP</string>
+    <string name="rutas_btn_verruta">SEE ROUTE</string>
     <string name="title_activity_user_features">Usuarios</string>
     <string name="title_activity_rutas_buscar">Rutas</string>
     <string name="title_activity_finded_routes">Rutas</string>
-    <string name="detalles_tipocalle">Tipo de Ruta:</string>
-    <string name="detalles_popu">Popularidad:</string>
-    <string name="detalles_nivel">Nivel:</string>
-    <string name="busqueda_head">Opciones de busqueda</string>
-    <string name="btn_ruta_detalle">COMENZAR</string>
+    <string name="detalles_tipocalle">Kind of route:</string>
+    <string name="detalles_popu">Popularity:</string>
+    <string name="detalles_nivel">Level:</string>
+    <string name="busqueda_head">Search options</string>
+    <string name="btn_ruta_detalle">BEGIN</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
-    <string name="ruta_finded_head">Rutas Encontradas</string>
-    <string name="ruta_finded_btnsee">VER RUTA</string>
-    <string name="near_of_me">Rutas cercanas</string>
-    <string name="detalles_distancia">Distancia</string>
+    <string name="ruta_finded_head">Found route</string>
+    <string name="ruta_finded_btnsee">SEE ROUTE</string>
+    <string name="near_of_me">Nearby routes</string>
+    <string name="detalles_distancia">Distance:</string>
     <string name="title_activity_retos">RetosActivity</string>
+    <string name="title_activity_prueba">PruebaActivity</string>
+    <string name="title_activity_first">FirstActivity</string>
+    <!-- End -->
+
+    <!-- Existing route -->
+    <string name="distance_existing">Distance</string>
+    <string name="route_name">Route</string>
+    <string name="route_level">Level</string>
+    <string name="start_route">Start</string>
     <!-- End -->
 
     <!-- Retos activity -->
-    <string name="head_activity_retos">Lista de Retos</string>
-    <string name="retos_tittle_activity">Lista de Retos</string>
+    <string name="head_activity_retos">Challenges list</string>
+    <string name="retos_tittle_activity">Challenges list</string>
     <!-- End -->
 
     <!-- Badge -->
     <string name="action_badge">Badge</string>
-    <string name="action_badge_label">Notificacion</string>
+    <string name="action_badge_label">Notification</string>
+    <string name="title_activity_existing_route">ExistingRoute</string>
     <!-- End -->
-
 </resources>

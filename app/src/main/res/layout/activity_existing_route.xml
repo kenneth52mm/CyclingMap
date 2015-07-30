@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/windowBackground"
+    tools:context="com.cyclingmap.orion.cyclingmap.activities.ExistingRoute"
+    >
+
+
+    <fragment
+        android:id="@+id/map"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="220dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp" />
+
+    <Chronometer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chronometer2"
+        android:textSize="55sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/map"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/ic_go"
+        android:background="@drawable/circle"
+        android:id="@+id/imageButton"
+        android:onClick="startRoute"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/map"
+        android:layout_alignEnd="@+id/map"
+        android:layout_marginRight="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/route_name"
+        android:id="@+id/txtR"
+        android:layout_gravity="left|center_vertical"
+        android:textStyle="bold"
+        android:layout_below="@+id/chronometer2"
+        android:layout_alignLeft="@+id/txtDis"
+        android:layout_alignStart="@+id/txtDis"
+        android:layout_marginTop="23dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/distance_existing"
+        android:id="@+id/txtDis"
+        android:layout_gravity="bottom|left"
+        android:layout_below="@+id/txtR"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/route_level"
+        android:id="@+id/txtLevel"
+        android:layout_below="@+id/txtDis"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Tiempo"
+        android:id="@+id/txtTime"
+        android:layout_below="@+id/chronometer2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/txt_route_exist"
+        android:layout_above="@+id/txtDis"
+        android:layout_toRightOf="@+id/txtTime"
+        android:layout_toEndOf="@+id/txtTime" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/txt_dist_exist"
+        android:layout_above="@+id/txtLevel"
+        android:layout_alignLeft="@+id/txt_route_exist"
+        android:layout_alignStart="@+id/txt_route_exist" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/txt_level_exist"
+        android:layout_alignBottom="@+id/txtLevel"
+        android:layout_alignLeft="@+id/txt_dist_exist"
+        android:layout_alignStart="@+id/txt_dist_exist" />
+
+</RelativeLayout>

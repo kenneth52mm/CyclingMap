@@ -51,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         txtDistance = (TextView) findViewById(R.id.dist);
         txtBestSpeed = (TextView) findViewById(R.id.speed);
-        txtTotalRoutes = (TextView) findViewById(R.id.textView2);
+        txtTotalRoutes = (TextView) findViewById(R.id.totalRoute);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -188,9 +188,9 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            txtDistance.setText(txtDistance.getText() + " " + distance);
-            txtBestSpeed.setText(txtBestSpeed.getText() + " " + speed);
-            txtTotalRoutes.setText(txtTotalRoutes.getText()+" "+totalRoutes);
+            txtDistance.setText(distance + " km");
+            txtBestSpeed.setText(speed + " km/h");
+            txtTotalRoutes.setText(totalRoutes);
         }
     }
 }

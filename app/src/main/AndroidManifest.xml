@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cyclingmap.orion.cyclingmap">
+    package="com.cyclingmap.orion.cyclingmap" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -13,16 +13,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".activities.SplashScreenActivity"
-            android:label="@string/title_activity_splash_screen">
+          >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +29,7 @@
         </activity>
         <activity
             android:name=".activities.MapActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
 
         <meta-data
@@ -49,13 +47,10 @@
             android:required="true" />
 
         <activity android:name=".activities.LogActivity" />
-
         <activity android:name=".activities.RegisterActivity" />
-
         <activity
             android:name=".activities.UserRoutes"
             android:label="@string/title_activity_user_routes" />
-
         <activity
             android:name=".activities.EndTraceActivity"
             android:label="@string/title_activity_end_trace"
@@ -63,14 +58,12 @@
         <activity
             android:name=".activities.ProfileUserActivity"
             android:label="@string/title_activity_profile_user"
-            android:parentActivityName=".activities.HomeActivity"/>
+            android:parentActivityName=".activities.HomeActivity" />
         <activity
             android:name=".activities.DetallesRuta"
             android:label="@string/title_activity_detalles_ruta" >
         </activity>
-        <activity
-            android:name=".activities.RutasActivity"
-            />
+        <activity android:name=".activities.RutasActivity" />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -83,9 +76,8 @@
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".activities.HomeActivity">
+            android:parentActivityName=".activities.HomeActivity" >
         </activity>
-
         <activity
             android:name=".activities.UserFeatures"
             android:label="@string/title_activity_user_features" >
@@ -93,10 +85,13 @@
         <activity
             android:name=".activities.BuscarRutas"
             android:label="@string/title_activity_buscar_rutas" />
-
         <activity
             android:name=".activities.FindedRoutes"
             android:label="@string/title_activity_finded_routes" >
+        </activity>
+        <activity
+            android:name=".activities.ExistingRoute"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
