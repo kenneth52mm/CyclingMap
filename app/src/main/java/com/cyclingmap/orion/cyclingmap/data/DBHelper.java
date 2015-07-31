@@ -48,12 +48,24 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCreateRoute);
     }
 
+    public boolean isLogged() {
+        boolean resp = true;
+        Cursor c = helper.rawQuery("Select logged from user;",null);
+        if(c.moveToFirst()){
+            do{
+                resp=(c.getInt(0)!=0);
+            }while(c.moveToNext());
+        }
+        return resp;
+    }
+
     public void addUser(User user) {
         ContentValues values = new ContentValues();
         values.put("name", user.getName());
         values.put("email", user.getEmail());
         if (user.getPassword() != null)
             values.put("pass", user.getPassword());
+        values.put("logged", 1);
         helper.insert("user", null, values);
     }
 
@@ -95,7 +107,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void addRoute(Route route) {
         ContentValues values = new ContentValues();
-        values.put("id", id);
+        values.put("id_route", id);
         values.put("distance", route.getDistance());
         values.put("time_to_finish", route.getTimeToFin().toString());
         values.put("avg_speed", route.getAvgSpeed());
@@ -106,7 +118,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public int getIdRoute() {
         int res = 0;
-        Cursor c = helper.rawQuery("Select count(*) from route", null);
+        Cursor c = helper.rawQuery("Select max(id_route) from route", null);
         if (c.moveToFirst()) {
             do {
                 res = c.getInt(0);

@@ -11,6 +11,7 @@ import android.view.Window;
 
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
@@ -23,6 +24,7 @@ public class SplashScreenActivity extends Activity implements GoogleApiClient.Co
 
     private static final long SPLASH_SCREEN_DELAY = 3500;
     private GoogleApiClient mGoogleApiClient;
+    private DBHelper dbHelper;
 
 
     @Override
@@ -33,13 +35,13 @@ public class SplashScreenActivity extends Activity implements GoogleApiClient.Co
         setContentView(R.layout.activity_splash_screen);
         mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build()).addScope(Plus.SCOPE_PLUS_LOGIN).build();
         mGoogleApiClient.connect();
-
+        dbHelper = new DBHelper(getApplicationContext());
 
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 Intent mainIntent = null;
-                if (mGoogleApiClient.isConnected()) {
+                if (mGoogleApiClient.isConnected()||dbHelper.isLogged()) {
                     mainIntent = new Intent().setClass(
                             SplashScreenActivity.this, LogActivity.class);
                 } else {

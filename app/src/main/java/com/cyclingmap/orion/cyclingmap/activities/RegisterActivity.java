@@ -14,9 +14,12 @@ import android.widget.Toast;
 
 import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.PersonWSHelper;
+import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.model.Login;
 import com.cyclingmap.orion.cyclingmap.model.Persona;
 import com.cyclingmap.orion.cyclingmap.business.Encript;
+import com.cyclingmap.orion.cyclingmap.model.User;
+
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,6 +29,7 @@ public class RegisterActivity extends ActionBarActivity {
 
     Button btnReg;
     EditText txtName, txtEmail, txtPass, txtConfirnPass;
+    private DBHelper dbHelper;
 //    private final ProgressDialog dialog = new ProgressDialog(getApplicationContext());
 
     @Override
@@ -38,7 +42,7 @@ public class RegisterActivity extends ActionBarActivity {
         txtPass = (EditText) findViewById(R.id.txtpass);
         //txtConfirnPass = (EditText) findViewById(R.id.editText4);
         btnReg = (Button) findViewById(R.id.btnRegister);
-
+        dbHelper = new DBHelper(getApplicationContext());
         //Estilos para fuente
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
         txtName.setTypeface(tf);
@@ -100,6 +104,11 @@ public class RegisterActivity extends ActionBarActivity {
             PersonWSHelper personWsHelper = new PersonWSHelper();
             personWsHelper.setPerson(person);
             personWsHelper.execute();
+            User u=new User();
+            u.setName(name);
+            u.setEmail(email);
+            u.setPassword(pass);
+            dbHelper.addUser(u);
             //Progress bar
         //    dialog.setMessage("Registrando...");
         //    dialog.show();

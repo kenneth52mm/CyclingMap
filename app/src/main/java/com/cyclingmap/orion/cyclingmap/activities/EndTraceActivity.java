@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.RouteWsHelper;
+import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.data.LocationAddress;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
 import com.cyclingmap.orion.cyclingmap.model.Province;
@@ -62,6 +63,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     Spinner spinner_level;
     private Route route;
     private int id_user;
+    private DBHelper dbHelper;
 
 
     @Override
@@ -83,6 +85,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         polylineOptions = new PolylineOptions();
         lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
+        dbHelper = new DBHelper(getApplicationContext());
 
         Bundle bundle = getIntent().getExtras();
         routeCoords = (ArrayList) bundle.get("route");
@@ -121,6 +124,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         /*Difficulty level*/
         route.setProvinces(routeProvinces);
         route.setCoordinateList(routeCoords);
+        dbHelper.addRoute(route);
         RouteWsHelper helper=new RouteWsHelper();
         Object []obj=new Object[2];
         obj[0]=route;
