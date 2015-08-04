@@ -50,7 +50,7 @@ import org.json.JSONObject;
 
 public class LogActivity extends Activity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    private LoginWSHelper helper;
+   // private LoginWSHelper helper;
     private TextView txtMessage;
     private boolean mIntentInProgress;
     private EditText txtUsername;
@@ -140,7 +140,7 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     }
 
     public void validarUsuario(View v) {
-        helper = new LoginWSHelper();
+        LoginWSHelper helper = new LoginWSHelper();
         helper.execute(txtUsername.getText().toString(), txtPassword.getText().toString());
         // int resp=helper.validate(txtUsername.getText().toString(), txtPassword.getText().toString());
 //        txtMessage.setText("Existe: " + LoginWSHelper.valor);
@@ -193,6 +193,7 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         if (responseCode == RESULT_OK) {
             Intent i = new Intent(this, HomeActivity.class);
             startActivity(i);
+            finish();
         }
     }
 
@@ -277,7 +278,7 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
             this.valor = valor;
         }
 
-        private final ProgressDialog dialog = new ProgressDialog(getApplicationContext());
+        private final ProgressDialog dialog = new ProgressDialog(LogActivity.this);
 
         @Override
         protected void onPreExecute() {
@@ -309,12 +310,12 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            dialog.dismiss();
             if (integer != 0) {
                 Intent intent = new Intent(LogActivity.this, HomeActivity.class);
                 startActivity(intent);
+                finish();
             }
-
+            dialog.dismiss();
         }
     }
 }

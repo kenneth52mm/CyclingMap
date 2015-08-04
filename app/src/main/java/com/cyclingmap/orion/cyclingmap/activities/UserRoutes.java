@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,21 +30,27 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class UserRoutes extends Activity {
+public class UserRoutes extends AppCompatActivity {
 
     ListView lwRoutes;
     UserRoutesAdapter routesAdapter;
     ArrayList<Route> routes = new ArrayList<>();
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_routes);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         lwRoutes = (ListView) findViewById(R.id.list);
         routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), UserRoutes.this);
         lwRoutes.setAdapter(routesAdapter);
         UserWSHelper helper = new UserWSHelper();
-        helper.execute(13);   //Error
+        helper.execute(13);
 
         lwRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
