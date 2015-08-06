@@ -1,5 +1,6 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
+import android.app.ProgressDialog;
 import android.content.Entity;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
@@ -18,11 +19,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.business.UserRoutesAdapter;
+import com.cyclingmap.orion.cyclingmap.data.DBHelper;
+import com.cyclingmap.orion.cyclingmap.model.Coordinate;
+import com.cyclingmap.orion.cyclingmap.model.Route;
+import com.cyclingmap.orion.cyclingmap.utils.BadgeDrawable;
 import com.cyclingmap.orion.cyclingmap.utils.Dialog_Notification;
 import com.cyclingmap.orion.cyclingmap.utils.addBadge;
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
+import com.readystatesoftware.viewbadger.BadgeView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -33,9 +46,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -43,7 +57,10 @@ public class HomeActivity extends AppCompatActivity {
     private TextView txtDistance;
     private TextView txtBestSpeed;
     private TextView txtTotalRoutes;
-
+    private GoogleApiClient mGoogleApiClient;
+    private ArrayList<Route> routes = new ArrayList<>();
+    private DBHelper dbHelper;
+    private BadgeDrawable badge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +75,14 @@ public class HomeActivity extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
+        mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build()).addScope(Plus.SCOPE_PLUS_LOGIN).build();
+        dbHelper = new DBHelper(HomeActivity.this);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
         }
         setupNavigationDrawerContent(navigationView);
-        LoadUserStats userStats=new LoadUserStats();
+        LoadUserStats userStats = new LoadUserStats();
         userStats.execute(13);
     }
 
@@ -82,13 +101,10 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem item = menu.findItem(R.id.action_badge);
-
-        // Obtener drawable del item
-        LayerDrawable icon = (LayerDrawable) item.getIcon();
-
-        // Agregando el contador de notificaciones
-        //
-        addBadge.setBadgeCount(this, icon, 20);
+        View target = findViewById(R.id.action_badge);
+        BadgeView badge = new BadgeView(this, target);
+        badge.setText(routes.size());
+        badge.show();
         return true;
     }
 
@@ -101,12 +117,14 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         //muestra las notificaciones en un dialog
-        Dialog_Notification notification = new Dialog_Notification();
-
-        String[] noti = {"Notificacion 1", "Notificacion 2", "Notificacion 3"};
-
-        notification.setNotification(noti);
-        notification.show(getFragmentManager(), "notification");
+//        Dialog_Notification notification = new Dialog_Notification();
+//
+//        String[] noti = {"Notificacion 1", "Notificacion 2", "Notificacion 3"};
+//
+//        notification.setNotification(noti);
+//        notification.show(getFragmentManager(), "notification");
+        Intent i = new Intent(HomeActivity.this, RetosActivity.class);
+        startActivity(i);
         return super.onOptionsItemSelected(item);
     }
 
@@ -147,15 +165,41 @@ public class HomeActivity extends AppCompatActivity {
                                 return true;
 
                             // Cerrar sesion
-                            //   case R.id.item_navigation_drawer_help_and_feedback:
-                            //       menuItem.setChecked(true);
-                            //       Toast.makeText(HomeActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                            //       drawerLayout.closeDrawer(GravityCompat.START);
-                            //       return true;
+                            case R.id.item_navigation_drawer_help_and_feedback:
+                                menuItem.setChecked(true);
+                                AccessToken accessToken = AccessToken.getCurrentAccessToken();
+                                if (dbHelper.isLogged()) {
+                                    dbHelper.loggout();
+                                    finish();
+                                } else if (accessToken != null) {
+                                    LoginManager.getInstance().logOut();
+                                    finish();
+                                } else {
+                                    mGoogleApiClient.disconnect();
+                                    if (!mGoogleApiClient.isConnected())
+                                        finish();
+                                }
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                return true;
                         }
                         return true;
                     }
                 });
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
     }
 
 
@@ -191,6 +235,63 @@ public class HomeActivity extends AppCompatActivity {
             txtDistance.setText(distance + " km");
             txtBestSpeed.setText(speed + " km/h");
             txtTotalRoutes.setText(totalRoutes);
+        }
+    }
+
+    class UserChallengesHelper extends AsyncTask<Integer, ArrayList, ArrayList> {
+
+        ArrayList<Route> respRoutes;
+        private final ProgressDialog dialog = new ProgressDialog(HomeActivity.this);
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.setMessage("Cargando...");
+            dialog.show();
+        }
+
+        @Override
+        protected ArrayList doInBackground(Integer... params) {
+            // android.os.Debug.waitForDebugger();
+            HttpClient client = new DefaultHttpClient();
+            HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/challenges/" + params[0]);
+            httpGet.setHeader("content-type", "application/json");
+            Log.i("entro", "entro");
+            try {
+                HttpResponse response = client.execute(httpGet);
+                JSONArray jsonArray = new JSONArray(EntityUtils.toString(response.getEntity()));
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    Route route = new Route();
+                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                    Log.i("ENTRO", "" + i);
+                    route.setIdRoute(jsonObject.getInt("IdRoute"));
+                    route.setDistance(jsonObject.getDouble("Distance"));
+                    route.setAvgSpeed(jsonObject.getDouble("AvgSpeed"));
+                    JSONArray jsonCoords = jsonObject.getJSONArray("CoordinateList");
+                    ArrayList<Coordinate> coordinates = new ArrayList<>();
+                    for (int j = 0; j < jsonCoords.length(); j++) {
+                        JSONObject coord = jsonCoords.getJSONObject(j);
+                        double x = coord.getDouble("X");
+                        double y = coord.getDouble("Y");
+                        coordinates.add(new Coordinate(x, y));
+                    }
+                    route.setCoordinateList(coordinates);
+                    // route.setTimeToFin((Time) jsonObject.get("TimeToFin"));
+                    routes.add(route);
+                }
+            } catch (Exception ex) {
+                Log.i("Error", "" + ex);
+            }
+            return routes;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList array) {
+            routes = array;
+            for (Route r : routes) {
+                dbHelper.addChallenges(r);
+            }
         }
     }
 }

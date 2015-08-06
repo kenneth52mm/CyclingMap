@@ -43,7 +43,7 @@ public class SplashScreenActivity extends Activity implements GoogleApiClient.Co
                 Intent mainIntent = null;
                 if (mGoogleApiClient.isConnected()||dbHelper.isLogged()) {
                     mainIntent = new Intent().setClass(
-                            SplashScreenActivity.this, LogActivity.class);
+                            SplashScreenActivity.this, HomeActivity.class);
                 } else {
                     mainIntent = new Intent().setClass(
 

@@ -35,4 +35,5 @@ dependencies {
     compile files('libs/nanotasks-1.1.0-sources.jar')
     compile 'com.android.support:design:22.2.0'
     compile 'com.github.markushi:circlebutton:1.1'
+    compile files('libs/android-viewbadger.jar')
 }

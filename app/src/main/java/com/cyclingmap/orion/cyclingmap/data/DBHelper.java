@@ -7,9 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
+import com.cyclingmap.orion.cyclingmap.model.Province;
 import com.cyclingmap.orion.cyclingmap.model.Route;
+import com.cyclingmap.orion.cyclingmap.model.Town;
 import com.cyclingmap.orion.cyclingmap.model.User;
 
+import java.lang.reflect.Array;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +29,12 @@ public class DBHelper extends SQLiteOpenHelper {
     String sqlCreateUserRoute = "CREATE TABLE user_route (id_route INTEGER, id_user INTEGER," +
             " FOREIGN KEY(id_route) REFERENCES route(id_route),FOREIGN KEY(id_user) REFERENCES " +
             "user(id_user),PRIMARY KEY (id_route,id_user))";
+    String sqlCreateChallenges = "CREATE TABLE challenge (id_challenge INTEGER PRIMARY" +
+            " KEY AUTOINCREMENT NOT NULL, distance REAL, time_to_finish NUMERIC, avg_speed REAL," +
+            "difficulty_level INTEGER);";
+    String getSqlCreateRegions = "CREATE TABLE regions (id_route INTEGER NOT NULL, province TEXT, " +
+            "town TEXT,FOREIGN KEY (id_route) REFERENCES route(id_route));";
     SQLiteDatabase helper;
-    int id;
 
     public DBHelper(Context contexto) {
         super(contexto, "orion.db", null, 1);
@@ -39,7 +47,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCreateCoords);
         db.execSQL(sqlCreateUser);
         db.execSQL(sqlCreateUserRoute);
-        //id = getIdRoute();
+        db.execSQL(sqlCreateChallenges);
+        db.execSQL(getSqlCreateRegions);
     }
 
     @Override
@@ -50,18 +59,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean isLogged() {
         boolean resp = true;
-        Cursor c = helper.rawQuery("Select logged from user;",null);
-        if(c.moveToFirst()){
-            do{
-                resp=(c.getInt(0)!=0);
-            }while(c.moveToNext());
+        Cursor c = helper.rawQuery("Select logged from user;", null);
+        if (c.moveToFirst()) {
+            do {
+                resp = (c.getInt(0) != 0);
+            } while (c.moveToNext());
         }
         return resp;
     }
 
     public void addUser(User user) {
         ContentValues values = new ContentValues();
-        values.put("id_user",user.getId());
+        values.put("id_user", user.getId());
         values.put("name", user.getName());
         values.put("email", user.getEmail());
         if (user.getPassword() != null)
@@ -83,6 +92,50 @@ public class DBHelper extends SQLiteOpenHelper {
         return resp;
     }
 
+    public void addRegions(String town, String province, int id_route) {
+        ContentValues values = new ContentValues();
+        values.put("id_route", id_route);
+        values.put("province", province);
+        values.put("town", town);
+        helper.insert("regions", null, values);
+    }
+
+    public void addRoute(Route route) {
+        ContentValues values = new ContentValues();
+        values.put("distance", route.getDistance());
+        values.put("time_to_finish", route.getTimeToFin().toString());
+        values.put("avg_speed", route.getAvgSpeed());
+        values.put("difficulty_level", route.getDifficultyLevel());
+        helper.insert("route", null, values);
+        int idRoute = getIdRoute();
+        addCoords(route.getCoordinateList(), idRoute);
+        if (route.getProvinces() != null) {
+            for (Province p : route.getProvinces()) {
+                String province = p.getNameProvince();
+                String town = p.getTownList().get(0).getNameTown();
+                addRegions(town, province, idRoute);
+            }
+        }
+    }
+
+
+    public void addChallenges(Route route) {
+        ContentValues values = new ContentValues();
+        values.put("distance", route.getDistance());
+        values.put("time_to_finish", route.getTimeToFin().toString());
+        values.put("avg_speed", route.getAvgSpeed());
+        values.put("difficulty_level", route.getDifficultyLevel());
+        helper.insert("challenges", null, values);
+        int idRoute = getIdRoute();
+        addCoords(route.getCoordinateList(), idRoute);
+        for (Province p : route.getProvinces()) {
+            String province = p.getNameProvince();
+            String town = p.getTownList().get(0).getNameTown();
+            addRegions(town, province, idRoute);
+        }
+    }
+
+
     public void addUserFeatures(int user_id, int weigth, int heigth, String ex_level) {
         String query = "Update user set weigth,heigth,ex_level  where id='" + user_id + "'";
         ContentValues values = new ContentValues();
@@ -92,10 +145,57 @@ public class DBHelper extends SQLiteOpenHelper {
         helper.update("user", values, query, null);
     }
 
-    public List<Coordinate> retrieveAll() {
+    public void loggin(){
+        String query="Update user set logged="+1;
+        helper.update("user", null, query, null);
+    }
+
+    public void loggout(){
+        String query="Update user set logged="+0;
+        helper.update("user",null,query,null);
+    }
+
+
+    public List<Route> retrieveAllRoutes() {
+        ArrayList<Route> routes = new ArrayList<>();
+        Cursor c = helper.rawQuery("Select * from challenges;", null);
+        if (c.moveToFirst()) {
+            do {
+                Route route = new Route();
+                int id = c.getInt(0);
+                double distance = c.getDouble(1);
+                Time time = Time.valueOf(c.getString(2));
+                double avg_speed = c.getDouble(3);
+                int level = c.getInt(4);
+                ArrayList<Coordinate> coordinates = (ArrayList<Coordinate>) retrieveAll(id);
+                route.setIdRoute(id);
+                route.setDistance(distance);
+                route.setTimeToFin(time);
+                route.setAvgSpeed(avg_speed);
+                route.setCoordinateList(coordinates);
+                Cursor c1 = helper.rawQuery("Select town,province from regions where id_route='" + id + "';", null);
+                if (c1.moveToFirst()) {
+                    do {
+                        String town = c1.getString(0);
+                        String province = c1.getString(1);
+                        ArrayList<Town> towns = new ArrayList<>();
+                        towns.add(new Town(town));
+                        ArrayList<Province> provinces = new ArrayList<>();
+                        provinces.add(new Province(province, towns));
+                        route.setProvinces(provinces);
+                    } while (c1.moveToNext());
+                    c1.close();
+                }
+                routes.add(route);
+            } while (c.moveToNext());
+            c.close();
+        }
+        return routes;
+    }
+
+    public List<Coordinate> retrieveAll(int id) {
         List<Coordinate> coordinates = new ArrayList<>();
-        // Cursor c = helper.rawQuery("Select lat,lng From coords Where id_route='" + id + "';", null);
-        Cursor c = helper.rawQuery("Select lat,lng From coords;", null);
+        Cursor c = helper.rawQuery("Select lat,lng From coords Where id_route='" + id + "';", null);
         if (c.moveToFirst()) {
             do {
                 double lat = c.getDouble(0);
@@ -103,19 +203,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 coordinates.add(new Coordinate(lat, lng));
             } while (c.moveToNext());
         }
+        c.close();
         return coordinates;
     }
 
-    public void addRoute(Route route) {
-        ContentValues values = new ContentValues();
-        values.put("id_route", id);
-        values.put("distance", route.getDistance());
-        values.put("time_to_finish", route.getTimeToFin().toString());
-        values.put("avg_speed", route.getAvgSpeed());
-        values.put("difficulty_level", route.getDifficultyLevel());
-        helper.insert("route", null, values);
-        addCoords(route.getCoordinateList(), getIdRoute());
-    }
 
     public int getIdRoute() {
         int res = 0;

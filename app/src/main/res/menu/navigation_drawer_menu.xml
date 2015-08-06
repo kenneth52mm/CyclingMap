@@ -3,8 +3,8 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:checked="true"
             android:id="@+id/item_navigation_drawer_home"
+            android:checked="true"
             android:icon="@drawable/ic_home_dr"
             android:title="Principal" />
         <item
@@ -24,17 +24,16 @@
     <item android:title="Otros">
         <menu>
 
-            <!-- <item
-                 android:id="@+id/item_navigation_drawer_help_and_feedback"
-                 android:title="Cerrar Sesion"/> -->
-            <!--  android:icon="@drawable/ic_action_action_delete"-->
+            <item
+                android:id="@+id/item_navigation_drawer_help_and_feedback"
+                android:icon="@drawable/ic_action_action_delete"
+                android:title="Cerrar Sesion" />
 
             <item
                 android:id="@+id/item_navigation_drawer_settings"
 
-                android:title="Settings"
                 android:icon="@drawable/ic_settings"
-                />
+                android:title="Settings" />
 
         </menu>
     </item>

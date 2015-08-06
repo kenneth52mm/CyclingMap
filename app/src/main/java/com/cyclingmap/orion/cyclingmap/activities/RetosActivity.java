@@ -1,145 +1,135 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
+import java.util.ArrayList;
+
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 
 import com.cyclingmap.orion.cyclingmap.R;
-import com.cyclingmap.orion.cyclingmap.utils.CustomListAdapter;
+import com.cyclingmap.orion.cyclingmap.business.UserRoutesAdapter;
+import com.cyclingmap.orion.cyclingmap.data.DBHelper;
+import com.cyclingmap.orion.cyclingmap.model.Coordinate;
+import com.cyclingmap.orion.cyclingmap.model.Route;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 
-public class RetosActivity extends Activity {
+public class RetosActivity extends AppCompatActivity {
 
-    CustomListAdapter listAdapter;
-    ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    ListView lwRoutes;
+    UserRoutesAdapter routesAdapter;
+    ArrayList<Route> routes = new ArrayList<>();
+    Toolbar toolbar;
+    DBHelper dbHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retos);
 
-        // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.explv_retos);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        dbHelper = new DBHelper(RetosActivity.this);
+        routes = (ArrayList<Route>) dbHelper.retrieveAllRoutes();
+        lwRoutes = (ListView) findViewById(R.id.list);
+        routesAdapter = new UserRoutesAdapter(routes, RetosActivity.this);
+        lwRoutes.setAdapter(routesAdapter);
+        UserChallengesHelper helper = new UserChallengesHelper();
+        helper.execute(13);
 
-        // preparing list data
-        prepareListData();
 
-        listAdapter = new CustomListAdapter (this, listDataHeader, listDataChild);
-
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
-
-        // Listview Group click listener
-        expListView.setOnGroupClickListener(new OnGroupClickListener() {
-
+        for (Route r : routes)
+            dbHelper.addChallenges(r);
+        lwRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
-                // Toast.makeText(getApplicationContext(),
-                // "Group Clicked " + listDataHeader.get(groupPosition),
-                // Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-
-        // Listview Group expanded listener
-        expListView.setOnGroupExpandListener(new OnGroupExpandListener() {
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Expanded",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Listview Group collasped listener
-        expListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
-
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Collapsed",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        // Listview on child click listener
-        expListView.setOnChildClickListener(new OnChildClickListener() {
-
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                // TODO Auto-generated method stub
-                Toast.makeText(
-                        getApplicationContext(),
-                        listDataHeader.get(groupPosition)
-                                + " : "
-                                + listDataChild.get(
-                                listDataHeader.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT)
-                        .show();
-                return false;
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Route route = routes.get(position);
+                Intent intent = new Intent(RetosActivity.this, DetallesRuta.class);
+                intent.putExtra("Distance", route.getDistance());
+                intent.putExtra("Id_Route", route.getIdRoute());
+                intent.putExtra("SpeedAveg", route.getAvgSpeed());
+                intent.putExtra("Level", route.getDifficultyLevel());
+                startActivity(intent);
             }
         });
     }
 
-    /*
-     * Preparing the list data
-     */
-    private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
 
-        // Adding child data
-        listDataHeader.add("Reto Jaco");
-        listDataHeader.add("Reto U de la Paz");
-        listDataHeader.add("Reto Chirripo");
+    class UserChallengesHelper extends AsyncTask<Integer, ArrayList, ArrayList> {
 
-        // Adding child data
-        List<String> retoJaco = new ArrayList<String>();
-        retoJaco.add("Distancia 24 km");
-        retoJaco.add("Nivel Principiante");
-        retoJaco.add("Tipo de ruta lastre");
+        ArrayList<Route> respRoutes;
+        private final ProgressDialog dialog = new ProgressDialog(RetosActivity.this);
 
 
-        List<String> RetoUPaz = new ArrayList<String>();
-        RetoUPaz.add("Distancia 34 km");
-        RetoUPaz.add("Nivel Avanzado");
-        RetoUPaz.add("Tipo de ruta tierra");
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.setMessage("Cargando...");
+            dialog.show();
+        }
 
+        @Override
+        protected ArrayList doInBackground(Integer... params) {
+            // android.os.Debug.waitForDebugger();
+            HttpClient client = new DefaultHttpClient();
+            HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/challenges/" + params[0]);
+            httpGet.setHeader("content-type", "application/json");
+            Log.i("entro", "entro");
+            try {
+                HttpResponse response = client.execute(httpGet);
+                JSONArray jsonArray = new JSONArray(EntityUtils.toString(response.getEntity()));
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    Route route = new Route();
+                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                    Log.i("ENTRO", "" + i);
+                    route.setIdRoute(jsonObject.getInt("IdRoute"));
+                    route.setDistance(jsonObject.getDouble("Distance"));
+                    route.setAvgSpeed(jsonObject.getDouble("AvgSpeed"));
+                    JSONArray jsonCoords = jsonObject.getJSONArray("CoordinateList");
+                    ArrayList<Coordinate> coordinates = new ArrayList<>();
+                    for (int j = 0; j < jsonCoords.length(); j++) {
+                        JSONObject coord = jsonCoords.getJSONObject(j);
+                        double x = coord.getDouble("X");
+                        double y = coord.getDouble("Y");
+                        coordinates.add(new Coordinate(x, y));
+                    }
+                    route.setCoordinateList(coordinates);
+                    // route.setTimeToFin((Time) jsonObject.get("TimeToFin"));
+                    routes.add(route);
+                }
+            } catch (Exception ex) {
+                Log.i("Error", "" + ex);
+            }
+            return routes;
+        }
 
-        List<String> RetoChirripo = new ArrayList<String>();
-        RetoChirripo.add("Distancia 14 km");
-        RetoChirripo.add("Nivel Intermedio");
-        RetoChirripo.add("Tipo de ruta montana");
-
-
-        listDataChild.put(listDataHeader.get(0), retoJaco); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), RetoUPaz);
-        listDataChild.put(listDataHeader.get(2), RetoChirripo);
+        @Override
+        protected void onPostExecute(ArrayList array) {
+            //super.onPostExecute(array);
+            lwRoutes = (ListView) findViewById(R.id.list);
+            routesAdapter = new UserRoutesAdapter(routes, getApplicationContext());
+            lwRoutes.setAdapter(routesAdapter);
+            dialog.dismiss();
+            // routesAdapter.setRoutesList(routes);
+            routesAdapter.notifyDataSetChanged();
+        }
     }
-
 }
