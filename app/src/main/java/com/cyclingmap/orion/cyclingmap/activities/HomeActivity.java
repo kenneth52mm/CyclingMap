@@ -84,6 +84,8 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         setupNavigationDrawerContent(navigationView);
         LoadUserStats userStats = new LoadUserStats();
         userStats.execute(13);
+        UserChallengesHelper challengesHelper=new UserChallengesHelper();
+        challengesHelper.execute(13);
     }
 
     public void newRoute(View v) {
@@ -101,10 +103,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem item = menu.findItem(R.id.action_badge);
-        View target = findViewById(R.id.action_badge);
-        BadgeView badge = new BadgeView(this, target);
-        badge.setText(routes.size());
-        badge.show();
+
         return true;
     }
 
@@ -290,8 +289,13 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         protected void onPostExecute(ArrayList array) {
             routes = array;
             for (Route r : routes) {
-                dbHelper.addChallenges(r);
+            //    dbHelper.addChallenges(r);
             }
+            View target = findViewById(R.id.action_badge);
+            BadgeView badge = new BadgeView(HomeActivity.this, target);
+            badge.setText(routes.size()+"");
+            badge.show();
+            dialog.dismiss();
         }
     }
 }

@@ -121,8 +121,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void addChallenges(Route route) {
         ContentValues values = new ContentValues();
-        values.put("distance", route.getDistance());
-        values.put("time_to_finish", route.getTimeToFin().toString());
+        values.put("distance", route.getDistance());        values.put("time_to_finish", route.getTimeToFin().toString());
         values.put("avg_speed", route.getAvgSpeed());
         values.put("difficulty_level", route.getDifficultyLevel());
         helper.insert("challenges", null, values);
