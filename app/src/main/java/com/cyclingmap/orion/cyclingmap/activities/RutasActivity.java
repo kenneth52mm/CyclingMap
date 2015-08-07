@@ -224,10 +224,7 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
     public void stopTrace(View v) {
         RUNNING = false;
         chrono.stop();
-        //Log.i("Tiempo ", "" + chrono.getBase());
         speed = ((long) distance / chrono.getBase()) / 1000;
-        //Log.i("Velocidad ", "" + speed);
-
         LatLng[] coords = new LatLng[1];
         coords[0] = new LatLng(9.799982, -84.033366);
         LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
