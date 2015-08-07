@@ -76,6 +76,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         txtdistancefinal = (TextView) findViewById(R.id.TxtDistTotal);
         txtDuration = (TextView) findViewById(R.id.TxtDuration);
         txtSpeedAvg = (TextView) findViewById(R.id.TxtSpeedAvg);
+        spinner_level = (Spinner) findViewById(R.id.spinnerEnd);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
@@ -91,12 +92,12 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
 
         Bundle bundle = getIntent().getExtras();
         routeCoords = (ArrayList) bundle.get("route");
-        distance=bundle.getDouble("Distance");
-        duration=bundle.getLong("Duration");
-        speed=bundle.getDouble("Speed");
-        txtdistancefinal.setText(distance+ "Km");
-        txtDuration.setText(duration+" Min");
-        txtSpeedAvg.setText(speed+"Km/h");
+        distance = bundle.getDouble("Distance");
+        duration = bundle.getLong("Duration");
+        speed = bundle.getDouble("Speed");
+        txtdistancefinal.setText(distance + "Km");
+        txtDuration.setText(duration + " Min");
+        txtSpeedAvg.setText(speed + "Km/h");
 
         LatLng current = (LatLng) routeCoords.get(0);
         CameraPosition myPosition = new CameraPosition.Builder()
@@ -114,15 +115,16 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         LocationAddress.getRouteInfo(coords, EndTraceActivity.this, new GeocoderHandler());
 
         ArrayAdapter a_level = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayLevel);
-        //    a_level.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);        spinner_level.setAdapter(a_level);
+        a_level.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_level.setAdapter(a_level);
     }
 
     //Ver detalle del Radio Button
     public void sendData(View v) {
         route = new Route();
-        route.setDistance(Double.parseDouble(txtdistancefinal.getText().toString()));
-        route.setTimeToFin(Time.valueOf(txtDuration.getText().toString()));
-        route.setAvgSpeed(Double.parseDouble(txtSpeedAvg.getText().toString()));
+        route.setDistance(distance);
+        route.setTimeToFin(Time.valueOf(String.valueOf(duration)));
+        route.setAvgSpeed(speed);
         /*Difficulty level*/
         route.setProvinces(routeProvinces);
         route.setCoordinateList(routeCoords);
