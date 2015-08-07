@@ -182,17 +182,17 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         double j = (double) hours;
         double speedavg = dist/j;
 
-        double speedAvg = ((double) dist / chrono.getBase());
+        double speedAvg = (double) dist / timeElapsed;
         speed = ((long) speedAvg / chrono.getBase());
         String rt= dist + " Km" + "";
         String dt = hours + " Hrs"+ "";
         String tm =  speedavg + " Km/h"+ "";
 
-        Intent i = new Intent(getApplicationContext(), EndTraceActivity.class);
+        Intent i = new Intent(RutasActivity.this, EndTraceActivity.class);
         i.putExtra("route", (Serializable) route);
-        i.putExtra("Distance", rt);
-        i.putExtra("Duration", dt);
-        i.putExtra("Speed", tm);
+        i.putExtra("Distance", dist);
+        i.putExtra("Duration", timeElapsed);
+        i.putExtra("Speed", speedAvg);
         startActivity(i);
     }
 

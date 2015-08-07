@@ -31,7 +31,6 @@ public class LocationAddress {
             public void run() {
                 Geocoder geocoder = new Geocoder(context, Locale.getDefault());
                 ArrayList<Town> towns = new ArrayList<>();
-                provinces.add(new Province("Cartago"));
                 try {
                     for (int j = 0; j < coords.length; j++) {
                         double latitude = coords[j].latitude;

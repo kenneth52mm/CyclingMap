@@ -64,7 +64,9 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     private Route route;
     private int id_user;
     private DBHelper dbHelper;
-
+    private double distance;
+    private long duration;
+    private double speed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,12 +91,13 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
 
         Bundle bundle = getIntent().getExtras();
         routeCoords = (ArrayList) bundle.get("route");
-        txtdistancefinal.setText(bundle.getString("Distance"));
-        txtDuration.setText(bundle.getString("Duration"));
-        txtSpeedAvg.setText(bundle.getString("Speed"));
+        distance=bundle.getDouble("Distance");
+        duration=bundle.getLong("Duration");
+        speed=bundle.getDouble("Speed");
+        txtdistancefinal.setText(distance+ "Km");
+        txtDuration.setText(duration+" Min");
+        txtSpeedAvg.setText(speed+"Km/h");
 
-
-        // Show the current position on Fragment map
         LatLng current = (LatLng) routeCoords.get(0);
         CameraPosition myPosition = new CameraPosition.Builder()
                 .target(current).zoom(17).bearing(90).tilt(30).build();
@@ -105,14 +108,13 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         polylineOptions.width(12);
         polylineOptions.color(Color.RED);
         map.addPolyline(polylineOptions);
-        LatLng[] coords = new LatLng[3];
+        LatLng[] coords = new LatLng[2];
         coords[0] = (LatLng) routeCoords.get(0);
         coords[1] = (LatLng) routeCoords.get(routeCoords.size() - 1);
-        LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
+        LocationAddress.getRouteInfo(coords, EndTraceActivity.this, new GeocoderHandler());
 
         ArrayAdapter a_level = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayLevel);
-        a_level.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_level.setAdapter(a_level);
+        //    a_level.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);        spinner_level.setAdapter(a_level);
     }
 
     //Ver detalle del Radio Button
@@ -125,10 +127,10 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         route.setProvinces(routeProvinces);
         route.setCoordinateList(routeCoords);
         dbHelper.addRoute(route);
-        RouteWsHelper helper=new RouteWsHelper();
-        Object []obj=new Object[2];
-        obj[0]=route;
-        obj[1]=id_user;
+        RouteWsHelper helper = new RouteWsHelper();
+        Object[] obj = new Object[2];
+        obj[0] = route;
+        obj[1] = id_user;
         helper.execute(obj);
     }
 

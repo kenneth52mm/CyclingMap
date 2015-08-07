@@ -229,8 +229,9 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     public void onConnected(Bundle arg0) {
         signedInUser = false;
         // Toast.makeText(this, "Connected", Toast.LENGTH_LONG).show();
-        getProfileInformation();
+
         if (!signedInUser) {
+            getProfileInformation();
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             finish();
