@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/windowBackground"
     android:layout_height="@dimen/image_size">
 
     <RelativeLayout
+        android:background="@color/windowBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <ImageView
             android:id="@+id/icon"
@@ -28,7 +30,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             style="?android:textAppearanceMedium"
-            tools:text="Ruta"
+            tools:text="@string/routes_user"
             android:transitionName="image"
             android:textColor="#ff484848" />
 
@@ -42,7 +44,7 @@
             android:ellipsize="end"
             android:maxLines="4"
             style="?android:textAppearanceSmall"
-            tools:text="Distancia" />
+            tools:text="@string/route_duration" />
 
     </RelativeLayout>
 

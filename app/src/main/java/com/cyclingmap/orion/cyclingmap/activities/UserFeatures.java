@@ -26,12 +26,13 @@ public class UserFeatures extends ActionBarActivity {
     EditText txtHeight, txtWeight;
     Spinner spinLevel;
     Button btnSave;
-    String[] arrayLevel = {"Principiante", "Intermedio", "Avanzado"};
+   // String[] arrayLevel = {"Principiante", "Intermedio", "Avanzado"};
     private DBHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String[] arrayLevel = {getString(R.string.beginner_level), getString(R.string.intermediate_level), getString(R.string.advanced_level)};
         setContentView(R.layout.activity_user_features);
         lblHead = (TextView)findViewById(R.id.tvFeaturesHead);
         txtHeight = (EditText)findViewById(R.id.txtFeaturesHeight);

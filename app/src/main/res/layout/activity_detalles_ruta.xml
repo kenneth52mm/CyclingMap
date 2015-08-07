@@ -1,12 +1,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/windowBackground"
     tools:context="com.cyclingmap.orion.cyclingmap.activities.DetallesRuta">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/greenLight"
+        android:elevation="4dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ToolbarTheme" >
+
+        <TextView
+            android:id="@+id/txt_Ruta_Detalle_Encabez"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/detalle_ruta_Encabezado"
+            android:textSize="20dp"
+            android:textColor="#fffffdfe" />
+    </android.support.v7.widget.Toolbar>
 
     <TableLayout
         android:layout_width="fill_parent"
@@ -15,23 +32,11 @@
         android:layout_centerHorizontal="true">
 
         <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/txt_Ruta_Detalle_Encabez"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="@string/detalle_ruta_Encabezado"
-                android:textSize="20dp" />
-        </TableRow>
-
-        <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="false"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginTop="60dp">
 
             <ImageView
                 android:id="@+id/ivRuta_Detalle"
@@ -43,11 +48,16 @@
                 android:layout_span="3"
                 android:src="@drawable/ejrutadetalle1" />
         </TableRow>
+        <View
+            android:layout_width="wrap_content"
+            android:background="@drawable/gradient"
+            android:layout_height="1dp"></View>
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left">
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,29 +70,36 @@
                     android:layout_height="wrap_content"
                     android:layout_column="0"
                     android:layout_gravity="left"
-                    android:src="@drawable/nombre" />
+                    android:src="@drawable/nombre"
+                    android:layout_marginLeft="15dp" />
 
                 <TextView
                     android:id="@+id/txtRuta_Det_Nombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:text="Nombre: "
-                    android:textSize="@dimen/lbl_text_size" />
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/name_det_r"
+                    android:textSize="@dimen/lbl_text_size"
+                    android:layout_marginTop="15dp" />
 
                 <TextView
                     android:id="@+id/txtNameRoad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp" />
             </LinearLayout>
 
         </TableRow>
-
+        <View
+            android:layout_width="wrap_content"
+            android:background="@drawable/gradient"
+            android:layout_height="1dp"></View>
         <TableRow
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,28 +111,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:src="@mipmap/ic_distanc" />
+                    android:src="@mipmap/ic_distanc"
+                    android:layout_marginLeft="15dp" />
 
                 <TextView
                     android:id="@+id/txtRuta_Det_Distancia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Distancia: "
-                    android:textSize="18dp" />
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/distance_det_r"
+                    android:textSize="18dp"
+                    android:layout_marginTop="15dp" />
 
                 <TextView
                     android:id="@+id/txtDistance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp" />
             </LinearLayout>
         </TableRow>
-
+        <View
+            android:layout_width="wrap_content"
+            android:background="@drawable/gradient"
+            android:layout_height="1dp"></View>
         <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -127,29 +152,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:src="@mipmap/ic_speedavg" />
+                    android:src="@mipmap/ic_speedavg"
+                    android:layout_marginLeft="15dp" />
 
                 <TextView
                     android:id="@+id/txtRutas_Det_Vel_Media"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Velocidad Media : "
-                    android:textSize="18dp" />
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/speed_det_r"
+                    android:textSize="18dp"
+                    android:layout_marginTop="15dp" />
 
                 <TextView
                     android:id="@+id/txtSpeedAveg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp" />
             </LinearLayout>
 
         </TableRow>
-
+        <View
+            android:layout_width="wrap_content"
+            android:background="@drawable/gradient"
+            android:layout_height="1dp"></View>
         <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -161,56 +194,60 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:src="@mipmap/ic_level_exp" />
+                    android:src="@mipmap/ic_level_exp"
+                    android:layout_marginLeft="15dp" />
 
                 <TextView
                     android:id="@+id/txtRuta_Det_Nivel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="Nivel: "
-                    android:textSize="18dp" />
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/level_det_r"
+                    android:textSize="18dp"
+                    android:layout_marginTop="15dp" />
 
                 <TextView
                     android:id="@+id/txtNivelRoad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp" />
             </LinearLayout>
         </TableRow>
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+        <!--  <TableRow
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="left"
-                    android:src="@drawable/tipocalle" />
+                  <ImageView
+                      android:id="@+id/imageView8"
+                      android:layout_width="45dp"
+                      android:layout_height="45dp"
+                      android:layout_gravity="left"
+                      android:src="@drawable/tipocalle" />
 
-                <TextView
-                    android:id="@+id/txtRuta_Det_TipCalle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="@string/detalles_tipocalle"
-                    android:textSize="18dp" />
+                  <TextView
+                      android:id="@+id/txtRuta_Det_TipCalle"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="10dp"
+                      android:text="@string/detalles_tipocalle"
+                      android:textSize="18dp" />
 
-                <TextView
-                    android:id="@+id/txtRoadType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp" />
-            </LinearLayout>
-        </TableRow>
+                  <TextView
+                      android:id="@+id/txtRoadType"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="18dp" />
+              </LinearLayout>
+          </TableRow> -->
 
     </TableLayout>
 
@@ -221,7 +258,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="false"
         android:layout_alignParentRight="false"
-        android:background="@color/greenDark"
+        android:background="@color/greenLight"
         android:text="@string/btn_ruta_detalle"
         android:textColor="#ffffffff"
         android:textStyle="bold" />

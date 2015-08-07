@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/windowBackground"
     tools:context="com.cyclingmap.orion.cyclingmap.activities.ProfileUserActivity">
 
     <FrameLayout
@@ -64,28 +65,22 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000000" />
 
-    </LinearLayout>
-      <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout1"
-        android:orientation="horizontal"
-        android:showDividers="beginning">
-
         <TextView
-            android:id="@+id/txtClave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/pass_user"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/txtUsernameProfile"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp" />
 
     </LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:background="@drawable/gradient"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></View>
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
@@ -94,7 +89,45 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linearLayout2"
         android:orientation="horizontal"
-        android:showDividers="beginning">
+        android:showDividers="beginning"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/txt_label_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/weight_user"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/txtWeight"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:background="@drawable/gradient"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></View>
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout1"
+        android:orientation="horizontal"
+        android:showDividers="beginning"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/txtQFriends"
@@ -102,12 +135,26 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
-            android:text="@string/friend_list"
+            android:text="@string/email_user"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000000" />
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/txtEmailProfile"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp" />
 
+    </LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:background="@drawable/gradient"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></View>
 
     <LinearLayout
         android:id="@+id/linearLayout5"
@@ -117,7 +164,47 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linearLayout3"
         android:orientation="horizontal"
-        android:showDividers="beginning">
+        android:showDividers="beginning"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/txt_label_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/height_user"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/txtHeight"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp" />
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:background="@drawable/gradient"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linearLayout5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></View>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/linearLayout5"
+        android:orientation="horizontal"
+        android:showDividers="beginning"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:id="@+id/txtConfig"
@@ -125,7 +212,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
-            android:text="Configuracion"
+            android:text="@string/configuration"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000000" />
 
@@ -148,7 +235,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@color/greenLight"
-        android:text="Guardar"
+        android:text="@string/user_features_btnsave"
         android:textColor="#ffffff"
         android:textStyle="bold" />
 

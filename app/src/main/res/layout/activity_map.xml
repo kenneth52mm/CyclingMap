@@ -1,88 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="6"
-    android:orientation="horizontal"
-    android:rowCount="8">
-
+    android:background="@color/windowBackground"
+    tools:context=".MapActivity">
 
     <fragment
-        android:id="@+id/map"
+        android:id="@+id/mapExistRoute"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="fill_parent"
-        android:layout_height="250dp"
+        android:layout_height="230dp"
         android:layout_column="0"
         android:layout_columnSpan="6"
         android:layout_gravity="center"
         android:layout_row="0"
-        android:layout_rowSpan="3" />
+        android:layout_rowSpan="3"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/mapExistRoute">
+        <Chronometer
+            android:id="@+id/txtTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|fill"
+            android:textIsSelectable="true"
+            android:textSize="60sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/time_Total"
+            android:id="@+id/textView10"
+            android:layout_alignBottom="@+id/txtTime"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/r2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/r1"
+        android:layout_alignLeft="@+id/mapExistRoute"
+        android:layout_alignStart="@+id/mapExistRoute">
+
+        <TextView
+            android:id="@+id/txtDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_columnSpan="3"
+            android:layout_columnWeight="3"
+            android:layout_gravity="center_horizontal"
+            android:layout_row="5"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="30sp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/distance_Total"
+            android:id="@+id/textView12"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="45dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/speed_avg"
+            android:id="@+id/textView13"
+            android:layout_marginRight="45dp"
+            android:layout_marginEnd="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/txtSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="30sp"
+            android:layout_above="@+id/textView13"
+            android:layout_alignRight="@+id/textView13"
+            android:layout_alignEnd="@+id/textView13"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/r3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_columnSpan="2"
-        android:layout_columnWeight="3"
-        android:layout_gravity="fill_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_row="4" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/mapExistRoute"
+        android:layout_alignEnd="@+id/mapExistRoute">
 
-    <TextView
-        android:id="@+id/txtDistance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_columnSpan="3"
-        android:layout_columnWeight="3"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_row="4"
-        android:text="0.0"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="30sp" />
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_stop"
+            android:background="@drawable/circle"
+            android:id="@+id/imageStop"
+            android:layout_gravity="right|bottom"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/btnPlay"
+            android:layout_toStartOf="@+id/btnPlay" />
 
-    <TextView
-        android:id="@+id/txtSpeed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="3"
-        android:layout_columnSpan="3"
-        android:layout_columnWeight="3"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_row="4"
-        android:text="0.0"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="30sp" />
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_see"
+            android:background="@drawable/circle"
+            android:id="@+id/imageSee"
+            android:layout_gravity="right|bottom"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/btnPlay"
+            android:layout_toEndOf="@+id/btnPlay" />
 
-    <Chronometer
-        android:id="@+id/txtTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="2"
-        android:layout_columnSpan="2"
-        android:layout_columnWeight="2"
-        android:layout_gravity="center|fill"
-        android:layout_row="5"
-        android:textAlignment="center"
-        android:textIsSelectable="true"
-        android:textSize="60sp" />
+        <at.markushi.ui.CircleButton
+            android:id="@+id/btnPlay"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_above="@+id/chronometer"
+            android:layout_centerHorizontal="true"
+            android:layout_column="1"
+            android:layout_columnSpan="5"
+            android:layout_gravity="center"
+            android:layout_row="7"
+            android:src="@mipmap/ic_play"
+            app:cb_color="#00994C"
+            app:cb_pressedRingWidth="8dp" />
 
-    <at.markushi.ui.CircleButton
-        android:id="@+id/btnPlay"
-        android:layout_width="100dip"
-        android:layout_height="100dip"
-        android:layout_above="@+id/chronometer"
-        android:layout_centerHorizontal="true"
-        android:layout_column="1"
-        android:layout_columnSpan="3"
-        android:layout_gravity="center"
-        android:layout_row="6"
-        android:layout_rowSpan="2"
-        android:src="@mipmap/ic_play"
-        app:cb_color="#00994C"
-        app:cb_pressedRingWidth="8dp" />
+    </RelativeLayout>
 
-</GridLayout>
+</RelativeLayout>

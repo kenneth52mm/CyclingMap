@@ -59,7 +59,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     private RouteWsHelper routeWsHelper = new RouteWsHelper();
     ArrayList<Province> routeProvinces;
     private ArrayList routeCoords;
-    String[] arrayLevel = {"Principiante", "Intermedio", "Avanzado"};
+    //String[] arrayLevel = {"Principiante", "Intermedio", "Avanzado"};
     Spinner spinner_level;
     private Route route;
     private int id_user;
@@ -72,6 +72,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_trace);
+        String[] arrayLevel = {getString(R.string.beginner_level), getString(R.string.intermediate_level), getString(R.string.advanced_level)};
 
         txtdistancefinal = (TextView) findViewById(R.id.TxtDistTotal);
         txtDuration = (TextView) findViewById(R.id.TxtDuration);
@@ -91,6 +92,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         dbHelper = new DBHelper(getApplicationContext());
 
         Bundle bundle = getIntent().getExtras();
+        //cae
         routeCoords = (ArrayList) bundle.get("route");
         distance = bundle.getDouble("Distance");
         duration = bundle.getLong("Duration");

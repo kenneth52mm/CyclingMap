@@ -164,7 +164,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                                 return true;
 
                             // Cerrar sesion
-                            case R.id.item_navigation_drawer_help_and_feedback:
+                            case R.id.item_close_session:
                                 menuItem.setChecked(true);
                                 AccessToken accessToken = AccessToken.getCurrentAccessToken();
                                 if (dbHelper.isLogged()) {
@@ -246,7 +246,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.setMessage("Cargando...");
+            dialog.setMessage(getString(R.string.loading_dialog));
             dialog.show();
         }
 

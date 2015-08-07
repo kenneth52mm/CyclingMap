@@ -178,7 +178,7 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:text="@string/btn_rutas_buscar_lblboton"
-            android:background="@color/greenDark"
+            android:background="@color/greenLight"
             android:id="@+id/btnRutas_Buscar"
             android:onClick="routesSearch"
             android:textColor="#ffffffff"

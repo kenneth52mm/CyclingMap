@@ -1,8 +1,10 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -32,12 +34,12 @@ public class DetallesRuta extends ActionBarActivity {
         lblDistancia = (TextView) findViewById(R.id.txtRuta_Det_Distancia);
         lblVelMedia = (TextView) findViewById(R.id.txtRutas_Det_Vel_Media);
         lblNivel = (TextView) findViewById(R.id.txtRuta_Det_Nivel);
-        lblTipCalle = (TextView) findViewById(R.id.txtRuta_Det_TipCalle);
+       // lblTipCalle = (TextView) findViewById(R.id.txtRuta_Det_TipCalle);
         txtNameRoad = (TextView) findViewById(R.id.txtNameRoad);
         txtDistanceRoad = (TextView) findViewById(R.id.txtDistance);
         txtAveSpeed = (TextView) findViewById(R.id.txtSpeedAveg);
         txtLevel = (TextView) findViewById(R.id.txtNivelRoad);
-        txtTipCalle = (TextView) findViewById(R.id.txtRoadType);
+      //  txtTipCalle = (TextView) findViewById(R.id.txtRoadType);
         btnPlay = (Button)findViewById(R.id.btnRuta_Det_Play);
 
         //Se agrega el estilo de la fuente
@@ -47,13 +49,13 @@ public class DetallesRuta extends ActionBarActivity {
         lblDistancia.setTypeface(tf);
         lblVelMedia.setTypeface(tf);
         lblNivel.setTypeface(tf);
-        lblTipCalle.setTypeface(tf);
+//        lblTipCalle.setTypeface(tf);
         btnPlay.setTypeface(tf);
         txtNameRoad.setTypeface(tf);
         txtDistanceRoad.setTypeface(tf);
         txtAveSpeed.setTypeface(tf);
         txtLevel.setTypeface(tf);
-        txtTipCalle.setTypeface(tf);
+//        txtTipCalle.setTypeface(tf);
 
         //Obtener los datos
         Bundle b = getIntent().getExtras();
@@ -82,9 +84,14 @@ public class DetallesRuta extends ActionBarActivity {
 
 
         }
-
+        btnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DetallesRuta.this, ExistingRoute.class);
+                startActivity(i);            }
+        });
     }
 
-
+    public void beginRoute(){ }
 
 }

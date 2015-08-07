@@ -75,7 +75,7 @@ public class UserRoutes extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.setMessage("Cargando...");
+            dialog.setMessage(getString(R.string.loading_dialog));
             dialog.show();
         }
 

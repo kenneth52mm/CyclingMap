@@ -1,21 +1,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="false"
     android:focusable="false"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/windowBackground"
     tools:context="com.cyclingmap.orion.cyclingmap.activities.UserFeatures">
 
-    <TextView
-        android:id="@+id/tvFeaturesHead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/user_features_head"
-        android:textSize="20dp" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/greenLight"
+        android:elevation="4dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ToolbarTheme" >
+
+        <TextView
+            android:id="@+id/tvFeaturesHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_features_head"
+            android:textSize="20dp"
+            android:textColor="#fffffdfe" />
+
+    </android.support.v7.widget.Toolbar>
+
+
 
     <EditText
         android:id="@+id/txtFeaturesWeight"
@@ -23,8 +35,7 @@
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvFeaturesHead"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="70dp"
         android:background="#ffffffff"
         android:hint="@string/user_features_weight"
         android:inputType="number|textPersonName"
@@ -86,7 +97,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:background="@color/greenDark"
+        android:background="@color/greenLight"
         android:text="@string/user_features_btnsave"
         android:textColor="#ffffffff"
         android:textStyle="bold" />

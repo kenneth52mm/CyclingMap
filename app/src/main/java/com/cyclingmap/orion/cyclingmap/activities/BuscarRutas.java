@@ -23,6 +23,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.UserRoutesAdapter;
@@ -45,70 +46,81 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class BuscarRutas extends ActionBarActivity implements LocationListener {
 
-    ListView lRoutes_Search;
-    UserRoutesAdapter routesAdapter;
-    LocationAddress locationAddress;
+    //spinner
     Spinner spinner_level;
-    ListView lvRutasBuscadas;
     Button btnRutasBusca;
     TextView txtDistance;
     RadioButton radioButton;
+
+    ListView lRoutes_Search;
+    UserRoutesAdapter routesAdapter;
+
     int diffLevel = 0;
     String town = "";
     String province = "";
     String distance = "";
-   // String[] arraNivel = {"Principiante", "Intermedio", "Avanzado"};
     ArrayList<Route> routes = new ArrayList<>();
     private LocationManager locationManager;
     private Location lc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_rutas);
-        spinner_level = (Spinner) findViewById(R.id.spinnerLevel);
+
         txtDistance = (EditText)findViewById(R.id.txt_distance_search);
-        radioButton = (RadioButton)findViewById(R.id.check_near);
-        String[] arraNivel = {"Principiante", "Intermedio", "Avanzado"};
 
-    //    lRoutes_Search = (ListView) findViewById(R.id.list);
-    //    routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), BuscarRutas.this);
-    //    lRoutes_Search.setAdapter(routesAdapter); // Error
-        btnRutasBusca = (Button) findViewById(R.id.btnRutas_Buscar);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        radioButton = (RadioButton)findViewById(R.id.check_near);
 
         spinner_level = (Spinner) findViewById(R.id.spinnerLevel);
+        String[] arraNivel = {getString(R.string.beginner_level), getString(R.string.intermediate_level), getString(R.string.advanced_level)};
         ArrayAdapter adapterNi = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraNivel);
         adapterNi.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_level.setAdapter(adapterNi);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        //  lRoutes_Search = (ListView) findViewById(R.id.list);
+        //  routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), BuscarRutas.this);
+        //  lRoutes_Search.setAdapter(routesAdapter); // Error
+
         // province = LocationAddress.getProvinceByName("San Jose");
         //LocationManager.GPS_PROVIDER;
 
+        btnRutasBusca = (Button) findViewById(R.id.btnRutas_Buscar);
         btnRutasBusca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                routesSearch(v);
             }
         });
     }
-     public void routesSearch(View v)
-     {
-         final LatLng[] coords = new LatLng[2];
-         coords[0] = new LatLng(lc.getLatitude(),lc.getLongitude()); //Error
-         LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
-         diffLevel = difficultyLevel(spinner_level.getSelectedItem().toString());
-         distance = txtDistance.getText().toString();
-         String[] data = new String[4];
-         data[0] = String.valueOf(diffLevel);
-         data[1] = province;
-         data[2] = town;
-         data[3] = distance;
-         final SearhByCriteriaWSHelper wsHelper = new SearhByCriteriaWSHelper();
-         wsHelper.execute(data);
 
-     }
+    public void routesSearch(View v)
+    {
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        final LatLng[] coords = new LatLng[2];
+
+        coords[0] = new LatLng(lc.getLatitude(),lc.getLongitude()); //Error
+        LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
+
+        diffLevel = difficultyLevel(spinner_level.getSelectedItem().toString());
+        if (diffLevel == 0)
+        {
+            diffLevel = difficultyLevelEnglish(spinner_level.getSelectedItem().toString());
+        }
+        Toast.makeText(getApplicationContext(), "seleccion del spinner = " + diffLevel + spinner_level.getSelectedItem().toString() , Toast.LENGTH_LONG).show();
+
+        distance = txtDistance.getText().toString();
+        String[] data = new String[4];
+        data[0] = String.valueOf(diffLevel);
+        data[1] = province;
+        data[2] = town;
+        data[3] = distance;
+        final SearhByCriteriaWSHelper wsHelper = new SearhByCriteriaWSHelper();
+        wsHelper.execute(data);
+    }
+
     @Override
     public void onLocationChanged(Location location) {    }
     @Override
@@ -165,9 +177,19 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
 
         @Override
         protected void onPostExecute(ArrayList route) {
-            lRoutes_Search = (ListView) findViewById(R.id.list);
-            routesAdapter = new UserRoutesAdapter(routes, getApplicationContext());
-            lRoutes_Search.setAdapter(routesAdapter);
+
+            //   lRoutes_Search = (ListView) findViewById(R.id.list);
+            // routesAdapter = new UserRoutesAdapter(routes, getApplicationContext());
+            // lRoutes_Search.setAdapter(routesAdapter);
+            // dialog.dismiss();
+
+            Intent i = new Intent(getApplicationContext(), UserRoutes.class);
+            i.putExtra("finded_routes", routes );
+
+            Toast.makeText(getApplicationContext(), "Cantidad rutas = " + routes.size(), Toast.LENGTH_LONG).show();
+
+            startActivity(i);
+
             dialog.dismiss();
         }
     }
@@ -188,6 +210,22 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
         return level;
     }
 
+    private Integer difficultyLevelEnglish(String p) {
+        int level = 0;
+        switch (p) {
+            case "Beginner":
+                level = 1;
+                break;
+            case "Intermediate":
+                level = 2;
+                break;
+            case "Advance":
+                level = 3;
+                break;
+        }
+        return level;
+    }
+
     private class GeocoderHandler extends Handler {
         @Override
         public void handleMessage(Message message) {
@@ -196,9 +234,14 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
                 case 1:
                     Bundle bundle = message.getData();
                     datos = (ArrayList<Province>) bundle.getSerializable("direccion");
-                    Province p = (Province) datos.get(0);
-                    province = p.getNameProvince();
-                    town = p.getTownList().get(0).getNameTown();
+
+                    if(datos.size()>0)
+                    {
+                        Province p = (Province) datos.get(0);
+                        province = p.getNameProvince();
+                        town = p.getTownList().get(0).getNameTown();
+                    }
+
                     break;
                 default:
                     datos = null;

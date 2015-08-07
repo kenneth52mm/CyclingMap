@@ -3,37 +3,37 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/item_navigation_drawer_home"
             android:checked="true"
+            android:id="@+id/item_navigation_drawer_home"
             android:icon="@drawable/ic_home_dr"
-            android:title="Principal" />
+            android:title="@string/home_title" />
         <item
             android:id="@+id/item_navigation_drawer_profile"
             android:icon="@drawable/ic_profile_dr"
-            android:title="Mi Perfil" />
+            android:title="@string/profile_title" />
         <item
             android:id="@+id/item_navigation_drawer_routes"
             android:icon="@drawable/ic_route_dr"
-            android:title="Mis Rutas" />
+            android:title="@string/route_title" />
         <item
             android:id="@+id/item_navigation_drawer_challenge"
             android:icon="@drawable/ic_challenge_dr"
-            android:title="Retos" />
+            android:title="@string/challenge_title" />
     </group>
-
-    <item android:title="Otros">
+    <item android:title="@string/others_titles">
         <menu>
 
             <item
-                android:id="@+id/item_navigation_drawer_help_and_feedback"
-                android:icon="@drawable/ic_action_action_delete"
-                android:title="Cerrar Sesion" />
+                android:id="@+id/item_close_session"
+                android:title="@string/sign_out_title"
+                android:icon="@drawable/ic_sign_out"
+                />
 
             <item
                 android:id="@+id/item_navigation_drawer_settings"
-
+                android:title="@string/settings_title"
                 android:icon="@drawable/ic_settings"
-                android:title="Settings" />
+                />
 
         </menu>
     </item>
