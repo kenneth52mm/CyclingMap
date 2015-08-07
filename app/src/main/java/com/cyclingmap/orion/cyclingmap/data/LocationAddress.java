@@ -58,6 +58,9 @@ public class LocationAddress {
                                 towns.add(new Town(townName));
                                 p.setTownList(towns);
                             }
+                            if(!provinces.contains(p))
+                                provinces.add(p);
+
                         }
                     }
                 } catch (IOException e) {
