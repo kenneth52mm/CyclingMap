@@ -16,7 +16,7 @@ public class addBadge {
         BadgeDrawable badge;
 
         // Reusar drawable
-        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_notification);
+        Drawable reuse = icon.findDrawableByLayerId(R.mipmap.ic_bell_notification);
         if (reuse != null && reuse instanceof BadgeDrawable) {
             badge = (BadgeDrawable) reuse;
         } else {

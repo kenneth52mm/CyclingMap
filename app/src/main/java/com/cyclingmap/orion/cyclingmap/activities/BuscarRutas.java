@@ -16,8 +16,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -50,12 +52,12 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
     ListView lvRutasBuscadas;
     Button btnRutasBusca;
     TextView txtDistance;
-    TextView txtTexto;
+    RadioButton radioButton;
     int diffLevel = 0;
     String town = "";
     String province = "";
     String distance = "";
-    String[] arraNivel = {"Principiante", "Intermedio", "Avanzado"};
+   // String[] arraNivel = {"Principiante", "Intermedio", "Avanzado"};
     ArrayList<Route> routes = new ArrayList<>();
     private LocationManager locationManager;
     private Location lc;
@@ -63,15 +65,19 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_rutas);
+        spinner_level = (Spinner) findViewById(R.id.spinnerLevel);
+        txtDistance = (EditText)findViewById(R.id.txt_distance_search);
+        radioButton = (RadioButton)findViewById(R.id.check_near);
         String[] arraNivel = {"Principiante", "Intermedio", "Avanzado"};
 
-        lRoutes_Search = (ListView) findViewById(R.id.list);
-//        routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), BuscarRutas.this);
-//        lRoutes_Search.setAdapter(routesAdapter); // Error
+    //    lRoutes_Search = (ListView) findViewById(R.id.list);
+    //    routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), BuscarRutas.this);
+    //    lRoutes_Search.setAdapter(routesAdapter); // Error
         btnRutasBusca = (Button) findViewById(R.id.btnRutas_Buscar);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
         spinner_level = (Spinner) findViewById(R.id.spinnerLevel);
         ArrayAdapter adapterNi = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraNivel);
         adapterNi.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -79,25 +85,30 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         // province = LocationAddress.getProvinceByName("San Jose");
         //LocationManager.GPS_PROVIDER;
-        final SearhByCriteriaWSHelper wsHelper = new SearhByCriteriaWSHelper();
+
         btnRutasBusca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LatLng[] coords = new LatLng[2];
-                //   coords[0] = new LatLng(lc.getLatitude(),lc.getLongitude()); //Error
-                LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
-                diffLevel = difficultyLevel(spinner_level.getSelectedItem().toString());
-                distance = txtDistance.getText().toString();
-                String[] data = new String[4];
-                data[0] = String.valueOf(diffLevel);
-                data[1] = province;
-                data[2] = town;
-                data[3] = distance;
-                wsHelper.execute(data);
+
             }
         });
     }
-    //   public void routesSearch(View v){    }
+     public void routesSearch(View v)
+     {
+         final LatLng[] coords = new LatLng[2];
+         coords[0] = new LatLng(lc.getLatitude(),lc.getLongitude()); //Error
+         LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
+         diffLevel = difficultyLevel(spinner_level.getSelectedItem().toString());
+         distance = txtDistance.getText().toString();
+         String[] data = new String[4];
+         data[0] = String.valueOf(diffLevel);
+         data[1] = province;
+         data[2] = town;
+         data[3] = distance;
+         final SearhByCriteriaWSHelper wsHelper = new SearhByCriteriaWSHelper();
+         wsHelper.execute(data);
+
+     }
     @Override
     public void onLocationChanged(Location location) {    }
     @Override

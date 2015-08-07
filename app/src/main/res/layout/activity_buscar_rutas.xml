@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:ems="10"
-                    android:id="@+id/txt_Distance"
+                    android:id="@+id/txt_distance_search"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp" />
