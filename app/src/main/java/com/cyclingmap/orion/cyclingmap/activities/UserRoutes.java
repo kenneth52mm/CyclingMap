@@ -28,6 +28,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class UserRoutes extends AppCompatActivity {
@@ -105,7 +106,7 @@ public class UserRoutes extends AppCompatActivity {
                         coordinates.add(new Coordinate(x, y));
                     }
                     route.setCoordinateList(coordinates);
-                    // route.setTimeToFin((Time) jsonObject.get("TimeToFin"));
+                    route.setTimeToFin(Time.valueOf(jsonObject.getString("TimeToFin")));
                     routes.add(route);
                 }
             } catch (Exception ex) {

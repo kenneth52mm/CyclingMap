@@ -46,6 +46,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -84,7 +85,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         setupNavigationDrawerContent(navigationView);
         LoadUserStats userStats = new LoadUserStats();
         userStats.execute(13);
-        UserChallengesHelper challengesHelper=new UserChallengesHelper();
+        UserChallengesHelper challengesHelper = new UserChallengesHelper();
         challengesHelper.execute(13);
     }
 
@@ -276,7 +277,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                         coordinates.add(new Coordinate(x, y));
                     }
                     route.setCoordinateList(coordinates);
-                    // route.setTimeToFin((Time) jsonObject.get("TimeToFin"));
+                    route.setTimeToFin(Time.valueOf(jsonObject.getString("TimeToFin")));
                     routes.add(route);
                 }
             } catch (Exception ex) {
@@ -289,11 +290,11 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         protected void onPostExecute(ArrayList array) {
             routes = array;
             for (Route r : routes) {
-            //    dbHelper.addChallenges(r);
+                dbHelper.addChallenges(r);
             }
             View target = findViewById(R.id.action_badge);
             BadgeView badge = new BadgeView(HomeActivity.this, target);
-            badge.setText(routes.size()+"");
+            badge.setText(routes.size() + "");
             badge.show();
             dialog.dismiss();
         }
