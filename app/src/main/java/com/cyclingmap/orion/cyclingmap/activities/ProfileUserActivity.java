@@ -1,6 +1,7 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
@@ -61,6 +63,11 @@ public class ProfileUserActivity extends AppCompatActivity {
 
         userProfileDetails userInfo = new userProfileDetails();
         userInfo.execute(1);
+    }
+
+    public void profileConfig(View v){
+        Intent intent = new Intent(ProfileUserActivity.this, UserFeatures.class);
+        startActivity(intent);
     }
 
 

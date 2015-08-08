@@ -84,6 +84,7 @@
             android:id="@+id/spinUserFeatures"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:spinnerMode="dialog"
             android:layout_marginLeft="30dp"
             android:textAlignment="center"
             android:touchscreenBlocksFocus="true" />

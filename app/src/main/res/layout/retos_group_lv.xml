@@ -3,17 +3,27 @@
     android:layout_width="fill_parent"
     android:layout_height="55dip"
     android:orientation="vertical"
-    android:background="@color/windowBackground"
     android:padding="5dp">
 
 
-    <TextView
-        android:id="@+id/retos_lbl_group"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="35dip"
-        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textSize="18dp"
-        android:textAlignment="center"
-        android:textColor="#ffffffff"
-        android:background="@color/greenDark" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="35dip"
+            android:layout_marginLeft="10dip" />
+
+        <TextView
+            android:id="@+id/retos_lbl_group"
+            android:layout_width="fill_parent"
+            android:layout_height="35dip"
+            android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+            android:textSize="18dp"
+            android:textAlignment="center"
+            android:textColor="#ffffffff"
+            android:background="@color/greenLight" />
+    </LinearLayout>
 </LinearLayout>

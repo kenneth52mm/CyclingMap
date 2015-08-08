@@ -23,16 +23,18 @@
     <item android:title="@string/others_titles">
         <menu>
 
-            <item
-                android:id="@+id/item_close_session"
-                android:title="@string/sign_out_title"
-                android:icon="@drawable/ic_sign_out"
-                />
+
 
             <item
                 android:id="@+id/item_navigation_drawer_settings"
                 android:title="@string/settings_title"
                 android:icon="@drawable/ic_settings"
+                />
+
+            <item
+                android:id="@+id/item_navigation_drawer_help_and_feedback"
+                android:title="@string/sign_out_title"
+                android:icon="@drawable/ic_sign_out"
                 />
 
         </menu>

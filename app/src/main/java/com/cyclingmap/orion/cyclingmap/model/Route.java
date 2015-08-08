@@ -4,13 +4,14 @@ package com.cyclingmap.orion.cyclingmap.model;/*
  * and open the template in the editor.
  */
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
 
 /**
  * @author Daniel
  */
-public class Route {
+public class Route implements Serializable{
     private int idRoute;
     private double distance;
     private Time timeToFin; //Tiempo de duracion

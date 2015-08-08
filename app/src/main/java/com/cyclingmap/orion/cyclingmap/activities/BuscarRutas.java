@@ -39,6 +39,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.cyclingmap.orion.cyclingmap.data.LocationAddress;
@@ -51,9 +52,6 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
     Button btnRutasBusca;
     TextView txtDistance;
     RadioButton radioButton;
-
-    ListView lRoutes_Search;
-    UserRoutesAdapter routesAdapter;
 
     int diffLevel = 0;
     String town = "";
@@ -78,13 +76,6 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
         adapterNi.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_level.setAdapter(adapterNi);
 
-        //  lRoutes_Search = (ListView) findViewById(R.id.list);
-        //  routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), BuscarRutas.this);
-        //  lRoutes_Search.setAdapter(routesAdapter); // Error
-
-        // province = LocationAddress.getProvinceByName("San Jose");
-        //LocationManager.GPS_PROVIDER;
-
         btnRutasBusca = (Button) findViewById(R.id.btnRutas_Buscar);
         btnRutasBusca.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +92,7 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
         lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         final LatLng[] coords = new LatLng[2];
 
-        coords[0] = new LatLng(lc.getLatitude(),lc.getLongitude()); //Error
+        coords[0] = new LatLng(lc.getLatitude(),lc.getLongitude());
         LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
 
         diffLevel = difficultyLevel(spinner_level.getSelectedItem().toString());
@@ -136,7 +127,7 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.setMessage("Cargando...");
+            dialog.setMessage(getString(R.string.loading_dialog));
             dialog.show();
         }
 
@@ -177,19 +168,12 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
 
         @Override
         protected void onPostExecute(ArrayList route) {
-
-            //   lRoutes_Search = (ListView) findViewById(R.id.list);
-            // routesAdapter = new UserRoutesAdapter(routes, getApplicationContext());
-            // lRoutes_Search.setAdapter(routesAdapter);
-            // dialog.dismiss();
-
             Intent i = new Intent(getApplicationContext(), FindedRoutes.class);
-            i.putExtra("finded_routes", routes );
-
-            Toast.makeText(getApplicationContext(), "Cantidad rutas = " + routes.size(), Toast.LENGTH_LONG).show();
-
+            Bundle b = new Bundle();
+            b.putSerializable("finded_routes",routes);
+            i.putExtra("b_finded", b);
             startActivity(i);
-
+            Toast.makeText(getApplicationContext(), "Cantidad rutas = " + routes.size(), Toast.LENGTH_LONG).show();
             dialog.dismiss();
         }
     }
@@ -219,7 +203,7 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
             case "Intermediate":
                 level = 2;
                 break;
-            case "Advance":
+            case "Advanced":
                 level = 3;
                 break;
         }

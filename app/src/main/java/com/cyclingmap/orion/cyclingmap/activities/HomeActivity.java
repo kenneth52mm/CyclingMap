@@ -164,7 +164,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                                 return true;
 
                             // Cerrar sesion
-                            case R.id.item_close_session:
+                            case R.id.item_navigation_drawer_help_and_feedback:
                                 menuItem.setChecked(true);
                                 AccessToken accessToken = AccessToken.getCurrentAccessToken();
                                 if (dbHelper.isLogged()) {
