@@ -24,6 +24,8 @@ public class FindedRoutes extends ActionBarActivity {
     List<String> listDataHeader;
     ArrayList<Route> findeRoutes;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +55,9 @@ public class FindedRoutes extends ActionBarActivity {
 
             for (int i = 0;  i <= findeRoutes.size()-1; i++) {
                 List<String> items = new ArrayList<String>();
-                items.add("Distancia " + findeRoutes.get(i).getDistance());
-                items.add("Velocidad media " + findeRoutes.get(i).getAvgSpeed());
-                items.add("Nivel " + findeRoutes.get(i).getDifficultyLevel());
+                items.add( getString(R.string.find_dist) + findeRoutes.get(i).getDistance());
+                items.add( getString(R.string.find_speed) + findeRoutes.get(i).getAvgSpeed());
+                items.add(getString(R.string.find_level) + findeRoutes.get(i).getDifficultyLevel());
                 listWithSubitem.put(listDataHeader.get(i), items);
             }
         }

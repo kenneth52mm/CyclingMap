@@ -151,6 +151,9 @@
     <!-- End -->
     <!-- Finded Routes -->
     <string name="find_route_title">Finded Routes</string>
+    <string name="find_dist">Distance</string>
+    <string name="find_speed">Speed</string>
+    <string name="find_level">Level</string>
     <!-- End -->
 
     <!-- Detalles ruta -->
