@@ -183,7 +183,7 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
             // lRoutes_Search.setAdapter(routesAdapter);
             // dialog.dismiss();
 
-            Intent i = new Intent(getApplicationContext(), UserRoutes.class);
+            Intent i = new Intent(getApplicationContext(), FindedRoutes.class);
             i.putExtra("finded_routes", routes );
 
             Toast.makeText(getApplicationContext(), "Cantidad rutas = " + routes.size(), Toast.LENGTH_LONG).show();

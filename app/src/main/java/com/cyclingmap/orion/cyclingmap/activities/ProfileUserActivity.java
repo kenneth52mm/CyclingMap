@@ -58,11 +58,12 @@ public class ProfileUserActivity extends AppCompatActivity {
         heightProfile = (TextView) findViewById(R.id.txtHeight);
         weightProfile = (TextView) findViewById(R.id.txtWeight);
 
-      //  User u = new User();
-      //  int idUser = u.getId();
+
         userProfileDetails userInfo = new userProfileDetails();
         userInfo.execute(1);
     }
+
+
 
     class userProfileDetails extends AsyncTask<Integer, String, String>{
 

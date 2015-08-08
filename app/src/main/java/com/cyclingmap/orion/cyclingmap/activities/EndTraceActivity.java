@@ -44,8 +44,12 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class EndTraceActivity extends FragmentActivity implements LocationListener {
 
@@ -67,6 +71,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     private double distance;
     private long duration;
     private double speed;
+    private final SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +102,17 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         distance = bundle.getDouble("Distance");
         duration = bundle.getLong("Duration");
         speed = bundle.getDouble("Speed");
+        String time = String.valueOf(duration);
         txtdistancefinal.setText(distance + "Km");
-        txtDuration.setText(duration + " Min");
+
+
+
+        String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
+                TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
+                TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
+
+
+        txtDuration.setText(hms + " Min");
         txtSpeedAvg.setText(speed + "Km/h");
 
         LatLng current = (LatLng) routeCoords.get(0);
