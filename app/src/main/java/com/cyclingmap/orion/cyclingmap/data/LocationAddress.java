@@ -32,7 +32,7 @@ public class LocationAddress {
                 Geocoder geocoder = new Geocoder(context, Locale.getDefault());
                 ArrayList<Town> towns = new ArrayList<>();
                 try {
-                    for (int j = 0; j < coords.length; j++) {
+                    for (int j = 0; j <1; j++) {
                         double latitude = coords[j].latitude;
                         double longitude = coords[j].longitude;
                         List<Address> addressList = geocoder.getFromLocation(
@@ -48,7 +48,7 @@ public class LocationAddress {
                             // Log.i("Canton ",townName);
                             // if (!province.getTownList().contains(townName))
                             Province p = null;
-                            if (provinces.size() != 0) {
+                            if (provinces.size()> 0) {
                                 p = getProvinceByName(provinceName);
                                 Log.i("Nombre",p.getNameProvince());
                                 if (!provinceHasTown(townName,p.getNameProvince()))

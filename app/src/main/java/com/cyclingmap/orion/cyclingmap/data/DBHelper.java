@@ -79,7 +79,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void addUser(User user) {
         ContentValues values = new ContentValues();
-        values.put("id_user", user.getId());
+       // values.put("id_user", user.getId());
         values.put("name", user.getName());
         values.put("email", user.getEmail());
         if (user.getPassword() != null)

@@ -12,9 +12,11 @@ import android.view.Window;
 
 import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
+import com.cyclingmap.orion.cyclingmap.model.User;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -41,9 +43,10 @@ public class SplashScreenActivity extends Activity implements GoogleApiClient.Co
             @Override
             public void run() {
                 Intent mainIntent = null;
-                if (mGoogleApiClient.isConnected()||dbHelper.isLogged()) {
+                if (mGoogleApiClient.isConnected() || dbHelper.isLogged()) {
                     mainIntent = new Intent().setClass(
                             SplashScreenActivity.this, HomeActivity.class);
+                    getProfileInformation();
                 } else {
                     mainIntent = new Intent().setClass(
 
@@ -59,6 +62,23 @@ public class SplashScreenActivity extends Activity implements GoogleApiClient.Co
         Timer timer = new Timer();
         timer.schedule(task, SPLASH_SCREEN_DELAY);
 
+    }
+
+    private void getProfileInformation() {
+        try {
+            if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null && mGoogleApiClient.isConnected()) {
+                Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+
+                String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
+                User u = new User();
+                u.setId(13);
+                u.setEmail(email);
+                u.setName(currentPerson.getDisplayName());
+                dbHelper.addUser(u);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     protected void onStart() {

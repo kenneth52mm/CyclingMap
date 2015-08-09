@@ -167,22 +167,21 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                             // Cerrar sesion
                             case R.id.item_navigation_drawer_help_and_feedback:
                                 menuItem.setChecked(true);
-                                AccessToken accessToken = AccessToken.getCurrentAccessToken();
-                                if (dbHelper.isLogged()) {
-                                    dbHelper.loggout();
-                                    finish();
-                                } else if (accessToken != null) {
-                                    LoginManager.getInstance().logOut();
-                                    finish();
-                                } else {
+//                                AccessToken accessToken = AccessToken.getCurrentAccessToken();
+//                                if (dbHelper.isLogged()) {
+//                                    dbHelper.loggout();
+//                                    finish();
+//                                } else if (accessToken != null) {
+//                                    LoginManager.getInstance().logOut();
+//                                    finish();
+//                                } else {
                                     mGoogleApiClient.disconnect();
                                     if (!mGoogleApiClient.isConnected())
                                         finish();
-                                }
+                                //}
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-                        }
-                        return true;
+                        }return true;
                     }
                 });
     }

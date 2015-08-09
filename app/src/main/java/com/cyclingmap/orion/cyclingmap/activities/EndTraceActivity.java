@@ -139,17 +139,18 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     public void sendData(View v) {
         route = new Route();
         route.setDistance(distance);
-        route.setTimeToFin(Time.valueOf(String.valueOf(duration)));
+        //route.setTimeToFin(Time.valueOf(String.valueOf(duration)));
+        route.setTimeToFin(new Time(duration));
         route.setAvgSpeed(speed);
         /*Difficulty level*/
         route.setProvinces(routeProvinces);
         route.setCoordinateList(routeCoords);
-        dbHelper.addRoute(route);
+        //dbHelper.addRoute(route);
         RouteWsHelper helper = new RouteWsHelper();
         Object[] obj = new Object[2];
         obj[0] = route;
         obj[1] = id_user;
-        helper.execute(obj);
+       // helper.execute(obj);
     }
 
 
