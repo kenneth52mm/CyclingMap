@@ -278,6 +278,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                     }
                     route.setCoordinateList(coordinates);
                     route.setTimeToFin(Time.valueOf(jsonObject.getString("TimeToFin")));
+                    route.setDifficultyLevel(String.valueOf(jsonObject.getInt("DifficultyLevel")));
                     routes.add(route);
                 }
             } catch (Exception ex) {
