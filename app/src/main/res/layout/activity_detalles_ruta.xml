@@ -217,6 +217,7 @@
         android:background="@color/greenLight"
         android:text="@string/btn_ruta_detalle"
         android:textColor="#ffffffff"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:onClick="beginRoute" />
 
 </RelativeLayout>
