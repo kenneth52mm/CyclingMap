@@ -32,7 +32,6 @@ import java.util.ArrayList;
 public class ProfileUserActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-
     private TextView userProfile;
     private TextView emailProfile;
     private TextView heightProfile;
@@ -61,63 +60,22 @@ public class ProfileUserActivity extends AppCompatActivity {
         weightProfile = (TextView) findViewById(R.id.txtWeight);
 
 
-        userProfileDetails userInfo = new userProfileDetails();
-        userInfo.execute(1);
+        Bundle bundle = getIntent().getExtras();
+        String uName = bundle.getString("username");
+        String uEmail = bundle.getString("email");
+        String uHeight = bundle.getString("height");
+        String uWeight = bundle.getString("weight");
+
+        userProfile.setText(uName);
+        emailProfile.setText(uEmail);
+        heightProfile.setText(uHeight);
+        weightProfile.setText(uWeight);
+        // userProfileDetails userInfo = new userProfileDetails();
+        // userInfo.execute(1);
     }
 
     public void profileConfig(View v){
         Intent intent = new Intent(ProfileUserActivity.this, UserFeatures.class);
         startActivity(intent);
     }
-
-
-
-    class userProfileDetails extends AsyncTask<Integer, String, String>{
-
-        String username;
-        String email;
-        String height;
-        String weight;
-
-        private final ProgressDialog dialog = new ProgressDialog(ProfileUserActivity.this);
-
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-            dialog.setMessage(getString(R.string.loading_dialog));
-            dialog.show();
-        }
-
-        @Override
-        protected String doInBackground(Integer... params) {
-            HttpClient client = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet("http://localhost:31408/Api/profile/" + params[0]);
-            httpGet.setHeader("content-type", "application/json");
-            try
-            {
-                HttpResponse response = client.execute(httpGet);
-                JSONArray jsonArray = new JSONArray(EntityUtils.toString(response.getEntity()));
-                username = jsonArray.getString(0);
-                email = jsonArray.getString(1);
-                height = jsonArray.getString(2);
-                weight = jsonArray.getString(3);
-            }
-            catch (Exception ex)
-            {
-                Log.i("Error", "" + ex);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            userProfile.setText(username);
-            emailProfile.setText(email);
-            heightProfile.setText(height);
-            weightProfile.setText(weight);
-            dialog.dismiss();
-        }
-    }
-
 }

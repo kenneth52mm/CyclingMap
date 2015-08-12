@@ -236,6 +236,7 @@
         android:layout_alignParentStart="true"
         android:background="@color/greenLight"
         android:text="@string/user_features_btnsave"
+        android:onClick="saveInfo"
         android:textColor="#ffffff"
         android:textStyle="bold" />
 
