@@ -157,9 +157,9 @@
     <!-- End -->
 
     <!-- Detalles ruta -->
-    <string name="name_det_r">Name</string>
+    <string name="place_route">Place</string>
     <string name="distance_det_r">Distance</string>
-    <string name="speed_det_r">Speed</string>
+    <string name="duration_det">Duration</string>
     <string name="level_det_r">Level</string>
     <!-- End -->
 
@@ -174,5 +174,6 @@
     <!-- Facebook message -->
     <string name="fb_cancel">Attempt canceled</string>
     <string name="fb_error">Failed attempt</string>
+    <string name="title_activity_trace_route">TraceRouteActivity</string>
     <!-- end -->
 </resources>

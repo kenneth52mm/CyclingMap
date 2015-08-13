@@ -63,6 +63,12 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     private DBHelper dbHelper;
     private BadgeDrawable badge;
 
+
+    private String userProfile;
+    private String emailProfile;
+    private String heightProfile;
+    private String weightProfile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,10 +93,12 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         userStats.execute(13);
         UserChallengesHelper challengesHelper = new UserChallengesHelper();
         challengesHelper.execute(13);
+        userProfileDetails userDetails = new userProfileDetails();
+        userDetails.execute(1);
     }
 
     public void newRoute(View v) {
-        Intent i = new Intent(HomeActivity.this, RutasActivity.class);
+        Intent i = new Intent(HomeActivity.this, TraceRouteActivity.class);
         startActivity(i);
     }
 
@@ -143,6 +151,11 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 Intent intent1 = new Intent(HomeActivity.this, ProfileUserActivity.class);
+                                intent1.putExtra("username", userProfile);
+                                intent1.putExtra("email", emailProfile);
+                                intent1.putExtra("height", heightProfile);
+                                intent1.putExtra("weight", weightProfile);
+                                startActivity(intent1);
                                 startActivity(intent1);
                                 return true;
 
@@ -178,6 +191,8 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                                     mGoogleApiClient.disconnect();
                                     if (!mGoogleApiClient.isConnected())
                                         finish();
+                                Intent i = new Intent(HomeActivity.this, LogActivity.class);
+                                startActivity(i);
                                 //}
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
@@ -299,4 +314,58 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
             dialog.dismiss();
         }
     }
+
+    class userProfileDetails extends AsyncTask<Integer, String, String>{
+        String username;
+        String email;
+        String height;
+        String weight;
+
+        private final ProgressDialog dialog = new ProgressDialog(HomeActivity.this);
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            dialog.setMessage(getString(R.string.loading_dialog));
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Integer... params) {
+            HttpClient client = new DefaultHttpClient();
+          //  HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/profile/" + params[0]);
+            HttpGet httpGet = new HttpGet("http://localhost:31408/Api/user/profile/" + params[0]);
+            httpGet.setHeader("content-type", "application/json");
+            Log.i("Load", "Load Profile");
+            try
+            {
+                HttpResponse response = client.execute(httpGet);
+                JSONArray jsonArray = new JSONArray(EntityUtils.toString(response.getEntity()));
+                username = jsonArray.getString(0);
+                email = jsonArray.getString(1);
+                height = jsonArray.getString(2);
+                weight = jsonArray.getString(3);
+            }
+            catch (Exception ex)
+            {
+                Log.i("Error", "" + ex);
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            userProfile = username;
+            emailProfile =  email ;
+            heightProfile = height;
+            weightProfile = weight;
+
+          //  userProfile= "Daniel";
+          //  emailProfile=  "danicormu@gmail.com"  ;
+          //  heightProfile= "1.75";
+          //  weightProfile= "74" ;
+            dialog.dismiss();
+        }
+    }
+
 }

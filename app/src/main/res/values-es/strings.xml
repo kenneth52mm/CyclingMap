@@ -157,9 +157,9 @@
     <!-- End -->
 
     <!-- Detalles ruta -->
-    <string name="name_det_r">Nombre</string>
+    <string name="place_route">Lugar</string>
     <string name="distance_det_r">Distancia</string>
-    <string name="speed_det_r">Velocidad</string>
+    <string name="Duration_det">Velocidad</string>
     <string name="level_det_r">Nivel</string>
     <!-- End -->
 

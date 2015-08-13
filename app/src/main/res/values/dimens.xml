@@ -9,4 +9,18 @@
     <dimen name="small_margin">8dp</dimen>
     <dimen name="lbl_text_size">18dp</dimen>
     <dimen name="badge_text_size">10sp</dimen>
+
+    <!-- Detalles ruta Land and Port -->
+    <dimen name="table_layout_height">100dp</dimen>
+    <dimen name="table_first_top">60dp</dimen>
+    <dimen name="layout_height">50dp</dimen>
+    <dimen name="imageview_bottom">5dp</dimen>
+    <dimen name="img_titles_margin_left">15dp</dimen>
+    <dimen name="data_text_bottom">10dp</dimen>
+    <dimen name="data_text_left">10dp</dimen>
+    <dimen name="text_top_det">15dp</dimen>
+    <dimen name="text_bottom_det">10dp</dimen>
+    <dimen name="table_top">5dp</dimen>
+    <dimen name="table_bottom">10dp</dimen>
+    <!-- end -->
 </resources>

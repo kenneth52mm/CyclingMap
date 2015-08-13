@@ -133,6 +133,7 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
     public void onProviderDisabled(String provider) {
     }
 
+
     class SearhByCriteriaWSHelper extends AsyncTask<String, ArrayList, ArrayList> {
         private final ProgressDialog dialog = new ProgressDialog(BuscarRutas.this);
 
