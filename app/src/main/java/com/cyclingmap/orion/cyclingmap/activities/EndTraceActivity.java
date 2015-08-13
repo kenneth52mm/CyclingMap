@@ -149,8 +149,8 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         RouteWsHelper helper = new RouteWsHelper();
         Object[] obj = new Object[2];
         obj[0] = route;
-        obj[1] = id_user;
-       // helper.execute(obj);
+        obj[1] = 13;
+        helper.execute(obj);
     }
 
 
@@ -227,7 +227,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
                     coords.put(coord);
                 }
                 object.put("coordinateList", coords);
-                object.put("id_user", params[0]);
+                object.put("id_user", params[1]);
 
                 StringEntity entity = new StringEntity(object.toString());
                 post.setEntity(entity);

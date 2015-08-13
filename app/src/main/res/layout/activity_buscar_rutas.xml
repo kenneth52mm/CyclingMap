@@ -81,7 +81,7 @@
                 <EditText
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:ems="10"
                     android:id="@+id/txt_distance_search"
                     android:layout_weight="1"
