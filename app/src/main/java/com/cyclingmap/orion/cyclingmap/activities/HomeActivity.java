@@ -98,7 +98,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     public void newRoute(View v) {
-        Intent i = new Intent(HomeActivity.this, RutasActivity.class);
+        Intent i = new Intent(HomeActivity.this, TraceRouteActivity.class);
         startActivity(i);
     }
 

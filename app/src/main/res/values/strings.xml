@@ -174,5 +174,6 @@
     <!-- Facebook message -->
     <string name="fb_cancel">Attempt canceled</string>
     <string name="fb_error">Failed attempt</string>
+    <string name="title_activity_trace_route">TraceRouteActivity</string>
     <!-- end -->
 </resources>

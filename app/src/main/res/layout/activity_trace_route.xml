@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/windowBackground"
+    >
+
+    <fragment
+        android:id="@+id/mapTrace"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="230dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp" />
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/mapTrace"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp">
+        <Chronometer
+            android:id="@+id/chronometerTrace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|fill"
+            android:textIsSelectable="true"
+            android:textSize="50sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/r2"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@+id/r1"
+        android:layout_alignLeft="@+id/mapTrace"
+        android:layout_alignStart="@+id/mapTrace">
+
+        <TextView
+            android:id="@+id/txt_dist_trace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="30sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/textView12"
+            android:layout_alignStart="@+id/textView12" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/distance_Total"
+            android:id="@+id/textView12"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="45dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/speed_avg"
+            android:id="@+id/textView13"
+            android:layout_marginRight="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/txt_speed_trace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="0.0"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="30sp"
+            android:layout_above="@+id/textView13"
+            android:layout_alignRight="@+id/textView13"
+            android:layout_alignEnd="@+id/textView13" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/r3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/mapExistRoute"
+        android:layout_alignEnd="@+id/mapExistRoute">
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_stop"
+            android:background="@drawable/circle"
+            android:id="@+id/BtnStop"
+            android:layout_gravity="right|bottom"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/btnPlayER"
+            android:layout_toStartOf="@+id/btnPlayER"
+            android:layout_marginTop="10dp"
+            android:onClick="stopTrace" />
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_go_end"
+            android:background="@drawable/circle"
+            android:id="@+id/imageSee"
+            android:onClick="seeRoute"
+            android:layout_gravity="right|bottom"
+            android:layout_alignTop="@+id/BtnStop"
+            android:layout_toRightOf="@+id/btnPlayER"
+            android:layout_toEndOf="@+id/btnPlayER"
+            android:layout_marginTop="10dp" />
+
+        <at.markushi.ui.CircleButton
+            android:id="@+id/btnPlayER"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_play"
+            app:cb_color="#00994C"
+            app:cb_pressedRingWidth="8dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
