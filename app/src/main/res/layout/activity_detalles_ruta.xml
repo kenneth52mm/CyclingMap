@@ -29,7 +29,7 @@
         android:id="@+id/mapDetalle"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="fill_parent"
-        android:layout_height="230dp"
+        android:layout_height="@dimen/height_map"
         android:layout_gravity="center"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
@@ -60,14 +60,14 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="@dimen/img_titles_margin_left"
             android:text="@string/place_route"
-            android:textSize="18dp"
+            android:textSize="@dimen/text_size"
             android:layout_marginTop="@dimen/text_top_det" />
 
         <TextView
             android:id="@+id/TxtProvince"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="@dimen/text_size"
             android:layout_marginTop="@dimen/text_top_det"
             android:layout_marginLeft="@dimen/data_text_left" />
 
@@ -75,7 +75,7 @@
             android:id="@+id/TxtTown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="@dimen/text_size"
             android:layout_marginTop="@dimen/text_top_det"
             android:layout_marginLeft="@dimen/data_text_left" />
     </LinearLayout>
@@ -111,14 +111,14 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="@dimen/img_titles_margin_left"
             android:text="@string/distance_det_r"
-            android:textSize="18dp"
+            android:textSize="@dimen/text_size"
             android:layout_marginTop="@dimen/text_top_det" />
 
         <TextView
             android:id="@+id/TxtDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="@dimen/text_size"
             android:layout_marginTop="@dimen/text_top_det"
             android:layout_marginLeft="@dimen/data_text_left" />
     </LinearLayout>
@@ -154,14 +154,14 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="@dimen/img_titles_margin_left"
             android:text="@string/duration_det"
-            android:textSize="18dp"
+            android:textSize="@dimen/text_size"
             android:layout_marginTop="@dimen/text_top_det" />
 
         <TextView
             android:id="@+id/TxtDurationDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="@dimen/text_size"
             android:layout_marginTop="@dimen/text_top_det"
             android:layout_marginLeft="@dimen/data_text_left" />
     </LinearLayout>
@@ -195,14 +195,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/img_titles_margin_left"
             android:text="@string/level_det_r"
-            android:textSize="18dp"
+            android:textSize="@dimen/text_size"
             android:layout_marginTop="@dimen/text_top_det" />
 
         <TextView
             android:id="@+id/TxtNivelRoad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="@dimen/text_size"
             android:layout_marginTop="@dimen/text_top_det"
             android:layout_marginLeft="@dimen/data_text_left" />
     </LinearLayout>
@@ -214,10 +214,12 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="false"
         android:layout_alignParentRight="false"
-        android:background="@color/greenLight"
+        android:background="@color/greenDark"
         android:text="@string/btn_ruta_detalle"
         android:textColor="#ffffffff"
         android:textStyle="bold"
-        android:onClick="beginRoute" />
+        android:onClick="beginRoute"
+        android:layout_marginRight="@dimen/button_padding"
+        android:layout_marginLeft="@dimen/button_padding" />
 
 </RelativeLayout>

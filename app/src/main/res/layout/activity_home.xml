@@ -15,8 +15,8 @@
         <RelativeLayout
             android:id="@+id/l1"
             android:layout_width="fill_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="90dp"
+            android:layout_height="@dimen/height_layout"
+            android:layout_marginTop="@dimen/top_first_home"
             android:gravity="left"
             android:background="@drawable/l_layout"
             android:orientation="horizontal">
@@ -25,7 +25,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="@dimen/imagev_home_left"
                 android:src="@mipmap/ic_km_trace"
                 android:layout_marginTop="10dp" />
 
@@ -42,7 +42,7 @@
                 android:layout_toRightOf="@+id/imageView"
                 android:layout_toEndOf="@+id/imageView"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="@dimen/text_margin_left" />
 
             <TextView
                 android:id="@+id/dist"
@@ -64,11 +64,11 @@
         <RelativeLayout
             android:id="@+id/l2"
             android:layout_width="fill_parent"
-            android:layout_height="70dp"
+            android:layout_height="@dimen/height_layout"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/l1"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/top_layout_home"
             android:background="@drawable/l_layout"
             android:orientation="horizontal">
 
@@ -76,7 +76,7 @@
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="@dimen/imagev_home_left"
                 android:src="@mipmap/ic_speed_avg"
                 android:layout_marginTop="10dp" />
 
@@ -92,7 +92,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/imageView2"
                 android:layout_toEndOf="@+id/imageView2"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="@dimen/text_margin_left"
                 android:layout_marginTop="10dp"
                 android:id="@+id/textView" />
 
@@ -113,12 +113,12 @@
         <RelativeLayout
             android:id="@+id/l3"
             android:layout_width="fill_parent"
-            android:layout_height="70dp"
+            android:layout_height="@dimen/height_layout"
             android:layout_below="@+id/l2"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:background="@drawable/l_layout"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/top_layout_home"
             android:orientation="horizontal"
             android:weightSum="1"
             android:layout_gravity="right|center_vertical">
@@ -127,7 +127,7 @@
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="@dimen/imagev_home_left"
                 android:src="@mipmap/ic_total_routes" />
 
 
@@ -142,7 +142,7 @@
                 android:layout_toRightOf="@+id/imageView4"
                 android:layout_toEndOf="@+id/imageView4"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="@dimen/text_margin_left"
                 android:id="@+id/textView11" />
 
             <TextView
@@ -162,7 +162,7 @@
         <RelativeLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="@dimen/bottom_menu_height"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"

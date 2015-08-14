@@ -1,2 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="image_size">120dp</dimen>
+    <dimen name="tiny_margin">4dp</dimen>
+    <dimen name="standard_margin">16dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="lbl_text_size">18dp</dimen>
+    <dimen name="badge_text_size">10sp</dimen>
+
+    <!-- Detalles ruta Land and Port and portrait Screens -->
+    <dimen name="height_map">210dp</dimen>
+    <dimen name="table_layout_height">100dp</dimen>
+    <dimen name="table_first_top">60dp</dimen>
+    <dimen name="layout_height">50dp</dimen>
+    <dimen name="imageview_bottom">5dp</dimen>
+    <dimen name="img_titles_margin_left">15dp</dimen>
+    <dimen name="data_text_bottom">10dp</dimen>
+    <dimen name="data_text_left">10dp</dimen>
+    <dimen name="text_top_det">15dp</dimen>
+    <dimen name="text_bottom_det">10dp</dimen>
+    <dimen name="table_top">5dp</dimen>
+    <dimen name="table_bottom">10dp</dimen>
+    <dimen name="button_padding">5dp</dimen>
+    <dimen name="text_size">18dp</dimen>
+    <!-- end -->
+    <!-- Login and Register dimens -->
+    <dimen name="top_margin_log">130dp</dimen>
+    <dimen name="top_margin_textview_log">15dp</dimen>
+    <dimen name="bottom_view_log">10dp</dimen>
+    <!-- end -->
+    <!-- buscar routes -->
+    <dimen name="top_buscar">130dp</dimen>
+    <dimen name="check_top">30dp</dimen>
+    <dimen name="imgview_margin_left">18dp</dimen>
+    <dimen name="textview_margin_left">15dp</dimen>
+    <dimen name="spiner_margin_left">50dp</dimen>
+    <dimen name="edittext_margin_left">20dp</dimen>
+    <dimen name="checkbox_margin_left">22dp</dimen>
+    <dimen name="top_layout_search">20dp</dimen>
+    <dimen name="bottom_layout_one">10dp</dimen>
+    <dimen name="text_size_search">15dp</dimen>
+    <!-- end -->
+
+    <!-- Exisiting route -->
+    <dimen name="layout_top_ex">15dp</dimen>
+    <dimen name="layout_height_ch">90dp</dimen>
+    <dimen name="layout_height_ex">60dp</dimen>
+    <dimen name="bottom_layout">5dp</dimen>
+    <dimen name="little_button">60dp</dimen>
+    <dimen name="big_button">100dip</dimen>
+    <dimen name="button_bottom">10dp</dimen>
+    <dimen name="size_chrono">50sp</dimen>
+    <dimen name="size_dis_sp">30sp</dimen>
+    <dimen name="size_text">15dp</dimen>
+    <!-- End -->
+    <!-- Home Activity -->
+    <dimen name="top_first_home">100dp</dimen>
+    <dimen name="top_layout_home">15dp</dimen>
+    <dimen name="height_layout">67dp</dimen>
+    <dimen name="imagev_home_left">20dp</dimen>
+    <dimen name="imagev_home_top">10dp</dimen>
+    <dimen name="bottom_menu_height">85dp</dimen>
+    <dimen name="text_margin_left">15dp</dimen>
+    <!-- end -->
+
+</resources>

@@ -120,7 +120,7 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
     public void seeRoute(View v) {
         polylineOptions.addAll(route);
         polylineOptions.width(12);
-        polylineOptions.color(Color.RED);
+        polylineOptions.color(Color.BLUE);
         map.addPolyline(polylineOptions);
 
         double distance_trace = getTotalDistance() / 1000; // km

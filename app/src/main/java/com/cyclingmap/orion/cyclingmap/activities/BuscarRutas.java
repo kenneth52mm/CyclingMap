@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -53,7 +54,8 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
     Spinner spinner_level;
     Button btnRutasBusca;
     TextView txtDistance;
-    RadioButton radioButton;
+  //  RadioButton radioButton;
+    CheckBox checkBox;
 
     int diffLevel = 0;
     String town = "";
@@ -73,7 +75,8 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtDistance = (EditText) findViewById(R.id.txt_distance_search);
 
-        radioButton = (RadioButton) findViewById(R.id.check_near);
+        checkBox = (CheckBox) findViewById(R.id.check_nearest);
+       // radioButton = (RadioButton) findViewById(R.id.check_near);
 
         spinner_level = (Spinner) findViewById(R.id.spinnerLevel);
         String[] arraNivel = {getString(R.string.beginner_level), getString(R.string.intermediate_level), getString(R.string.advanced_level)};
@@ -94,7 +97,7 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (radioButton.isChecked()) {
+        if (checkBox.isChecked()) {
             final LatLng[] coords = new LatLng[2];
 
             coords[0] = new LatLng(lc.getLatitude(), lc.getLongitude());

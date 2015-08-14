@@ -1,2 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <!-- Detalles ruta Land and Port and portrait Screens -->
+    <dimen name="height_map">350dp</dimen>
+    <dimen name="table_layout_height">100dp</dimen>
+    <dimen name="table_first_top">70dp</dimen>
+    <dimen name="layout_height">60dp</dimen>
+    <dimen name="imageview_bottom">5dp</dimen>
+    <dimen name="img_titles_margin_left">15dp</dimen>
+    <dimen name="data_text_bottom">10dp</dimen>
+    <dimen name="data_text_left">10dp</dimen>
+    <dimen name="text_top_det">15dp</dimen>
+    <dimen name="text_bottom_det">10dp</dimen>
+    <dimen name="table_top">20dp</dimen>
+    <dimen name="table_bottom">15dp</dimen>
+    <dimen name="button_padding">10dp</dimen>
+    <dimen name="text_size">21dp</dimen>
+    <!-- end -->
+
+    <!-- Login and Register dimens -->
+    <dimen name="top_margin_log">250dp</dimen>
+    <dimen name="top_margin_textview_log">15dp</dimen>
+    <dimen name="bottom_view_log">10dp</dimen>
+    <!-- end -->
+    <!-- buscar routes -->
+    <dimen name="top_buscar">230dp</dimen>
+    <dimen name="check_top">40dp</dimen>
+    <dimen name="imgview_margin_left">30dp</dimen>
+    <dimen name="textview_margin_left">28dp</dimen>
+    <dimen name="spiner_margin_left">60dp</dimen>
+    <dimen name="edittext_margin_left">30dp</dimen>
+    <dimen name="checkbox_margin_left">32dp</dimen>
+    <dimen name="top_layout_search">30dp</dimen>
+    <dimen name="bottom_layout_one">25dp</dimen>
+    <dimen name="text_size_search">28dp</dimen>
+    <!-- end -->
+    <!-- Exisiting route -->
+    <dimen name="layout_top_ex">25dp</dimen>
+    <dimen name="layout_height_ch">100dp</dimen>
+    <dimen name="layout_height_ex">65dp</dimen>
+    <dimen name="bottom_layout">15dp</dimen>
+    <dimen name="little_button">80dp</dimen>
+    <dimen name="big_button">130dip</dimen>
+    <dimen name="button_bottom">30dp</dimen>
+    <dimen name="size_chrono">65sp</dimen>
+    <dimen name="size_dis_sp">40sp</dimen>
+    <dimen name="size_text">22dp</dimen>
+    <!-- End -->
+    <!-- Home Activity -->
+    <dimen name="top_first_home">180dp</dimen>
+    <dimen name="top_layout_home">35dp</dimen>
+    <dimen name="height_layout">72dp</dimen>
+    <dimen name="imagev_home_left">35dp</dimen>
+    <dimen name="imagev_home_top">10dp</dimen>
+    <dimen name="bottom_menu_height">98dp</dimen>
+    <dimen name="text_margin_left">25dp</dimen>
+    <!-- end -->
+</resources>

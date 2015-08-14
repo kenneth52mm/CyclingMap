@@ -32,8 +32,10 @@
     <string name="login_label">Ingresar</string>
     <string name="register_label">Registrar</string>
     <string name="title_activity_register">Registrar</string>
-    <string name="register_message"><u><b><i>Regístrate en CyclingMap</i></b></u></string>
-    <string name="login_fb_text">Facebook</string>
+    <string name="register_message"><u><b><i>Regístrate</i></b></u></string>
+    <string name="input_pass">Por favor ingrese contraseña</string>
+    <string name="input_username">Por favor ingrese su nombre</string>
+    <string name="invalid_email">Correo Inválido</string>
     <!-- End -->
 
     <!-- Drawer -->
