@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -61,12 +62,15 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
     ArrayList<Route> routes = new ArrayList<>();
     private LocationManager locationManager;
     private Location lc;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_rutas);
-
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtDistance = (EditText) findViewById(R.id.txt_distance_search);
 
         radioButton = (RadioButton) findViewById(R.id.check_near);

@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.business.NetworkUtil;
 import com.cyclingmap.orion.cyclingmap.business.RouteWsHelper;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.data.LocationAddress;
@@ -78,7 +79,6 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_trace);
         String[] arrayLevel = {getString(R.string.beginner_level), getString(R.string.intermediate_level), getString(R.string.advanced_level)};
-
         txtdistancefinal = (TextView) findViewById(R.id.TxtDistTotal);
         txtDuration = (TextView) findViewById(R.id.TxtDuration);
         txtSpeedAvg = (TextView) findViewById(R.id.TxtSpeedAvg);
@@ -104,7 +104,6 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         speed = bundle.getDouble("Speed");
         String time = String.valueOf(duration);
         txtdistancefinal.setText(distance + "Km");
-
 
 
         String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
@@ -145,12 +144,19 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         /*Difficulty level*/
         route.setProvinces(routeProvinces);
         route.setCoordinateList(routeCoords);
-        //dbHelper.addRoute(route);
-        RouteWsHelper helper = new RouteWsHelper();
-        Object[] obj = new Object[2];
-        obj[0] = route;
-        obj[1] = 13;
-        helper.execute(obj);
+        int netStatus = NetworkUtil.getConnectivityState(EndTraceActivity.this);
+        switch (netStatus) {
+            case 0:
+                dbHelper.addRoute(route);
+                break;
+            case 1:
+                RouteWsHelper helper = new RouteWsHelper();
+                Object[] obj = new Object[2];
+                obj[0] = route;
+                obj[1] = 13;
+                helper.execute(obj);
+                break;
+        }
     }
 
 

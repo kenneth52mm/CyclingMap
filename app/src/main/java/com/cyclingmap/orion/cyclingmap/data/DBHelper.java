@@ -30,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
             " FOREIGN KEY(id_route) REFERENCES route(id_route),FOREIGN KEY(id_user) REFERENCES " +
             "user(id_user),PRIMARY KEY (id_route,id_user))";
     String sqlCreateChallenges = "CREATE TABLE challenge (id_challenge INTEGER PRIMARY" +
-            " KEY AUTOINCREMENT NOT NULL, distance REAL, time_to_finish NUMERIC, avg_speed REAL," +
+            " KEY NOT NULL, distance REAL, time_to_finish NUMERIC, avg_speed REAL," +
             "difficulty_level INTEGER);";
     String getSqlCreateRegions = "CREATE TABLE regions (id_route INTEGER NOT NULL, province TEXT, " +
             "town TEXT,FOREIGN KEY (id_route) REFERENCES route(id_route));";
@@ -129,7 +129,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void addChallenges(Route route) {
+        deleteChallenges();
         ContentValues values = new ContentValues();
+        values.put("id_challenge",route.getIdRoute());
         values.put("distance", route.getDistance());
         values.put("time_to_finish", route.getTimeToFin().toString());
         values.put("avg_speed", route.getAvgSpeed());
@@ -146,6 +148,10 @@ public class DBHelper extends SQLiteOpenHelper {
             }
         }
     }
+    public void deleteChallenges(){
+        String query="Delete from challenges;";
+        helper.execSQL(query);
+    }
 
 
     public void addUserFeatures(int user_id, int weigth, int heigth, String ex_level) {
@@ -158,13 +164,16 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void loggin() {
-        String query = "Update user set logged=" + 1;
-        helper.update("user", null, query, null);
+        ContentValues values=new ContentValues();
+        values.put("logged",1);
+
+        helper.update("user", values, null, null);
     }
 
     public void loggout() {
-        String query = "Update user set logged=" + 0;
-        helper.update("user", null, query, null);
+        ContentValues values=new ContentValues();
+        values.put("logged",0);
+        helper.update("user", values, null, null);
     }
 
 
