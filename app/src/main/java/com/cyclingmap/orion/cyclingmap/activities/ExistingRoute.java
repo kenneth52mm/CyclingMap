@@ -65,6 +65,7 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
     private ArrayList routeCoords;
     private Chronometer chronometerExistRoute;
     private boolean flag = true;
+    long timeRunning = 0;
 
 
 
@@ -132,8 +133,8 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
         double j = (double) hours;
         double speedavg = distance_trace / j;
 
-        double speedAvg = ((double) distance_trace / chronometerExistRoute.getBase());
-        speed = ((long) speedAvg / chronometerExistRoute.getBase());
+        double speedAvg = ((double) distance_trace / timeRunning);
+        speed = ((long) speedAvg / timeRunning);
 
         String totalDistance = distance_trace + " Km" + "";
         String timeTour = hours + " Hrs" + "";
@@ -194,7 +195,7 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
         RUNNING = false;
         chronometerExistRoute.stop();
         //Log.i("Tiempo ", "" + chrono.getBase());
-        speed = ((long) distance / chronometerExistRoute.getBase()) / 1000;
+        speed = ((long) distance / timeRunning) / 1000;
         //Log.i("Velocidad ", "" + speed);
 
         LatLng[] coords = new LatLng[1];
@@ -266,11 +267,11 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
         chronometerExistRoute.setBase(SystemClock.elapsedRealtime() - chronometerExistRoute.getBase());
     }
 
-    @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
-        chronometerExistRoute.setBase(SystemClock.elapsedRealtime() - chronometerExistRoute.getBase());
-    }
+   // @Override
+   // protected void onResumeFragments() {
+   //     super.onResumeFragments();
+   //     chronometerExistRoute.setBase(SystemClock.elapsedRealtime() - chronometerExistRoute.getBase());
+   // }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {

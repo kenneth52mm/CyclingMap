@@ -62,7 +62,7 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
     private ArrayList routeCoords;
     private boolean flag = true;
 
-    long time = 0;
+    long timeRan = 0;
 
 
 
@@ -161,12 +161,13 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
 
     public void startTrace(View v) {
         RUNNING = true;
-        chronometer.setBase(SystemClock.elapsedRealtime() + time);
+        chronometer.setBase(SystemClock.elapsedRealtime() + timeRan);
         chronometer.start();
 
 
     }
     public void pauseTrace(View v){
+        timeRan = chronometer.getBase() - SystemClock.elapsedRealtime();
         chronometer.getBase();
         chronometer.stop();
     }
@@ -239,11 +240,11 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
         }
     }
 
-    @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
-        chronometer.setBase(SystemClock.elapsedRealtime() - chronometer.getBase());
-    }
+  //  @Override
+ //   protected void onResumeFragments() {
+ //       super.onResumeFragments();
+ //       chronometer.setBase(SystemClock.elapsedRealtime() - chronometer.getBase());
+ //   }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
