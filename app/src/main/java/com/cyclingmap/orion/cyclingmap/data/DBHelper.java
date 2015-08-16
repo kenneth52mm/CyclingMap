@@ -129,7 +129,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void addChallenges(Route route) {
-        deleteChallenges();
+
         ContentValues values = new ContentValues();
         values.put("id_challenge",route.getIdRoute());
         values.put("distance", route.getDistance());
@@ -147,6 +147,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 addRegions(town, province, idRoute);
             }
         }
+//        deleteChallenges();
     }
     public void deleteChallenges(){
         String query="Delete from challenges;";

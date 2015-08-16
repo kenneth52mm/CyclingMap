@@ -29,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textSize="@dimen/text_size_et" />
 
 </RelativeLayout>

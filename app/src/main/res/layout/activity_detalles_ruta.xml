@@ -220,6 +220,7 @@
         android:textStyle="bold"
         android:onClick="beginRoute"
         android:layout_marginRight="@dimen/button_padding"
-        android:layout_marginLeft="@dimen/button_padding" />
+        android:layout_marginLeft="@dimen/button_padding"
+        android:textSize="@dimen/text_size_button_det" />
 
 </RelativeLayout>

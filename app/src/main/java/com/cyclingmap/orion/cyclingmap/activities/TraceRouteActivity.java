@@ -1,6 +1,9 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
@@ -11,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -51,20 +55,15 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
     private double distance;
     private long speed;
     private DBHelper dbHelper;
-
     // labels and chronometer
     private TextView txtDistance;
     private TextView txtSpeed;
     private Chronometer chronometer;
     private ImageView btnPlay;
     private ImageView btnStop;
-    //
     private ArrayList routeCoords;
     private boolean flag = true;
-
     long timeRan = 0;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +87,8 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
         dbHelper = new DBHelper(getApplicationContext());
         getCurrentLocation();
         buttonTest();
-
+        activateLocation();
     }
-
-
     public void seeRoute(View v){
         chronometer.stop();
         loadMap(v);
@@ -121,7 +118,6 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
         i.putExtra("Speed", speedAvg);
         startActivity(i);
     }
-
     private double getTotalDistance() {
         double totalDistance = 0.0;
         for (int i = 0; i < route.size() - 1; i++) {
@@ -137,7 +133,6 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
         }
         return totalDistance;
     }
-
     public void getCurrentLocation() {
 
         map.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
@@ -152,19 +147,10 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
             }
         });
     }
-
-    public void resetTime(){
-        chronometer.setBase(SystemClock.elapsedRealtime());
-        chronometer.stop();
-        chronometer.setText("00:00");
-    }
-
     public void startTrace(View v) {
         RUNNING = true;
         chronometer.setBase(SystemClock.elapsedRealtime() + timeRan);
         chronometer.start();
-
-
     }
     public void pauseTrace(View v){
         timeRan = chronometer.getBase() - SystemClock.elapsedRealtime();
@@ -176,14 +162,10 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
         //chrono.stop();
         // chrono.setBase(SystemClock.elapsedRealtime());
         //  timeStopped = 0;
-
-
-
         speed = ((long) distance / chronometer.getBase()) / 1000;
         LatLng[] coords = new LatLng[1];
         coords[0] = new LatLng(9.799982, -84.033366);
         LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
-
         //Muestro distancia y velocidad
         NumberFormat numFormat = NumberFormat.getInstance();
         numFormat.setMaximumFractionDigits(2);
@@ -191,7 +173,6 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
         Double distan = this.getTotalDistance() / 1000;
         txtDistance.setText(numFormat.format(distan) + "");
         txtSpeed.setText(numFormat.format(this.getTotalDistance() / (chronometer.getBase() / 3600000)) + "");
-
         loadMap(v);
     }
     public void centerMapOnMyLocation() {
@@ -200,14 +181,12 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
                 .target(current).zoom(17).bearing(90).tilt(30).build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
     }
-
     public void loadMap(View v) {
         polylineOptions.addAll(route);
         polylineOptions.width(10);
         polylineOptions.color(Color.RED);
         map.addPolyline(polylineOptions);
     }
-
     public void buttonTest() {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,9 +204,6 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
             }
         });
     }
-
-
-
     @Override
     public void onLocationChanged(Location location) {
         if (RUNNING) {
@@ -239,27 +215,37 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 5, this);
         }
     }
-
-  //  @Override
- //   protected void onResumeFragments() {
- //       super.onResumeFragments();
- //       chronometer.setBase(SystemClock.elapsedRealtime() - chronometer.getBase());
- //   }
+    public void activateLocation(){
+        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if(!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.dialog_title));
+            builder.setMessage(R.string.dialog_message);
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            });
+            Dialog alertDialog = builder.create();
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.show();
+        }
+    }
+    //  @Override
+    //   protected void onResumeFragments() {
+    //       super.onResumeFragments();
+    //       chronometer.setBase(SystemClock.elapsedRealtime() - chronometer.getBase());
+    //  }
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
+    public void onStatusChanged(String provider, int status, Bundle extras) {}
     @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
+    public void onProviderEnabled(String provider) {}
     @Override
-    public void onProviderDisabled(String provider) {
-
-    }
+    public void onProviderDisabled(String provider) {}
 
     private class GeocoderHandler extends Handler {
         @Override

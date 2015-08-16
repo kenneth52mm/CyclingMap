@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Entity;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -100,6 +101,8 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     public void newRoute(View v) {
         Intent i = new Intent(HomeActivity.this, TraceRouteActivity.class);
         startActivity(i);
+     //   Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+     //   startActivity(intent);
     }
 
     public void searchRoute(View v) {
@@ -305,7 +308,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         protected void onPostExecute(ArrayList array) {
             routes = array;
             for (Route r : routes) {
-                dbHelper.addChallenges(r);
+               dbHelper.addChallenges(r);
             }
             View target = findViewById(R.id.action_badge);
             BadgeView badge = new BadgeView(HomeActivity.this, target);

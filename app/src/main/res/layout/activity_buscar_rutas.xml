@@ -83,14 +83,15 @@
                     android:layout_marginLeft="@dimen/textview_margin_left" />
 
                 <EditText
-                    android:layout_width="80dp"
+                    android:layout_width="@dimen/textview_number"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     android:ems="10"
                     android:id="@+id/txt_distance_search"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="@dimen/edittext_margin_left" />
+                    android:layout_marginLeft="@dimen/edittext_margin_left"
+                    android:textSize="@dimen/text_size_search" />
 
             </LinearLayout>
 
@@ -168,7 +169,7 @@
 
                 <CheckBox
                     android:layout_width="wrap_content"
-                    android:layout_height="35dp"
+                    android:layout_height="wrap_content"
                     android:text="@string/near_of_me"
                     android:id="@+id/check_nearest"
                     android:layout_gravity="center_vertical"
@@ -199,7 +200,8 @@
             android:textColor="#ffffffff"
             android:textStyle="bold"
             android:layout_marginRight="@dimen/button_padding"
-            android:layout_marginLeft="@dimen/button_padding" />
+            android:layout_marginLeft="@dimen/button_padding"
+            android:textSize="@dimen/text_button_search" />
 
     </LinearLayout>
 

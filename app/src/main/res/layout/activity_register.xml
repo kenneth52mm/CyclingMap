@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     >
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="center"
         android:src="@drawable/cycling"/>
 
@@ -24,7 +24,7 @@
         <EditText
             android:id="@+id/txtEmail"
             android:layout_width="fill_parent"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/textview_height_reg"
             android:layout_column="0"
             android:layout_marginBottom="@dimen/bottom_view_log"
             android:layout_marginTop="@dimen/top_margin_log"
@@ -40,7 +40,7 @@
         <EditText
             android:id="@+id/txtuserna"
             android:layout_width="fill_parent"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/textview_height_reg"
             android:layout_column="0"
             android:layout_marginBottom="@dimen/bottom_view_log"
             android:layout_marginTop="@dimen/top_margin_textview_log"
@@ -56,7 +56,7 @@
         <EditText
             android:id="@+id/txtpass"
             android:layout_width="fill_parent"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/textview_height_reg"
             android:layout_column="0"
             android:layout_marginBottom="@dimen/bottom_view_log"
             android:layout_marginTop="@dimen/top_margin_textview_log"
@@ -74,8 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:layout_marginBottom="38dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="@dimen/button_create_top"
             android:layout_row="3"
             android:background="@color/greenDark"
             android:text="@string/create_user_label"

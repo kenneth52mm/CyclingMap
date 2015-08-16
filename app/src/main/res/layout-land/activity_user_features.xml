@@ -32,29 +32,29 @@
     <EditText
         android:id="@+id/txtFeaturesWeight"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/textview_height"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="@dimen/textview_first_top"
         android:background="#ffffffff"
         android:hint="@string/user_features_weight"
         android:inputType="number|textPersonName"
-        android:paddingLeft="10dp"
+        android:paddingLeft="@dimen/text_left_uf"
         android:textColor="#757575"
         android:textColorHint="#757575" />
 
     <EditText
         android:id="@+id/txtFeaturesHeight"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/textview_height"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/txtFeaturesWeight"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/textview_top_uf"
         android:background="#ffffffff"
         android:hint="@string/user_features_height"
         android:inputType="text|number"
-        android:paddingLeft="10dp"
+        android:paddingLeft="@dimen/text_left_uf"
         android:textColor="#757575"
         android:textColorHint="#757575" />
 
@@ -65,7 +65,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/txtFeaturesHeight"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/textview_top_uf"
         android:background="#ffffffff"
         android:orientation="horizontal"
         android:singleLine="true">
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/text_left_uf"
             android:text="@string/user_features_level"
             android:textColor="#757575"
             android:textSize="20dp" />
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:spinnerMode="dialog"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="@dimen/spin_margin_left_uf"
             android:textAlignment="center"
             android:touchscreenBlocksFocus="true" />
 
@@ -98,9 +98,12 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:background="@color/greenLight"
+        android:background="@color/greenDark"
         android:text="@string/user_features_btnsave"
         android:textColor="#ffffffff"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textSize="@dimen/button_text_size" />
 
 </RelativeLayout>
