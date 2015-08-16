@@ -3,8 +3,10 @@ package com.cyclingmap.orion.cyclingmap.data;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
 import com.cyclingmap.orion.cyclingmap.model.Province;
@@ -13,6 +15,7 @@ import com.cyclingmap.orion.cyclingmap.model.Town;
 import com.cyclingmap.orion.cyclingmap.model.User;
 
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +67,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCreateUserRoute);
         db.execSQL(sqlCreateChallenges);
         db.execSQL(getSqlCreateRegions);
+        deleteChallenges();
     }
 
     public boolean isLogged() {
@@ -79,7 +83,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void addUser(User user) {
         ContentValues values = new ContentValues();
-       // values.put("id_user", user.getId());
+        // values.put("id_user", user.getId());
         values.put("name", user.getName());
         values.put("email", user.getEmail());
         if (user.getPassword() != null)
@@ -129,27 +133,32 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void addChallenges(Route route) {
-        deleteChallenges();
-        ContentValues values = new ContentValues();
-        values.put("id_challenge",route.getIdRoute());
-        values.put("distance", route.getDistance());
-        values.put("time_to_finish", route.getTimeToFin().toString());
-        values.put("avg_speed", route.getAvgSpeed());
-        values.put("difficulty_level", route.getDifficultyLevel());
-        helper.insert("challenge", null, values);
-        int idRoute = getIdRoute();
-        if (route.getCoordinateList() != null)
-            addCoords(route.getCoordinateList(), idRoute);
-        if (route.getProvinces() != null) {
-            for (Province p : route.getProvinces()) {
-                String province = p.getNameProvince();
-                String town = p.getTownList().get(0).getNameTown();
-                addRegions(town, province, idRoute);
+
+        try {
+            ContentValues values = new ContentValues();
+            values.put("id_challenge", route.getIdRoute());
+            values.put("distance", route.getDistance());
+            values.put("time_to_finish", route.getTimeToFin().toString());
+            values.put("avg_speed", route.getAvgSpeed());
+            values.put("difficulty_level", route.getDifficultyLevel());
+            helper.insertOrThrow("challenge", null, values);
+            int idRoute = getIdRoute();
+            if (route.getCoordinateList() != null)
+                addCoords(route.getCoordinateList(), idRoute);
+            if (route.getProvinces() != null) {
+                for (Province p : route.getProvinces()) {
+                    String province = p.getNameProvince();
+                    String town = p.getTownList().get(0).getNameTown();
+                    addRegions(town, province, idRoute);
+                }
             }
+        }catch (SQLiteConstraintException ex){
+            Log.e("Sqlite", ex.getMessage());
         }
     }
-    public void deleteChallenges(){
-        String query="Delete from challenges;";
+
+    public void deleteChallenges() {
+        String query = "Delete from challenges;";
         helper.execSQL(query);
     }
 
@@ -164,15 +173,15 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void loggin() {
-        ContentValues values=new ContentValues();
-        values.put("logged",1);
+        ContentValues values = new ContentValues();
+        values.put("logged", 1);
 
         helper.update("user", values, null, null);
     }
 
     public void loggout() {
-        ContentValues values=new ContentValues();
-        values.put("logged",0);
+        ContentValues values = new ContentValues();
+        values.put("logged", 0);
         helper.update("user", values, null, null);
     }
 
