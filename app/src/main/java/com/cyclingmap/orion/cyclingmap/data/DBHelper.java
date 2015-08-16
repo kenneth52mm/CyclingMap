@@ -134,6 +134,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void addChallenges(Route route) {
 
+<<<<<<< HEAD
         try {
             ContentValues values = new ContentValues();
             values.put("id_challenge", route.getIdRoute());
@@ -151,10 +152,28 @@ public class DBHelper extends SQLiteOpenHelper {
                     String town = p.getTownList().get(0).getNameTown();
                     addRegions(town, province, idRoute);
                 }
+=======
+        ContentValues values = new ContentValues();
+        values.put("id_challenge",route.getIdRoute());
+        values.put("distance", route.getDistance());
+        values.put("time_to_finish", route.getTimeToFin().toString());
+        values.put("avg_speed", route.getAvgSpeed());
+        values.put("difficulty_level", route.getDifficultyLevel());
+        helper.insert("challenge", null, values);
+        int idRoute = getIdRoute();
+        if (route.getCoordinateList() != null)
+            addCoords(route.getCoordinateList(), idRoute);
+        if (route.getProvinces() != null) {
+            for (Province p : route.getProvinces()) {
+                String province = p.getNameProvince();
+                String town = p.getTownList().get(0).getNameTown();
+                addRegions(town, province, idRoute);
+>>>>>>> origin/master
             }
         }catch (SQLiteConstraintException ex){
             Log.e("Sqlite", ex.getMessage());
         }
+//        deleteChallenges();
     }
 
     public void deleteChallenges() {

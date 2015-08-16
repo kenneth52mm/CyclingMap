@@ -21,9 +21,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_log">LogActivity</string>
     <string name="time_trace">tiempo</string>
-
     <!-- Login and Register labels  -->
-
     <string name="user_label">Nombre de Usuario</string>
     <string name="pass_label">Clave</string>
     <string name="confirm_pass">Confirmar contraseña</string>
@@ -32,24 +30,23 @@
     <string name="login_label">Ingresar</string>
     <string name="register_label">Registrar</string>
     <string name="title_activity_register">Registrar</string>
-    <string name="register_message"><u><b><i>Regístrate en CyclingMap</i></b></u></string>
-    <string name="login_fb_text">Facebook</string>
+    <string name="register_message"><u><b><i>Regístrate</i></b></u></string>
+    <string name="input_pass">Por favor ingrese contraseña</string>
+    <string name="input_username">Por favor ingrese su nombre</string>
+    <string name="invalid_email">Correo Inválido</string>
     <!-- End -->
-
     <!-- Drawer -->
     <string name="title_activity_principal">Principal</string>
     <string name="title_principal">Principal</string>
     <string name="title_routes">Rutas</string>
     <string name="title_friends">Amigos</string>
     <string name="title_groups">Perfil</string>
-
     <string name="navigation_drawer_open">Abrir navigation drawer</string>
     <string name="navigation_drawer_close">Cerrar navigation drawer</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_user_routes">Rutas de usuario</string>
     <string name="empty_list">No hay rutas</string>
     <string name="title_activity_end_trace">Ruta Trazada</string>
-
     <string name="home_title">Principal</string>
     <string name="profile_title">Mi Perfil</string>
     <string name="route_title">Mis Rutas</string>
@@ -57,27 +54,23 @@
     <string name="others_titles">Otros</string>
     <string name="sign_out_title">Cerrar Sesión</string>
     <string name="settings_title">Ajustes</string>
-
     <!-- Final trace -->
     <string name="distance_Total">Distancia</string>
     <string name="time_Total">Duración</string>
     <string name="speed_avg">Velocidad</string>
     <string name="share_public">Pública</string>
     <string name="difficulty_l">Nivel</string>
+    <string name="saving_route">Guardar</string>
     <!-- End -->
-
     <!-- lay_Principal -->
-
     <string name="distance_user_total">Kilómetros recorridos</string>
     <string name="max_speed">Mejor velocidad</string>
     <string name="experience_level">Nivel de experiencia</string>
     <string name="total_routes">Total rutas recorridas</string>
-
     <string name="add_route">Agregar ruta</string>
     <string name="search_route">Buscar rutas</string>
     <string name="title_activity_profile_user">Perfil</string>
     <!-- end lay -->
-
     <!-- Profile -->
     <string name="name_user">Usuario</string>
     <string name="pass_user">Clave</string>
@@ -85,20 +78,17 @@
     <string name="weight_user">Peso</string>
     <string name="height_user">Altura</string>
     <string name="configuration">Configuración</string>
-
     <string name="user_features_head">Datos de Usuario</string>
     <string name="user_features_weight">Peso</string>
     <string name="user_features_height">Altura</string>
     <string name="user_features_level">Nivel</string>
     <string name="user_features_btnsave">Guardar</string>
     <!-- End -->
-
     <string name="title_activity_buscar_rutas">Buscar Rutas</string>
     <string name="btnRutas_lista_buscar">Aceptar</string>
     <string name="btn_rutas_buscar_lblboton">Buscar</string>
     <string name="title_activity_detalles_ruta">Detalles de Ruta</string>
     <string name="detalle_ruta_Encabezado">Detalles de la Ruta</string>
-
     <!-- Rutas activity -->
     <string name="rutas_activity_lbltiempo">TIEMPO (s)</string>
     <string name="ruta_activity_lbldistancia">DISTANCIA</string>
@@ -113,7 +103,7 @@
     <string name="title_activity_finded_routes">Rutas</string>
     <string name="detalles_tipocalle">Tipo de Ruta:</string>
     <string name="detalles_popu">Popularidad:</string>
-    <string name="detalles_nivel">Nivel:</string>
+    <string name="detalles_nivel">Nivel</string>
     <string name="busqueda_head">Opciones de busqueda</string>
     <string name="btn_ruta_detalle">COMENZAR</string>
     <string name="title_activity_home">Principal</string>
@@ -124,26 +114,21 @@
     <string name="detalles_distancia">Distancia</string>
     <string name="title_activity_retos">Retos</string>
     <!-- End -->
-
     <!-- Existing route -->
     <string name="distance_existing">Distancia</string>
     <string name="route_name">Ruta</string>
     <string name="route_level">Nivel</string>
     <string name="start_route">Comenzar</string>
     <!-- End -->
-
-
     <!-- Retos activity -->
     <string name="head_activity_retos">Lista de Retos</string>
     <string name="retos_tittle_activity">Lista de Retos</string>
     <!-- End -->
-
     <!-- Badge -->
     <string name="action_badge">Badge</string>
     <string name="action_badge_label">Notificacion</string>
     <string name="title_activity_existing_route">Ruta Existente</string>
     <!-- End -->
-
     <!-- Buscar Rutas -->
     <string name="beginner_level">Principiante</string>
     <string name="intermediate_level">Intermedio</string>
@@ -155,14 +140,12 @@
     <string name="find_speed">Velocidad</string>
     <string name="find_level">Nivel</string>
     <!-- End -->
-
     <!-- Detalles ruta -->
     <string name="place_route">Lugar</string>
     <string name="distance_det_r">Distancia</string>
     <string name="Duration_det">Velocidad</string>
     <string name="level_det_r">Nivel</string>
     <!-- End -->
-
     <!-- user route -->
     <string name="routes_user">Ruta</string>
     <string name="route_duration">Duración</string>
@@ -170,11 +153,12 @@
     <!-- load progress dialog -->
     <string name="loading_dialog">Cargando...</string>
     <!-- end -->
-
     <!-- Facebook message -->
     <string name="fb_cancel">Intento cancelado</string>
     <string name="fb_error">Intento fallido</string>
     <!-- end -->
-
-
+    <!-- dialog for activing GPS -->
+    <string name="dialog_title">Servicios de ubicación desactivados</string>
+    <string name="dialog_message">Por favor activar servicios de localización y GPS</string>
+    <!-- end -->
 </resources>

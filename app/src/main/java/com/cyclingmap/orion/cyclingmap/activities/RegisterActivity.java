@@ -81,19 +81,19 @@ public class RegisterActivity extends ActionBarActivity {
                         }
                         else
                         {
-                            Toast.makeText(getApplicationContext(), "Por favor ingrese contrasena",
+                            Toast.makeText(getApplicationContext(), getString(R.string.input_pass),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                     else
                     {
-                        Toast.makeText(getApplicationContext(), "Por favor ingrese nombre",
+                        Toast.makeText(getApplicationContext(), getString(R.string.input_username),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "Correo invalido",
+                    Toast.makeText(getApplicationContext(), getString(R.string.invalid_email),
                         Toast.LENGTH_SHORT).show();
                 }
             }

@@ -10,7 +10,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/home_pic">
+        android:background="@drawable/home_pic_land">
 
         <RelativeLayout
             android:id="@+id/l1"
@@ -26,8 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/imagev_home_left"
-                android:src="@mipmap/ic_km_trace"
-                android:layout_marginTop="10dp" />
+                android:src="@mipmap/ic_km_trace" />
 
             <TextView
                 android:id="@+id/title_dist"
@@ -51,11 +50,9 @@
                 android:text=""
                 android:textColor="#ff404040"
                 android:gravity="center_horizontal"
-                android:layout_below="@+id/title_dist"
-                android:layout_toRightOf="@+id/imageView"
-                android:layout_toEndOf="@+id/imageView"
+                android:layout_toRightOf="@+id/title_dist"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="15dp" />
 
 
 
@@ -77,8 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/imagev_home_left"
-                android:src="@mipmap/ic_speed_avg"
-                android:layout_marginTop="10dp" />
+                android:src="@mipmap/ic_speed_avg" />
 
 
             <TextView
@@ -102,11 +98,9 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="#FF404040"
-                android:layout_below="@+id/textView"
-                android:layout_toRightOf="@+id/imageView2"
-                android:layout_toEndOf="@+id/imageView2"
+                android:layout_toRightOf="@+id/textView"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="15dp" />
 
         </RelativeLayout>
 
@@ -151,11 +145,9 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="#FF404040"
-                android:layout_below="@+id/textView11"
-                android:layout_toRightOf="@+id/imageView4"
-                android:layout_toEndOf="@+id/imageView4"
+                android:layout_toRightOf="@+id/textView11"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="15dp" />
         </RelativeLayout>
 
 
@@ -176,7 +168,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="39dp"
+                android:layout_marginLeft="@dimen/addr_margin_left"
                 android:layout_marginStart="39dp"
                 android:onClick="newRoute"
                 android:src="@mipmap/ic_add" />
@@ -189,7 +181,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="44dp"
-                android:layout_marginRight="44dp"
+                android:layout_marginRight="@dimen/search_margin_right"
                 android:onClick="searchRoute"
                 android:src="@mipmap/ic_search_route"
                 android:text="Search" />
@@ -207,7 +199,8 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
-                android:textSize="@dimen/text_size_menu" />
+                android:textSize="@dimen/text_size_menu"
+                android:textIsSelectable="false" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -246,7 +239,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/status_bar_margin_top">
 
 

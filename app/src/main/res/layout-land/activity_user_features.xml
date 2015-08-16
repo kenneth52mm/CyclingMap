@@ -33,17 +33,15 @@
         android:id="@+id/txtFeaturesWeight"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/textview_height"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/textview_first_top"
         android:background="#ffffffff"
         android:hint="@string/user_features_weight"
         android:inputType="number|textPersonName"
-        android:textColor="#757575"
-        android:textColorHint="#757575"
         android:paddingLeft="@dimen/text_left_uf"
-        android:textSize="@dimen/text_hint_size"
-        android:paddingRight="@dimen/textview_padding"
-        android:layout_alignRight="@+id/btnUserFeaturesSave"
-        android:layout_alignEnd="@+id/btnUserFeaturesSave" />
+        android:textColor="#757575"
+        android:textColorHint="#757575" />
 
     <EditText
         android:id="@+id/txtFeaturesHeight"
@@ -58,20 +56,19 @@
         android:inputType="text|number"
         android:paddingLeft="@dimen/text_left_uf"
         android:textColor="#757575"
-        android:textColorHint="#757575"
-        android:textSize="@dimen/text_hint_size" />
+        android:textColorHint="#757575" />
 
     <LinearLayout
         android:id="@+id/linearLayout10"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/textview_height"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/txtFeaturesHeight"
+        android:layout_marginTop="@dimen/textview_top_uf"
         android:background="#ffffffff"
         android:orientation="horizontal"
-        android:singleLine="true"
-        android:layout_marginTop="@dimen/textview_top_uf">
+        android:singleLine="true">
 
         <TextView
             android:id="@+id/textView8"
@@ -81,7 +78,7 @@
             android:layout_marginLeft="@dimen/text_left_uf"
             android:text="@string/user_features_level"
             android:textColor="#757575"
-            android:textSize="@dimen/text_hint_size" />
+            android:textSize="20dp" />
 
         <Spinner
             android:id="@+id/spinUserFeatures"
@@ -105,8 +102,8 @@
         android:text="@string/user_features_btnsave"
         android:textColor="#ffffffff"
         android:textStyle="bold"
-        android:textSize="@dimen/button_text_size"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" />
+        android:layout_marginRight="5dp"
+        android:textSize="@dimen/button_text_size" />
 
 </RelativeLayout>

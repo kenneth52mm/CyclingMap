@@ -38,21 +38,21 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/textpr_margin_left"
+            android:layout_marginLeft="34dp"
             android:layout_marginStart="34dp"
             android:scaleType="fitStart"
             android:src="@drawable/ic_profile" />
 
     </RelativeLayout>
 
+    
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/layout_height_pr"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/nav_header_container"
-        android:layout_marginTop="@dimen/layout_top_first"
         android:orientation="horizontal">
 
         <TextView
@@ -71,7 +71,16 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/txtUsernameProfile"
-            android:layout_marginLeft="@dimen/text_left_data"
+            android:layout_marginLeft="@dimen/textpr_margin_left"
+            android:layout_marginTop="@dimen/textpr_margin_top"
+            android:textSize="@dimen/text_size_pr" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/txtEmailProfile"
+            android:layout_marginLeft="@dimen/textpr_margin_left"
             android:layout_marginTop="@dimen/textpr_margin_top"
             android:textSize="@dimen/text_size_pr" />
 
@@ -87,12 +96,48 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_height_pr"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout2"
         android:orientation="horizontal"
         android:showDividers="beginning"
-        android:layout_marginTop="@dimen/layout_top_pr">
+        android:layout_below="@+id/view2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <TextView
+            android:id="@+id/txtConfig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/textpr_margin_left"
+            android:layout_marginTop="@dimen/textpr_margin_top"
+            android:text="@string/configuration"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textSize="@dimen/text_size_pr" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/image_margin"
+            android:layout_marginTop="@dimen/image_top"
+            android:onClick="profileConfig"
+            android:src="@drawable/ic_config" />
+    </LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:background="@drawable/gradient"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/view2"></View>
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height_pr"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout1"
+        android:orientation="horizontal"
+        android:showDividers="beginning">
+
 
         <TextView
             android:id="@+id/txt_label_weight"
@@ -110,48 +155,40 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/txtWeight"
-            android:layout_marginLeft="@dimen/text_left_data"
-            android:layout_marginTop="@dimen/textpr_margin_top"
-            android:textSize="@dimen/text_size_pr" />
-
-    </LinearLayout>
-    <View
-        android:layout_width="wrap_content"
-        android:background="@drawable/gradient"
-        android:layout_height="1dp"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"></View>
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_height_pr"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout1"
-        android:orientation="horizontal"
-        android:showDividers="beginning"
-        android:layout_marginTop="@dimen/layout_top_pr">
-
-        <TextView
-            android:id="@+id/txtQFriends"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/textpr_margin_left"
             android:layout_marginTop="@dimen/textpr_margin_top"
-            android:text="@string/email_user"
+            android:textSize="@dimen/text_size_pr" />
+        <TextView
+            android:id="@+id/txt_label_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/height_user"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000000"
             android:textSize="@dimen/text_size_pr" />
 
         <TextView
+            android:id="@+id/txtQFriends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email_user"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textSize="@dimen/text_size_pr"
+            android:layout_alignBottom="@+id/linearLayout1"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/txtEmailProfile"
-            android:layout_marginLeft="@dimen/text_left_data"
+            android:id="@+id/txtHeight"
+            android:layout_marginLeft="@dimen/textpr_margin_left"
             android:layout_marginTop="@dimen/textpr_margin_top"
             android:textSize="@dimen/text_size_pr" />
+
+
 
     </LinearLayout>
     <View
@@ -171,27 +208,9 @@
         android:layout_below="@+id/linearLayout3"
         android:orientation="horizontal"
         android:showDividers="beginning"
-        android:layout_marginTop="@dimen/layout_top_pr">
+        android:layout_marginTop="10dp">
 
-        <TextView
-            android:id="@+id/txt_label_height"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/textpr_margin_left"
-            android:layout_marginTop="@dimen/textpr_margin_top"
-            android:text="@string/height_user"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000"
-            android:textSize="@dimen/text_size_pr" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/txtHeight"
-            android:layout_marginLeft="@dimen/text_left_data"
-            android:layout_marginTop="@dimen/textpr_margin_top"
-            android:textSize="@dimen/text_size_pr" />
 
 
     </LinearLayout>
@@ -210,28 +229,11 @@
         android:layout_below="@+id/linearLayout5"
         android:orientation="horizontal"
         android:showDividers="beginning"
-        android:layout_marginTop="@dimen/layout_top_pr"
+        android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <TextView
-            android:id="@+id/txtConfig"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/textpr_margin_left"
-            android:layout_marginTop="@dimen/textpr_margin_top"
-            android:text="@string/configuration"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000"
-            android:textSize="@dimen/text_size_pr" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="profileConfig"
-            android:src="@drawable/ic_config"
-            android:layout_marginTop="@dimen/image_top"
-            android:layout_marginLeft="@dimen/image_margin" />
 
     </LinearLayout>
 

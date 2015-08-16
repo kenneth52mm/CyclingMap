@@ -38,7 +38,7 @@
             android:id="@+id/txtRut_Buscar_Enca"
             android:layout_marginBottom="10dp"
             android:height="40dp"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_search"
             android:textStyle="bold"
             android:textColor="@color/md_white_1000"
             android:layout_marginTop="10dp" />
@@ -58,8 +58,8 @@
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/top_buscar"
-            android:layout_marginBottom="@dimen/bottom_layout_one">
+            android:layout_marginBottom="@dimen/bottom_layout_one"
+            android:layout_marginTop="@dimen/top_buscar">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -90,8 +90,7 @@
                     android:id="@+id/txt_distance_search"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="@dimen/edittext_margin_left"
-                    android:textSize="@dimen/text_size_search" />
+                    android:layout_marginLeft="@dimen/edittext_margin_left" />
 
             </LinearLayout>
 
@@ -108,8 +107,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/top_layout_search">
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -132,7 +130,6 @@
                     android:id="@+id/spinnerLevel"
                     android:spinnerMode="dialog"
                     android:layout_marginLeft="@dimen/spiner_margin_left"
-                    android:layout_marginTop="10dp"
                     android:touchscreenBlocksFocus="true" />
 
 
@@ -147,8 +144,7 @@
 
         <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="35dp"
-            android:layout_marginTop="@dimen/check_top">
+            android:layout_height="30dp">
 
             <LinearLayout
                 android:orientation="horizontal"

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!-- Detalles ruta Land and Port and portrait Screens -->
     <dimen name="height_map">350dp</dimen>
     <dimen name="table_layout_height">100dp</dimen>
@@ -12,30 +11,31 @@
     <dimen name="data_text_left">10dp</dimen>
     <dimen name="text_top_det">15dp</dimen>
     <dimen name="text_bottom_det">10dp</dimen>
-    <dimen name="table_top">27dp</dimen>
+    <dimen name="table_top">20dp</dimen>
     <dimen name="table_bottom">15dp</dimen>
     <dimen name="button_padding">10dp</dimen>
-    <dimen name="text_size">25dp</dimen>
+    <dimen name="text_size">21dp</dimen>
     <!-- end -->
     <!-- Login and Register dimens -->
-    <dimen name="top_margin_log">250dp</dimen>
+    <dimen name="top_margin_log">150dp</dimen>
     <dimen name="top_margin_textview_log">15dp</dimen>
-    <dimen name="bottom_view_log">10dp</dimen>
-    <dimen name="textview_height_reg">45dp</dimen>
-    <dimen name="button_create_top">35dp</dimen>
+    <dimen name="bottom_view_log">20dp</dimen>
+    <dimen name="top_margin_reg">120dp</dimen>
+    <dimen name="top_margin_text_reg">15dp</dimen>
+    <dimen name="bottom_margin_reg">20dp</dimen>
     <!-- end -->
     <!-- buscar routes -->
-    <dimen name="top_buscar">230dp</dimen>
+    <dimen name="top_buscar">140dp</dimen>
     <dimen name="check_top">40dp</dimen>
-    <dimen name="imgview_margin_left">30dp</dimen>
+    <dimen name="imgview_margin_left">65dp</dimen>
     <dimen name="textview_margin_left">28dp</dimen>
-    <dimen name="spiner_margin_left">60dp</dimen>
-    <dimen name="edittext_margin_left">30dp</dimen>
-    <dimen name="checkbox_margin_left">32dp</dimen>
+    <dimen name="spiner_margin_left">120dp</dimen>
+    <dimen name="edittext_margin_left">100dp</dimen>
+    <dimen name="checkbox_margin_left">65dp</dimen>
     <dimen name="top_layout_search">30dp</dimen>
     <dimen name="bottom_layout_one">25dp</dimen>
     <dimen name="text_size_search">25sp</dimen>
-    <dimen name="textview_number">65dp</dimen>
+    <dimen name="textview_number">75dp</dimen>
     <dimen name="text_button_search">18sp</dimen>
     <!-- end -->
     <!-- Exisiting route -->
@@ -51,10 +51,10 @@
     <dimen name="size_text">22dp</dimen>
     <!-- End -->
     <!-- Home Activity -->
-    <dimen name="top_first_home">180dp</dimen>
+    <dimen name="top_first_home">110dp</dimen>
     <dimen name="top_layout_home">35dp</dimen>
     <dimen name="height_layout">72dp</dimen>
-    <dimen name="imagev_home_left">35dp</dimen>
+    <dimen name="imagev_home_left">55dp</dimen>
     <dimen name="imagev_home_top">10dp</dimen>
     <dimen name="bottom_menu_height">98dp</dimen>
     <dimen name="text_margin_left">25dp</dimen>
@@ -63,46 +63,30 @@
     <dimen name="search_margin_right">60dp</dimen>
     <!-- end -->
     <!-- Profile -->
-    <dimen name="container_height">140dp</dimen>
-    <dimen name="container_top">60dp</dimen>
-    <dimen name="layout_height_pr">70dp</dimen>
+    <dimen name="container_height">90dp</dimen>
+    <dimen name="container_top">55dp</dimen>
+    <dimen name="layout_height_pr">80dp</dimen>
     <dimen name="layout_top_first">20dp</dimen>
-    <dimen name="layout_top_pr">16dp</dimen>
-    <dimen name="textpr_margin_left">60dp</dimen>
+    <dimen name="layout_top_pr">13dp</dimen>
+    <dimen name="textpr_margin_left">50dp</dimen>
     <dimen name="textpr_margin_top">20dp</dimen>
     <dimen name="text_left_data">30dp</dimen>
-    <dimen name="image_margin">200dp</dimen>
-    <dimen name="image_top">18dp</dimen>
+    <dimen name="image_margin">680dp</dimen>
+    <dimen name="image_top">20dp</dimen>
     <dimen name="text_size_pr">26dp</dimen>
-    <dimen name="image_user">90dp</dimen>
+    <dimen name="image_user">80dp</dimen>
     <dimen name="text_size_button">18dp</dimen>
     <!-- end -->
-    <!-- End Trace -->
-    <dimen name="layout_height_et">70dp</dimen>
-    <dimen name="layout_one_top">18dp</dimen>
-    <dimen name="text_size_et">25sp</dimen>
-    <dimen name="text_size_butt_et">18sp</dimen>
-    <dimen name="text_margin_left_et">25dp</dimen>
-    <dimen name="text_margin_top_et">15dp</dimen>
-    <dimen name="text2_margin_left_et">15dp</dimen>
-    <dimen name="text2_margin_top_et">18dp</dimen>
-    <dimen name="imagev_margin_left">25dp</dimen>
-    <dimen name="text_size_check_et">25sp</dimen>
-    <dimen name="check_margin_left_et">25dp</dimen>
-    <dimen name="check_margin_top_et">15dp</dimen>
-    <dimen name="lbl_margin_left">70dp</dimen>
-    <dimen name="lbl_margin_top">15dp</dimen>
-    <dimen name="spinner_width_et">85dp</dimen>
-    <dimen name="spinner_margin_et">25dp</dimen>
-    <!-- end -->
     <!-- User Features -->
-    <dimen name="textview_first_top">130dp</dimen>
-    <dimen name="textview_height">50dp</dimen>
-    <dimen name="textview_top_uf">40dp</dimen>
-    <dimen name="text_left_uf">20dp</dimen>
+    <dimen name="textview_first_top">120dp</dimen>
+    <dimen name="textview_height">40dp</dimen>
+    <dimen name="textview_top_uf">30dp</dimen>
+    <dimen name="text_left_uf">35dp</dimen>
     <dimen name="text_hint_size">25sp</dimen>
-    <dimen name="spin_margin_left_uf">35dp</dimen>
-    <dimen name="textview_padding">20dp</dimen>
+    <dimen name="spin_margin_left_uf">100dp</dimen>
+    <dimen name="textview_padding">15dp</dimen>
     <dimen name="button_text_size">18sp</dimen>
     <!-- end -->
+
+
 </resources>

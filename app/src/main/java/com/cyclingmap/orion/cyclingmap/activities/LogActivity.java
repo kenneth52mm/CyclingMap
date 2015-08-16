@@ -84,8 +84,8 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build()).addScope(Plus.SCOPE_PLUS_LOGIN).build();
         signinButton.setOnClickListener(this);
         signinButton.setSize(SignInButton.SIZE_STANDARD);
-        buttonLogin = (ImageView) findViewById(R.id.login);
-        loginButton = (LoginButton) findViewById(R.id.login_Button);
+      //  buttonLogin = (ImageView) findViewById(R.id.login);
+     //   loginButton = (LoginButton) findViewById(R.id.login_Button);
         register = (TextView) findViewById(R.id.register);
     }
 
