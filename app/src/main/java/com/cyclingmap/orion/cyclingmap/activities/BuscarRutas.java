@@ -50,11 +50,9 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class BuscarRutas extends ActionBarActivity implements LocationListener {
 
-    //spinner
     Spinner spinner_level;
     Button btnRutasBusca;
     TextView txtDistance;
-  //  RadioButton radioButton;
     CheckBox checkBox;
 
     int diffLevel = 0;
@@ -76,8 +74,6 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
         txtDistance = (EditText) findViewById(R.id.txt_distance_search);
 
         checkBox = (CheckBox) findViewById(R.id.check_nearest);
-       // radioButton = (RadioButton) findViewById(R.id.check_near);
-
         spinner_level = (Spinner) findViewById(R.id.spinnerLevel);
         String[] arraNivel = {getString(R.string.beginner_level), getString(R.string.intermediate_level), getString(R.string.advanced_level)};
         ArrayAdapter adapterNi = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arraNivel);
@@ -149,6 +145,7 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
             super.onPreExecute();
             dialog.setMessage(getString(R.string.loading_dialog));
             dialog.show();
+            
         }
 
         @Override
