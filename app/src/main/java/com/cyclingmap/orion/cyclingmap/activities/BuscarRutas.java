@@ -145,7 +145,7 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
             super.onPreExecute();
             dialog.setMessage(getString(R.string.loading_dialog));
             dialog.show();
-            
+
         }
 
         @Override
