@@ -88,10 +88,11 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
         getCurrentLocation();
         buttonTest();
         activateLocation();
+        loadMap();
     }
+
     public void seeRoute(View v){
         chronometer.stop();
-        loadMap(v);
         String td = getTotalDistance() + "";
         String ch = chronometer.getBase() + "";
         String sp = speed + "";
@@ -159,7 +160,7 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
     }
     public void stopTrace(View v) {
         RUNNING = false;
-        //chrono.stop();
+        chronometer.stop();
         // chrono.setBase(SystemClock.elapsedRealtime());
         //  timeStopped = 0;
         speed = ((long) distance / chronometer.getBase()) / 1000;
@@ -173,7 +174,7 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
         Double distan = this.getTotalDistance() / 1000;
         txtDistance.setText(numFormat.format(distan) + "");
         txtSpeed.setText(numFormat.format(this.getTotalDistance() / (chronometer.getBase() / 3600000)) + "");
-        loadMap(v);
+        loadMap();
     }
     public void centerMapOnMyLocation() {
         LatLng current = route.get(0);
@@ -181,7 +182,7 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
                 .target(current).zoom(17).bearing(90).tilt(30).build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
     }
-    public void loadMap(View v) {
+    public void loadMap() {
         polylineOptions.addAll(route);
         polylineOptions.width(10);
         polylineOptions.color(Color.RED);

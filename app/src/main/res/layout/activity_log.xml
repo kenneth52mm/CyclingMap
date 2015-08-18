@@ -58,13 +58,6 @@
             android:textColorHint="#757575"
             android:layout_marginBottom="@dimen/bottom_view_log" />
 
-
-        <!--<TextView-->
-        <!--android:id="@+id/TxtMessage"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
-
         <Button
             android:id="@+id/BtnLogin"
             android:layout_width="match_parent"
@@ -84,10 +77,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:layout_row="6"
+            android:layout_row="4"
             android:text="r"
             android:layout_marginTop="@dimen/top_margin_textview_log" />
-
         <Button
             android:id="@+id/Register"
             android:layout_width="match_parent"
@@ -96,61 +88,11 @@
             android:layout_columnSpan="2"
             android:layout_gravity="fill_horizontal"
             android:layout_marginTop="@dimen/top_margin_textview_log"
-            android:layout_row="4"
+            android:layout_row="6"
             android:onClick="registerNew"
             android:text="@string/register_message"
             android:textColor="@color/textColorPrimary"
             android:background="@color/greenDark"
-
             />
-        <!--  <ImageButton
-          android:id="@+id/login"
-          android:layout_width="match_parent"
-          android:layout_height="40dp"
-          android:layout_column="0"
-          android:layout_marginTop="20dp"
-          android:layout_row="6"
-          android:background="@drawable/fb_login" /> -->
-
-        <!--  <com.facebook.login.widget.LoginButton
-              android:id="@+id/login_Button"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_column="0"
-              android:layout_marginTop="20dp"
-              android:layout_row="6"
-              /> -->
-
-        <!--    <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:layout_marginTop="25dp"
-                android:layout_row="7"
-                android:textColor="#fffffdfe"
-                android:textStyle="bold"
-                android:clickable="true"
-                android:onClick="registerNew"
-                android:text="@string/register_message"
-                android:textSize="20dp"
-                android:gravity="right"
-                android:singleLine="false"
-                android:shadowColor="#9E9E9E" /> -->
-
-        <!--   <Button
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_column="3"
-               android:layout_marginTop="15dp"
-               android:layout_row="2"
-               android:text="rl" /> -->
     </GridLayout>
-    <!--<Button-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="60dp"-->
-    <!--android:text="@string/register_label"-->
-    <!--android:id="@+id/BtnRegister"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_marginTop="32dp" />-->
-
 </FrameLayout>

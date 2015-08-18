@@ -62,9 +62,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     private GoogleApiClient mGoogleApiClient;
     private ArrayList<Route> routes = new ArrayList<>();
     private DBHelper dbHelper;
-    private BadgeDrawable badge;
-
-
     private String userProfile;
     private String emailProfile;
     private String heightProfile;
@@ -97,20 +94,14 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         userProfileDetails userDetails = new userProfileDetails();
         userDetails.execute(1);
     }
-
     public void newRoute(View v) {
         Intent i = new Intent(HomeActivity.this, TraceRouteActivity.class);
         startActivity(i);
-     //   Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-     //   startActivity(intent);
     }
-
     public void searchRoute(View v) {
         Intent i = new Intent(HomeActivity.this, BuscarRutas.class);
         startActivity(i);
     }
-
-    //Opciones del toolbar para mostrar el badge
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -126,14 +117,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
-
-        //muestra las notificaciones en un dialog
-//        Dialog_Notification notification = new Dialog_Notification();
-//
-//        String[] noti = {"Notificacion 1", "Notificacion 2", "Notificacion 3"};
-//
-//        notification.setNotification(noti);
-//        notification.show(getFragmentManager(), "notification");
         Intent i = new Intent(HomeActivity.this, RetosActivity.class);
         startActivity(i);
         return super.onOptionsItemSelected(item);
@@ -179,8 +162,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                                 Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
                                 startActivity(intent);
                                 return true;
-
-                            // Cerrar sesion
                             case R.id.item_navigation_drawer_help_and_feedback:
                                 menuItem.setChecked(true);
 //                                AccessToken accessToken = AccessToken.getCurrentAccessToken();
@@ -205,34 +186,22 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     @Override
-    public void onConnected(Bundle bundle) {
-
-    }
-
+    public void onConnected(Bundle bundle) {}
     @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
+    public void onConnectionSuspended(int i) {}
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
-    }
-
+    public void onConnectionFailed(ConnectionResult connectionResult) {}
 
     class LoadUserStats extends AsyncTask<Integer, String, String> {
-
 
         String distance;
         String speed;
         String totalRoutes;
-
         @Override
         protected String doInBackground(Integer... params) {
             HttpClient client = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/stats/" + params[0]);
             httpGet.setHeader("content-type", "application/json");
-
             try {
                 HttpResponse response = client.execute(httpGet);
                 JSONArray array = new JSONArray(EntityUtils.toString(response.getEntity()));
@@ -242,15 +211,14 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
             } catch (Exception ex) {
                 Log.i("Error", "" + ex);
             }
-
             return null;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            txtDistance.setText(distance + " km");
-            txtBestSpeed.setText(speed + " km/h");
+            txtDistance.setText(distance + " Km");
+            txtBestSpeed.setText(speed + " Km/h");
             txtTotalRoutes.setText(totalRoutes);
         }
     }
@@ -259,7 +227,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
 
         ArrayList<Route> respRoutes;
         private final ProgressDialog dialog = new ProgressDialog(HomeActivity.this);
-
 
         @Override
         protected void onPreExecute() {
@@ -323,7 +290,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         String email;
         String height;
         String weight;
-
         private final ProgressDialog dialog = new ProgressDialog(HomeActivity.this);
 
         @Override
@@ -332,7 +298,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
             dialog.setMessage(getString(R.string.loading_dialog));
             dialog.show();
         }
-
         @Override
         protected String doInBackground(Integer... params) {
             HttpClient client = new DefaultHttpClient();
@@ -362,13 +327,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
             emailProfile =  email ;
             heightProfile = height;
             weightProfile = weight;
-
-          //  userProfile= "Daniel";
-          //  emailProfile=  "danicormu@gmail.com"  ;
-          //  heightProfile= "1.75";
-          //  weightProfile= "74" ;
             dialog.dismiss();
         }
     }
-
 }
