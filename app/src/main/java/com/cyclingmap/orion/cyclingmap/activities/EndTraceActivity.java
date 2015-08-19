@@ -1,5 +1,6 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -124,6 +125,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         a_level.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_level.setAdapter(a_level);
     }
+
     public void sendData(View v) {
         route = new Route();
         route.setDistance(distance);
@@ -185,6 +187,13 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
 
     class RouteWsHelper extends AsyncTask<Object, String, String> {
 
+        private final ProgressDialog dialog = new ProgressDialog(EndTraceActivity.this);
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.setMessage("Saving..");
+            dialog.show();
+        }
 
         @Override
         protected String doInBackground(Object... params) {
@@ -234,6 +243,12 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
             }
 
             return resp;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            dialog.dismiss();
         }
     }
 }
