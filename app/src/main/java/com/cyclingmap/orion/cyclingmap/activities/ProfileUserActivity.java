@@ -36,6 +36,7 @@ public class ProfileUserActivity extends AppCompatActivity {
     private TextView emailProfile;
     private TextView heightProfile;
     private TextView weightProfile;
+    private DBHelper dbHelper;
 
 
     @Override
@@ -53,23 +54,26 @@ public class ProfileUserActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(colorPrimaryDark);
         }
-
+        dbHelper=new DBHelper(ProfileUserActivity.this);
         userProfile = (TextView) findViewById(R.id.txtUsernameProfile);
         emailProfile = (TextView) findViewById(R.id.txtEmailProfile);
         heightProfile = (TextView) findViewById(R.id.txtHeight);
         weightProfile = (TextView) findViewById(R.id.txtWeight);
+        User u=dbHelper.getUser();
+       // int id=u.getId();
+        String name =u.getName();
+        String mail=u.getEmail();
 
-
-        Bundle bundle = getIntent().getExtras();
-        String uName = bundle.getString("username");
-        String uEmail = bundle.getString("email");
-        String uHeight = bundle.getString("height");
-        String uWeight = bundle.getString("weight");
-
-        userProfile.setText(uName);
-        emailProfile.setText(uEmail);
-        heightProfile.setText(uHeight);
-        weightProfile.setText(uWeight);
+//        Bundle bundle = getIntent().getExtras();
+//        String uName = bundle.getString("username");
+//        String uEmail = bundle.getString("email");
+//        String uHeight = bundle.getString("height");
+//        String uWeight = bundle.getString("weight");
+//
+        userProfile.setText(name);
+        emailProfile.setText(mail);
+//        heightProfile.setText(uHeight);
+//        weightProfile.setText(uWeight);
         // userProfileDetails userInfo = new userProfileDetails();
         // userInfo.execute(1);
     }

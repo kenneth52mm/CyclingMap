@@ -134,7 +134,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void addChallenges(Route route) {
 
-<<<<<<< HEAD
         try {
             ContentValues values = new ContentValues();
             values.put("id_challenge", route.getIdRoute());
@@ -152,28 +151,19 @@ public class DBHelper extends SQLiteOpenHelper {
                     String town = p.getTownList().get(0).getNameTown();
                     addRegions(town, province, idRoute);
                 }
-=======
-        ContentValues values = new ContentValues();
-        values.put("id_challenge",route.getIdRoute());
-        values.put("distance", route.getDistance());
-        values.put("time_to_finish", route.getTimeToFin().toString());
-        values.put("avg_speed", route.getAvgSpeed());
-        values.put("difficulty_level", route.getDifficultyLevel());
-        helper.insert("challenge", null, values);
-        int idRoute = getIdRoute();
-        if (route.getCoordinateList() != null)
-            addCoords(route.getCoordinateList(), idRoute);
-        if (route.getProvinces() != null) {
-            for (Province p : route.getProvinces()) {
-                String province = p.getNameProvince();
-                String town = p.getTownList().get(0).getNameTown();
-                addRegions(town, province, idRoute);
->>>>>>> origin/master
+                if (route.getProvinces() != null) {
+                    for (Province p : route.getProvinces()) {
+                        String province = p.getNameProvince();
+                        String town = p.getTownList().get(0).getNameTown();
+                        addRegions(town, province, idRoute);
+                    }
+                }
             }
-        }catch (SQLiteConstraintException ex){
+        } catch (SQLiteConstraintException ex) {
             Log.e("Sqlite", ex.getMessage());
         }
 //        deleteChallenges();
+
     }
 
     public void deleteChallenges() {
@@ -265,6 +255,23 @@ public class DBHelper extends SQLiteOpenHelper {
             } while (c.moveToNext());
         }
         return id_ser;
+    }
+
+    public User getUser() {
+        User u = new User();
+        Cursor c = helper.rawQuery("Select * from user;", null);
+        //int id=c.getInt(0);
+        if (c.moveToFirst()) {
+            do {
+                String name = c.getString(1);
+                String mail = c.getString(2);
+                //  u.setId(id);
+                u.setName(name);
+                u.setEmail(mail);
+            }while (c.moveToNext());
+        }
+
+        return u;
     }
 
 

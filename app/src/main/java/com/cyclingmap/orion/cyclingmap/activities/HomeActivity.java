@@ -188,7 +188,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     @Override
-<<<<<<< HEAD
     public void onConnected(Bundle bundle) {
         getProfileInformation();
     }
@@ -209,9 +208,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         }
     }
 
-=======
-    public void onConnected(Bundle bundle) {}
->>>>>>> origin/master
     @Override
     public void onConnectionSuspended(int i) {}
     @Override
