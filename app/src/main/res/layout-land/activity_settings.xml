@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/windowBackground"
+    tools:context="com.example.daniel.navigationdrawer.SettingsActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_bar_kitkat_height"
+        android:background="?colorPrimary"/>
+
+    <android.support.v7.widget.Toolbar
+        android:layout_marginTop="@dimen/status_bar_margin_top"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ToolbarTheme" />
+
+</RelativeLayout>
+

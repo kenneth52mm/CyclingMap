@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
-    tools:context="com.cyclingmap.orion.cyclingmap.activities.EndTraceActivity">
+    tools:context="com.cyclingmap.orion.cyclingmap.activities.EndTraceActivity"
+   >
 
     <fragment
         android:id="@+id/map"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="fill_parent"
-        android:layout_height="220dp"
+        android:layout_height="@dimen/height_map"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
@@ -18,19 +19,19 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/layout_height_et"
         android:id="@+id/lL1"
         android:layout_below="@+id/map"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="@dimen/layout_one_top">
 
         <ImageView
             android:layout_width="39dp"
             android:layout_height="39dp"
             android:src="@mipmap/ic_distance"
             android:id="@+id/imageView"
-            android:layout_marginLeft="15dp" />
+            android:layout_marginLeft="@dimen/imagev_margin_left" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -41,16 +42,20 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imageView"
             android:layout_toEndOf="@+id/imageView"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="42dp" />
+            android:layout_marginLeft="@dimen/text_margin_left_et"
+            android:layout_marginStart="42dp"
+            android:textSize="@dimen/text_size_et"
+            android:layout_marginTop="@dimen/text_margin_top_et" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/TxtDistTotal"
-            android:layout_marginTop="18dp"
-            android:text="" />
+            android:layout_marginTop="@dimen/text2_margin_top_et"
+            android:text=""
+            android:textSize="@dimen/text_size_et"
+            android:layout_marginLeft="@dimen/text2_margin_left_et" />
 
     </LinearLayout>
 
@@ -65,19 +70,19 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/layout_height_et"
         android:id="@+id/lL2"
         android:layout_below="@+id/lL1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="@dimen/table_top">
 
         <ImageView
             android:layout_width="39dp"
             android:layout_height="39dp"
             android:src="@mipmap/ic_duration"
             android:id="@+id/imageView2"
-            android:layout_marginLeft="15dp" />
+            android:layout_marginLeft="@dimen/imagev_margin_left" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,16 +93,20 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imageView2"
             android:layout_toEndOf="@+id/imageView2"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="44dp" />
+            android:layout_marginLeft="@dimen/text_margin_left_et"
+            android:layout_marginStart="44dp"
+            android:textSize="@dimen/text_size_et"
+            android:layout_marginTop="@dimen/text_margin_top_et" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/TxtDuration"
-            android:layout_marginTop="18dp"
-            android:text="" />
+            android:layout_marginTop="@dimen/text2_margin_top_et"
+            android:text=""
+            android:textSize="@dimen/text_size_et"
+            android:layout_marginLeft="@dimen/text2_margin_left_et" />
 
     </LinearLayout>
     <View
@@ -112,20 +121,19 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/layout_height_et"
         android:id="@+id/lL3"
         android:layout_below="@+id/lL2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="0dp">
+        android:layout_marginTop="@dimen/table_top">
 
         <ImageView
             android:layout_width="39dp"
             android:layout_height="39dp"
             android:src="@mipmap/ic_speed_avg"
             android:id="@+id/imageView3"
-            android:layout_marginLeft="15dp" />
+            android:layout_marginLeft="@dimen/imagev_margin_left" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -136,16 +144,20 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imageView3"
             android:layout_toEndOf="@+id/imageView3"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="44dp" />
+            android:layout_marginLeft="@dimen/text_margin_left_et"
+            android:layout_marginStart="44dp"
+            android:textSize="@dimen/text_size_et"
+            android:layout_marginTop="@dimen/text_margin_top_et" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/TxtSpeedAvg"
-            android:layout_marginTop="18dp"
-            android:text="" />
+            android:layout_marginTop="@dimen/text2_margin_top_et"
+            android:text=""
+            android:textSize="@dimen/text_size_et"
+            android:layout_marginLeft="@dimen/text2_margin_left_et" />
 
     </LinearLayout>
     <View
@@ -158,16 +170,25 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/layout_height_et"
         android:id="@+id/lL4"
         android:layout_below="@+id/lL3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="15dp">
+        android:layout_marginTop="@dimen/table_top">
 
 
-        <RadioButton
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/share_public"
+            android:textSize="@dimen/text_size_check_et"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:id="@+id/checkBox"
+            android:layout_marginLeft="@dimen/check_margin_left_et"
+            android:layout_marginTop="@dimen/check_margin_top_et"/>
+
+   <!--     <RadioButton
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -176,7 +197,7 @@
             android:id="@+id/radioButton"
             android:checked="false"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp" /> -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -184,29 +205,31 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/Txtinfo"
             android:text="@string/difficulty_l"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginLeft="@dimen/lbl_margin_left"
+            android:layout_marginTop="@dimen/lbl_margin_top"
+            android:textSize="@dimen/text_size_check_et" />
 
         <Spinner
-            android:layout_width="80dp"
+            android:layout_width="@dimen/spinner_width_et"
             android:layout_height="wrap_content"
             android:id="@+id/spinnerEnd"
             android:spinnerMode="dialog"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp" />
+            android:layout_marginLeft="@dimen/spinner_margin_et" />
     </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Guardar ruta"
+        android:text="@string/saving_route"
         android:id="@+id/button3"
         android:background="@color/greenDark"
         android:textStyle="bold"
         android:textColor="#ffffff"
         android:layout_alignParentBottom="true"
         android:onClick="sendData"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/button_padding"
+        android:layout_marginRight="@dimen/button_padding"
+        android:textSize="@dimen/text_size_butt_et" />
 </RelativeLayout>
 

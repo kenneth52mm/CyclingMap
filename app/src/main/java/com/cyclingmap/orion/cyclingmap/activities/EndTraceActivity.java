@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.business.NetworkUtil;
 import com.cyclingmap.orion.cyclingmap.business.RouteWsHelper;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.data.LocationAddress;
@@ -78,7 +79,6 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_trace);
         String[] arrayLevel = {getString(R.string.beginner_level), getString(R.string.intermediate_level), getString(R.string.advanced_level)};
-
         txtdistancefinal = (TextView) findViewById(R.id.TxtDistTotal);
         txtDuration = (TextView) findViewById(R.id.TxtDuration);
         txtSpeedAvg = (TextView) findViewById(R.id.TxtSpeedAvg);
@@ -88,33 +88,23 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-
         map = mapFragment.getMap();
         map.setMyLocationEnabled(true);
         polylineOptions = new PolylineOptions();
         lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
         dbHelper = new DBHelper(getApplicationContext());
-
         Bundle bundle = getIntent().getExtras();
-        //cae
         routeCoords = (ArrayList) bundle.get("route");
         distance = bundle.getDouble("Distance");
         duration = bundle.getLong("Duration");
         speed = bundle.getDouble("Speed");
         String time = String.valueOf(duration);
         txtdistancefinal.setText(distance + "Km");
-
-
-
-        String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
+        String timeFinished = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
                 TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
                 TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
-
-
-        txtDuration.setText(hms + " Min");
+        txtDuration.setText(timeFinished + " Min");
         txtSpeedAvg.setText(speed + "Km/h");
-
         LatLng current = (LatLng) routeCoords.get(0);
         CameraPosition myPosition = new CameraPosition.Builder()
                 .target(current).zoom(17).bearing(90).tilt(30).build();
@@ -123,7 +113,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         //Draw the route on fragmentmap
         polylineOptions.addAll(routeCoords);
         polylineOptions.width(12);
-        polylineOptions.color(Color.RED);
+        polylineOptions.color(Color.GREEN);
         map.addPolyline(polylineOptions);
         LatLng[] coords = new LatLng[2];
         coords[0] = (LatLng) routeCoords.get(0);
@@ -134,22 +124,28 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         a_level.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_level.setAdapter(a_level);
     }
-
-    //Ver detalle del Radio Button
     public void sendData(View v) {
         route = new Route();
         route.setDistance(distance);
-        route.setTimeToFin(Time.valueOf(String.valueOf(duration)));
+        //route.setTimeToFin(Time.valueOf(String.valueOf(duration)));
+        route.setTimeToFin(new Time(duration));
         route.setAvgSpeed(speed);
         /*Difficulty level*/
         route.setProvinces(routeProvinces);
         route.setCoordinateList(routeCoords);
-        dbHelper.addRoute(route);
-        RouteWsHelper helper = new RouteWsHelper();
-        Object[] obj = new Object[2];
-        obj[0] = route;
-        obj[1] = id_user;
-        helper.execute(obj);
+        int netStatus = NetworkUtil.getConnectivityState(EndTraceActivity.this);
+        switch (netStatus) {
+            case 0:
+                dbHelper.addRoute(route);
+                break;
+            case 1:
+                RouteWsHelper helper = new RouteWsHelper();
+                Object[] obj = new Object[2];
+                obj[0] = route;
+                obj[1] = 13;
+                helper.execute(obj);
+                break;
+        }
     }
 
 
@@ -226,7 +222,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
                     coords.put(coord);
                 }
                 object.put("coordinateList", coords);
-                object.put("id_user", params[0]);
+                object.put("id_user", params[1]);
 
                 StringEntity entity = new StringEntity(object.toString());
                 post.setEntity(entity);

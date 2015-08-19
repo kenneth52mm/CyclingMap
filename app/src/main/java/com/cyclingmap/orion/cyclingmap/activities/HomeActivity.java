@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Entity;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,7 +64,10 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     private GoogleApiClient mGoogleApiClient;
     private ArrayList<Route> routes = new ArrayList<>();
     private DBHelper dbHelper;
-    private BadgeDrawable badge;
+    private String userProfile;
+    private String emailProfile;
+    private String heightProfile;
+    private String weightProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,19 +93,17 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         userStats.execute(13);
         UserChallengesHelper challengesHelper = new UserChallengesHelper();
         challengesHelper.execute(13);
+        userProfileDetails userDetails = new userProfileDetails();
+        userDetails.execute(1);
     }
-
     public void newRoute(View v) {
-        Intent i = new Intent(HomeActivity.this, RutasActivity.class);
+        Intent i = new Intent(HomeActivity.this, TraceRouteActivity.class);
         startActivity(i);
     }
-
     public void searchRoute(View v) {
         Intent i = new Intent(HomeActivity.this, BuscarRutas.class);
         startActivity(i);
     }
-
-    //Opciones del toolbar para mostrar el badge
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -117,14 +119,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
-
-        //muestra las notificaciones en un dialog
-//        Dialog_Notification notification = new Dialog_Notification();
-//
-//        String[] noti = {"Notificacion 1", "Notificacion 2", "Notificacion 3"};
-//
-//        notification.setNotification(noti);
-//        notification.show(getFragmentManager(), "notification");
         Intent i = new Intent(HomeActivity.this, RetosActivity.class);
         startActivity(i);
         return super.onOptionsItemSelected(item);
@@ -145,6 +139,11 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 Intent intent1 = new Intent(HomeActivity.this, ProfileUserActivity.class);
+                                intent1.putExtra("username", userProfile);
+                                intent1.putExtra("email", emailProfile);
+                                intent1.putExtra("height", heightProfile);
+                                intent1.putExtra("weight", weightProfile);
+                                startActivity(intent1);
                                 startActivity(intent1);
                                 return true;
 
@@ -165,31 +164,31 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                                 Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
                                 startActivity(intent);
                                 return true;
-
-                            // Cerrar sesion
                             case R.id.item_navigation_drawer_help_and_feedback:
                                 menuItem.setChecked(true);
-                                AccessToken accessToken = AccessToken.getCurrentAccessToken();
-                                if (dbHelper.isLogged()) {
-                                    dbHelper.loggout();
-                                    finish();
-                                } else if (accessToken != null) {
-                                    LoginManager.getInstance().logOut();
-                                    finish();
-                                } else {
+//                                AccessToken accessToken = AccessToken.getCurrentAccessToken();
+//                                if (dbHelper.isLogged()) {
+//                                    dbHelper.loggout();
+//                                    finish();
+//                                } else if (accessToken != null) {
+//                                    LoginManager.getInstance().logOut();
+//                                    finish();
+//                                } else {
                                     mGoogleApiClient.disconnect();
                                     if (!mGoogleApiClient.isConnected())
                                         finish();
-                                }
+                                Intent i = new Intent(HomeActivity.this, LogActivity.class);
+                                startActivity(i);
+                                //}
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-                        }
-                        return true;
+                        }return true;
                     }
                 });
     }
 
     @Override
+<<<<<<< HEAD
     public void onConnected(Bundle bundle) {
         getProfileInformation();
     }
@@ -210,30 +209,24 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         }
     }
 
+=======
+    public void onConnected(Bundle bundle) {}
+>>>>>>> origin/master
     @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
+    public void onConnectionSuspended(int i) {}
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
-    }
-
+    public void onConnectionFailed(ConnectionResult connectionResult) {}
 
     class LoadUserStats extends AsyncTask<Integer, String, String> {
-
 
         String distance;
         String speed;
         String totalRoutes;
-
         @Override
         protected String doInBackground(Integer... params) {
             HttpClient client = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/stats/" + params[0]);
             httpGet.setHeader("content-type", "application/json");
-
             try {
                 HttpResponse response = client.execute(httpGet);
                 JSONArray array = new JSONArray(EntityUtils.toString(response.getEntity()));
@@ -243,15 +236,14 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
             } catch (Exception ex) {
                 Log.i("Error", "" + ex);
             }
-
             return null;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            txtDistance.setText(distance + " km");
-            txtBestSpeed.setText(speed + " km/h");
+            txtDistance.setText(distance + " Km");
+            txtBestSpeed.setText(speed + " Km/h");
             txtTotalRoutes.setText(totalRoutes);
         }
     }
@@ -260,7 +252,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
 
         ArrayList<Route> respRoutes;
         private final ProgressDialog dialog = new ProgressDialog(HomeActivity.this);
-
 
         @Override
         protected void onPreExecute() {
@@ -296,6 +287,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                     }
                     route.setCoordinateList(coordinates);
                     route.setTimeToFin(Time.valueOf(jsonObject.getString("TimeToFin")));
+                    route.setDifficultyLevel(String.valueOf(jsonObject.getInt("DifficultyLevel")));
                     routes.add(route);
                 }
             } catch (Exception ex) {
@@ -308,12 +300,58 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         protected void onPostExecute(ArrayList array) {
             routes = array;
             for (Route r : routes) {
-                dbHelper.addChallenges(r);
+               dbHelper.addChallenges(r);
             }
             View target = findViewById(R.id.action_badge);
             BadgeView badge = new BadgeView(HomeActivity.this, target);
             badge.setText(routes.size() + "");
             badge.show();
+            dialog.dismiss();
+        }
+    }
+
+    class userProfileDetails extends AsyncTask<Integer, String, String>{
+        String username;
+        String email;
+        String height;
+        String weight;
+        private final ProgressDialog dialog = new ProgressDialog(HomeActivity.this);
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            dialog.setMessage(getString(R.string.loading_dialog));
+            dialog.show();
+        }
+        @Override
+        protected String doInBackground(Integer... params) {
+            HttpClient client = new DefaultHttpClient();
+          //  HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/profile/" + params[0]);
+            HttpGet httpGet = new HttpGet("http://localhost:31408/Api/user/profile/" + params[0]);
+            httpGet.setHeader("content-type", "application/json");
+            Log.i("Load", "Load Profile");
+            try
+            {
+                HttpResponse response = client.execute(httpGet);
+                JSONArray jsonArray = new JSONArray(EntityUtils.toString(response.getEntity()));
+                username = jsonArray.getString(0);
+                email = jsonArray.getString(1);
+                height = jsonArray.getString(2);
+                weight = jsonArray.getString(3);
+            }
+            catch (Exception ex)
+            {
+                Log.i("Error", "" + ex);
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            userProfile = username;
+            emailProfile =  email ;
+            heightProfile = height;
+            weightProfile = weight;
             dialog.dismiss();
         }
     }

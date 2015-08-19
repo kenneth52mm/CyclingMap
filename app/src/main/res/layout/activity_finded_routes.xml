@@ -14,35 +14,22 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ToolbarTheme"
-        >
+        app:theme="@style/ToolbarTheme" />
 
-        <TextView android:text="@string/find_route_title" android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView9"
-            android:textSize="20dp"
-            android:textColor="#fffffdfe" />
-    </android.support.v7.widget.Toolbar>
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 
-
-
-    <ExpandableListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lfinded_routes"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#ffffffff"
-        android:background="@color/greenLight"
-        android:clickable="true" />
+    <TextView
+        android:id="@android:id/empty"
+        android:text="@string/empty_list"
+        style="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_et" />
 
 </RelativeLayout>

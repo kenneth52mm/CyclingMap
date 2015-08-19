@@ -225,10 +225,6 @@ public class RutasActivity extends FragmentActivity implements LocationListener{
         RUNNING = false;
         chrono.stop();
         speed = ((long) distance / chrono.getBase()) / 1000;
-        LatLng[] coords = new LatLng[1];
-        coords[0] = new LatLng(9.799982, -84.033366);
-        LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
-
         //Muestro distancia y velocidad
         NumberFormat numFormat = NumberFormat.getInstance();
         numFormat.setMaximumFractionDigits(2);

@@ -8,6 +8,7 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.business.UserRoutesAdapter;
 import com.cyclingmap.orion.cyclingmap.model.Route;
 import com.cyclingmap.orion.cyclingmap.utils.CustomListAdapter;
 
@@ -18,46 +19,27 @@ import java.util.List;
 
 public class FindedRoutes extends ActionBarActivity {
 
-    CustomListAdapter listAdapter;
-    ExpandableListView eListView;
-    HashMap<String, List<String>> listWithSubitem;
-    List<String> listDataHeader;
-    ArrayList<Route> findeRoutes;
+
+   private  ArrayList<Route> findeRoutes;
+   private ListView routeList;
+    private UserRoutesAdapter routesAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finded_routes);
-
-        eListView = (ExpandableListView) findViewById(R.id.lfinded_routes);
-
+        routeList= (ListView) findViewById(R.id.list);
         routesData();
-
-        listAdapter = new CustomListAdapter(this, listDataHeader, listWithSubitem);
-
-        eListView.setAdapter(listAdapter);
     }
 
     private void routesData()
     {
-        Bundle b = getIntent().getBundleExtra("b_finded");
-        if(b!= null) {
-            findeRoutes = (ArrayList<Route>) b.getSerializable("finded_routes");
-
-            listDataHeader = new ArrayList<String>();
-            listWithSubitem = new HashMap<String, List<String>>();
-
-            for (int i = 0; i <= findeRoutes.size()-1; i++) {
-                listDataHeader.add("Ruta " + findeRoutes.get(i).getIdRoute());
-            }
-
-            for (int i = 0;  i <= findeRoutes.size()-1; i++) {
-                List<String> items = new ArrayList<String>();
-                items.add("Distancia " + findeRoutes.get(i).getDistance());
-                items.add("Velocidad media " + findeRoutes.get(i).getAvgSpeed());
-                items.add("Nivel " + findeRoutes.get(i).getDifficultyLevel());
-                listWithSubitem.put(listDataHeader.get(i), items);
-            }
-        }
+        Bundle b = getIntent().getExtras();
+        findeRoutes= (ArrayList<Route>) b.getSerializable("finded_routes");
+        routeList= (ListView) findViewById(R.id.list);
+        routesAdapter=new UserRoutesAdapter(findeRoutes,FindedRoutes.this);
+        routeList.setAdapter(routesAdapter);
+        routesAdapter.notifyDataSetChanged();
     }
 }

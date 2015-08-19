@@ -12,7 +12,7 @@
         android:id="@+id/mapExistRoute"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="fill_parent"
-        android:layout_height="230dp"
+        android:layout_height="@dimen/height_map"
         android:layout_column="0"
         android:layout_columnSpan="6"
         android:layout_gravity="center"
@@ -25,37 +25,28 @@
     <RelativeLayout
         android:id="@+id/r1"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="@dimen/layout_height_ch"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/mapExistRoute"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="@dimen/bottom_layout"
+        android:layout_marginTop="@dimen/layout_top_ex">
         <Chronometer
             android:id="@+id/chrono_exist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|fill"
             android:textIsSelectable="true"
-            android:textSize="50sp"
+            android:textSize="@dimen/size_chrono"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/time_Total"
-            android:id="@+id/textView10"
-            android:layout_below="@+id/chrono_exist"
-            android:layout_alignRight="@+id/chrono_exist"
-            android:layout_alignEnd="@+id/chrono_exist" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/r2"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/layout_height_ex"
         android:layout_below="@+id/r1"
         android:layout_alignLeft="@+id/mapExistRoute"
         android:layout_alignStart="@+id/mapExistRoute">
@@ -71,10 +62,13 @@
             android:layout_row="5"
             android:text="0.0"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="30sp"
+            android:textSize="@dimen/size_dis_sp"
             android:layout_alignParentTop="true"
             android:layout_alignLeft="@+id/textView12"
-            android:layout_alignStart="@+id/textView12" />
+            android:layout_alignStart="@+id/textView12"
+            android:layout_alignBottom="@+id/txt_speed_exist"
+            android:layout_alignRight="@+id/textView12"
+            android:layout_alignEnd="@+id/textView12" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -83,7 +77,8 @@
             android:text="@string/distance_Total"
             android:id="@+id/textView12"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="45dp" />
+            android:layout_marginLeft="45dp"
+            android:textSize="@dimen/size_text" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -94,7 +89,8 @@
             android:layout_marginRight="45dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:textSize="@dimen/size_text" />
 
         <TextView
             android:id="@+id/txt_speed_exist"
@@ -103,7 +99,7 @@
             android:layout_gravity="center_horizontal"
             android:text="0.0"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="30sp"
+            android:textSize="@dimen/size_dis_sp"
             android:layout_above="@+id/textView13"
             android:layout_alignRight="@+id/textView13"
             android:layout_alignEnd="@+id/textView13" />
@@ -116,11 +112,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/mapExistRoute"
-        android:layout_alignEnd="@+id/mapExistRoute">
+        android:layout_alignEnd="@+id/mapExistRoute"
+        android:layout_marginBottom="@dimen/button_bottom">
 
         <ImageButton
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="@dimen/little_button"
+            android:layout_height="@dimen/little_button"
             android:src="@drawable/ic_stop"
             android:background="@drawable/circle"
             android:id="@+id/imageStop"
@@ -131,9 +128,9 @@
             android:layout_marginTop="10dp" />
 
         <ImageButton
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_see"
+            android:layout_width="@dimen/little_button"
+            android:layout_height="@dimen/little_button"
+            android:src="@drawable/ic_go_end"
             android:background="@drawable/circle"
             android:id="@+id/imageSee"
             android:onClick="seeRoute"
@@ -145,8 +142,8 @@
 
         <at.markushi.ui.CircleButton
             android:id="@+id/btnPlayER"
-            android:layout_width="100dip"
-            android:layout_height="100dip"
+            android:layout_width="@dimen/big_button"
+            android:layout_height="@dimen/big_button"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:src="@mipmap/ic_play"
