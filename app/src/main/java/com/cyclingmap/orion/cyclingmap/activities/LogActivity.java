@@ -232,7 +232,7 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         // Toast.makeText(this, "Connected", Toast.LENGTH_LONG).show();
 
         if (!signedInUser) {
-            getProfileInformation();
+          //  getProfileInformation();
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             finish();

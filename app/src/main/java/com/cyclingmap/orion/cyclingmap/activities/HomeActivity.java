@@ -27,6 +27,7 @@ import com.cyclingmap.orion.cyclingmap.business.UserRoutesAdapter;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
 import com.cyclingmap.orion.cyclingmap.model.Route;
+import com.cyclingmap.orion.cyclingmap.model.User;
 import com.cyclingmap.orion.cyclingmap.utils.BadgeDrawable;
 import com.cyclingmap.orion.cyclingmap.utils.Dialog_Notification;
 import com.cyclingmap.orion.cyclingmap.utils.addBadge;
@@ -35,6 +36,7 @@ import com.facebook.login.LoginManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 import com.readystatesoftware.viewbadger.BadgeView;
 
 import org.apache.http.HttpResponse;
@@ -189,7 +191,23 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onConnected(Bundle bundle) {
+        getProfileInformation();
+    }
 
+    private void getProfileInformation() {
+        try {
+            if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+                Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+
+                String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
+                User u = new User();
+                u.setEmail(email);
+                u.setName(currentPerson.getDisplayName());
+                dbHelper.addUser(u);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
