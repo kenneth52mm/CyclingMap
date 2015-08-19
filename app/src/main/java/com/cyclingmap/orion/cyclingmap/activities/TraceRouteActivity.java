@@ -87,7 +87,6 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
         dbHelper = new DBHelper(getApplicationContext());
         getCurrentLocation();
         buttonTest();
-        activateLocation();
         loadMap();
     }
 
@@ -214,25 +213,6 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
         if (route.size() == 1) {
             centerMapOnMyLocation();
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 5, this);
-        }
-    }
-    public void activateLocation(){
-        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if(!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(getString(R.string.dialog_title));
-            builder.setMessage(R.string.dialog_message);
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivity(intent);
-                }
-            });
-            Dialog alertDialog = builder.create();
-            alertDialog.setCanceledOnTouchOutside(false);
-            alertDialog.show();
         }
     }
     //  @Override
