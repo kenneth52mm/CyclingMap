@@ -115,30 +115,34 @@
         android:layout_alignEnd="@+id/mapExistRoute"
         android:layout_marginBottom="@dimen/button_bottom">
 
-        <ImageButton
+        <at.markushi.ui.CircleButton
+            android:id="@+id/BtnStop"
+            android:onClick="stopTrace"
             android:layout_width="@dimen/little_button"
             android:layout_height="@dimen/little_button"
             android:src="@drawable/ic_stop"
-            android:background="@drawable/circle"
-            android:id="@+id/imageStop"
-            android:layout_gravity="right|bottom"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/btnPlayER"
             android:layout_toStartOf="@+id/btnPlayER"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:layout_gravity="right|bottom"
+            app:cb_color="#00994C"
+            app:cb_pressedRingWidth="4dp"/>
 
-        <ImageButton
-            android:layout_width="@dimen/little_button"
-            android:layout_height="@dimen/little_button"
-            android:src="@drawable/ic_go_end"
-            android:background="@drawable/circle"
+        <at.markushi.ui.CircleButton
             android:id="@+id/imageSee"
             android:onClick="seeRoute"
+            android:layout_width="@dimen/little_button"
+            android:layout_height="@dimen/little_button"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_go_end"
             android:layout_gravity="right|bottom"
-            android:layout_alignTop="@+id/imageStop"
+            android:layout_alignTop="@+id/BtnStop"
             android:layout_toRightOf="@+id/btnPlayER"
             android:layout_toEndOf="@+id/btnPlayER"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            app:cb_color="#00994C"
+            app:cb_pressedRingWidth="4dp"/>
 
         <at.markushi.ui.CircleButton
             android:id="@+id/btnPlayER"
@@ -150,5 +154,4 @@
             app:cb_color="#00994C"
             app:cb_pressedRingWidth="8dp" />
     </RelativeLayout>
-
 </RelativeLayout>
