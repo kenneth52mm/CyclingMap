@@ -113,6 +113,7 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
 
         Intent i = new Intent(TraceRouteActivity.this, EndTraceActivity.class);
         i.putExtra("route", (Serializable) route);
+        i.putExtra("coords",(Serializable)coords);
         i.putExtra("Distance", dist);
         i.putExtra("Duration", timeElapsed);
         i.putExtra("Speed", speedAvg);

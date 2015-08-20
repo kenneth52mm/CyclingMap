@@ -65,6 +65,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     private RouteWsHelper routeWsHelper = new RouteWsHelper();
     ArrayList<Province> routeProvinces;
     private ArrayList routeCoords;
+    private ArrayList<Coordinate> coordinates;
     //String[] arrayLevel = {"Principiante", "Intermedio", "Avanzado"};
     Spinner spinner_level;
     private Route route;
@@ -96,6 +97,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         dbHelper = new DBHelper(getApplicationContext());
         Bundle bundle = getIntent().getExtras();
         routeCoords = (ArrayList) bundle.get("route");
+        coordinates= (ArrayList<Coordinate>) bundle.get("coords");
         distance = bundle.getDouble("Distance");
         duration = bundle.getLong("Duration");
         speed = bundle.getDouble("Speed");
@@ -134,7 +136,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         route.setAvgSpeed(speed);
         /*Difficulty level*/
         route.setProvinces(routeProvinces);
-        route.setCoordinateList(routeCoords);
+        route.setCoordinateList(coordinates);
         int netStatus = NetworkUtil.getConnectivityState(EndTraceActivity.this);
         switch (netStatus) {
             case 0:

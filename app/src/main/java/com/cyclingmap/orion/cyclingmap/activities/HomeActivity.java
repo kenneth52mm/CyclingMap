@@ -68,6 +68,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     private String emailProfile;
     private String heightProfile;
     private String weightProfile;
+    private int size=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,26 +90,39 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
             setupNavigationDrawerContent(navigationView);
         }
         setupNavigationDrawerContent(navigationView);
-        LoadUserStats userStats = new LoadUserStats();
-        userStats.execute(13);
-        UserChallengesHelper challengesHelper = new UserChallengesHelper();
-        challengesHelper.execute(13);
+        Bundle bundle = getIntent().getExtras();
+        size = (int) bundle.get("challenges");
+        String[] user_stats = (String[]) bundle.get("user_stats");
+        txtDistance.setText(user_stats[0] + " km");
+        txtBestSpeed.setText(user_stats[1] + "km/h");
+        txtTotalRoutes.setText(user_stats[2]);
+
+//        LoadUserStats userStats = new LoadUserStats();
+//        userStats.execute(13);
+//        UserChallengesHelper challengesHelper = new UserChallengesHelper();
+//        challengesHelper.execute(13);
         userProfileDetails userDetails = new userProfileDetails();
         userDetails.execute(1);
     }
+
     public void newRoute(View v) {
         Intent i = new Intent(HomeActivity.this, TraceRouteActivity.class);
         startActivity(i);
     }
+
     public void searchRoute(View v) {
         Intent i = new Intent(HomeActivity.this, BuscarRutas.class);
         startActivity(i);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem item = menu.findItem(R.id.action_badge);
-
+        View target = findViewById(R.id.action_badge);
+        BadgeView badge = new BadgeView(this, target);
+        String not=String.valueOf(size);
+        badge.setText(not);
+        badge.show();
         return true;
     }
 
@@ -174,15 +188,16 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
 //                                    LoginManager.getInstance().logOut();
 //                                    finish();
 //                                } else {
-                                    mGoogleApiClient.disconnect();
-                                    if (!mGoogleApiClient.isConnected())
-                                        finish();
+                                mGoogleApiClient.disconnect();
+                                if (!mGoogleApiClient.isConnected())
+                                    finish();
                                 Intent i = new Intent(HomeActivity.this, LogActivity.class);
                                 startActivity(i);
                                 //}
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-                        }return true;
+                        }
+                        return true;
                     }
                 });
     }
@@ -209,15 +224,19 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     @Override
-    public void onConnectionSuspended(int i) {}
+    public void onConnectionSuspended(int i) {
+    }
+
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {}
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+    }
 
     class LoadUserStats extends AsyncTask<Integer, String, String> {
 
         String distance;
         String speed;
         String totalRoutes;
+
         @Override
         protected String doInBackground(Integer... params) {
             HttpClient client = new DefaultHttpClient();
@@ -296,7 +315,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         protected void onPostExecute(ArrayList array) {
             routes = array;
             for (Route r : routes) {
-               dbHelper.addChallenges(r);
+                dbHelper.addChallenges(r);
             }
             View target = findViewById(R.id.action_badge);
             BadgeView badge = new BadgeView(HomeActivity.this, target);
@@ -306,7 +325,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         }
     }
 
-    class userProfileDetails extends AsyncTask<Integer, String, String>{
+    class userProfileDetails extends AsyncTask<Integer, String, String> {
         String username;
         String email;
         String height;
@@ -314,38 +333,37 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         private final ProgressDialog dialog = new ProgressDialog(HomeActivity.this);
 
         @Override
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             super.onPreExecute();
             dialog.setMessage(getString(R.string.loading_dialog));
             dialog.show();
         }
+
         @Override
         protected String doInBackground(Integer... params) {
             HttpClient client = new DefaultHttpClient();
-          //  HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/profile/" + params[0]);
+            //  HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/profile/" + params[0]);
             HttpGet httpGet = new HttpGet("http://localhost:31408/Api/user/profile/" + params[0]);
             httpGet.setHeader("content-type", "application/json");
             Log.i("Load", "Load Profile");
-            try
-            {
+            try {
                 HttpResponse response = client.execute(httpGet);
                 JSONArray jsonArray = new JSONArray(EntityUtils.toString(response.getEntity()));
                 username = jsonArray.getString(0);
                 email = jsonArray.getString(1);
                 height = jsonArray.getString(2);
                 weight = jsonArray.getString(3);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Log.i("Error", "" + ex);
             }
             return null;
         }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             userProfile = username;
-            emailProfile =  email ;
+            emailProfile = email;
             heightProfile = height;
             weightProfile = weight;
             dialog.dismiss();
