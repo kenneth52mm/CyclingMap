@@ -30,6 +30,7 @@ public class RouteWsHelper extends AsyncTask<Object, String, String> {
 
     @Override
     protected String doInBackground(Object... params) {
+       // android.os.Debug.waitForDebugger();
         Route route = (Route) params[0];
         String resp = "";
         HttpClient client = new DefaultHttpClient();
@@ -72,7 +73,7 @@ public class RouteWsHelper extends AsyncTask<Object, String, String> {
             resp = EntityUtils.toString(response.getEntity());
 
         } catch (Exception ex) {
-            Log.e("route ex", ex.getMessage());
+            Log.e("route ex",""+ex);
         }
 
         return resp;

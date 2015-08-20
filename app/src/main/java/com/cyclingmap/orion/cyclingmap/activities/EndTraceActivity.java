@@ -187,16 +187,17 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
 
     class RouteWsHelper extends AsyncTask<Object, String, String> {
 
-        private final ProgressDialog dialog = new ProgressDialog(EndTraceActivity.this);
+        //        private final ProgressDialog dialog = new ProgressDialog(EndTraceActivity.this);
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.setMessage("Saving..");
-            dialog.show();
+            //dialog.setMessage("Saving..");
+            //dialog.show();
         }
 
         @Override
         protected String doInBackground(Object... params) {
+            //android.os.Debug.waitForDebugger();
             Route route = (Route) params[0];
             String resp = "";
             HttpClient client = new DefaultHttpClient();
@@ -239,7 +240,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
                 resp = EntityUtils.toString(response.getEntity());
 
             } catch (Exception ex) {
-                Log.e("route ex", ex.getMessage());
+                Log.e("route ex", "" + ex);
             }
 
             return resp;
@@ -248,7 +249,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            dialog.dismiss();
+            //dialog.dismiss();
         }
     }
 }
