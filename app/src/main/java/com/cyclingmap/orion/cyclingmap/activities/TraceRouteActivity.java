@@ -88,6 +88,7 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
         getCurrentLocation();
         buttonTest();
         loadMap();
+        activateLocation();
     }
 
     public void seeRoute(View v){
@@ -194,7 +195,6 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
             public void onClick(View v) {
                 if (flag) {
                     btnPlay.setImageResource(R.mipmap.ic_pause);
-                    RUNNING = true;
                     startTrace(v);
                     flag = false;
                 } else {
@@ -205,6 +205,27 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
             }
         });
     }
+
+    public void activateLocation(){
+        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if(!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.dialog_title));
+            builder.setMessage(R.string.dialog_message);
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            });
+            Dialog alertDialog = builder.create();
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.show();
+        }
+    }
+
     @Override
     public void onLocationChanged(Location location) {
         if (RUNNING) {

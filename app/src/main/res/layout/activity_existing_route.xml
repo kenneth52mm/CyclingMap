@@ -42,14 +42,21 @@
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
-
+    <View
+        android:layout_width="wrap_content"
+        android:background="@drawable/gradient"
+        android:layout_height="1dp"
+        android:layout_above="@+id/r2"
+        android:layout_alignLeft="@+id/r2"
+        android:layout_alignStart="@+id/r2"></View>
     <RelativeLayout
         android:id="@+id/r2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_height_ex"
         android:layout_below="@+id/r1"
         android:layout_alignLeft="@+id/mapExistRoute"
-        android:layout_alignStart="@+id/mapExistRoute">
+        android:layout_alignStart="@+id/mapExistRoute"
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:id="@+id/txt_dist_exist"
@@ -105,7 +112,6 @@
             android:layout_alignEnd="@+id/textView13" />
 
     </RelativeLayout>
-
     <RelativeLayout
         android:id="@+id/r3"
         android:layout_width="match_parent"

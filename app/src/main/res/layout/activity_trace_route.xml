@@ -5,9 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/windowBackground"
-    >
-
+    android:background="@color/windowBackground">
     <fragment
         android:id="@+id/mapTrace"
         class="com.google.android.gms.maps.SupportMapFragment"
@@ -38,7 +36,13 @@
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
-
+    <View
+        android:layout_width="wrap_content"
+        android:background="@drawable/gradient"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/r1"
+        android:layout_alignLeft="@+id/r2"
+        android:layout_alignStart="@+id/r2"></View>
     <RelativeLayout
         android:id="@+id/r2"
         android:layout_width="match_parent"
@@ -58,7 +62,6 @@
             android:layout_alignParentTop="true"
             android:layout_alignLeft="@+id/textView12"
             android:layout_alignStart="@+id/textView12" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +71,6 @@
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="45dp"
             android:textSize="@dimen/size_text" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,7 +82,6 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textSize="@dimen/size_text" />
-
         <TextView
             android:id="@+id/txt_speed_trace"
             android:layout_width="wrap_content"
@@ -92,9 +93,7 @@
             android:layout_above="@+id/textView13"
             android:layout_alignRight="@+id/textView13"
             android:layout_alignEnd="@+id/textView13" />
-
     </RelativeLayout>
-
     <RelativeLayout
         android:id="@+id/r3"
         android:layout_width="match_parent"

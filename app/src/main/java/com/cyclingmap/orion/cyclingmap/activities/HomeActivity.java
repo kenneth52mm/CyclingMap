@@ -106,8 +106,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
 //        userStats.execute(13);
 //        UserChallengesHelper challengesHelper = new UserChallengesHelper();
 //        challengesHelper.execute(13);
-        userProfileDetails userDetails = new userProfileDetails();
-        userDetails.execute(1);
+
     }
 
     public void newRoute(View v) {
@@ -326,48 +325,5 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         }
     }
 
-    class userProfileDetails extends AsyncTask<Integer, String, String> {
-        String username;
-        String email;
-        String height;
-        String weight;
-        private final ProgressDialog dialog = new ProgressDialog(HomeActivity.this);
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            dialog.setMessage(getString(R.string.loading_dialog));
-            dialog.show();
-        }
-
-        @Override
-        protected String doInBackground(Integer... params) {
-            HttpClient client = new DefaultHttpClient();
-            //  HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/profile/" + params[0]);
-            HttpGet httpGet = new HttpGet("http://localhost:31408/Api/user/profile/" + params[0]);
-            httpGet.setHeader("content-type", "application/json");
-            Log.i("Load", "Load Profile");
-            try {
-                HttpResponse response = client.execute(httpGet);
-                JSONArray jsonArray = new JSONArray(EntityUtils.toString(response.getEntity()));
-                username = jsonArray.getString(0);
-                email = jsonArray.getString(1);
-                height = jsonArray.getString(2);
-                weight = jsonArray.getString(3);
-            } catch (Exception ex) {
-                Log.i("Error", "" + ex);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            userProfile = username;
-            emailProfile = email;
-            heightProfile = height;
-            weightProfile = weight;
-            dialog.dismiss();
-        }
-    }
 }

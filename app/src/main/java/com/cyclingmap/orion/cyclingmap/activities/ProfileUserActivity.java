@@ -54,28 +54,73 @@ public class ProfileUserActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(colorPrimaryDark);
         }
-        dbHelper=new DBHelper(ProfileUserActivity.this);
+        dbHelper = new DBHelper(ProfileUserActivity.this);
         userProfile = (TextView) findViewById(R.id.txtUsernameProfile);
         emailProfile = (TextView) findViewById(R.id.txtEmailProfile);
         heightProfile = (TextView) findViewById(R.id.txtHeight);
         weightProfile = (TextView) findViewById(R.id.txtWeight);
-        User u=dbHelper.getUser();
-       // int id=u.getId();
-        String name =u.getName();
-        String mail=u.getEmail();
 
-//        Bundle bundle = getIntent().getExtras();
-//        String uName = bundle.getString("username");
-//        String uEmail = bundle.getString("email");
-//        String uHeight = bundle.getString("height");
-//        String uWeight = bundle.getString("weight");
-//
-        userProfile.setText(name);
-        emailProfile.setText(mail);
-//        heightProfile.setText(uHeight);
-//        weightProfile.setText(uWeight);
-        // userProfileDetails userInfo = new userProfileDetails();
-        // userInfo.execute(1);
+        User u = dbHelper.getUser();
+        int id_user = u.getId();
+        userProfileDetails userDetails = new userProfileDetails();
+        userDetails.execute(id_user);
+      // String name = u.getName();
+      // String mail= u.getEmail();
+
+     //   Bundle bundle = getIntent().getExtras();
+     //   String uName = bundle.getString("username");
+     //   String uEmail = bundle.getString("email");
+     //   String uHeight = bundle.getString("height");
+     //   String uWeight = bundle.getString("weight");
+
+      //  userProfile.setText(uName);
+       // emailProfile.setText(uEmail);
+     //   heightProfile.setText(uHeight);//
+      //  weightProfile.setText(uWeight);
+    }
+
+    class userProfileDetails extends AsyncTask<Integer, String, String> {
+        String username;
+        String email;
+        String height;
+        String weight;
+        private final ProgressDialog dialog = new ProgressDialog(ProfileUserActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.setMessage(getString(R.string.loading_dialog));
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Integer... params) {
+            HttpClient client = new DefaultHttpClient();
+            HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/profile/" + params[0]);
+            httpGet.setHeader("content-type", "application/json");
+            Log.i("Load", "Load Profile");
+            try {
+                HttpResponse response = client.execute(httpGet);
+                JSONArray jsonArray = new JSONArray(EntityUtils.toString(response.getEntity()));
+                username = jsonArray.getString(0);
+                email = jsonArray.getString(1);
+                height = jsonArray.getString(2);
+                weight = jsonArray.getString(3);
+            } catch (Exception ex) {
+                Log.i("Error", "" + ex);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            userProfile.setText(username);
+            emailProfile.setText(email);
+            heightProfile.setText(height);
+            weightProfile.setText(weight);
+            dialog.dismiss();
+        }
     }
 
     public void profileConfig(View v){

@@ -1,6 +1,9 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
@@ -9,6 +12,7 @@ import android.location.LocationManager;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -101,6 +105,7 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
 
         getCurrentLocation();
         test();
+        activateLocation();
     }
 
     public void getCurrentLocation() {
@@ -148,20 +153,28 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
         startActivity(i);
     }
 
+    public void startTrace(View v) {
+        RUNNING = true;
+        chronometerExistRoute.setBase(SystemClock.elapsedRealtime() + timeRunning);
+        chronometerExistRoute.start();
+    }
+    public void pauseTrace(View v){
+        timeRunning = chronometerExistRoute.getBase() - SystemClock.elapsedRealtime();
+        chronometerExistRoute.getBase();
+        chronometerExistRoute.stop();
+    }
+
     public void test() {
         buttonPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (flag) {
                     buttonPlay.setImageResource(R.mipmap.ic_pause);
-                    RUNNING = true;
-                    chronometerExistRoute.setBase(SystemClock.elapsedRealtime());
-                    chronometerExistRoute.start();
+                    startTrace(v);
                     flag = false;
                 } else {
                     buttonPlay.setImageResource(R.mipmap.ic_play);
-                    chronometerExistRoute.setBase(SystemClock.elapsedRealtime());
-                    //    chronometerExistRoute.pause();
+                    pauseTrace(v);
                     flag = true;
                 }
             }
@@ -194,23 +207,34 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
     public void stopTrace(View v) {
         RUNNING = false;
         chronometerExistRoute.stop();
-        //Log.i("Tiempo ", "" + chrono.getBase());
         speed = ((long) distance / timeRunning) / 1000;
-        //Log.i("Velocidad ", "" + speed);
-
         LatLng[] coords = new LatLng[1];
         coords[0] = new LatLng(9.799982, -84.033366);
         LocationAddress.getRouteInfo(coords, getApplicationContext(), new GeocoderHandler());
-
-        //Muestro distancia y velocidad
         NumberFormat numFormat = NumberFormat.getInstance();
         numFormat.setMaximumFractionDigits(2);
         numFormat.setRoundingMode(RoundingMode.DOWN);
         Double distan = this.getTotalDistance()/1000;
-        //     txtDistan.setText( numFormat.format( distan ) + "");
-        //     txtAvegSpeed.setText(  numFormat.format( this.getTotalDistance()/ (chrono.getBase()/3600000) )+ "");
-
         loadMap(v);
+    }
+    public void activateLocation(){
+        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if(!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.dialog_title));
+            builder.setMessage(R.string.dialog_message);
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            });
+            Dialog alertDialog = builder.create();
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.show();
+        }
     }
 
     public void loadMap(View v) {
@@ -262,26 +286,10 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        chronometerExistRoute.setBase(SystemClock.elapsedRealtime() - chronometerExistRoute.getBase());
-    }
-
-   // @Override
-   // protected void onResumeFragments() {
-   //     super.onResumeFragments();
-   //     chronometerExistRoute.setBase(SystemClock.elapsedRealtime() - chronometerExistRoute.getBase());
-   // }
+    public void onStatusChanged(String provider, int status, Bundle extras) {}
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
+    public void onProviderEnabled(String provider) {}
 
     @Override
     public void onProviderDisabled(String provider) {

@@ -5,23 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
     tools:context="com.cyclingmap.orion.cyclingmap.activities.BuscarRutas">
-
-    <!-- <include
-         android:id="@+id/toolbar"
-         layout="@layout/tool_bar">
-
-         <TextView
-             android:layout_width="fill_parent"
-             android:layout_height="wrap_content"
-             android:text="@string/busqueda_head"
-             android:id="@+id/txtRut_Buscar_Enca"
-             android:layout_marginBottom="10dp"
-             android:height="40dp"
-             android:textSize="20dp"
-             android:layout_marginTop="10dp" />
-
-     </include> -->
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -30,7 +13,6 @@
         android:elevation="4dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ToolbarTheme" >
-
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -42,11 +24,7 @@
             android:textStyle="bold"
             android:textColor="@color/md_white_1000"
             android:layout_marginTop="10dp" />
-
-
     </android.support.v7.widget.Toolbar>
-
-
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
@@ -54,25 +32,21 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
-
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/top_buscar"
             android:layout_marginBottom="@dimen/bottom_layout_one">
-
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent">
-
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/imageView"
                     android:src="@mipmap/ic_distanc"
                     android:layout_marginLeft="@dimen/imgview_margin_left" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,7 +55,6 @@
                     android:layout_marginTop="10dp"
                     android:textSize="@dimen/text_size_search"
                     android:layout_marginLeft="@dimen/textview_margin_left" />
-
                 <EditText
                     android:layout_width="@dimen/textview_number"
                     android:layout_height="wrap_content"
@@ -92,15 +65,12 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="@dimen/edittext_margin_left"
                     android:textSize="@dimen/text_size_search" />
-
             </LinearLayout>
-
         </TableRow>
         <View
             android:layout_width="wrap_content"
             android:background="@drawable/gradient"
             android:layout_height="1dp"></View>
-
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="match_parent">
