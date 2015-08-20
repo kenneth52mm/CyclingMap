@@ -83,7 +83,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void addUser(User user) {
         ContentValues values = new ContentValues();
-        // values.put("id_user", user.getId());
+        values.put("id_user", user.getId());
         values.put("name", user.getName());
         values.put("email", user.getEmail());
         if (user.getPassword() != null)
@@ -252,6 +252,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 id_ser = c.getInt(0);
+                break;
             } while (c.moveToNext());
         }
         return id_ser;
@@ -273,6 +274,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return u;
     }
+
+    public boolean isUser(String mail)
+    {
+         boolean resp=false;
+         Cursor c=helper.rawQuery("Select * from user where email='"+mail+"';",null);
+         if(c.moveToFirst()){
+            do{
+               resp=true;
+            }while(c.moveToNext());
+         }
+    }
+
 
 
     public int getIdRoute() {

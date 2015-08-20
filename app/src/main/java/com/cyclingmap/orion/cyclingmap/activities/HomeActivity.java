@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     private String emailProfile;
     private String heightProfile;
     private String weightProfile;
-    private int size=0;
+    private int size = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +97,11 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         txtBestSpeed.setText(user_stats[1] + "km/h");
         txtTotalRoutes.setText(user_stats[2]);
 
+        View target = findViewById(R.id.action_badge);
+        BadgeView badge = new BadgeView(this, target);
+        String not = String.valueOf(size);
+        badge.setText(not);
+        badge.show();
 //        LoadUserStats userStats = new LoadUserStats();
 //        userStats.execute(13);
 //        UserChallengesHelper challengesHelper = new UserChallengesHelper();
@@ -118,11 +123,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        View target = findViewById(R.id.action_badge);
-        BadgeView badge = new BadgeView(this, target);
-        String not=String.valueOf(size);
-        badge.setText(not);
-        badge.show();
+
         return true;
     }
 
