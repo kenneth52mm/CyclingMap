@@ -133,6 +133,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+
     public void addChallenges(Route route) {
 
         try {
@@ -176,9 +177,23 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return flag;
     }
+    public boolean hasRoutes(){
+        boolean flag=false;
+        Cursor c=helper.rawQuery("Select * from route;",null);
+        if(c.moveToFirst()){
+            do{
+                flag=true;
+            }while (c.moveToNext());
+        }
+        return flag;
+    }
 
     public void deleteChallenges() {
         String query = "Delete from challenges;";
+        helper.execSQL(query);
+    }
+    public void deleteRoute() {
+        String query = "Delete from route;";
         helper.execSQL(query);
     }
 
