@@ -24,7 +24,8 @@
     <dimen name="table_top">10dp</dimen>
     <dimen name="table_bottom">10dp</dimen>
     <dimen name="button_padding">5dp</dimen>
-    <dimen name="text_size">17sp</dimen>
+    <dimen name="text_size">20sp</dimen>
+    <dimen name="text_size_2">18sp</dimen>
     <dimen name="text_size_button_det">13sp</dimen>
     <!-- end -->
     <!-- Login and Register dimens -->
@@ -48,7 +49,6 @@
     <dimen name="textview_number">65dp</dimen>
     <dimen name="text_button_search">13sp</dimen>
     <!-- end -->
-
     <!-- Exisiting route -->
     <dimen name="layout_top_ex">15dp</dimen>
     <dimen name="layout_height_ch">90dp</dimen>
@@ -86,7 +86,7 @@
     <dimen name="image_top">10dp</dimen>
     <dimen name="text_size_pr">20dp</dimen>
     <dimen name="image_user">60dp</dimen>
-    <dimen name="text_size_button">15dp</dimen>
+    <dimen name="text_size_button">13dp</dimen>
     <!-- end -->
     <!-- End Trace -->
     <dimen name="layout_height_et">50dp</dimen>

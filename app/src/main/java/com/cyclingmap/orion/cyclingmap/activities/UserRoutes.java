@@ -61,10 +61,11 @@ public class UserRoutes extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Route route = routes.get(position);
                 Intent intent = new Intent(UserRoutes.this, DetallesRuta.class);
-                intent.putExtra("Distance", route.getDistance());
-                intent.putExtra("Id_Route", route.getIdRoute());
-                intent.putExtra("SpeedAveg", route.getAvgSpeed());
-                intent.putExtra("Level", route.getDifficultyLevel());
+            //    intent.putExtra("Province", route.getProvinces().get(0).toString());
+            //    intent.putExtra("Town"), route.getTown());
+                  intent.putExtra("Distance", route.getDistance());
+            //    intent.putExtra("Duration"), route.getDuration());
+                  intent.putExtra("Level", route.getDifficultyLevel());
                 startActivity(intent);
             }
         });

@@ -34,6 +34,7 @@
     <string name="input_pass">Por favor ingrese contraseña</string>
     <string name="input_username">Por favor ingrese su nombre</string>
     <string name="invalid_email">Correo Inválido</string>
+    <string name="register_error">Error en Registrar</string>
     <!-- End -->
     <!-- Drawer -->
     <string name="title_activity_principal">Principal</string>

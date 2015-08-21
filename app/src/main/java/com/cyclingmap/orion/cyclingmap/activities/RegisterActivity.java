@@ -122,7 +122,7 @@ public class RegisterActivity extends ActionBarActivity {
             //    dialog.show();
         } catch (Exception e) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Error en registrar");
+            builder.setTitle(getString(R.string.register_error));
             builder.setMessage(e.toString());
             builder.setPositiveButton("OK", null);
             builder.create();

@@ -5,12 +5,10 @@
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
     tools:context="com.cyclingmap.orion.cyclingmap.activities.ProfileUserActivity">
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/status_bar_kitkat_height"
         android:background="?colorPrimary" />
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -20,7 +18,6 @@
         android:elevation="4dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ToolbarTheme" />
-
     <RelativeLayout
         android:id="@+id/nav_header_container"
         android:layout_width="fill_parent"
@@ -30,7 +27,6 @@
         android:layout_marginTop="@dimen/container_top"
         android:layout_row="0"
         android:background="@color/greenLight">
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="@dimen/image_user"
@@ -42,9 +38,7 @@
             android:layout_marginStart="34dp"
             android:scaleType="fitStart"
             android:src="@drawable/ic_profile" />
-
     </RelativeLayout>
-
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
@@ -54,7 +48,6 @@
         android:layout_below="@+id/nav_header_container"
         android:layout_marginTop="@dimen/layout_top_first"
         android:orientation="horizontal">
-
         <TextView
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
@@ -63,9 +56,8 @@
             android:layout_marginTop="@dimen/textpr_margin_top"
             android:text="@string/name_user"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000"
-            android:textSize="@dimen/text_size_pr" />
-
+            android:textSize="@dimen/text_size"
+            android:textColor="#ff5a5757" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,8 +65,8 @@
             android:id="@+id/txtUsernameProfile"
             android:layout_marginLeft="@dimen/text_left_data"
             android:layout_marginTop="@dimen/textpr_margin_top"
-            android:textSize="@dimen/text_size_pr" />
-
+            android:textSize="@dimen/text_size_2"
+            android:textColor="#FF3B3B3B" />
     </LinearLayout>
     <View
         android:layout_width="wrap_content"
@@ -93,7 +85,6 @@
         android:orientation="horizontal"
         android:showDividers="beginning"
         android:layout_marginTop="@dimen/layout_top_pr">
-
         <TextView
             android:id="@+id/txt_label_weight"
             android:layout_width="wrap_content"
@@ -102,9 +93,8 @@
             android:layout_marginTop="@dimen/textpr_margin_top"
             android:text="@string/weight_user"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000"
-            android:textSize="@dimen/text_size_pr" />
-
+            android:textSize="@dimen/text_size"
+            android:textColor="#ff5a5757" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,8 +102,8 @@
             android:id="@+id/txtWeight"
             android:layout_marginLeft="@dimen/text_left_data"
             android:layout_marginTop="@dimen/textpr_margin_top"
-            android:textSize="@dimen/text_size_pr" />
-
+            android:textSize="@dimen/text_size_2"
+            android:textColor="#FF3B3B3B" />
     </LinearLayout>
     <View
         android:layout_width="wrap_content"
@@ -132,7 +122,6 @@
         android:orientation="horizontal"
         android:showDividers="beginning"
         android:layout_marginTop="@dimen/layout_top_pr">
-
         <TextView
             android:id="@+id/txtQFriends"
             android:layout_width="wrap_content"
@@ -141,9 +130,8 @@
             android:layout_marginTop="@dimen/textpr_margin_top"
             android:text="@string/email_user"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000"
-            android:textSize="@dimen/text_size_pr" />
-
+            android:textSize="@dimen/text_size"
+            android:textColor="#ff5a5757" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -151,8 +139,8 @@
             android:id="@+id/txtEmailProfile"
             android:layout_marginLeft="@dimen/text_left_data"
             android:layout_marginTop="@dimen/textpr_margin_top"
-            android:textSize="@dimen/text_size_pr" />
-
+            android:textSize="@dimen/text_size_2"
+            android:textColor="#FF3B3B3B" />
     </LinearLayout>
     <View
         android:layout_width="wrap_content"
@@ -161,7 +149,6 @@
         android:layout_below="@+id/linearLayout3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"></View>
-
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
@@ -172,7 +159,6 @@
         android:orientation="horizontal"
         android:showDividers="beginning"
         android:layout_marginTop="@dimen/layout_top_pr">
-
         <TextView
             android:id="@+id/txt_label_height"
             android:layout_width="wrap_content"
@@ -181,9 +167,8 @@
             android:layout_marginTop="@dimen/textpr_margin_top"
             android:text="@string/height_user"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000"
-            android:textSize="@dimen/text_size_pr" />
-
+            android:textSize="@dimen/text_size"
+            android:textColor="#ff5a5757" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -191,9 +176,8 @@
             android:id="@+id/txtHeight"
             android:layout_marginLeft="@dimen/text_left_data"
             android:layout_marginTop="@dimen/textpr_margin_top"
-            android:textSize="@dimen/text_size_pr" />
-
-
+            android:textSize="@dimen/text_size_2"
+            android:textColor="#FF3B3B3B" />
     </LinearLayout>
     <View
         android:layout_width="wrap_content"
@@ -202,7 +186,6 @@
         android:layout_below="@+id/linearLayout5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"></View>
-
     <LinearLayout
         android:id="@+id/LinearLayout6"
         android:layout_width="match_parent"
@@ -213,7 +196,6 @@
         android:layout_marginTop="@dimen/layout_top_pr"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
-
         <TextView
             android:id="@+id/txtConfig"
             android:layout_width="wrap_content"
@@ -222,9 +204,8 @@
             android:layout_marginTop="@dimen/textpr_margin_top"
             android:text="@string/configuration"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000"
-            android:textSize="@dimen/text_size_pr" />
-
+            android:textSize="@dimen/text_size"
+            android:textColor="#ff5a5757" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -232,9 +213,7 @@
             android:src="@drawable/ic_config"
             android:layout_marginTop="@dimen/image_top"
             android:layout_marginLeft="@dimen/image_margin" />
-
     </LinearLayout>
-
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
@@ -250,5 +229,4 @@
         android:textSize="@dimen/text_size_button"
         android:layout_marginLeft="@dimen/button_padding"
         android:layout_marginRight="@dimen/button_padding" />
-
 </RelativeLayout>

@@ -38,8 +38,6 @@ import java.util.ArrayList;
 public class DetallesRuta extends ActionBarActivity implements LocationListener{
 
     Button btnPlay;
-    UserRoutesAdapter routesAdapter;
-    ArrayList<Route> routes = new ArrayList<>();
     Route route;
     private TextView txtProvince;
     private TextView txtTown;
@@ -52,6 +50,7 @@ public class DetallesRuta extends ActionBarActivity implements LocationListener{
     private Location lc;
     private LocationManager locationManager;
     private PolylineOptions polylineOptions;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,48 +71,34 @@ public class DetallesRuta extends ActionBarActivity implements LocationListener{
         polylineOptions = new PolylineOptions();
         lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         btnPlay = (Button)findViewById(R.id.btnRuta_Det_Play);
-        drawRouteDetail();
         receiveData();
-      //  btnPlay.setOnClickListener(new View.OnClickListener() {
-      //      @Override
-      //      public void onClick(View v) {
-      //          Intent i = new Intent(DetallesRuta.this, ExistingRoute.class);
-      //          startActivity(i);
-      //      }
-      //  });
     }
     public void receiveData(){
-        //Those bundle's receive the data of user routes
         Bundle bundle = getIntent().getExtras();
-        routeCoords = (ArrayList) bundle.get("routeFinded");
-        Bundle b = getIntent().getExtras();
-        if(b != null) {
+        route = (Route) bundle.get("routeFinded");
+
+        if(route != null) {
             //Aca se recibe los datos PROVINCIA, CANTON, DISTANCIA, DURACION Y NIVEL
-            String province = b.getInt("province")+"";
-            String town = b.getDouble("town")+"";
-            String distance = b.getDouble("Distance")+"";
-            Long duration = b.getLong("duration");
-            String nivel = b.getString("Level");
+            String province = route.getProvinces().get(0).toString();
+            //        .getInt("province")+"";
+            //String town = b.getDouble("town")+"";
+            String distance = bundle.getString("Distance");
+            //Long duration = bundle.getLong("Duration");
+            String nivel = bundle.getString("Level");
 
-            String timeDuration = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
-                    TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
-                    TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
-
-            txtProvince.setText(province);
-            txtTown.setText(town);
+           // String timeDuration = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
+           //         TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
+           //         TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
+           // txtProvince.setText(province);
+           // txtTown.setText(town);
             txtDistanceDetail.setText(distance + "");
-            txtDurationDetail.setText(timeDuration + "");
+           // txtDurationDetail.setText(timeDuration + "");
             txtLevelDetail.setText( nivel + "");
+            drawRouteDetail();
         }
     }
+
     public void drawRouteDetail(){
-
-        //Error Beacause routeCoords are null
-
-        LatLng current = (LatLng) routeCoords.get(0);
-        CameraPosition myPosition = new CameraPosition.Builder()
-                .target(current).zoom(17).bearing(90).tilt(30).build();
-        mapDetail.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
         //Draw the route on fragmentmap
         polylineOptions.addAll(routeCoords);
         polylineOptions.width(12);

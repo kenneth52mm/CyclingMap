@@ -65,7 +65,8 @@
         <activity
             android:name=".activities.ProfileUserActivity"
             android:label="@string/title_activity_profile_user"
-            android:parentActivityName=".activities.HomeActivity" />
+            android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.DetallesRuta"
             android:label="@string/title_activity_detalles_ruta"
@@ -102,6 +103,5 @@
             android:name=".activities.TraceRouteActivity"
             android:label="@string/title_activity_trace_route"
             android:screenOrientation="portrait"/>
-
     </application>
 </manifest>
