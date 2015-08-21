@@ -81,7 +81,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return resp;
     }
 
-    public void addUser(User user) {
+    public int addUser(User user) {
         ContentValues values = new ContentValues();
         values.put("id_user", user.getId());
         values.put("name", user.getName());
@@ -89,7 +89,8 @@ public class DBHelper extends SQLiteOpenHelper {
         if (user.getPassword() != null)
             values.put("pass", user.getPassword());
         values.put("logged", 1);
-        helper.insert("user", null, values);
+        int resp = (int) helper.insert("user", null, values);
+        return resp;
     }
 
     public boolean addCoords(List<Coordinate> coordinates, int id_route) {
@@ -165,6 +166,16 @@ public class DBHelper extends SQLiteOpenHelper {
 //        deleteChallenges();
 
     }
+    public boolean hasChallenges(){
+        boolean flag=false;
+        Cursor c=helper.rawQuery("Select * from challenges;",null);
+        if(c.moveToFirst()){
+            do{
+                flag=true;
+            }while (c.moveToNext());
+        }
+        return flag;
+    }
 
     public void deleteChallenges() {
         String query = "Delete from challenges;";
@@ -181,11 +192,16 @@ public class DBHelper extends SQLiteOpenHelper {
         helper.update("user", values, query, null);
     }
 
-    public void loggin() {
+    public int loggin() {
         ContentValues values = new ContentValues();
         values.put("logged", 1);
-
-        helper.update("user", values, null, null);
+        int resp = helper.update("user", values, null, null);
+        return resp;
+    }
+    public void addId(int id){
+        ContentValues values=new ContentValues();
+        values.put("id_user",id);
+        helper.update("user",values,null,null);
     }
 
     public void loggout() {
@@ -269,24 +285,22 @@ public class DBHelper extends SQLiteOpenHelper {
                 //  u.setId(id);
                 u.setName(name);
                 u.setEmail(mail);
-            }while (c.moveToNext());
+            } while (c.moveToNext());
         }
 
         return u;
     }
 
-    public boolean isUser(String mail)
-    {
-         boolean resp=false;
-         Cursor c=helper.rawQuery("Select * from user where email='"+mail+"';",null);
-         if(c.moveToFirst()){
-            do{
-               resp=true;
-            }while(c.moveToNext());
-         }
+    public boolean isUser(String mail) {
+        boolean resp = false;
+        Cursor c = helper.rawQuery("Select * from user where email='" + mail + "';", null);
+        if (c.moveToFirst()) {
+            do {
+                resp = true;
+            } while (c.moveToNext());
+        }
         return resp;
     }
-
 
 
     public int getIdRoute() {

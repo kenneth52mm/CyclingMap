@@ -90,23 +90,23 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
             setupNavigationDrawerContent(navigationView);
         }
         setupNavigationDrawerContent(navigationView);
-        Bundle bundle = getIntent().getExtras();
-        size = (int) bundle.get("challenges");
-        String[] user_stats = (String[]) bundle.get("user_stats");
-        txtDistance.setText(user_stats[0] + " km");
-        txtBestSpeed.setText(user_stats[1] + "km/h");
-        txtTotalRoutes.setText(user_stats[2]);
-
-        View target = findViewById(R.id.action_badge);
-        BadgeView badge = new BadgeView(this, target);
-        String not = String.valueOf(size);
-        badge.setText(not);
-        badge.show();
-//        LoadUserStats userStats = new LoadUserStats();
-//        userStats.execute(13);
-//        UserChallengesHelper challengesHelper = new UserChallengesHelper();
-//        challengesHelper.execute(13);
-
+//        Bundle bundle = getIntent().getExtras();
+//        size = (int) bundle.get("challenges");
+//        String[] user_stats = (String[]) bundle.get("user_stats");
+//        txtDistance.setText(user_stats[0] + " km");
+//        txtBestSpeed.setText(user_stats[1] + "km/h");
+//        txtTotalRoutes.setText(user_stats[2]);
+//
+//        View target = findViewById(R.id.action_badge);
+//        BadgeView badge = new BadgeView(this, target);
+//        String not = String.valueOf(size);
+//        badge.setText(not);
+//        badge.show();
+        int id_user=dbHelper.getIdUser();
+        LoadUserStats userStats = new LoadUserStats();
+        userStats.execute(id_user);
+        UserChallengesHelper challengesHelper = new UserChallengesHelper();
+        challengesHelper.execute(id_user);
     }
 
     public void newRoute(View v) {
@@ -266,13 +266,11 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
     class UserChallengesHelper extends AsyncTask<Integer, ArrayList, ArrayList> {
 
         ArrayList<Route> respRoutes;
-        private final ProgressDialog dialog = new ProgressDialog(HomeActivity.this);
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.setMessage(getString(R.string.loading_dialog));
-            dialog.show();
+
         }
 
         @Override
@@ -302,7 +300,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                     }
                     route.setCoordinateList(coordinates);
                     route.setTimeToFin(Time.valueOf(jsonObject.getString("TimeToFin")));
-                    route.setDifficultyLevel(String.valueOf(jsonObject.getInt("DifficultyLevel")));
+                    route.setDifficultyLevel(jsonObject.getInt("DifficultyLevel"));
                     routes.add(route);
                 }
             } catch (Exception ex) {
@@ -321,7 +319,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
             BadgeView badge = new BadgeView(HomeActivity.this, target);
             badge.setText(routes.size() + "");
             badge.show();
-            dialog.dismiss();
+
         }
     }
 

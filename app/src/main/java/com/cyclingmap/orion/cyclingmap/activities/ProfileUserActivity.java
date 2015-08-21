@@ -59,9 +59,7 @@ public class ProfileUserActivity extends AppCompatActivity {
         emailProfile = (TextView) findViewById(R.id.txtEmailProfile);
         heightProfile = (TextView) findViewById(R.id.txtHeight);
         weightProfile = (TextView) findViewById(R.id.txtWeight);
-
-        User u = dbHelper.getUser();
-        int id_user = u.getId();
+        int id_user = dbHelper.getIdUser();
         userProfileDetails userDetails = new userProfileDetails();
         userDetails.execute(id_user);
       // String name = u.getName();

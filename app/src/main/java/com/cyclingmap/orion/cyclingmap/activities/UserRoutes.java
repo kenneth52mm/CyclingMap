@@ -17,6 +17,7 @@ import android.widget.ListView;
 
 import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.UserRoutesAdapter;
+import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
 import com.cyclingmap.orion.cyclingmap.model.Route;
 
@@ -37,6 +38,7 @@ public class UserRoutes extends AppCompatActivity {
     UserRoutesAdapter routesAdapter;
     ArrayList<Route> routes = new ArrayList<>();
     Toolbar toolbar;
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +48,13 @@ public class UserRoutes extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        dbHelper = new DBHelper(UserRoutes.this);
         lwRoutes = (ListView) findViewById(R.id.list);
         routesAdapter = new UserRoutesAdapter(new ArrayList<Route>(), UserRoutes.this);
         lwRoutes.setAdapter(routesAdapter);
-        UserWSHelper helper = new UserWSHelper();
-        helper.execute(13);
+        int id_user = dbHelper.getIdUser();
+                UserWSHelper helper = new UserWSHelper();
+        helper.execute(id_user);
 
         lwRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -118,7 +121,7 @@ public class UserRoutes extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList array) {
             //super.onPostExecute(array);
-            lwRoutes = (ListView)findViewById(R.id.list);
+            lwRoutes = (ListView) findViewById(R.id.list);
             routesAdapter = new UserRoutesAdapter(routes, getApplicationContext());
             lwRoutes.setAdapter(routesAdapter);
             dialog.dismiss();

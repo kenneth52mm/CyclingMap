@@ -56,6 +56,8 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     private DBHelper dbHelper;
     private CallbackManager callbackManager;
     private ImageView imgProfilePic;
+    private int id_user;
+    private User u=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,10 +178,10 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
             if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
                 Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
                 String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
-                User u=new User();
+               u=new User();
                 u.setEmail(email);
                 u.setName(currentPerson.getDisplayName());
-                dbHelper.addUser(u);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -206,6 +208,7 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         }
         @Override
         protected Integer doInBackground(String... params) {
+            //android.os.Debug.waitForDebugger();
             int resul = 0;
             HttpClient client = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/Login/" + params[0] + "/" + params[1]);
@@ -227,7 +230,11 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             if (integer != 0) {
+                id_user=integer;
+                int resp=dbHelper.loggin();
+                dbHelper.addId(id_user);
                 Intent intent = new Intent(LogActivity.this, HomeActivity.class);
+                intent.putExtra("id_user",id_user);
                 startActivity(intent);
                 finish();
             }

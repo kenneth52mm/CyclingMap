@@ -41,6 +41,7 @@ public class RegisterActivity extends ActionBarActivity {
     EditText txtName, txtEmail, txtPass, txtConfirnPass;
     private DBHelper dbHelper;
     int id_user;
+    private User u = null;
 //    private final ProgressDialog dialog = new ProgressDialog(getApplicationContext());
 
     @Override
@@ -66,47 +67,40 @@ public class RegisterActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //validaciones
-                if(isEmailValid(txtEmail.getText().toString()))//email
+                if (isEmailValid(txtEmail.getText().toString()))//email
                 {
-                    if(txtName.getText().toString().trim().length() > 0)//nombre
+                    if (txtName.getText().toString().trim().length() > 0)//nombre
                     {
-                        if(txtPass.getText().toString().trim().length() > 0)//clave
+                        if (txtPass.getText().toString().trim().length() > 0)//clave
                         {
-                            Encript encript =new Encript();
+                            Encript encript = new Encript();
                             registerPerson(txtEmail.getText().toString(), txtName.getText().toString(), (txtPass.getText().toString()));
                             //resetear los texts
                             txtName.setText("");
                             txtEmail.setText("");
                             txtPass.setText("");
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(getApplicationContext(), getString(R.string.input_pass),
                                     Toast.LENGTH_SHORT).show();
                         }
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(getApplicationContext(), getString(R.string.input_username),
                                 Toast.LENGTH_SHORT).show();
                     }
-                }
-                else
-                {
+                } else {
                     Toast.makeText(getApplicationContext(), getString(R.string.invalid_email),
-                        Toast.LENGTH_SHORT).show();
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
     }
 
-    public void registerPerson(String email, String name, String pass){
-        try
-        {
+    public void registerPerson(String email, String name, String pass) {
+        try {
             Persona person = new Persona();
             person.setName(name);
-            Login login = new Login(email,pass);
+            Login login = new Login(email, pass);
             person.setLogin(login);
             person.setTotalDistance(0.0);
             Date date = new Date(0);
@@ -116,19 +110,17 @@ public class RegisterActivity extends ActionBarActivity {
 //            personWsHelper.setPerson(person);
 //            personWsHelper.execute();
 
-            User u=new User();
+            u = new User();
             u.setName(name);
             u.setEmail(email);
             u.setPassword(pass);
             dbHelper.addUser(u);
-            RegisterHelper helper=new RegisterHelper();
+            RegisterHelper helper = new RegisterHelper();
             helper.execute(u);
             //Progress bar
-        //    dialog.setMessage("Registrando...");
-        //    dialog.show();
-        }
-        catch (Exception e )
-        {
+            //    dialog.setMessage("Registrando...");
+            //    dialog.show();
+        } catch (Exception e) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Error en registrar");
             builder.setMessage(e.toString());
@@ -153,7 +145,7 @@ public class RegisterActivity extends ActionBarActivity {
         return isValid;
     }
 
-    class RegisterHelper extends AsyncTask<User,User,Integer>{
+    class RegisterHelper extends AsyncTask<User, User, Integer> {
 
         @Override
         protected void onPreExecute() {
@@ -162,20 +154,20 @@ public class RegisterActivity extends ActionBarActivity {
 
         @Override
         protected Integer doInBackground(User... params) {
-            int resp=0;
+            int resp = 0;
             try {
 
                 HttpClient client = new DefaultHttpClient();
                 HttpPost postPerson = new HttpPost("http://orion-group.azurewebsites.net/Api/user/add");
                 postPerson.setHeader("content-type", "application/json");
-                JSONObject object=new JSONObject();
+                JSONObject object = new JSONObject();
                 object.put("User", params[0]);
-                StringEntity objetoString=new StringEntity(object.toString());
+                StringEntity objetoString = new StringEntity(object.toString());
                 postPerson.setEntity(objetoString);
 
-                HttpResponse response=client.execute(postPerson);
-                resp= Integer.parseInt(response.toString());
-                id_user=resp;
+                HttpResponse response = client.execute(postPerson);
+                resp = Integer.parseInt(response.toString());
+                id_user = resp;
                 Log.i("Resultado=", " " + response);
 
             } catch (Exception ex) {
@@ -188,9 +180,11 @@ public class RegisterActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            id_user=integer;
-            if(id_user>0){
-                Intent i=new Intent(RegisterActivity.this,HomeActivity.class);
+            id_user = integer;
+            if (id_user > 0) {
+                u.setId(id_user);
+                dbHelper.addUser(u);
+                Intent i = new Intent(RegisterActivity.this, HomeActivity.class);
                 startActivity(i);
                 finish();
             }

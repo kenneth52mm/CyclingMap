@@ -120,11 +120,6 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         polylineOptions.width(12);
         polylineOptions.color(Color.GREEN);
         map.addPolyline(polylineOptions);
-        LatLng[] coords = new LatLng[2];
-        coords[0] = (LatLng) routeCoords.get(0);
-        coords[1] = (LatLng) routeCoords.get(routeCoords.size() - 1);
-        LocationAddress.getRouteInfo(coords, EndTraceActivity.this, new GeocoderHandler());
-
         ArrayAdapter a_level = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayLevel);
         a_level.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_level.setAdapter(a_level);
@@ -133,11 +128,9 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     public void sendData(View v) {
         route = new Route();
         route.setDistance(distance);
-        //route.setTimeToFin(Time.valueOf(String.valueOf(duration)));
         route.setTimeToFin(new Time(duration));
         route.setAvgSpeed(speed);
-        /*Difficulty level*/
-        route.setProvinces(routeProvinces);
+        route.setDifficultyLevel(spinner_level.getSelectedItemPosition());
         route.setCoordinateList(coordinates);
         int netStatus = NetworkUtil.getConnectivityState(EndTraceActivity.this);
         switch (netStatus) {
@@ -145,6 +138,11 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
                 dbHelper.addRoute(route);
                 break;
             case 1:
+                LatLng[] coords = new LatLng[2];
+                coords[0] = (LatLng) routeCoords.get(0);
+                coords[1] = (LatLng) routeCoords.get(routeCoords.size() - 1);
+                LocationAddress.getRouteInfo(coords, EndTraceActivity.this, new GeocoderHandler());
+                route.setProvinces(routeProvinces);
                 RouteWsHelper helper = new RouteWsHelper();
                 Object[] obj = new Object[2];
                 obj[0] = route;

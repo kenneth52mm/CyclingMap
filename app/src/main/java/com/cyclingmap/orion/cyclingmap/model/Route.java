@@ -16,7 +16,7 @@ public class Route implements Serializable{
     private double distance;
     private Time timeToFin; //Tiempo de duracion
     private double avgSpeed;
-    private String difficultyLevel;
+    private int difficultyLevel;
     private ArrayList<Province> provinces;
     private ArrayList<Coordinate> coordinateList;
 
@@ -24,7 +24,7 @@ public class Route implements Serializable{
     }
 
     public Route(int idRoute, double distance, Time timeToFinish, double avgSpeed,
-                 String dLevel, ArrayList<Province> provinceArrayList, ArrayList<Coordinate> coordinateList) {
+                 int dLevel, ArrayList<Province> provinceArrayList, ArrayList<Coordinate> coordinateList) {
         this.idRoute = idRoute;
         this.distance = distance;
         this.timeToFin = timeToFinish;
@@ -89,14 +89,14 @@ public class Route implements Serializable{
     /**
      * @return the difficultyLevel
      */
-    public String getDifficultyLevel() {
+    public int getDifficultyLevel() {
         return difficultyLevel;
     }
 
     /**
      * @param difficultyLevel the difficultyLevel to set
      */
-    public void setDifficultyLevel(String difficultyLevel) {
+    public void setDifficultyLevel(int difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
     }
 
