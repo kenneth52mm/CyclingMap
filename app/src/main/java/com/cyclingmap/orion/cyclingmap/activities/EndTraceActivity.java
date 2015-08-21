@@ -64,8 +64,8 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     private PolylineOptions polylineOptions;
     private RouteWsHelper routeWsHelper = new RouteWsHelper();
     ArrayList<Province> routeProvinces;
-    private ArrayList routeCoords;
-    private ArrayList<Coordinate> coordinates;
+    private ArrayList<LatLng> routeCoords;
+    private ArrayList<Coordinate> coordinates = new ArrayList<>();
     //String[] arrayLevel = {"Principiante", "Intermedio", "Avanzado"};
     Spinner spinner_level;
     private Route route;
@@ -96,8 +96,10 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         dbHelper = new DBHelper(getApplicationContext());
         Bundle bundle = getIntent().getExtras();
-        routeCoords = (ArrayList) bundle.get("route");
-        coordinates= (ArrayList<Coordinate>) bundle.get("coords");
+        routeCoords = (ArrayList<LatLng>) bundle.get("route");
+        // coordinates= (ArrayList<Coordinate>) bundle.get("coords");
+        for (LatLng latLng : routeCoords)
+            coordinates.add(new Coordinate(latLng.latitude, latLng.longitude));
         distance = bundle.getDouble("Distance");
         duration = bundle.getLong("Duration");
         speed = bundle.getDouble("Speed");
@@ -184,74 +186,6 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
                 default:
                     routeProvinces = null;
             }
-        }
-    }
-
-    class RouteWsHelper extends AsyncTask<Object, String, String> {
-
-        //        private final ProgressDialog dialog = new ProgressDialog(EndTraceActivity.this);
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            //dialog.setMessage("Saving..");
-            //dialog.show();
-        }
-
-        @Override
-        protected String doInBackground(Object... params) {
-            //android.os.Debug.waitForDebugger();
-            Route route = (Route) params[0];
-            String resp = "";
-            HttpClient client = new DefaultHttpClient();
-            HttpPost post = new HttpPost("http://orion-group.azurewebsites.net/Api/route/save/");
-            post.setHeader("content-type", "application/json");
-            try {
-                JSONObject object = new JSONObject();
-                object.put("distance", route.getDistance());
-                object.put("timeToFin", route.getTimeToFin());
-                object.put("avgSpeed", route.getAvgSpeed());
-                object.put("difficultyLevel", route.getDifficultyLevel());
-
-                JSONArray provinces = new JSONArray();
-                for (Province p : route.getProvinces()) {
-                    JSONObject province = new JSONObject();
-                    province.put("nameProvince", p.getNameProvince());
-                    JSONArray towns = new JSONArray();
-                    for (Town t : p.getTownList()) {
-                        JSONObject town = new JSONObject();
-                        town.put("nameTown", t.getNameTown());
-                        towns.put(town);
-                    }
-                    province.put("townList", towns);
-
-                }
-                object.put("provinces", provinces);
-                JSONArray coords = new JSONArray();
-                for (Coordinate c : route.getCoordinateList()) {
-                    JSONObject coord = new JSONObject();
-                    coord.put("X", c.getX());
-                    coord.put("Y", c.getY());
-                    coords.put(coord);
-                }
-                object.put("coordinateList", coords);
-                object.put("id_user", params[1]);
-
-                StringEntity entity = new StringEntity(object.toString());
-                post.setEntity(entity);
-                HttpResponse response = client.execute(post);
-                resp = EntityUtils.toString(response.getEntity());
-
-            } catch (Exception ex) {
-                Log.e("route ex", "" + ex);
-            }
-
-            return resp;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            //dialog.dismiss();
         }
     }
 }
