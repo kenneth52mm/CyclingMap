@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:background="@color/windowBackground"
+    android:background="@drawable/background"
     tools:context="com.cyclingmap.orion.cyclingmap.activities.BuscarRutas">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

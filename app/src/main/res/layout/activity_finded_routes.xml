@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
     tools:context="com.cyclingmap.orion.cyclingmap.activities.FindedRoutes">
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,13 +14,11 @@
         android:elevation="4dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ToolbarTheme" />
-
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical" />
-
     <TextView
         android:id="@android:id/empty"
         android:text="@string/empty_list"
@@ -31,5 +28,4 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textSize="@dimen/text_size_et" />
-
 </RelativeLayout>

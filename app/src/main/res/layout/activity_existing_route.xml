@@ -5,9 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/windowBackground"
+    android:background="@drawable/background"
     tools:context=".MapActivity">
-
     <fragment
         android:id="@+id/mapExistRoute"
         class="com.google.android.gms.maps.SupportMapFragment"
@@ -21,7 +20,6 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp" />
-
     <RelativeLayout
         android:id="@+id/r1"
         android:layout_width="match_parent"
@@ -41,7 +39,6 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:textColor="#ff5a5757" />
-
     </RelativeLayout>
     <View
         android:layout_width="wrap_content"
@@ -58,7 +55,6 @@
         android:layout_alignLeft="@+id/mapExistRoute"
         android:layout_alignStart="@+id/mapExistRoute"
         android:layout_marginBottom="5dp">
-
         <TextView
             android:id="@+id/txt_dist_exist"
             android:layout_width="wrap_content"
@@ -78,7 +74,6 @@
             android:layout_alignRight="@+id/textView12"
             android:layout_alignEnd="@+id/textView12"
             android:textColor="#ff5a5757" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,7 +84,6 @@
             android:layout_marginLeft="45dp"
             android:textSize="@dimen/size_text"
             android:textColor="#FF3B3B3B" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,7 +96,6 @@
             android:layout_alignParentEnd="true"
             android:textSize="@dimen/size_text"
             android:textColor="#FF3B3B3B" />
-
         <TextView
             android:id="@+id/txt_speed_exist"
             android:layout_width="wrap_content"
@@ -115,7 +108,6 @@
             android:layout_alignRight="@+id/textView13"
             android:layout_alignEnd="@+id/textView13"
             android:textColor="#ff5a5757" />
-
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/r3"
@@ -125,7 +117,6 @@
         android:layout_alignRight="@+id/mapExistRoute"
         android:layout_alignEnd="@+id/mapExistRoute"
         android:layout_marginBottom="@dimen/button_bottom">
-
         <at.markushi.ui.CircleButton
             android:id="@+id/BtnStop"
             android:onClick="stopTrace"
@@ -139,7 +130,6 @@
             android:layout_gravity="right|bottom"
             app:cb_color="#00994C"
             app:cb_pressedRingWidth="4dp"/>
-
         <at.markushi.ui.CircleButton
             android:id="@+id/imageSee"
             android:onClick="seeRoute"
@@ -154,7 +144,6 @@
             android:layout_marginTop="10dp"
             app:cb_color="#00994C"
             app:cb_pressedRingWidth="4dp"/>
-
         <at.markushi.ui.CircleButton
             android:id="@+id/btnPlayER"
             android:layout_width="@dimen/big_button"

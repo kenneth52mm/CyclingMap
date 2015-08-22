@@ -79,6 +79,7 @@ public class DetallesRuta extends ActionBarActivity implements LocationListener 
     public void receiveRoute() {
 
         Bundle bundle = getIntent().getExtras();
+<<<<<<< HEAD
         coordinates = (ArrayList) bundle.get("routeFinded");
         for (Coordinate c : coordinates)
             routeCoords.add(new LatLng(c.getX(), c.getY()));
@@ -106,6 +107,37 @@ public class DetallesRuta extends ActionBarActivity implements LocationListener 
             //TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
             //TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
 
+=======
+        routeCoords = (ArrayList) bundle.get("routeFinded");
+        if(bundle != null){
+            drawRouteDetail();
+        }
+        Bundle bundle1 = getIntent().getExtras();
+        if(bundle1 != null) {
+            route =(Route) bundle1.get("Route");
+            String province = bundle1.get("Province") + "";
+            String Town = bundle1.get("Town") + "";
+            String distance = bundle1.get("Distance") + "";
+            long duration = Long.parseLong(bundle1.get("Duration") + "");
+            String level = bundle1.getString("Level") + "";
+
+            String timeDuration = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
+                    TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
+                    TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
+            txtProvince.setText(province);
+            txtTown.setText(Town);
+            txtDistanceDetail.setText(distance + "");
+            txtDurationDetail.setText(timeDuration + "");
+            txtLevelDetail.setText(level + "");
+            drawRouteDetail();
+
+        }else {
+            txtProvince.setText("No");
+            txtTown.setText("No");
+            txtDistanceDetail.setText("0");
+            txtDurationDetail.setText("00:00");
+            txtLevelDetail.setText("No");
+>>>>>>> origin/master
         }
     else
 

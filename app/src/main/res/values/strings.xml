@@ -32,16 +32,20 @@
     <string name="login_label">Log In</string>
     <string name="register_label">Sign Up </string>
     <string name="title_activity_register">Register</string>
-    <string name="register_message"><u><b><i>Sign Up</i></b></u></string>
+    <string name="register_message">Sign Up</string>
     <string name="login_fb_text">Facebook</string>
     <string name="input_pass">Please Enter Password</string>
     <string name="input_username">Please enter your name</string>
     <string name="invalid_email">Invalid email</string>
+<<<<<<< HEAD
 
 
 
     <string name="register_error">Error in Register</string>
 
+=======
+    <string name="register_error">Error in Register</string>
+>>>>>>> origin/master
     <!-- End -->
     <!-- Drawer -->
     <string name="title_activity_principal">PrincipalActivity</string>

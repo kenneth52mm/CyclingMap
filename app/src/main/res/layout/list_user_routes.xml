@@ -4,13 +4,10 @@
     android:layout_width="match_parent"
     android:background="@color/windowBackground"
     android:layout_height="@dimen/image_size">
-
     <RelativeLayout
         android:background="@color/windowBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
         <TextView
             android:id="@+id/route_name"
             android:layout_width="match_parent"
@@ -24,7 +21,6 @@
             tools:text="@string/routes_user"
             android:transitionName="image"
             android:textColor="#ff484848" />
-
         <TextView
             android:id="@+id/text2"
             android:layout_width="match_parent"
@@ -35,7 +31,5 @@
             android:maxLines="4"
             style="?android:textAppearanceSmall"
             tools:text="@string/route_duration" />
-
     </RelativeLayout>
-
 </FrameLayout>

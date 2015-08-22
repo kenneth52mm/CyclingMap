@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     android:clickable="false"
     android:focusable="false"
-    android:background="@color/windowBackground"
+    android:background="@drawable/backgroundland"
     tools:context="com.cyclingmap.orion.cyclingmap.activities.UserFeatures">
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -16,7 +15,6 @@
         android:elevation="4dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ToolbarTheme" >
-
         <TextView
             android:id="@+id/tvFeaturesHead"
             android:layout_width="wrap_content"
@@ -24,11 +22,7 @@
             android:text="@string/user_features_head"
             android:textSize="20dp"
             android:textColor="#fffffdfe" />
-
     </android.support.v7.widget.Toolbar>
-
-
-
     <EditText
         android:id="@+id/txtFeaturesWeight"
         android:layout_width="fill_parent"
@@ -42,7 +36,6 @@
         android:paddingLeft="@dimen/text_left_uf"
         android:textColor="#757575"
         android:textColorHint="#757575" />
-
     <EditText
         android:id="@+id/txtFeaturesHeight"
         android:layout_width="fill_parent"
@@ -57,7 +50,6 @@
         android:paddingLeft="@dimen/text_left_uf"
         android:textColor="#757575"
         android:textColorHint="#757575" />
-
     <LinearLayout
         android:id="@+id/linearLayout10"
         android:layout_width="fill_parent"
@@ -69,7 +61,6 @@
         android:background="#ffffffff"
         android:orientation="horizontal"
         android:singleLine="true">
-
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
@@ -79,18 +70,15 @@
             android:text="@string/user_features_level"
             android:textColor="#757575"
             android:textSize="20dp" />
-
         <Spinner
             android:id="@+id/spinUserFeatures"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:spinnerMode="dialog"
             android:layout_marginLeft="@dimen/spin_margin_left_uf"
             android:textAlignment="center"
             android:touchscreenBlocksFocus="true" />
-
     </LinearLayout>
-
     <Button
         android:id="@+id/btnUserFeaturesSave"
         android:layout_width="fill_parent"
@@ -100,10 +88,10 @@
         android:layout_alignParentRight="true"
         android:background="@color/greenDark"
         android:text="@string/user_features_btnsave"
+        android:onClick="saveCharacteristic"
         android:textColor="#ffffffff"
         android:textStyle="bold"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:textSize="@dimen/button_text_size" />
-
+        android:textSize="@dimen/text_size_button"/>
 </RelativeLayout>

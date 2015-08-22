@@ -4,7 +4,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/windowBackground"
+    android:background="@drawable/background"
     android:orientation="vertical">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -14,8 +14,7 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ToolbarTheme"
-        >
+        app:theme="@style/ToolbarTheme">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
