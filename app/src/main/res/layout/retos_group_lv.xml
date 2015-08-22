@@ -3,19 +3,16 @@
     android:layout_width="fill_parent"
     android:layout_height="55dip"
     android:orientation="vertical"
+    android:background="@drawable/background"
     android:padding="5dp">
-
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="35dip"
             android:layout_marginLeft="10dip" />
-
         <TextView
             android:id="@+id/retos_lbl_group"
             android:layout_width="fill_parent"

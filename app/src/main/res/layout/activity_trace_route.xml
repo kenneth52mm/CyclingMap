@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,7 +14,6 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp" />
-
     <RelativeLayout
         android:id="@+id/r1"
         android:layout_width="match_parent"
@@ -34,7 +32,6 @@
             android:textSize="@dimen/size_chrono"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
-
     </RelativeLayout>
     <View
         android:layout_width="wrap_content"
@@ -50,7 +47,6 @@
         android:layout_below="@+id/r1"
         android:layout_alignLeft="@+id/mapTrace"
         android:layout_alignStart="@+id/mapTrace">
-
         <TextView
             android:id="@+id/txt_dist_trace"
             android:layout_width="wrap_content"
@@ -102,7 +98,6 @@
         android:layout_alignRight="@+id/mapExistRoute"
         android:layout_alignEnd="@+id/mapExistRoute"
         android:layout_marginBottom="@dimen/button_bottom">
-
         <at.markushi.ui.CircleButton
             android:id="@+id/BtnStop"
             android:onClick="stopTrace"
@@ -116,7 +111,6 @@
             android:layout_gravity="right|bottom"
             app:cb_color="#00994C"
             app:cb_pressedRingWidth="4dp"/>
-
         <at.markushi.ui.CircleButton
             android:id="@+id/imageSee"
             android:onClick="seeRoute"
@@ -131,7 +125,6 @@
             android:layout_marginTop="10dp"
             app:cb_color="#00994C"
             app:cb_pressedRingWidth="4dp"/>
-
         <at.markushi.ui.CircleButton
             android:id="@+id/btnPlayER"
             android:layout_width="@dimen/big_button"
@@ -142,5 +135,4 @@
             app:cb_color="#00994C"
             app:cb_pressedRingWidth="8dp" />
     </RelativeLayout>
-
 </RelativeLayout>

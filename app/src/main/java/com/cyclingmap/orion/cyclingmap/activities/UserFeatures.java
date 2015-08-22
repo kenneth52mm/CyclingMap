@@ -26,7 +26,6 @@ public class UserFeatures extends ActionBarActivity {
     EditText txtHeight, txtWeight;
     Spinner spinLevel;
     Button btnSave;
-   // String[] arrayLevel = {"Principiante", "Intermedio", "Avanzado"};
     private DBHelper db;
 
     @Override

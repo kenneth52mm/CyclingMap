@@ -90,9 +90,9 @@
     <dimen name="text_size_check_et">25sp</dimen>
     <dimen name="check_margin_left_et">25dp</dimen>
     <dimen name="check_margin_top_et">15dp</dimen>
-    <dimen name="lbl_margin_left">70dp</dimen>
+    <dimen name="lbl_margin_left">600dp</dimen>
     <dimen name="lbl_margin_top">15dp</dimen>
-    <dimen name="spinner_width_et">85dp</dimen>
+    <dimen name="spinner_width_et">145dp</dimen>
     <dimen name="spinner_margin_et">25dp</dimen>
     <!-- end -->
     <!-- User Features -->

@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="55dip"
     android:orientation="vertical" >
-
     <TextView
         android:id="@+id/lbl_retos_subitem"
         android:layout_width="fill_parent"

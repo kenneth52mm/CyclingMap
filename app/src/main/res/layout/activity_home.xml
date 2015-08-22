@@ -5,13 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="@bool/fitsSystemWindows">
-
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/home_pic">
-
         <RelativeLayout
             android:id="@+id/l1"
             android:layout_width="fill_parent"
@@ -20,7 +18,6 @@
             android:gravity="left"
             android:background="@drawable/l_layout"
             android:orientation="horizontal">
-
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
@@ -28,7 +25,6 @@
                 android:layout_marginLeft="@dimen/imagev_home_left"
                 android:src="@mipmap/ic_km_trace"
                 android:layout_marginTop="10dp" />
-
             <TextView
                 android:id="@+id/title_dist"
                 android:layout_width="wrap_content"
@@ -43,7 +39,6 @@
                 android:layout_toEndOf="@+id/imageView"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="@dimen/text_margin_left" />
-
             <TextView
                 android:id="@+id/dist"
                 android:layout_width="wrap_content"
@@ -56,11 +51,7 @@
                 android:layout_toEndOf="@+id/imageView"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="5dp" />
-
-
-
         </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/l2"
             android:layout_width="fill_parent"
@@ -71,7 +62,6 @@
             android:layout_marginTop="@dimen/top_layout_home"
             android:background="@drawable/l_layout"
             android:orientation="horizontal">
-
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
@@ -79,10 +69,7 @@
                 android:layout_marginLeft="@dimen/imagev_home_left"
                 android:src="@mipmap/ic_speed_avg"
                 android:layout_marginTop="10dp" />
-
-
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/max_speed"
@@ -95,7 +82,6 @@
                 android:layout_marginLeft="@dimen/text_margin_left"
                 android:layout_marginTop="10dp"
                 android:id="@+id/textView" />
-
             <TextView
                 android:id="@+id/speed"
                 android:layout_width="wrap_content"
@@ -107,9 +93,7 @@
                 android:layout_toEndOf="@+id/imageView2"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="5dp" />
-
         </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/l3"
             android:layout_width="fill_parent"
@@ -122,15 +106,12 @@
             android:orientation="horizontal"
             android:weightSum="1"
             android:layout_gravity="right|center_vertical">
-
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/imagev_home_left"
                 android:src="@mipmap/ic_total_routes" />
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -144,7 +125,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="@dimen/text_margin_left"
                 android:id="@+id/textView11" />
-
             <TextView
                 android:id="@+id/totalRoute"
                 android:layout_width="wrap_content"
@@ -157,8 +137,6 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="5dp" />
         </RelativeLayout>
-
-
         <RelativeLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
@@ -167,8 +145,6 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:background="@color/greenLight">
-
-
             <ImageView
                 android:id="@+id/ImageV1"
                 android:layout_width="wrap_content"
@@ -180,7 +156,6 @@
                 android:layout_marginStart="39dp"
                 android:onClick="newRoute"
                 android:src="@mipmap/ic_add" />
-
             <ImageView
                 android:id="@+id/ImageV2"
                 android:layout_width="wrap_content"
@@ -193,7 +168,6 @@
                 android:onClick="searchRoute"
                 android:src="@mipmap/ic_search_route"
                 android:text="Search" />
-
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
@@ -208,7 +182,6 @@
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:textSize="@dimen/text_size_menu" />
-
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
@@ -224,32 +197,24 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/text_size_menu" />
         </RelativeLayout>
-
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/status_bar_kitkat_height"
             android:background="?colorPrimary" />
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/status_bar_lollipop_height"
             android:background="?colorPrimaryDark" />
-
-
     </LinearLayout>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/status_bar_margin_top">
-
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -258,12 +223,8 @@
             android:elevation="4dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ToolbarTheme" >
-
         </android.support.v7.widget.Toolbar>
-
     </FrameLayout>
-
-
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
@@ -273,10 +234,7 @@
         app:headerLayout="@layout/navigation_drawer_header"
         app:menu="@menu/navigation_drawer_menu"
         app:theme="@style/NavigationViewTheme" >
-
     </android.support.design.widget.NavigationView>
-
-
 </android.support.v4.widget.DrawerLayout>
 
 

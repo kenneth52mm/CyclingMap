@@ -100,9 +100,9 @@
     <dimen name="text_size_check_et">18sp</dimen>
     <dimen name="check_margin_left_et">15dp</dimen>
     <dimen name="check_margin_top_et">8dp</dimen>
-    <dimen name="lbl_margin_left">50dp</dimen>
+    <dimen name="lbl_margin_left">25dp</dimen>
     <dimen name="lbl_margin_top">8dp</dimen>
-    <dimen name="spinner_width_et">70dp</dimen>
+    <dimen name="spinner_width_et">125dp</dimen>
     <dimen name="spinner_margin_et">15dp</dimen>
     <!-- end -->
     <!-- User Features -->

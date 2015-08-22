@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/windowBackground"
+    android:background="@drawable/background"
     tools:context="com.cyclingmap.orion.cyclingmap.activities.ProfileUserActivity">
     <FrameLayout
         android:layout_width="match_parent"
@@ -214,19 +214,4 @@
             android:layout_marginTop="@dimen/image_top"
             android:layout_marginLeft="@dimen/image_margin" />
     </LinearLayout>
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/greenDark"
-        android:text="@string/user_features_btnsave"
-        android:onClick="saveInfo"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_size_button"
-        android:layout_marginLeft="@dimen/button_padding"
-        android:layout_marginRight="@dimen/button_padding" />
 </RelativeLayout>
