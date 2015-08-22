@@ -26,7 +26,7 @@ public class LocationAddress {
     private static ArrayList<Province> provinces = new ArrayList<>();
 
     public static void getRouteInfo(final LatLng[] coords, final Context context, final Handler handler) {
-       // android.os.Debug.waitForDebugger();
+        //android.os.Debug.waitForDebugger();
         Thread thread = new Thread() {
             @Override
             public void run() {
@@ -36,8 +36,7 @@ public class LocationAddress {
                     for (int j = 0; j < 1; j++) {
                         double latitude = coords[j].latitude;
                         double longitude = coords[j].longitude;
-                        List<Address> addressList = geocoder.getFromLocation(
-                                latitude, longitude, 1);
+                        List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
                         if (addressList != null && addressList.size() > 0) {
                             Address address = addressList.get(0);
                             StringBuilder sb = new StringBuilder();
@@ -45,28 +44,21 @@ public class LocationAddress {
                                 sb.append(address.getAddressLine(i)).append("\n");
                             }
                             String provinceName = address.getAdminArea();
-                            String townName = address.getLocality();
-                            // Log.i("Canton ",townName);
-                            // if (!province.getTownList().contains(townName))
-                            Province p = null;
-                            if (provinces.size() > 0) {
-                                p = getProvinceByName(provinceName);
-                                Log.i("Nombre", p.getNameProvince());
-                                if (!provinceHasTown(townName, p.getNameProvince()))
-                                    p.getTownList().add(new Town(townName));
-                            } else if (p == null) {
-                                p = new Province();
-                                towns.add(new Town(townName));
-                                p.setTownList(towns);
-                            }
-
+                            String townName = address.getAddressLine(0);
+                            Province p = new Province();
+                            p.setNameProvince(provinceName);
+                            towns.add(new Town(townName));
+                            p.setTownList(towns);
                             provinces.add(p);
-
                         }
+
+
                     }
                 } catch (IOException e) {
                     Log.e(TAG, "No se puede conectar al geocoder", e);
-                } finally {
+                } finally
+
+                {
                     Message message = Message.obtain();
                     message.setTarget(handler);
                     if (provinces != null) {

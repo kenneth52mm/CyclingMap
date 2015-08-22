@@ -46,6 +46,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 import com.cyclingmap.orion.cyclingmap.data.LocationAddress;
+import com.cyclingmap.orion.cyclingmap.model.Town;
 import com.google.android.gms.maps.model.LatLng;
 
 public class BuscarRutas extends ActionBarActivity implements LocationListener {
@@ -165,6 +166,21 @@ public class BuscarRutas extends ActionBarActivity implements LocationListener {
                     route.setIdRoute(jsonObject.getInt("IdRoute"));
                     route.setDistance(jsonObject.getDouble("Distance"));
                     route.setAvgSpeed(jsonObject.getDouble("AvgSpeed"));
+                    JSONArray jsonProvinces = jsonObject.getJSONArray("Provinces");
+                    ArrayList<Province> provinces = new ArrayList<>();
+                    for (int k = 0; k < jsonProvinces.length(); k++) {
+                        JSONObject province=jsonProvinces.getJSONObject(k);
+                        String provinceName=province.getString("NameProvince");
+                        JSONArray jsonTowns=province.getJSONArray("TownList");
+                        ArrayList<Town> towns=new ArrayList<>();
+                        for(int h=0;h<jsonTowns.length();h++){
+                            JSONObject town=jsonTowns.getJSONObject(h);
+                            String townName=town.getString("NameTown");
+                            towns.add(new Town(townName));
+                        }
+                        provinces.add(new Province(provinceName,towns));
+                    }
+                    route.setProvinces(provinces);
                     JSONArray jsonCoords = jsonObject.getJSONArray("CoordinateList");
                     ArrayList<Coordinate> coordinates = new ArrayList<>();
                     for (int j = 0; j < jsonCoords.length(); j++) {

@@ -161,4 +161,5 @@
     <string name="dialog_title">Servicios de ubicación desactivados</string>
     <string name="dialog_message">Por favor activar servicios de localización y GPS</string>
     <!-- end -->
+    <string name="distance_list">Distancia </string>
 </resources>

@@ -1,6 +1,7 @@
 package com.cyclingmap.orion.cyclingmap.business;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.model.Province;
 import com.cyclingmap.orion.cyclingmap.model.Route;
 
 import java.util.List;
@@ -32,9 +34,12 @@ public class UserRoutesAdapter extends ArrayAdapter<Route> {
         LayoutInflater inflater = LayoutInflater.from(context);
         View item = inflater.inflate(R.layout.list_user_routes, null);
         TextView txt1 = (TextView) item.findViewById(R.id.route_name);
-        txt1.setText("Distancia: "+route.getDistance());
+        Province province=route.getProvinces().get(0);
+        String nameProvince=province.getNameProvince();
+        String townName=province.getTownList().get(0).getNameTown();
+        txt1.setText(nameProvince+" - "+townName);
         TextView txt2 = (TextView) item.findViewById(R.id.text2);
-        txt2 .setText("Duracion: "+route.getAvgSpeed());
+        txt2 .setText(route.getDistance()+" km");
         return item;
     }
 

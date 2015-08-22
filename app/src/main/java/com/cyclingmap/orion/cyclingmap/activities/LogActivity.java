@@ -100,7 +100,7 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         if (!connectionResult.hasResolution()) {
-            GooglePlayServicesUtil.getErrorDialog(connectionResult.getErrorCode(), this, 0).show();
+            //GooglePlayServicesUtil.getErrorDialog(connectionResult.getErrorCode(), this, 0).show();
             return;
         }
         if (!mIntentInProgress) {

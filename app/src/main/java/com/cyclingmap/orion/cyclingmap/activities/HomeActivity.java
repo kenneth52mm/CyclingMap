@@ -27,7 +27,9 @@ import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.UserRoutesAdapter;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
+import com.cyclingmap.orion.cyclingmap.model.Province;
 import com.cyclingmap.orion.cyclingmap.model.Route;
+import com.cyclingmap.orion.cyclingmap.model.Town;
 import com.cyclingmap.orion.cyclingmap.model.User;
 import com.cyclingmap.orion.cyclingmap.utils.BadgeDrawable;
 import com.cyclingmap.orion.cyclingmap.utils.Dialog_Notification;
@@ -290,6 +292,21 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                     route.setIdRoute(jsonObject.getInt("IdRoute"));
                     route.setDistance(jsonObject.getDouble("Distance"));
                     route.setAvgSpeed(jsonObject.getDouble("AvgSpeed"));
+                    JSONArray jsonProvinces = jsonObject.getJSONArray("Provinces");
+                    ArrayList<Province> provinces = new ArrayList<>();
+                    for (int k = 0; k < jsonProvinces.length(); k++) {
+                        JSONObject province=jsonProvinces.getJSONObject(k);
+                        String provinceName=province.getString("NameProvince");
+                        JSONArray jsonTowns=province.getJSONArray("TownList");
+                        ArrayList<Town> towns=new ArrayList<>();
+                        for(int h=0;h<jsonTowns.length();h++){
+                            JSONObject town=jsonTowns.getJSONObject(h);
+                            String townName=town.getString("NameTown");
+                            towns.add(new Town(townName));
+                        }
+                        provinces.add(new Province(provinceName,towns));
+                    }
+                    route.setProvinces(provinces);
                     JSONArray jsonCoords = jsonObject.getJSONArray("CoordinateList");
                     ArrayList<Coordinate> coordinates = new ArrayList<>();
                     for (int j = 0; j < jsonCoords.length(); j++) {

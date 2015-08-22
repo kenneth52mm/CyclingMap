@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.NetworkUtil;
@@ -130,24 +131,20 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
         route.setDistance(distance);
         route.setTimeToFin(new Time(duration));
         route.setAvgSpeed(speed);
-        route.setDifficultyLevel(spinner_level.getSelectedItemPosition());
+        route.setDifficultyLevel(spinner_level.getSelectedItemPosition()+1);
         route.setCoordinateList(coordinates);
         int netStatus = NetworkUtil.getConnectivityState(EndTraceActivity.this);
         switch (netStatus) {
             case 0:
-                dbHelper.addRoute(route);
+                long resp = dbHelper.addRoute(route);
+                if (resp != -1)
+                    Toast.makeText(this, "Guardado", Toast.LENGTH_LONG);
                 break;
             case 1:
                 LatLng[] coords = new LatLng[2];
                 coords[0] = (LatLng) routeCoords.get(0);
-                coords[1] = (LatLng) routeCoords.get(routeCoords.size() - 1);
                 LocationAddress.getRouteInfo(coords, EndTraceActivity.this, new GeocoderHandler());
-                route.setProvinces(routeProvinces);
-                RouteWsHelper helper = new RouteWsHelper();
-                Object[] obj = new Object[2];
-                obj[0] = route;
-                obj[1] = 13;
-                helper.execute(obj);
+
                 break;
         }
     }
@@ -174,12 +171,20 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     }
 
     private class GeocoderHandler extends Handler {
+
         @Override
         public void handleMessage(Message message) {
             switch (message.what) {
                 case 1:
                     Bundle bundle = message.getData();
                     routeProvinces = (ArrayList<Province>) bundle.getSerializable("direccion");
+                    route.setProvinces(routeProvinces);
+                    RouteWsHelper helper = new RouteWsHelper();
+                    helper.setContext(EndTraceActivity.this);
+                    Object[] obj = new Object[2];
+                    obj[0] = route;
+                    obj[1] = 13;
+                    helper.execute(obj);
                     break;
                 default:
                     routeProvinces = null;

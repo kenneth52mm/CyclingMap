@@ -1,5 +1,6 @@
 package com.cyclingmap.orion.cyclingmap.business;
 
+import android.content.Context;
 import android.content.Entity;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -21,12 +22,22 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by kenneth on 23/06/2015.
  */
 public class RouteWsHelper extends AsyncTask<Object, String, String> {
 
+    private Context context;
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
     @Override
     protected String doInBackground(Object... params) {
@@ -39,7 +50,11 @@ public class RouteWsHelper extends AsyncTask<Object, String, String> {
         try {
             JSONObject object = new JSONObject();
             object.put("distance", route.getDistance());
-            object.put("timeToFin", route.getTimeToFin());
+            long duration=route.getTimeToFin().getTime();
+            String timeFinished = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
+                    TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
+                    TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
+            object.put("timeToFin", timeFinished);
             object.put("avgSpeed", route.getAvgSpeed());
             object.put("difficultyLevel", route.getDifficultyLevel());
 
@@ -54,7 +69,7 @@ public class RouteWsHelper extends AsyncTask<Object, String, String> {
                     towns.put(town);
                 }
                 province.put("townList", towns);
-
+                provinces.put(province);
             }
             object.put("provinces", provinces);
             JSONArray coords = new JSONArray();
@@ -72,8 +87,9 @@ public class RouteWsHelper extends AsyncTask<Object, String, String> {
             HttpResponse response = client.execute(post);
             resp = EntityUtils.toString(response.getEntity());
 
+
         } catch (Exception ex) {
-            Log.e("route ex",""+ex);
+            Log.e("route ex", "" + ex);
         }
 
         return resp;
@@ -82,5 +98,7 @@ public class RouteWsHelper extends AsyncTask<Object, String, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        if(s!=null)
+            Toast.makeText(getContext(),"Ruta guardada",Toast.LENGTH_LONG);
     }
 }

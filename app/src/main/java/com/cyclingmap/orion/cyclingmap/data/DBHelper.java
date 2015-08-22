@@ -114,13 +114,14 @@ public class DBHelper extends SQLiteOpenHelper {
         helper.insert("regions", null, values);
     }
 
-    public void addRoute(Route route) {
+    public long addRoute(Route route) {
+        long resp = 0;
         ContentValues values = new ContentValues();
         values.put("distance", route.getDistance());
         values.put("time_to_finish", route.getTimeToFin().toString());
         values.put("avg_speed", route.getAvgSpeed());
         values.put("difficulty_level", route.getDifficultyLevel());
-        helper.insert("route", null, values);
+        resp = helper.insert("route", null, values);
         int idRoute = getIdRoute();
         addCoords(route.getCoordinateList(), idRoute);
         if (route.getProvinces() != null) {
@@ -130,8 +131,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 addRegions(town, province, idRoute);
             }
         }
+        return resp;
     }
-
 
 
     public void addChallenges(Route route) {
@@ -167,23 +168,25 @@ public class DBHelper extends SQLiteOpenHelper {
 //        deleteChallenges();
 
     }
-    public boolean hasChallenges(){
-        boolean flag=false;
-        Cursor c=helper.rawQuery("Select * from challenges;",null);
-        if(c.moveToFirst()){
-            do{
-                flag=true;
-            }while (c.moveToNext());
+
+    public boolean hasChallenges() {
+        boolean flag = false;
+        Cursor c = helper.rawQuery("Select * from challenges;", null);
+        if (c.moveToFirst()) {
+            do {
+                flag = true;
+            } while (c.moveToNext());
         }
         return flag;
     }
-    public boolean hasRoutes(){
-        boolean flag=false;
-        Cursor c=helper.rawQuery("Select * from route;",null);
-        if(c.moveToFirst()){
-            do{
-                flag=true;
-            }while (c.moveToNext());
+
+    public boolean hasRoutes() {
+        boolean flag = false;
+        Cursor c = helper.rawQuery("Select * from route;", null);
+        if (c.moveToFirst()) {
+            do {
+                flag = true;
+            } while (c.moveToNext());
         }
         return flag;
     }
@@ -192,6 +195,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String query = "Delete from challenges;";
         helper.execSQL(query);
     }
+
     public void deleteRoute() {
         String query = "Delete from route;";
         helper.execSQL(query);
@@ -213,10 +217,11 @@ public class DBHelper extends SQLiteOpenHelper {
         int resp = helper.update("user", values, null, null);
         return resp;
     }
-    public void addId(int id){
-        ContentValues values=new ContentValues();
-        values.put("id_user",id);
-        helper.update("user",values,null,null);
+
+    public void addId(int id) {
+        ContentValues values = new ContentValues();
+        values.put("id_user", id);
+        helper.update("user", values, null, null);
     }
 
     public void loggout() {
