@@ -5,26 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
     tools:context="com.cyclingmap.orion.cyclingmap.activities.DetallesRuta">
-
-    <!-- <android.support.v7.widget.Toolbar
-         android:id="@+id/toolbar"
-         android:layout_width="match_parent"
-         android:layout_height="?actionBarSize"
-         android:background="@color/greenLight"
-         android:elevation="4dp"
-         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-         app:theme="@style/ToolbarTheme" >
-
-         <TextView
-             android:id="@+id/txt_Ruta_Detalle_Encabez"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginBottom="10dp"
-             android:text="@string/detalle_ruta_Encabezado"
-             android:textSize="20dp"
-             android:textColor="#fffffdfe" />
-     </android.support.v7.widget.Toolbar> -->
-
     <fragment
         android:id="@+id/mapDetalle"
         class="com.google.android.gms.maps.SupportMapFragment"
@@ -34,8 +14,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp" />
-
-    <LinearLayout
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_height"
         android:orientation="horizontal"
@@ -44,7 +23,6 @@
         android:layout_alignRight="@+id/mapDetalle"
         android:layout_alignEnd="@+id/mapDetalle"
         android:layout_marginTop="@dimen/table_top">
-
         <ImageView
             android:id="@+id/imageView613"
             android:layout_width="wrap_content"
@@ -52,7 +30,6 @@
             android:layout_gravity="left"
             android:src="@mipmap/ic_place"
             android:layout_marginLeft="@dimen/img_titles_margin_left" />
-
         <TextView
             android:id="@+id/txtRuta_Det_Prov_Town"
             android:layout_width="wrap_content"
@@ -61,23 +38,24 @@
             android:layout_marginLeft="@dimen/img_titles_margin_left"
             android:text="@string/place_route"
             android:textSize="@dimen/text_size"
-            android:layout_marginTop="@dimen/text_top_det" />
-
+            android:layout_marginTop="@dimen/text_top_det"
+            android:textColor="#ff5a5757" />
         <TextView
             android:id="@+id/TxtProvince"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/text_size_2"
             android:layout_marginTop="@dimen/text_top_det"
-            android:layout_marginLeft="@dimen/data_text_left" />
-
+            android:layout_marginLeft="@dimen/data_text_left"
+            android:textColor="#ff000000" />
         <TextView
             android:id="@+id/TxtTown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/text_size_2"
             android:layout_marginTop="@dimen/text_top_det"
-            android:layout_marginLeft="@dimen/data_text_left" />
+            android:layout_marginLeft="@dimen/data_text_left"
+            android:textColor="#ff000000" />
     </LinearLayout>
     <View
         android:layout_width="wrap_content"
@@ -95,7 +73,6 @@
         android:layout_alignRight="@+id/mapDetalle"
         android:layout_alignEnd="@+id/mapDetalle"
         android:layout_marginTop="@dimen/table_top">
-
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
@@ -103,7 +80,6 @@
             android:layout_gravity="left"
             android:src="@mipmap/ic_distanc"
             android:layout_marginLeft="@dimen/img_titles_margin_left" />
-
         <TextView
             android:id="@+id/txtRuta_Det_Distancia"
             android:layout_width="wrap_content"
@@ -112,13 +88,13 @@
             android:layout_marginLeft="@dimen/img_titles_margin_left"
             android:text="@string/distance_det_r"
             android:textSize="@dimen/text_size"
-            android:layout_marginTop="@dimen/text_top_det" />
-
+            android:layout_marginTop="@dimen/text_top_det"
+            android:textColor="#ff5a5757" />
         <TextView
             android:id="@+id/TxtDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/text_size_2"
             android:layout_marginTop="@dimen/text_top_det"
             android:layout_marginLeft="@dimen/data_text_left" />
     </LinearLayout>
@@ -138,7 +114,6 @@
         android:layout_alignLeft="@+id/mapDetalle"
         android:layout_alignStart="@+id/mapDetalle"
         android:layout_marginTop="@dimen/table_top">
-
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="wrap_content"
@@ -146,7 +121,6 @@
             android:layout_gravity="left"
             android:src="@mipmap/ic_duration"
             android:layout_marginLeft="@dimen/data_text_left" />
-
         <TextView
             android:id="@+id/txtRutas_Det_Vel_Media"
             android:layout_width="wrap_content"
@@ -155,13 +129,13 @@
             android:layout_marginLeft="@dimen/img_titles_margin_left"
             android:text="@string/duration_det"
             android:textSize="@dimen/text_size"
-            android:layout_marginTop="@dimen/text_top_det" />
-
+            android:layout_marginTop="@dimen/text_top_det"
+            android:textColor="#ff5a5757" />
         <TextView
             android:id="@+id/TxtDurationDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/text_size_2"
             android:layout_marginTop="@dimen/text_top_det"
             android:layout_marginLeft="@dimen/data_text_left" />
     </LinearLayout>
@@ -180,7 +154,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/table_top">
-
         <ImageView
             android:id="@+id/imageView7"
             android:layout_width="wrap_content"
@@ -188,7 +161,6 @@
             android:layout_gravity="left"
             android:src="@mipmap/ic_level_exp"
             android:layout_marginLeft="@dimen/img_titles_margin_left" />
-
         <TextView
             android:id="@+id/txtRuta_Det_Nivel"
             android:layout_width="wrap_content"
@@ -196,17 +168,16 @@
             android:layout_marginLeft="@dimen/img_titles_margin_left"
             android:text="@string/level_det_r"
             android:textSize="@dimen/text_size"
-            android:layout_marginTop="@dimen/text_top_det" />
-
+            android:layout_marginTop="@dimen/text_top_det"
+            android:textColor="#ff5a5757" />
         <TextView
             android:id="@+id/TxtNivelRoad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/text_size_2"
             android:layout_marginTop="@dimen/text_top_det"
             android:layout_marginLeft="@dimen/data_text_left" />
     </LinearLayout>
-
     <Button
         android:id="@+id/btnRuta_Det_Play"
         android:layout_width="fill_parent"
@@ -222,5 +193,4 @@
         android:layout_marginRight="@dimen/button_padding"
         android:layout_marginLeft="@dimen/button_padding"
         android:textSize="@dimen/text_size_button_det" />
-
 </RelativeLayout>

@@ -93,7 +93,6 @@
             android:touchscreenBlocksFocus="true" />
 
     </LinearLayout>
-
     <Button
         android:id="@+id/btnUserFeaturesSave"
         android:layout_width="fill_parent"
@@ -108,5 +107,4 @@
         android:textSize="@dimen/button_text_size"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp" />
-
 </RelativeLayout>

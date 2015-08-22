@@ -21,6 +21,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_log">LogActivity</string>
     <string name="time_trace">tiempo</string>
+    <string name="distance_Total_t">Distancia (Km)</string>
+    <string name="speed_avg_t">Velocidad (Km/h)</string>
     <!-- Login and Register labels  -->
     <string name="user_label">Nombre de Usuario</string>
     <string name="pass_label">Clave</string>
@@ -34,6 +36,7 @@
     <string name="input_pass">Por favor ingrese contraseña</string>
     <string name="input_username">Por favor ingrese su nombre</string>
     <string name="invalid_email">Correo Inválido</string>
+    <string name="register_error">Error en Registrar</string>
     <!-- End -->
     <!-- Drawer -->
     <string name="title_activity_principal">Principal</string>
@@ -57,6 +60,7 @@
     <!-- Final trace -->
     <string name="distance_Total">Distancia</string>
     <string name="time_Total">Duración</string>
+    <string name="time_total_final">Duración</string>
     <string name="speed_avg">Velocidad</string>
     <string name="share_public">Pública</string>
     <string name="difficulty_l">Nivel</string>
@@ -157,9 +161,16 @@
     <string name="fb_cancel">Intento cancelado</string>
     <string name="fb_error">Intento fallido</string>
     <!-- end -->
-    <!-- dialog for activing GPS -->
+    <!-- dialogs for active GPS and Report connection unable -->
     <string name="dialog_title">Servicios de ubicación desactivados</string>
     <string name="dialog_message">Por favor activar servicios de localización y GPS</string>
+    <string name="connection_title">ERROR</string>
+    <string name="connection_msg">Se produjo un error de red desconocido</string>
+    <string name="button_dismiss">Descartar</string>
+    <string name="title_close">Cerrar Sesión</string>
+    <string name="title_message_close">Desea cerrar sesión?</string>
+    <string name="yes_option">Si</string>
+    <string name="no_option">No</string>
     <!-- end -->
     <string name="distance_list">Distancia </string>
 </resources>

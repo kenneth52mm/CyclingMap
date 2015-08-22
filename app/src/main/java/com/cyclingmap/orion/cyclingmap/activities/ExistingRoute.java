@@ -48,7 +48,7 @@ import java.util.ArrayList;
 public class ExistingRoute extends FragmentActivity implements LocationListener {
 
     private GoogleMap map;
-    private ArrayList<LatLng> route = new ArrayList<>();
+    private ArrayList<LatLng> routeExisted = new ArrayList<>();
     private ArrayList<Coordinate> coords = new ArrayList<>();
     private Location lc;
     private boolean RUNNING = false;
@@ -64,20 +64,14 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
     private TextView txtLevelExist;
     private LocationManager locationManager;
     private PolylineOptions polylineOptions;
-    private Location location;
-    //Receive Route
-    private ArrayList routeCoords;
     private Chronometer chronometerExistRoute;
     private boolean flag = true;
     long timeRunning = 0;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_existing_route);
-
         txtDistExist = (TextView)findViewById(R.id.txt_dist_exist);
         txtSpeedExist = (TextView)findViewById(R.id.txt_speed_exist);
         chronometerExistRoute = (Chronometer) findViewById(R.id.chrono_exist);
@@ -86,30 +80,24 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-       // SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-       // LatLng current = (LatLng) routeCoords.get(0);
-       // CameraPosition myPosition = new CameraPosition.Builder()
-      //          .target(current).zoom(17).bearing(90).tilt(30).build();
-      //  map.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
-
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapExistRoute);
         map = mapFragment.getMap();
         map.setMyLocationEnabled(true);
         polylineOptions = new PolylineOptions();
         lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        dbHelper = new DBHelper(getApplicationContext());
+        // LatLng current = (LatLng) routeExisted.get(0);
+        // CameraPosition myPosition = new CameraPosition.Builder()
+        //          .target(current).zoom(17).bearing(90).tilt(30).build();
+        // map.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
 
+        dbHelper = new DBHelper(getApplicationContext());
         getCurrentLocation();
         test();
         activateLocation();
+        showRouteInMap();
     }
-
+    //Method to find my location in the map
     public void getCurrentLocation() {
-
         map.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
             public boolean onMyLocationButtonClick() {
@@ -123,47 +111,48 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
         });
     }
 
-    public void seeRoute(View v) {
-        polylineOptions.addAll(route);
-        polylineOptions.width(12);
-        polylineOptions.color(Color.BLUE);
-        map.addPolyline(polylineOptions);
+    //Method that bring the coordenates from Detalles ruta and show the route on the map
+    public void showRouteInMap(){
+        Bundle bundle = getIntent().getExtras();
+        routeExisted = (ArrayList<LatLng>) bundle.get("routeCoords");
+        loadMap();
+    }
 
+    //Method for see the route traveled
+    public void seeRoute(View v) {
         double distance_trace = getTotalDistance() / 1000; // km
         long timeElapsed = SystemClock.elapsedRealtime() - chronometerExistRoute.getBase();
         long hours = (timeElapsed / 3600000); //H
         long minutes = ((timeElapsed - hours * 3600000) / 60000);
         long seconds = ((timeElapsed - hours * 3600000 - minutes * 60000) / 1000);
-
         double j = (double) hours;
         double speedavg = distance_trace / j;
-
         double speedAvg = ((double) distance_trace / timeRunning);
         speed = ((long) speedAvg / timeRunning);
-
         String totalDistance = distance_trace + " Km" + "";
         String timeTour = hours + " Hrs" + "";
         String speedTour = speedavg + " Km/h" + "";
-
+        //Here the metthod send the coordinates to End Trace
         Intent i = new Intent(getApplicationContext(), EndTraceActivity.class);
-        i.putExtra("route", (Serializable) route);
+        i.putExtra("route", (Serializable) routeExisted);
         i.putExtra("Distance", totalDistance);
         i.putExtra("Duration", timeTour);
         i.putExtra("Speed", speedTour);
         startActivity(i);
     }
-
+    //Start the trace
     public void startTrace(View v) {
         RUNNING = true;
         chronometerExistRoute.setBase(SystemClock.elapsedRealtime() + timeRunning);
         chronometerExistRoute.start();
     }
+    //pause
     public void pauseTrace(View v){
         timeRunning = chronometerExistRoute.getBase() - SystemClock.elapsedRealtime();
         chronometerExistRoute.getBase();
         chronometerExistRoute.stop();
     }
-
+    //Method button play and pause
     public void test() {
         buttonPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,19 +169,19 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
             }
         });
     }
-
+    //Method that show my location
     public void centerMapOnMyLocation() {
-        LatLng current = route.get(0);
+        LatLng current = routeExisted.get(0);
         CameraPosition myPosition = new CameraPosition.Builder()
                 .target(current).zoom(17).bearing(90).tilt(30).build();
         map.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
     }
-
+    //Method that get the distance
     private double getTotalDistance() {
         double totalDistance = 0.0;
-        for (int i = 0; i < route.size() - 1; i++) {
-            LatLng start = route.get(i);
-            LatLng end = route.get(i + 1);
+        for (int i = 0; i < routeExisted.size() - 1; i++) {
+            LatLng start = routeExisted.get(i);
+            LatLng end = routeExisted.get(i + 1);
             Location locationA = new Location("");
             locationA.setLatitude(start.latitude);
             locationA.setLongitude(start.longitude);
@@ -203,7 +192,7 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
         }
         return totalDistance;
     }
-
+    //Method that stop the travel
     public void stopTrace(View v) {
         RUNNING = false;
         chronometerExistRoute.stop();
@@ -215,8 +204,16 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
         numFormat.setMaximumFractionDigits(2);
         numFormat.setRoundingMode(RoundingMode.DOWN);
         Double distan = this.getTotalDistance()/1000;
-        loadMap(v);
+        loadMap();
     }
+    //Method that show the route
+    public void loadMap() {
+        polylineOptions.addAll(routeExisted);
+        polylineOptions.width(10);
+        polylineOptions.color(Color.RED);
+        map.addPolyline(polylineOptions);
+    }
+    //Method that show a Dialog to activate the location
     public void activateLocation(){
         LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
         if(!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
@@ -236,16 +233,7 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
             alertDialog.show();
         }
     }
-
-    public void loadMap(View v) {
-        polylineOptions.addAll(route);
-        polylineOptions.width(10);
-        polylineOptions.color(Color.RED);
-        map.addPolyline(polylineOptions);
-    }
-
-
-    //This method start the trail
+       //This method start the trail
     public void startRoute(View v){
 
     }
@@ -256,30 +244,26 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
         getMenuInflater().inflate(R.menu.menu_existing_route, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onLocationChanged(Location location) {
-
         if (RUNNING) {
-            route.add(new LatLng(location.getLatitude(), location.getLongitude()));
+            routeExisted.add(new LatLng(location.getLatitude(), location.getLongitude()));
             coords.add(new Coordinate(location.getLatitude(), location.getLongitude()));
         }
-        if (route.size() == 1) {
+        if (routeExisted.size() == 1) {
             centerMapOnMyLocation();
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 5, this);
         }
@@ -287,15 +271,11 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {}
-
     @Override
     public void onProviderEnabled(String provider) {}
-
     @Override
-    public void onProviderDisabled(String provider) {
-
-    }
-
+    public void onProviderDisabled(String provider) {}
+    //Get the provinces
     private class GeocoderHandler extends Handler {
         @Override
         public void handleMessage(Message message) {
@@ -314,9 +294,7 @@ public class ExistingRoute extends FragmentActivity implements LocationListener 
             }
         }
     }
-
     public void routeToLocalData(Route route){
         dbHelper.addRoute(route);
     }
-
 }

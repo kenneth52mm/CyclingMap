@@ -39,7 +39,8 @@
             android:textIsSelectable="true"
             android:textSize="@dimen/size_chrono"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textColor="#ff5a5757" />
 
     </RelativeLayout>
     <View
@@ -75,7 +76,8 @@
             android:layout_alignStart="@+id/textView12"
             android:layout_alignBottom="@+id/txt_speed_exist"
             android:layout_alignRight="@+id/textView12"
-            android:layout_alignEnd="@+id/textView12" />
+            android:layout_alignEnd="@+id/textView12"
+            android:textColor="#ff5a5757" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,7 +87,8 @@
             android:id="@+id/textView12"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="45dp"
-            android:textSize="@dimen/size_text" />
+            android:textSize="@dimen/size_text"
+            android:textColor="#FF3B3B3B" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -97,7 +100,8 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:textSize="@dimen/size_text" />
+            android:textSize="@dimen/size_text"
+            android:textColor="#FF3B3B3B" />
 
         <TextView
             android:id="@+id/txt_speed_exist"
@@ -109,7 +113,8 @@
             android:textSize="@dimen/size_dis_sp"
             android:layout_above="@+id/textView13"
             android:layout_alignRight="@+id/textView13"
-            android:layout_alignEnd="@+id/textView13" />
+            android:layout_alignEnd="@+id/textView13"
+            android:textColor="#ff5a5757" />
 
     </RelativeLayout>
     <RelativeLayout

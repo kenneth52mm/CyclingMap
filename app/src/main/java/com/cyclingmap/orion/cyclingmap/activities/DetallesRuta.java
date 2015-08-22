@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -38,8 +39,6 @@ import java.util.ArrayList;
 public class DetallesRuta extends ActionBarActivity implements LocationListener{
 
     Button btnPlay;
-    UserRoutesAdapter routesAdapter;
-    ArrayList<Route> routes = new ArrayList<>();
     Route route;
     private TextView txtProvince;
     private TextView txtTown;
@@ -47,23 +46,23 @@ public class DetallesRuta extends ActionBarActivity implements LocationListener{
     private TextView txtDurationDetail;
     private TextView txtLevelDetail;
     ArrayList<Province> routeProvinces;
-    private ArrayList routeCoords;
+    private ArrayList<LatLng> routeCoords;
+    ArrayList<Route> routes = new ArrayList<>();
     private GoogleMap mapDetail;
     private Location lc;
     private LocationManager locationManager;
     private PolylineOptions polylineOptions;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles_ruta);
-
         txtProvince = (TextView) findViewById(R.id.TxtProvince);
         txtTown = (TextView) findViewById(R.id.TxtTown);
         txtDistanceDetail = (TextView) findViewById(R.id.TxtDistance);
         txtDurationDetail = (TextView) findViewById(R.id.TxtDurationDetail);
         txtLevelDetail = (TextView) findViewById(R.id.TxtNivelRoad);
-
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapDetalle);
@@ -71,63 +70,63 @@ public class DetallesRuta extends ActionBarActivity implements LocationListener{
         mapDetail.setMyLocationEnabled(true);
         polylineOptions = new PolylineOptions();
         lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        btnPlay = (Button)findViewById(R.id.btnRuta_Det_Play);
-        drawRouteDetail();
-        receiveData();
-      //  btnPlay.setOnClickListener(new View.OnClickListener() {
-      //      @Override
-      //      public void onClick(View v) {
-      //          Intent i = new Intent(DetallesRuta.this, ExistingRoute.class);
-      //          startActivity(i);
-      //      }
-      //  });
+        receiveRoute();
     }
-    public void receiveData(){
-        //Those bundle's receive the data of user routes
+    //Method that receive the route from user routes or challenges
+    public void receiveRoute(){
         Bundle bundle = getIntent().getExtras();
         routeCoords = (ArrayList) bundle.get("routeFinded");
-        Bundle b = getIntent().getExtras();
-        if(b != null) {
-            //Aca se recibe los datos PROVINCIA, CANTON, DISTANCIA, DURACION Y NIVEL
-            String province = b.getInt("province")+"";
-            String town = b.getDouble("town")+"";
-            String distance = b.getDouble("Distance")+"";
-            Long duration = b.getLong("duration");
-            String nivel = b.getString("Level");
+        if(bundle != null){
+            drawRouteDetail();
+        }
+        Bundle bundle1 = getIntent().getExtras();
+        if(bundle1 != null) {
+            route =(Route) bundle1.get("Route");
+            //String province = bundle1.get("Province") + "";
+            //String Town = bundle1.get("Town") + "";
+            String distance = bundle1.get("Distance") + "";
+            //Long duration = bundle1.get("Duration") + "";
+            //String level = bundle1.getString("Level") + "";
 
-            String timeDuration = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
-                    TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
-                    TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
+          ////////Here set the textview's
 
-            txtProvince.setText(province);
-            txtTown.setText(town);
+            //txtProvince.setText(province);
+            //txtTown.setText(town);
             txtDistanceDetail.setText(distance + "");
-            txtDurationDetail.setText(timeDuration + "");
-            txtLevelDetail.setText( nivel + "");
+            //txtDurationDetail.setText(timeDuration + "");
+            //txtLevelDetail.setText(level + "");
+            //drawRouteDetail();
+            //String timeDuration = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
+            //TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
+            //TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
+        }else {
+            txtProvince.setText("No");
+            txtTown.setText("No");
+            txtDistanceDetail.setText("0");
+            txtDurationDetail.setText("00:00");
+            txtLevelDetail.setText("No");
         }
     }
+
+    //Method that draw the route on the map
     public void drawRouteDetail(){
-
-        //Error Beacause routeCoords are null
-
-        LatLng current = (LatLng) routeCoords.get(0);
-        CameraPosition myPosition = new CameraPosition.Builder()
-                .target(current).zoom(17).bearing(90).tilt(30).build();
-        mapDetail.animateCamera(CameraUpdateFactory.newCameraPosition(myPosition));
-        //Draw the route on fragmentmap
         polylineOptions.addAll(routeCoords);
         polylineOptions.width(12);
-        polylineOptions.color(Color.RED);
+        polylineOptions.color(Color.BLUE);
         mapDetail.addPolyline(polylineOptions);
         LatLng[] coords = new LatLng[2];
         coords[0] = (LatLng) routeCoords.get(0);
         coords[1] = (LatLng) routeCoords.get(routeCoords.size() - 1);
         LocationAddress.getRouteInfo(coords, DetallesRuta.this, new GeocoderHandler());
     }
+
+    //Method go to Existing route for start the route selected
     public void beginRoute(){
         Intent i = new Intent(DetallesRuta.this, ExistingRoute.class);
+        i.putExtra("routeCoords", (Serializable)routeCoords );
         startActivity(i);
     }
+    //Methods of locationListener
     @Override
     public void onLocationChanged(Location location) {}
     @Override
@@ -137,6 +136,7 @@ public class DetallesRuta extends ActionBarActivity implements LocationListener{
     @Override
     public void onProviderDisabled(String provider) {}
 
+    //Method that find the provinces
     private class GeocoderHandler extends Handler {
         @Override
         public void handleMessage(Message message) {

@@ -23,7 +23,9 @@
     <dimen name="table_top">5dp</dimen>
     <dimen name="table_bottom">10dp</dimen>
     <dimen name="button_padding">5dp</dimen>
-    <dimen name="text_size">18dp</dimen>
+    <dimen name="text_size">20sp</dimen>
+    <dimen name="text_size_2">18sp</dimen>
+    <dimen name="text_size_button_det">13sp</dimen>
     <!-- end -->
     <!-- Login and Register dimens -->
     <dimen name="top_margin_log">130dp</dimen>
@@ -82,7 +84,7 @@
     <dimen name="image_top">10dp</dimen>
     <dimen name="text_size_pr">20dp</dimen>
     <dimen name="image_user">60dp</dimen>
-    <dimen name="text_size_button">15dp</dimen>
+    <dimen name="text_size_button">13dp</dimen>
     <!-- end -->
 
 </resources>

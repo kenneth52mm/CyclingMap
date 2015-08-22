@@ -2,6 +2,7 @@ package com.cyclingmap.orion.cyclingmap.activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.UiAutomation;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.RouteWsHelper;
@@ -29,6 +31,7 @@ import com.cyclingmap.orion.cyclingmap.data.LocationAddress;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
 import com.cyclingmap.orion.cyclingmap.model.Province;
 import com.cyclingmap.orion.cyclingmap.model.Route;
+import com.cyclingmap.orion.cyclingmap.business.NetworkUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -40,7 +43,6 @@ import java.io.Serializable;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-
 
 public class TraceRouteActivity extends FragmentActivity implements LocationListener {
 
@@ -114,7 +116,7 @@ public class TraceRouteActivity extends FragmentActivity implements LocationList
 
         Intent i = new Intent(TraceRouteActivity.this, EndTraceActivity.class);
         i.putExtra("route", (Serializable) route);
-       // i.putExtra("coords",(Serializable)coords);
+        // i.putExtra("coords",(Serializable)coords);
         i.putExtra("Distance", dist);
         i.putExtra("Duration", timeElapsed);
         i.putExtra("Speed", speedAvg);
