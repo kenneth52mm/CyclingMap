@@ -68,11 +68,12 @@ public class UserRoutes extends AppCompatActivity {
                 validateConnection();
                 Route route = routes.get(position);
                 Intent intent = new Intent(UserRoutes.this, DetallesRuta.class);
-            //    intent.putExtra("Province", route.getProvinces().get(0).toString());
-            //    intent.putExtra("Town"), route.getTown());
-                  intent.putExtra("Distance", route.getDistance());
-            //    intent.putExtra("Duration"), route.getDuration());
-                  intent.putExtra("Level", route.getDifficultyLevel());
+                //    intent.putExtra("Province", route.getProvinces().get(0).toString());
+                //    intent.putExtra("Town"), route.getTown());
+                intent.putExtra("routeFinded",route.getCoordinateList());
+                intent.putExtra("Distance", route.getDistance());
+                intent.putExtra("Duration", route.getTimeToFin());
+                intent.putExtra("Level", route.getDifficultyLevel());
                 startActivity(intent);
             }
         });
@@ -93,7 +94,7 @@ public class UserRoutes extends AppCompatActivity {
 
         @Override
         protected ArrayList doInBackground(Integer... params) {
-           // android.os.Debug.waitForDebugger();
+            // android.os.Debug.waitForDebugger();
             HttpClient client = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet("http://orion-group.azurewebsites.net/Api/user/routes/" + params[0]);
             httpGet.setHeader("content-type", "application/json");
@@ -111,16 +112,16 @@ public class UserRoutes extends AppCompatActivity {
                     JSONArray jsonProvinces = jsonObject.getJSONArray("Provinces");
                     ArrayList<Province> provinces = new ArrayList<>();
                     for (int k = 0; k < jsonProvinces.length(); k++) {
-                        JSONObject province=jsonProvinces.getJSONObject(k);
-                        String provinceName=province.getString("NameProvince");
-                        JSONArray jsonTowns=province.getJSONArray("TownList");
-                        ArrayList<Town> towns=new ArrayList<>();
-                        for(int h=0;h<jsonTowns.length();h++){
-                            JSONObject town=jsonTowns.getJSONObject(h);
-                            String townName=town.getString("NameTown");
+                        JSONObject province = jsonProvinces.getJSONObject(k);
+                        String provinceName = province.getString("NameProvince");
+                        JSONArray jsonTowns = province.getJSONArray("TownList");
+                        ArrayList<Town> towns = new ArrayList<>();
+                        for (int h = 0; h < jsonTowns.length(); h++) {
+                            JSONObject town = jsonTowns.getJSONObject(h);
+                            String townName = town.getString("NameTown");
                             towns.add(new Town(townName));
                         }
-                        provinces.add(new Province(provinceName,towns));
+                        provinces.add(new Province(provinceName, towns));
                     }
                     route.setProvinces(provinces);
                     JSONArray jsonCoords = jsonObject.getJSONArray("CoordinateList");
@@ -153,16 +154,17 @@ public class UserRoutes extends AppCompatActivity {
         }
     }
 
-    public int validateConnection(){
+    public int validateConnection() {
         int pConnected;
         pConnected = NetworkUtil.getConnectivityStatus(this);
-        if(pConnected == 0){
+        if (pConnected == 0) {
             dialogConnection();
         }
-        return  pConnected;
+        return pConnected;
     }
+
     //Method that show message dialog
-    public void dialogConnection(){
+    public void dialogConnection() {
         AlertDialog.Builder msgConn = new AlertDialog.Builder(this);
         msgConn.setTitle(getString(R.string.connection_title));
         msgConn.setMessage(getString(R.string.connection_msg));

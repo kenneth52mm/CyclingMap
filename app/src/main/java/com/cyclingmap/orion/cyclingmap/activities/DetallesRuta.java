@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.cyclingmap.orion.cyclingmap.R;
 import com.cyclingmap.orion.cyclingmap.business.UserRoutesAdapter;
 import com.cyclingmap.orion.cyclingmap.data.LocationAddress;
+import com.cyclingmap.orion.cyclingmap.model.Coordinate;
 import com.cyclingmap.orion.cyclingmap.model.Province;
 import com.cyclingmap.orion.cyclingmap.model.Route;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,7 +37,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 
 
-public class DetallesRuta extends ActionBarActivity implements LocationListener{
+public class DetallesRuta extends ActionBarActivity implements LocationListener {
 
     Button btnPlay;
     Route route;
@@ -48,11 +49,12 @@ public class DetallesRuta extends ActionBarActivity implements LocationListener{
     ArrayList<Province> routeProvinces;
     private ArrayList<LatLng> routeCoords;
     ArrayList<Route> routes = new ArrayList<>();
+    ArrayList<Coordinate> coordinates;
     private GoogleMap mapDetail;
     private Location lc;
     private LocationManager locationManager;
     private PolylineOptions polylineOptions;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,23 +74,27 @@ public class DetallesRuta extends ActionBarActivity implements LocationListener{
         lc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         receiveRoute();
     }
+
     //Method that receive the route from user routes or challenges
-    public void receiveRoute(){
+    public void receiveRoute() {
+
         Bundle bundle = getIntent().getExtras();
-        routeCoords = (ArrayList) bundle.get("routeFinded");
-        if(bundle != null){
-            drawRouteDetail();
-        }
-        Bundle bundle1 = getIntent().getExtras();
-        if(bundle1 != null) {
-            route =(Route) bundle1.get("Route");
+        coordinates = (ArrayList) bundle.get("routeFinded");
+        for (Coordinate c : coordinates)
+            routeCoords.add(new LatLng(c.getX(), c.getY()));
+        if(bundle!=null) {
+            if (!routeCoords.isEmpty()) {
+                drawRouteDetail();
+            }
+
+
             //String province = bundle1.get("Province") + "";
             //String Town = bundle1.get("Town") + "";
-            String distance = bundle1.get("Distance") + "";
-            //Long duration = bundle1.get("Duration") + "";
+            String distance = bundle.get("Distance") + "";
+            // Long duration = bundle.get("Duration") + "";
             //String level = bundle1.getString("Level") + "";
 
-          ////////Here set the textview's
+            ////////Here set the textview's
 
             //txtProvince.setText(province);
             //txtTown.setText(town);
@@ -99,17 +105,21 @@ public class DetallesRuta extends ActionBarActivity implements LocationListener{
             //String timeDuration = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
             //TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
             //TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
-        }else {
-            txtProvince.setText("No");
-            txtTown.setText("No");
-            txtDistanceDetail.setText("0");
-            txtDurationDetail.setText("00:00");
-            txtLevelDetail.setText("No");
+
         }
+    else
+
+    {
+        txtProvince.setText("No");
+        txtTown.setText("No");
+        txtDistanceDetail.setText("0");
+        txtDurationDetail.setText("00:00");
+        txtLevelDetail.setText("No");
     }
+}
 
     //Method that draw the route on the map
-    public void drawRouteDetail(){
+    public void drawRouteDetail() {
         polylineOptions.addAll(routeCoords);
         polylineOptions.width(12);
         polylineOptions.color(Color.BLUE);
@@ -121,33 +131,41 @@ public class DetallesRuta extends ActionBarActivity implements LocationListener{
     }
 
     //Method go to Existing route for start the route selected
-    public void beginRoute(){
+    public void beginRoute() {
         Intent i = new Intent(DetallesRuta.this, ExistingRoute.class);
-        i.putExtra("routeCoords", (Serializable)routeCoords );
+        i.putExtra("routeCoords", (Serializable) routeCoords);
         startActivity(i);
     }
+
     //Methods of locationListener
     @Override
-    public void onLocationChanged(Location location) {}
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) { }
-    @Override
-    public void onProviderEnabled(String provider) {}
-    @Override
-    public void onProviderDisabled(String provider) {}
+    public void onLocationChanged(Location location) {
+    }
 
-    //Method that find the provinces
-    private class GeocoderHandler extends Handler {
-        @Override
-        public void handleMessage(Message message) {
-            switch (message.what) {
-                case 1:
-                    Bundle bundle = message.getData();
-                    routeProvinces = (ArrayList<Province>) bundle.getSerializable("direccion");
-                    break;
-                default:
-                    routeProvinces = null;
-            }
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+    }
+
+//Method that find the provinces
+private class GeocoderHandler extends Handler {
+    @Override
+    public void handleMessage(Message message) {
+        switch (message.what) {
+            case 1:
+                Bundle bundle = message.getData();
+                routeProvinces = (ArrayList<Province>) bundle.getSerializable("direccion");
+                break;
+            default:
+                routeProvinces = null;
         }
     }
+}
 }

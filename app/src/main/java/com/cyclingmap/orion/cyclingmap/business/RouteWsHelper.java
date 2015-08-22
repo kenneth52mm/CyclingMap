@@ -2,11 +2,13 @@ package com.cyclingmap.orion.cyclingmap.business;
 
 import android.content.Context;
 import android.content.Entity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 
+import com.cyclingmap.orion.cyclingmap.activities.HomeActivity;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
 import com.cyclingmap.orion.cyclingmap.model.Province;
 import com.cyclingmap.orion.cyclingmap.model.Route;
@@ -30,6 +32,7 @@ import java.util.concurrent.TimeUnit;
 public class RouteWsHelper extends AsyncTask<Object, String, String> {
 
     private Context context;
+    private String SAVED="";
 
     public Context getContext() {
         return context;
@@ -41,7 +44,7 @@ public class RouteWsHelper extends AsyncTask<Object, String, String> {
 
     @Override
     protected String doInBackground(Object... params) {
-       // android.os.Debug.waitForDebugger();
+       //android.os.Debug.waitForDebugger();
         Route route = (Route) params[0];
         String resp = "";
         HttpClient client = new DefaultHttpClient();
@@ -91,14 +94,17 @@ public class RouteWsHelper extends AsyncTask<Object, String, String> {
         } catch (Exception ex) {
             Log.e("route ex", "" + ex);
         }
-
+        SAVED=resp;
         return resp;
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        if(s!=null)
-            Toast.makeText(getContext(),"Ruta guardada",Toast.LENGTH_LONG);
+        if(SAVED.equals("1")){
+            Toast.makeText(getContext(),"Ruta guardada",Toast.LENGTH_LONG).show();
+            Intent i =new Intent(getContext(), HomeActivity.class);
+            getContext().startActivity(i);
+        }
     }
 }
