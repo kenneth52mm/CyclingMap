@@ -37,11 +37,7 @@
     <string name="input_pass">Please Enter Password</string>
     <string name="input_username">Please enter your name</string>
     <string name="invalid_email">Invalid email</string>
-<<<<<<< HEAD
-
-=======
     <string name="register_error">Error in Register</string>
->>>>>>> origin/master
     <!-- End -->
     <!-- Drawer -->
     <string name="title_activity_principal">PrincipalActivity</string>

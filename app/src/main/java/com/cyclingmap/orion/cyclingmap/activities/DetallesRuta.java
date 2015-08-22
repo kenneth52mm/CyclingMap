@@ -82,23 +82,22 @@ public class DetallesRuta extends ActionBarActivity implements LocationListener{
         Bundle bundle1 = getIntent().getExtras();
         if(bundle1 != null) {
             route =(Route) bundle1.get("Route");
-            //String province = bundle1.get("Province") + "";
-            //String Town = bundle1.get("Town") + "";
+            String province = bundle1.get("Province") + "";
+            String Town = bundle1.get("Town") + "";
             String distance = bundle1.get("Distance") + "";
-            //Long duration = bundle1.get("Duration") + "";
-            //String level = bundle1.getString("Level") + "";
+            long duration = Long.parseLong(bundle1.get("Duration") + "");
+            String level = bundle1.getString("Level") + "";
 
-          ////////Here set the textview's
-
-            //txtProvince.setText(province);
-            //txtTown.setText(town);
+            String timeDuration = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
+                    TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
+                    TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
+            txtProvince.setText(province);
+            txtTown.setText(Town);
             txtDistanceDetail.setText(distance + "");
-            //txtDurationDetail.setText(timeDuration + "");
-            //txtLevelDetail.setText(level + "");
-            //drawRouteDetail();
-            //String timeDuration = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
-            //TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
-            //TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
+            txtDurationDetail.setText(timeDuration + "");
+            txtLevelDetail.setText(level + "");
+            drawRouteDetail();
+
         }else {
             txtProvince.setText("No");
             txtTown.setText("No");
