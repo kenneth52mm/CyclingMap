@@ -1,6 +1,9 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -16,6 +19,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.business.NetworkUtil;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.model.User;
 
@@ -122,7 +126,32 @@ public class ProfileUserActivity extends AppCompatActivity {
     }
 
     public void profileConfig(View v){
+        validateConnection();
         Intent intent = new Intent(ProfileUserActivity.this, UserFeatures.class);
         startActivity(intent);
+    }
+
+    public int validateConnection(){
+        int pConnected;
+        pConnected = NetworkUtil.getConnectivityStatus(this);
+        if(pConnected == 0){
+            dialogConnection();
+        }
+        return  pConnected;
+    }
+    //Method that show message dialog
+    public void dialogConnection(){
+        AlertDialog.Builder msgConn = new AlertDialog.Builder(this);
+        msgConn.setTitle(getString(R.string.connection_title));
+        msgConn.setMessage(getString(R.string.connection_msg));
+        msgConn.setPositiveButton(getString(R.string.button_dismiss), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        Dialog alertDialog = msgConn.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
     }
 }

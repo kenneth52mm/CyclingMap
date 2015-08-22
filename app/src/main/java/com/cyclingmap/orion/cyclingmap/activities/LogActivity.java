@@ -1,7 +1,10 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.AsyncTask;
@@ -14,8 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.business.NetworkUtil;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.model.User;
+import com.cyclingmap.orion.cyclingmap.activities.HomeActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -62,17 +67,19 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        callbackManager = CallbackManager.Factory.create();
-        dbHelper = new DBHelper(getApplicationContext());
-        setContentView(R.layout.activity_log);
-        txtUsername = (EditText) findViewById(R.id.TxtUsername);
-        txtPassword = (EditText) findViewById(R.id.TxtPassword);
-        signinButton = (SignInButton) findViewById(R.id.btnGP);
-        imgProfilePic = (ImageView) findViewById(R.id.imgProfile);
-        mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build()).addScope(Plus.SCOPE_PLUS_LOGIN).build();
-        signinButton.setOnClickListener(this);
-        signinButton.setSize(SignInButton.SIZE_STANDARD);
+
+            FacebookSdk.sdkInitialize(getApplicationContext());
+            callbackManager = CallbackManager.Factory.create();
+            dbHelper = new DBHelper(getApplicationContext());
+            setContentView(R.layout.activity_log);
+            txtUsername = (EditText) findViewById(R.id.TxtUsername);
+            txtPassword = (EditText) findViewById(R.id.TxtPassword);
+            signinButton = (SignInButton) findViewById(R.id.btnGP);
+            imgProfilePic = (ImageView) findViewById(R.id.imgProfile);
+            mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(Plus.API, Plus.PlusOptions.builder().build()).addScope(Plus.SCOPE_PLUS_LOGIN).build();
+            signinButton.setOnClickListener(this);
+            signinButton.setSize(SignInButton.SIZE_STANDARD);
+
     }
     public void registerNew(View v) {
         Intent intent = new Intent(LogActivity.this, RegisterActivity.class);
@@ -89,8 +96,20 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
         }
     }
     public void validarUsuario(View v) {
-        LoginWSHelper helper = new LoginWSHelper();
-        helper.execute(txtUsername.getText().toString(), txtPassword.getText().toString());
+        validateConnection();
+        if(txtUsername.getText().toString().trim().length() > 0){
+
+            if(txtPassword.getText().toString().trim().length() > 0){
+                LoginWSHelper helper = new LoginWSHelper();
+                helper.execute(txtUsername.getText().toString(), txtPassword.getText().toString());
+            } else {
+                Toast.makeText(getApplicationContext(), getString(R.string.input_pass),
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), getString(R.string.input_username),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     public void onConnectionSuspended(int i) {
@@ -241,4 +260,29 @@ public class LogActivity extends Activity implements View.OnClickListener, Googl
             dialog.dismiss();
         }
     }
+
+    public int validateConnection(){
+        int pConnected;
+        pConnected = NetworkUtil.getConnectivityStatus(this);
+        if(pConnected == 0){
+            dialogConnection();
+        }
+        return  pConnected;
+    }
+    //Method that show message dialog
+    public void dialogConnection(){
+        AlertDialog.Builder msgConn = new AlertDialog.Builder(this);
+        msgConn.setTitle(getString(R.string.connection_title));
+        msgConn.setMessage(getString(R.string.connection_msg));
+        msgConn.setPositiveButton(getString(R.string.button_dismiss), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        Dialog alertDialog = msgConn.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
+    }
+
 }

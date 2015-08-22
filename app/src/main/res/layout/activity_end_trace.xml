@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/time_Total"
+            android:text="@string/time_total_final"
             android:id="@+id/textView4"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imageView2"
@@ -222,7 +222,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/spinnerEnd"
             android:spinnerMode="dialog"
-            android:layout_marginLeft="@dimen/spinner_margin_et" />
+            android:layout_marginLeft="@dimen/spinner_margin_et"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 
     <Button

@@ -1,6 +1,9 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import android.widget.ListView;
 
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.business.NetworkUtil;
 import com.cyclingmap.orion.cyclingmap.business.UserRoutesAdapter;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
@@ -38,7 +42,6 @@ public class RetosActivity extends AppCompatActivity {
     Toolbar toolbar;
     DBHelper dbHelper;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +58,9 @@ public class RetosActivity extends AppCompatActivity {
         UserChallengesHelper helper = new UserChallengesHelper();
         helper.execute(13);
 
-
         for (Route r : routes)
             dbHelper.addChallenges(r);
-        lwRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            lwRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Route route = routes.get(position);
@@ -68,21 +70,20 @@ public class RetosActivity extends AppCompatActivity {
                 intent.putExtra("SpeedAveg", route.getAvgSpeed());
                 intent.putExtra("Level", route.getDifficultyLevel());
                 startActivity(intent);
+                validateConnection();
             }
         });
     }
-
 
     class UserChallengesHelper extends AsyncTask<Integer, ArrayList, ArrayList> {
 
         ArrayList<Route> respRoutes;
         private final ProgressDialog dialog = new ProgressDialog(RetosActivity.this);
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.setMessage("Cargando...");
+            dialog.setMessage(getString(R.string.loading_dialog));
             dialog.show();
         }
 
@@ -131,5 +132,28 @@ public class RetosActivity extends AppCompatActivity {
             // routesAdapter.setRoutesList(routes);
             routesAdapter.notifyDataSetChanged();
         }
+    }
+    public int validateConnection(){
+        int pConnected;
+        pConnected = NetworkUtil.getConnectivityStatus(this);
+        if(pConnected == 0){
+            dialogConnection();
+        }
+        return  pConnected;
+    }
+    //Method that show message dialog
+    public void dialogConnection(){
+        AlertDialog.Builder msgConn = new AlertDialog.Builder(this);
+        msgConn.setTitle(getString(R.string.connection_title));
+        msgConn.setMessage(getString(R.string.connection_msg));
+        msgConn.setPositiveButton(getString(R.string.button_dismiss), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        Dialog alertDialog = msgConn.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
     }
 }

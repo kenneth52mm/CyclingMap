@@ -89,7 +89,8 @@
             android:label="@string/title_activity_user_features"/>
         <activity
             android:name=".activities.BuscarRutas"
-            android:label="@string/title_activity_buscar_rutas" />
+            android:label="@string/title_activity_buscar_rutas"
+            android:parentActivityName=".activities.HomeActivity"/>
         <activity
             android:name=".activities.FindedRoutes"
             android:label="@string/title_activity_finded_routes"/>
@@ -98,7 +99,8 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.RetosActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.HomeActivity"/>
         <activity
             android:name=".activities.TraceRouteActivity"
             android:label="@string/title_activity_trace_route"

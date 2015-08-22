@@ -21,6 +21,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_log">LogActivity</string>
     <string name="time_trace">time</string>
+    <string name="distance_Total_t">Distance (Km)</string>
+    <string name="speed_avg_t">Speed (Km/h)</string>
     <!-- Login and Register labels  -->
     <string name="user_label">Username</string>
     <string name="pass_label">Password</string>
@@ -59,6 +61,7 @@
     <!-- Final trace -->
     <string name="distance_Total">Distance</string>
     <string name="time_Total">Duration</string>
+    <string name="time_total_final">Duration</string>
     <string name="speed_avg">Speed</string>
     <string name="share_public">Public</string>
     <string name="difficulty_l">Level</string>
@@ -163,8 +166,15 @@
     <string name="fb_error">Failed attempt</string>
     <string name="title_activity_trace_route">TraceRouteActivity</string>
     <!-- end -->
-    <!-- dialog for activing GPS -->
+    <!-- dialogs for active GPS and Report connection unable -->
     <string name="dialog_title">Location Services not Active</string>
     <string name="dialog_message">Please enable Location Services and GPS</string>
+    <string name="connection_title">ERROR</string>
+    <string name="connection_msg">An unknown network error has ocurred</string>
+    <string name="button_dismiss">Dismiss</string>
+    <string name="title_close">Close Session</string>
+    <string name="title_message_close">Are you sure?</string>
+    <string name="yes_option">Yes</string>
+    <string name="no_option">No</string>
     <!-- end -->
 </resources>

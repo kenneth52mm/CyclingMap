@@ -1,7 +1,10 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
@@ -126,6 +129,7 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
     }
 
     public void sendData(View v) {
+        validateConnection();
         route = new Route();
         route.setDistance(distance);
         route.setTimeToFin(new Time(duration));
@@ -185,5 +189,29 @@ public class EndTraceActivity extends FragmentActivity implements LocationListen
                     routeProvinces = null;
             }
         }
+    }
+
+    public int validateConnection(){
+        int pConnected;
+        pConnected = NetworkUtil.getConnectivityStatus(this);
+        if(pConnected == 0){
+            dialogConnection();
+        }
+        return  pConnected;
+    }
+    //Method that show message dialog
+    public void dialogConnection(){
+        AlertDialog.Builder msgConn = new AlertDialog.Builder(this);
+        msgConn.setTitle(getString(R.string.connection_title));
+        msgConn.setMessage(getString(R.string.connection_msg));
+        msgConn.setPositiveButton(getString(R.string.button_dismiss), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        Dialog alertDialog = msgConn.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
     }
 }

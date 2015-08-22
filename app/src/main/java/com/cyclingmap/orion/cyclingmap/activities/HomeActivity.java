@@ -1,6 +1,9 @@
 package com.cyclingmap.orion.cyclingmap.activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Entity;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
@@ -24,6 +27,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cyclingmap.orion.cyclingmap.R;
+import com.cyclingmap.orion.cyclingmap.business.NetworkUtil;
 import com.cyclingmap.orion.cyclingmap.business.UserRoutesAdapter;
 import com.cyclingmap.orion.cyclingmap.data.DBHelper;
 import com.cyclingmap.orion.cyclingmap.model.Coordinate;
@@ -107,6 +111,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         userStats.execute(id_user);
         UserChallengesHelper challengesHelper = new UserChallengesHelper();
         challengesHelper.execute(id_user);
+        validateConnection();
     }
 
     public void newRoute(View v) {
@@ -137,7 +142,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
         startActivity(i);
         return super.onOptionsItemSelected(item);
     }
-
     private void setupNavigationDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -148,7 +152,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-
                             case R.id.item_navigation_drawer_profile:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -160,7 +163,6 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
                                 startActivity(intent1);
                                 startActivity(intent1);
                                 return true;
-
                             case R.id.item_navigation_drawer_routes:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -170,36 +172,55 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
 
                             case R.id.item_navigation_drawer_challenge:
                                 menuItem.setChecked(true);
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                return true;
-                            case R.id.item_navigation_drawer_settings:
-                                menuItem.setChecked(true);
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                                Intent intent = new Intent(HomeActivity.this, RetosActivity.class);
                                 startActivity(intent);
+                                drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
                             case R.id.item_navigation_drawer_help_and_feedback:
                                 menuItem.setChecked(true);
-//                                AccessToken accessToken = AccessToken.getCurrentAccessToken();
-//                                if (dbHelper.isLogged()) {
-//                                    dbHelper.loggout();
-//                                    finish();
-//                                } else if (accessToken != null) {
-//                                    LoginManager.getInstance().logOut();
-//                                    finish();
-//                                } else {
-                                mGoogleApiClient.disconnect();
-                                if (!mGoogleApiClient.isConnected())
-                                    finish();
-                                Intent i = new Intent(HomeActivity.this, LogActivity.class);
-                                startActivity(i);
-                                //}
+                                messageClose();
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
                         }
                         return true;
                     }
                 });
+    }
+
+    public void messageClose(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+        builder.setMessage(getString(R.string.title_message_close))
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.yes_option), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        closeSession();
+                    }
+                }).setNegativeButton(getString(R.string.no_option), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.setTitle(getString(R.string.title_close));
+        alert.show();
+    }
+
+    public void closeSession(){
+        //if (dbHelper.isLogged()) {
+        //dbHelper.loggout();
+        //finish();
+        //} else if (accessToken != null) {
+        // LoginManager.getInstance().logOut();
+        //finish();
+        //} else {
+        mGoogleApiClient.disconnect();
+        if (!mGoogleApiClient.isConnected())
+            finish();
+        Intent i = new Intent(HomeActivity.this, LogActivity.class);
+        startActivity(i);
+        //}
     }
 
     @Override
@@ -319,8 +340,31 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.C
             BadgeView badge = new BadgeView(HomeActivity.this, target);
             badge.setText(routes.size() + "");
             badge.show();
-
         }
+    }
+
+    public int validateConnection(){
+        int pConnected;
+        pConnected = NetworkUtil.getConnectivityStatus(this);
+        if(pConnected == 0){
+            dialogConnection();
+        }
+        return  pConnected;
+    }
+    //Method that show message dialog
+    public void dialogConnection(){
+        AlertDialog.Builder msgConn = new AlertDialog.Builder(this);
+        msgConn.setTitle(getString(R.string.connection_title));
+        msgConn.setMessage(getString(R.string.connection_msg));
+        msgConn.setPositiveButton(getString(R.string.button_dismiss), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        Dialog alertDialog = msgConn.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
     }
 
 
