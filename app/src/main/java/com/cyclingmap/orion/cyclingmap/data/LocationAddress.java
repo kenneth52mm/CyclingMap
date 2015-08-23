@@ -26,7 +26,7 @@ public class LocationAddress {
     private static ArrayList<Province> provinces = new ArrayList<>();
 
     public static void getRouteInfo(final LatLng[] coords, final Context context, final Handler handler) {
-        //android.os.Debug.waitForDebugger();
+       // android.os.Debug.waitForDebugger();
         Thread thread = new Thread() {
             @Override
             public void run() {

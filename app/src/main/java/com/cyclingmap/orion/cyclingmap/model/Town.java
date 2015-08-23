@@ -5,11 +5,13 @@ package com.cyclingmap.orion.cyclingmap.model;/*
  */
 
 
+import java.io.Serializable;
+
 /**
  *
  * @author Daniel
  */
-public class Town {
+public class Town implements Serializable{
     private String nameTown;
     
     public Town(String nTown)

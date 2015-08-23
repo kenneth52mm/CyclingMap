@@ -6,13 +6,14 @@ package com.cyclingmap.orion.cyclingmap.model;
  */
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Daniel
  */
-public class Province {
+public class Province implements Serializable{
     private int idProvince;
     private String nameProvince;
     private ArrayList<Town> townList;

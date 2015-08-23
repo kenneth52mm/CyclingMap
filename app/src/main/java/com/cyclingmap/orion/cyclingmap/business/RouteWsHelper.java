@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 public class RouteWsHelper extends AsyncTask<Object, String, String> {
 
     private Context context;
-    private String SAVED="";
+    private String SAVED = "";
 
     public Context getContext() {
         return context;
@@ -44,7 +44,7 @@ public class RouteWsHelper extends AsyncTask<Object, String, String> {
 
     @Override
     protected String doInBackground(Object... params) {
-       //android.os.Debug.waitForDebugger();
+        android.os.Debug.waitForDebugger();
         Route route = (Route) params[0];
         String resp = "";
         HttpClient client = new DefaultHttpClient();
@@ -53,14 +53,13 @@ public class RouteWsHelper extends AsyncTask<Object, String, String> {
         try {
             JSONObject object = new JSONObject();
             object.put("distance", route.getDistance());
-            long duration=route.getTimeToFin().getTime();
+            long duration = route.getTimeToFin().getTime();
             String timeFinished = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(duration),
                     TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
                     TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
             object.put("timeToFin", timeFinished);
             object.put("avgSpeed", route.getAvgSpeed());
             object.put("difficultyLevel", route.getDifficultyLevel());
-
             JSONArray provinces = new JSONArray();
             for (Province p : route.getProvinces()) {
                 JSONObject province = new JSONObject();
@@ -94,16 +93,16 @@ public class RouteWsHelper extends AsyncTask<Object, String, String> {
         } catch (Exception ex) {
             Log.e("route ex", "" + ex);
         }
-        SAVED=resp;
+        SAVED = resp;
         return resp;
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        if(SAVED.equals("1")){
-            Toast.makeText(getContext(),"Ruta guardada",Toast.LENGTH_LONG).show();
-            Intent i =new Intent(getContext(), HomeActivity.class);
+        if (SAVED.equals("1")) {
+            Toast.makeText(getContext(), "Ruta guardada", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(getContext(), HomeActivity.class);
             getContext().startActivity(i);
         }
     }

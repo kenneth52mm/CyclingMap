@@ -35,6 +35,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
 
@@ -62,21 +63,21 @@ public class UserRoutes extends AppCompatActivity {
         UserWSHelper helper = new UserWSHelper();
         helper.execute(id_user);
 
-        lwRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                validateConnection();
-                Route route = routes.get(position);
-                Intent intent = new Intent(UserRoutes.this, DetallesRuta.class);
-                //    intent.putExtra("Province", route.getProvinces().get(0).toString());
-                //    intent.putExtra("Town"), route.getTown());
-                intent.putExtra("routeFinded",route.getCoordinateList());
-                intent.putExtra("Distance", route.getDistance());
-                intent.putExtra("Duration", route.getTimeToFin());
-                intent.putExtra("Level", route.getDifficultyLevel());
-                startActivity(intent);
-            }
-        });
+//        lwRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                validateConnection();
+//                Route route = routes.get(position);
+//                Intent intent = new Intent(UserRoutes.this, DetallesRuta.class);
+//                intent.putExtra("idRoute", route.getIdRoute());
+//                intent.putExtra("routeFinded", route.getCoordinateList());
+//                intent.putExtra("provinces", route.getProvinces());
+//                intent.putExtra("Distance", route.getDistance());
+//                intent.putExtra("Duration", route.getTimeToFin());
+//                intent.putExtra("Level", route.getDifficultyLevel());
+//                startActivity(intent);
+//            }
+//        });
     }
 
     class UserWSHelper extends AsyncTask<Integer, ArrayList, ArrayList> {
@@ -151,6 +152,26 @@ public class UserRoutes extends AppCompatActivity {
             dialog.dismiss();
             // routesAdapter.setRoutesList(routes);
             routesAdapter.notifyDataSetChanged();
+            lwRoutes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    validateConnection();
+                    Route route = routes.get(position);
+                    Intent intent = new Intent(UserRoutes.this, DetallesRuta.class);
+//                    intent.putExtra("idRoute", route.getIdRoute());
+//                    intent.putExtra("routeFinded",(Serializable) route.getCoordinateList());
+//                    intent.putExtra("provinces",(Serializable) route.getProvinces());
+//                    intent.putExtra("Distance", route.getDistance());
+//                    intent.putExtra("Duration", route.getTimeToFin());
+//                    intent.putExtra("Level", route.getDifficultyLevel());
+
+                   // intent.putExtra("route", (Serializable) route);
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable("route",route);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
         }
     }
 

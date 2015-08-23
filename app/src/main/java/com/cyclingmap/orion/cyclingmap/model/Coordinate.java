@@ -5,11 +5,13 @@
  */
 package com.cyclingmap.orion.cyclingmap.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Daniel
  */
-public final class Coordinate {
+public final class Coordinate implements Serializable {
     private double x;
     private double y;
 
